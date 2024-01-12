@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/src/core/core.dart';
-import 'package:stoxhero/src/modules/profile/widgets/profile_list_tile.dart';
+import 'package:punyam/src/core/core.dart';
+import 'package:punyam/src/modules/profile/widgets/profile_list_tile.dart';
 import '../../modules/modules.dart';
 
 class CommonDrawer extends StatefulWidget {

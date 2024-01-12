@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 class BookingView extends StatefulWidget {
-  const BookingView({Key? key}) : super(key: key);
+  const BookingView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<BookingView> createState() => _BookingViewState();
@@ -10,10 +12,16 @@ class BookingView extends StatefulWidget {
 
 class _BookingViewState extends State<BookingView> {
   final ScrollController _scrollController = ScrollController();
+  late PoojaServicesController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<PoojaServicesController>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print("inside desc ${MediaQuery.of(context).size.width}");
     return Scaffold(
       appBar: AppBar(
         title: Text("Booking"),
@@ -24,16 +32,16 @@ class _BookingViewState extends State<BookingView> {
             child: Padding(
               padding: AppConstants.getAppPadding(context),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                        flex: 1,
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "Griha Pravesh",
+                            "${controller.selectedPoojaById.value.name ?? ''}",
                             style: AppStyles.tsBlackMedium20,
                             softWrap: true,
                           ),
@@ -47,11 +55,10 @@ class _BookingViewState extends State<BookingView> {
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Container(
-                      height: 220,
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        AppImages.homepuja,
+                      child: Image.network(
+                        controller.selectedPoojaById.value.image?.url ?? '',
                         fit: BoxFit.fill,
+                        height: 220,
                       ),
                     ),
                   ),
@@ -61,12 +68,24 @@ class _BookingViewState extends State<BookingView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "About Pooja",
-                        style: AppStyles.tsBlackMedium24
-                            .copyWith(color: AppColors.brandYellow),
-                        textAlign: TextAlign.center,
-                      )
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "General Pooja")
+                        Text(
+                          "About Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Jaap")
+                        Text(
+                          "About Jaap",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                     ],
                   ),
                   SizedBox(
@@ -74,7 +93,8 @@ class _BookingViewState extends State<BookingView> {
                   ),
                   Container(
                     child: Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim massa ac urna vestibulum, a aliquam mi tincidunt. Integer non tincidunt urna. Curabitur nec volutpat tortor. Proin non fermentum erat. Ut lacinia sit amet arcu a ullamcorper. Curabitur luctus nec ligula id varius. Nulla facilisi. Aliquam vitae ipsum a mi semper finibus. Morbi eu justo vel risus efficitur dapibus in vitae purus.In hac habitasse platea dictumst. Suspendisse vel mi vel quam tincidunt aliquet a nec lacus. Sed efficitur, sem a pellentesque volutpat, orci nulla efficitur elit, ut auctor justo erat vitae erat. Nulla facilisi. Suspendisse potenti. Maecenas ac scelerisque urna. Fusce eget nisi eu lacus congue pulvinar at vel turpis.Vivamus ut fermentum justo. Sed vel mauris a tellus consequat scelerisque eu eget purus. Curabitur ac hendrerit lectus. Nulla facilisi. Quisque vel tortor id tortor volutpat malesuada. Sed tincidunt enim in augue venenatis, id rhoncus purus varius. Fusce vel vulputate orci. Nam vehicula, elit sit amet aliquet hendrerit, urna mi aliquam lacus, et efficitur lacus quam vel sapien.Pellentesque ultrices turpis non bibendum eleifend. Nulla facilisi. Nullam lacinia urna sit amet lacus vestibulum, a imperdiet metus malesuada. Morbi id lacus vel purus semper tristique eu ac sem. Etiam vel purus vitae ante luctus venenatis. Sed sit amet dui orci. Nullam eget turpis a velit posuere auctor. Duis consectetur eleifend turpis, vel scelerisque elit vulputate id. Ut vel felis et urna euismod pellentesque. Suspendisse potenti. Integer ut quam sit amet risus tincidunt commodo in ut nisl.Aenean nec mi non elit auctor dignissim vel id elit. In hac habitasse platea dictumst. Ut bibendum massa ac est pharetra eleifend. Quisque sollicitudin malesuada hendrerit. Nulla facilisi. Integer ut justo vel orci ullamcorper fringilla. Morbi malesuada, lacus vel suscipit ultricies, quam erat vulputate lectus, vel varius purus mauris ut ex. Integer ac scelerisque purus."),
+                      "${controller.selectedPoojaById.value.description}",
+                    ),
                   ),
                   SizedBox(
                     height: 12,
@@ -86,9 +106,7 @@ class _BookingViewState extends State<BookingView> {
                         Container(
                           width: MediaQuery.of(context).size.width -
                               MediaQuery.of(context).size.width / 5,
-                          child: imageGallery(
-                            image: AppImages.homepuja,
-                          ),
+                          child: imageGallery(image: AppImages.homepuja),
                         ),
                         SizedBox(
                           width: 12,
@@ -96,9 +114,7 @@ class _BookingViewState extends State<BookingView> {
                         Container(
                           width: MediaQuery.of(context).size.width -
                               MediaQuery.of(context).size.width / 5,
-                          child: imageGallery(
-                            image: AppImages.homepuja,
-                          ),
+                          child: imageGallery(image: AppImages.homepuja),
                         ),
                       ],
                     ),
@@ -109,10 +125,78 @@ class _BookingViewState extends State<BookingView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Jaap")
+                        Text(
+                          "Purpose of Jaap",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "General Pooja")
+                        Text(
+                          "Purpose of Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount:
+                          controller.selectedPoojaById.value.purpose?.length ??
+                              0,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  size: 15,
+                                  color: AppColors.orangeColor,
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    controller.selectedPoojaById.value
+                                        .purpose![index],
+                                    style: AppStyles.tsBlackRegular14,
+                                    softWrap: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Text(
                         "Benefits",
-                        style: AppStyles.tsBlackMedium24
-                            .copyWith(color: AppColors.brandYellow),
+                        style: AppStyles.tsBlackMedium24.copyWith(
+                          color: AppColors.brandYellow,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -121,36 +205,97 @@ class _BookingViewState extends State<BookingView> {
                     height: 12,
                   ),
                   SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal, // Allowing horizontal scrolling
+                    scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width -
-                              MediaQuery.of(context).size.width / 5,
-                          child: benfitCard(
-                              title: "Peace and Freedom from\nWorries",
-                              details:
-                                  "Pitru Pooja an Amavasya relieves all family members from worries. In life, problems get resolved, and spiritual wealth, material wealth, and happiness increase."),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width -
-                              MediaQuery.of(context).size.width / 5,
-                          child: benfitCard(
-                              title: "Peace and Freedom from\nWorries",
-                              details:
-                                  "Pitru Pooja an Amavasya relieves all family members from worries. In life, problems get resolved, and spiritual wealth, material wealth, and happiness increase."),
-                        )
-                      ],
+                      children: controller.selectedPoojaById.value.benefits
+                              ?.map(
+                                (entry) => Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      MediaQuery.of(context).size.width / 5,
+                                  margin: EdgeInsets.only(right: 12),
+                                  child: benfitCard(
+                                    title: entry.header.toString(),
+                                    details: entry.description.toString(),
+                                  ),
+                                ),
+                              )
+                              .toList() ??
+                          [],
                     ),
                   ),
                   SizedBox(
                     height: 12,
                   ),
-                  TierWisePaymentDetails(key: tierWiseKey),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "General Pooja")
+                        Text(
+                          "Pooja Items",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Jaap")
+                        Text(
+                          "Jaap Items",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount:
+                          controller.selectedPoojaById.value.items?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        var item = controller.selectedPoojaById.value.items;
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  size: 15,
+                                  color: AppColors.orangeColor,
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    "${item![index].name} - ${item[index].quantity} ${item[index].unit}",
+                                    style: AppStyles.tsBlackRegular14,
+                                    softWrap: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  TierWisePaymentDetails(
+                    key: tierWiseKey,
+                    packages: controller.selectedPoojaById.value.packages,
+                  ),
                   SizedBox(
                     height: 112,
                   ),
@@ -169,7 +314,8 @@ class _BookingViewState extends State<BookingView> {
             ElevatedButton(
               style: ButtonStyle(
                 padding: MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
                 backgroundColor:
                     MaterialStateProperty.all<Color>(AppColors.chiveColor),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -186,9 +332,11 @@ class _BookingViewState extends State<BookingView> {
             ElevatedButton(
               style: ButtonStyle(
                 padding: MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                    AppColors.cinnamonStickColor),
+                  AppColors.cinnamonStickColor,
+                ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -227,51 +375,52 @@ Widget imageGallery({required String image}) {
 }
 
 Widget benfitCard({
-  required title,
-  required details,
+  required String title,
+  required String details,
 }) {
   return Container(
-    height: 250,
+    height: 220,
     decoration: BoxDecoration(
       image: DecorationImage(
         image: AssetImage(AppImages.templeBackGroundImage),
         fit: BoxFit.fill,
       ),
       color: AppColors.orangeColor,
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: BorderRadius.circular(10.0),
     ),
     child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: AppStyles.tsBlackMedium20.copyWith(
-                    color: AppColors.cinnamonStickColor,
-                  ),
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              child: Text(
-                details,
-                softWrap: true,
-                textAlign: TextAlign.center,
-                style: AppStyles.tsBlackRegular12.copyWith(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: AppStyles.tsBlackMedium20.copyWith(
                   color: AppColors.cinnamonStickColor,
                 ),
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Container(
+            child: Text(
+              details,
+              softWrap: true,
+              textAlign: TextAlign.center,
+              style: AppStyles.tsBlackRegular12.copyWith(
+                color: AppColors.cinnamonStickColor,
               ),
             ),
-          ],
-        )),
+          ),
+        ],
+      ),
+    ),
   );
 }

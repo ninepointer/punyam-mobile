@@ -10,8 +10,8 @@ import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mime/mime.dart';
-import 'package:stoxhero/src/base/base.dart';
-import 'package:stoxhero/src/data/data.dart';
+import 'package:punyam/src/base/base.dart';
+import 'package:punyam/src/data/data.dart';
 
 import '../../../core/core.dart';
 import '../../modules.dart';

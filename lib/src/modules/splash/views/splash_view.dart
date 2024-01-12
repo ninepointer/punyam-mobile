@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/main.dart';
-import 'package:stoxhero/src/core/core.dart';
+import 'package:punyam/main.dart';
+import 'package:punyam/src/core/core.dart';
 
 import '../splash_index.dart';
 
@@ -20,14 +20,14 @@ class SplashView extends GetView<SplashController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppLogoWidget(),
-                SizedBox(height: 8),
+                SizedBox(height: 16),
                 Container(
                   width: 150,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: LinearProgressIndicator(
                       backgroundColor: AppColors.grey.withOpacity(.25),
-                      color: AppColors.lightGreen,
+                      color: AppColors.appLinearProgressionColor,
                     ),
                   ),
                 ),

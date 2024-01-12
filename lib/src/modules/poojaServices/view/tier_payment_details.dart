@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 class TierWisePaymentDetails extends StatefulWidget {
-  const TierWisePaymentDetails({Key? key}) : super(key: key);
+  final List<Packagess>? packages;
+  TierWisePaymentDetails({Key? key, this.packages}) : super(key: key);
 
   @override
   _TierWisePaymentDetailsState createState() => _TierWisePaymentDetailsState();
@@ -11,11 +12,13 @@ class TierWisePaymentDetails extends StatefulWidget {
 class _TierWisePaymentDetailsState extends State<TierWisePaymentDetails>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  late PoojaServicesController controller;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: widget.packages!.length, vsync: this);
+    controller = Get.find<PoojaServicesController>();
   }
 
   @override
@@ -43,14 +46,13 @@ class _TierWisePaymentDetailsState extends State<TierWisePaymentDetails>
                 borderRadius: BorderRadius.circular(5),
               ),
               indicatorPadding: EdgeInsets.symmetric(horizontal: 8),
-              tabs: [
-                Tab(
-                  text: "${FormatHelper.formatNumbers(751, decimal: 0)}",
-                ),
-                Tab(text: "${FormatHelper.formatNumbers(1100, decimal: 0)}"),
-                Tab(text: "${FormatHelper.formatNumbers(2100, decimal: 0)}"),
-                Tab(text: "${FormatHelper.formatNumbers(2551, decimal: 0)}"),
-              ],
+              tabs: widget.packages?.map((package) {
+                    return Tab(
+                      text:
+                          "${FormatHelper.formatNumbers(package.price, decimal: 0)}",
+                    );
+                  }).toList() ??
+                  [],
             ),
           ),
           SizedBox(
@@ -58,15 +60,17 @@ class _TierWisePaymentDetailsState extends State<TierWisePaymentDetails>
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 500,
+            height: 450,
             child: TabBarView(
               controller: tabController,
-              children: [
-                Tier1Details(),
-                Tier2Details(),
-                Tier3Details(),
-                Tier4Details()
-              ],
+              children: widget.packages?.map((package) {
+                    return Tier1Details(
+                      package: package,
+                      poojaId:
+                          controller.selectedPoojaById.value.sId.toString(),
+                    );
+                  }).toList() ??
+                  [],
             ),
           )
         ],

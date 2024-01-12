@@ -20,13 +20,13 @@ class AuthRepository extends BaseRepository {
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
-  // Future<RepoResponse<CampaignCodeResponse>> getDefaultInviteCode() async {
-  //   String apiURL = AppUrls.defaultInviteCode;
-  //   var response = await service.getAuth(path: apiURL);
-  //   return response is APIException
-  //       ? RepoResponse(error: response)
-  //       : RepoResponse(data: CampaignCodeResponse.fromJson(response));
-  // }
+  Future<RepoResponse<CampaignCodeResponse>> getDefaultInviteCode() async {
+    String apiURL = AppUrls.defaultInviteCode;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: CampaignCodeResponse.fromJson(response));
+  }
 
   Future<RepoResponse<GenericResponse>> phoneLogin(
       Map<String, dynamic> data) async {

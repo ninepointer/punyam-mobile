@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/core/core.dart';
+import 'package:punyam/src/core/core.dart';
 
 class NoDataFound extends StatelessWidget {
   final String? label;

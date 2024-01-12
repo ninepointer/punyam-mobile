@@ -14,4 +14,20 @@ class AppImages {
   static const String homepuja = '$imagesDir/homepuja.png';
   static const String templeImage = '$imagesDir/TempleImage.jpg';
   static const String templeBackGroundImage = '$imagesDir/mandirBackground.png';
+  static const String mandir1 = '$imagesDir/mandir1.png';
+  static const String pooja1 = '$imagesDir/pooja1.png';
+  static const String product1 = '$imagesDir/product1.png';
+  static const String mathuraMandir = '$imagesDir/mathuramandir.jpg';
+  static const String tirupatiBalaji = '$imagesDir/tirupatiBalaji.jpg';
+  static const String hanumanji = '$imagesDir/hanumannji.jpg';
+  static const String ramji = '$imagesDir/ramji.jpg';
+  static const String shivji = '$imagesDir/shivji.jpeg';
+  static const String durgaji = '$imagesDir/durgaji.jpg';
+
+  static const String newHome = '$imagesDir/NewHome.jpg';
+  static const String newCar = '$imagesDir/NewCar.jpg';
+
+  static const String sundarKaand = '$imagesDir/sundarkand.jpeg';
+  static const String gayatrijaap = '$imagesDir/gayatriMayntra.jpeg';
+  static const String punyamApplogo = '$imagesDir/LogoPunyam.png';
 }

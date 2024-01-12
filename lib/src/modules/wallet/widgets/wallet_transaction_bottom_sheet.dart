@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/src/modules/modules.dart';
+import 'package:punyam/src/modules/modules.dart';
 
 import '../../../core/core.dart';
 
@@ -88,8 +88,12 @@ class WalletTransactionBottomSheet extends GetView<WalletController> {
                       height: 42,
                       onPressed: controller.onCancel,
                       label: 'Cancel',
-                      backgroundColor: Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-                      labelColor: Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
+                      backgroundColor: Get.isDarkMode
+                          ? AppColors.darkGreen
+                          : AppColors.lightGreen,
+                      labelColor: Get.isDarkMode
+                          ? AppColors.darkGreen
+                          : AppColors.lightGreen,
                     ),
                   ),
                   SizedBox(width: 8),
@@ -99,7 +103,9 @@ class WalletTransactionBottomSheet extends GetView<WalletController> {
                       width: 120,
                       label: 'Proceed',
                       onPressed: controller.onConfirm,
-                      backgroundColor: Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
+                      backgroundColor: Get.isDarkMode
+                          ? AppColors.darkGreen
+                          : AppColors.lightGreen,
                     ),
                   ),
                 ],

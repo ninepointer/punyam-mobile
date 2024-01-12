@@ -18,4 +18,22 @@ class PoojaServicesRespository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: PoojaCategoryResponse.fromJson(response));
   }
+
+  Future<RepoResponse<SelectPoojaByIdResponse>> getPoojaServiceByid(
+      String poojaId) async {
+    String apiURL = AppUrls.individualPoojaById(poojaId);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: SelectPoojaByIdResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<BookingConfirmationResponse>> getConfirmationBooking(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.bookingConfirmation;
+    var response = await service.postAuth(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: BookingConfirmationResponse.fromJson(response));
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:stoxhero/src/data/data.dart';
+import 'package:punyam/src/data/data.dart';
 
 class AppStorage {
   AppStorage._privateConstructor();

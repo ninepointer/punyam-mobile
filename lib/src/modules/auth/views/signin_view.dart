@@ -120,15 +120,19 @@ class _SigninViewState extends State<SigninView> {
                         ),
                       ),
                       SizedBox(height: 24),
-                      // CommonOutlinedButton(
-                      //   backgroundColor: Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-                      //   labelColor: Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-                      //   label: 'Create account',
-                      //   onPressed: () {
-                      //     controller.getDefaultInviteCode();
-                      //     Get.toNamed(AppRoutes.signup);
-                      //   },
-                      // ),
+                      CommonOutlinedButton(
+                        backgroundColor: Get.isDarkMode
+                            ? AppColors.darkGreen
+                            : AppColors.lightGreen,
+                        labelColor: Get.isDarkMode
+                            ? AppColors.darkGreen
+                            : AppColors.lightGreen,
+                        label: 'Create account',
+                        onPressed: () {
+                          // controller.getDefaultInviteCode();
+                          Get.toNamed(AppRoutes.signup);
+                        },
+                      ),
                     ],
                   ),
                 ),

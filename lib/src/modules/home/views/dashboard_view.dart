@@ -24,6 +24,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
+    print("${controller.dashboardCarouselList.length}");
     return Scaffold(
       body: Obx(
         () => RefreshIndicator(
@@ -44,53 +45,51 @@ class _DashboardViewState extends State<DashboardView> {
                     CommonTile(
                       label: "Trending Now",
                     ),
-
                     SizedBox(
                       height: 12,
                     ),
-                    // Container(
-                    //   height: 150,
-                    //   width: double.infinity,
-                    //   child: CarouselSlider.builder(
-                    //     itemCount: controller.dashboardCarouselList.length,
-                    //     itemBuilder: (context, int index, _) {
-                    //       return GestureDetector(
-                    //         onTap: () => controller.navigateToCarousel(
-                    //           controller.dashboardCarouselList[index]
-                    //                   .linkToCarousel ??
-                    //               '',
-                    //         ),
-                    //         child: Container(
-                    //           width: double.infinity,
-                    //           height: 100,
-                    //           decoration: BoxDecoration(
-                    //             color: AppColors.grey.withOpacity(.1),
-                    //             borderRadius: BorderRadius.circular(8),
-                    //           ),
-                    //           child: ClipRRect(
-                    //             borderRadius: BorderRadius.circular(8),
-                    //             child: Image.network(
-                    //               "${controller.dashboardCarouselList[index].carouselImage}",
-                    //               fit: BoxFit.fill,
-                    //               height: 100,
-                    //               width: double.infinity,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //     options: CarouselOptions(
-                    //       viewportFraction: 1,
-                    //       autoPlay: true,
-                    //       enlargeCenterPage: true,
-                    //       autoPlayInterval: const Duration(seconds: 6),
-                    //     ),
-                    //   ),
-                    // ),
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+                      child: CarouselSlider.builder(
+                        itemCount: controller.dashboardCarouselList.length,
+                        itemBuilder: (context, int index, _) {
+                          return GestureDetector(
+                            onTap: () => controller.navigateToCarousel(
+                              controller.dashboardCarouselList[index]
+                                      .linkToCarousel ??
+                                  '',
+                            ),
+                            child: Container(
+                              width: double.infinity,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: AppColors.grey.withOpacity(.1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  "${controller.dashboardCarouselList[index].carouselImage}",
+                                  fit: BoxFit.fill,
+                                  height: 100,
+                                  width: double.infinity,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          autoPlayInterval: const Duration(seconds: 6),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 12,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -120,7 +119,6 @@ class _DashboardViewState extends State<DashboardView> {
                     SizedBox(
                       height: 12,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -130,7 +128,7 @@ class _DashboardViewState extends State<DashboardView> {
                           },
                           child: boxCard(
                               label: "Pooja",
-                              image: AppImages.poojaservice,
+                              image: AppImages.pooja1,
                               context: context),
                         ),
                         SizedBox(
@@ -142,7 +140,7 @@ class _DashboardViewState extends State<DashboardView> {
                           },
                           child: boxCard(
                               label: "Temples",
-                              image: AppImages.mandir,
+                              image: AppImages.mandir1,
                               context: context),
                         ),
                         SizedBox(
@@ -154,7 +152,7 @@ class _DashboardViewState extends State<DashboardView> {
                           },
                           child: boxCard(
                               label: "Products",
-                              image: AppImages.shopping,
+                              image: AppImages.product1,
                               context: context),
                         )
                       ],
@@ -182,7 +180,7 @@ class _DashboardViewState extends State<DashboardView> {
                           ),
                           poojaServiceCard(
                             label: "Griha Pravesh Pooja",
-                            price: 1100,
+                            price: 2100,
                             image: AppImages.homepuja,
                           ),
                           SizedBox(
@@ -190,7 +188,7 @@ class _DashboardViewState extends State<DashboardView> {
                           ),
                           poojaServiceCard(
                             label: "New Vehicle Pooja",
-                            price: 1100,
+                            price: 1500,
                             image: AppImages.shopping,
                           ),
                         ],
@@ -200,17 +198,46 @@ class _DashboardViewState extends State<DashboardView> {
                       height: 12,
                     ),
                     GestureDetector(
-                        onTap: () {
-                          Get.to(() => PoojaServicesView());
-                        },
-                        child: Text("View All Poojas -->",
-                            style: AppStyles.tsBlackMedium14.copyWith(
-                              color: AppColors.brandYellow,
-                              decoration: TextDecoration.underline,
-                            )))
-
-                    //dsgd
-                    //sgsg
+                      onTap: () {
+                        Get.to(() => PoojaServicesView());
+                      },
+                      child: Text(
+                        "View All Poojas -->",
+                        style: AppStyles.tsBlackMedium14.copyWith(
+                          color: AppColors.brandYellow,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    CommonTile(
+                      label: "Temples Near Me",
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          poojaServiceCard(
+                            label: "Mathura Dham",
+                            price: 21000,
+                            image: AppImages.mathuraMandir,
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          poojaServiceCard(
+                            label: "Triputi Balaji Dham",
+                            price: 11000,
+                            image: AppImages.tirupatiBalaji,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -230,7 +257,7 @@ class _DashboardViewState extends State<DashboardView> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.50,
       // height: 160,
-      padding: EdgeInsetsDirectional.all(10),
+      padding: EdgeInsetsDirectional.all(6),
       decoration: BoxDecoration(
           color: AppColors.white,
           border: Border.all(
@@ -241,13 +268,14 @@ class _DashboardViewState extends State<DashboardView> {
         children: [
           Container(
             height: 150,
-            width: MediaQuery.of(context).size.width * 0.45,
-            child: Padding(
-                padding: EdgeInsets.all(2),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.fill,
-                )),
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           SizedBox(
             height: 8,
@@ -265,7 +293,7 @@ class _DashboardViewState extends State<DashboardView> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
+                "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
                 style: AppStyles.tsBlackMedium14,
               ),
             ],

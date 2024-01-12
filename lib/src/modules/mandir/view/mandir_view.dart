@@ -72,23 +72,20 @@ class _MandirViewState extends State<MandirView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          godImage(
-                              image: AppImages.templeImage, context: context),
+                          godImage(image: AppImages.ramji, context: context),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          godImage(image: AppImages.durgaji, context: context),
                           SizedBox(
                             width: 8,
                           ),
                           godImage(
-                              image: AppImages.templeImage, context: context),
+                              image: AppImages.hanumanji, context: context),
                           SizedBox(
                             width: 8,
                           ),
-                          godImage(
-                              image: AppImages.templeImage, context: context),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          godImage(
-                              image: AppImages.templeImage, context: context),
+                          godImage(image: AppImages.shivji, context: context),
                           SizedBox(
                             width: 8,
                           ),
@@ -109,15 +106,38 @@ class _MandirViewState extends State<MandirView> {
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             child: mandirCard(
-                                image: AppImages.templeImage,
-                                mandirName: "Hanuman Mandir",
-                                godName: "Hanuman Ji",
+                                image: AppImages.mathuraMandir,
+                                mandirName: "Mathura Mandir",
+                                godName: "Radhe Shyam Ji",
                                 imageWidth: MediaQuery.of(context).size.width,
-                                morningTime: "6:00AM to 12:00PM",
-                                eveningTime: "4:00PM to 9:00PM",
-                                address: "Pratap Nagar Jaipur"),
+                                morningTime: "7:00AM to 11:00PM",
+                                eveningTime: "3:00PM to 10:00PM",
+                                address: "Mathura, Utter Pradesh"),
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => MandirDetailsView());
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: mandirCard(
+                                image: AppImages.tirupatiBalaji,
+                                mandirName: "Tirupati Balaji Dham",
+                                godName: "Vishnu Ji",
+                                imageWidth: MediaQuery.of(context).size.width,
+                                morningTime: "5:00AM to 12:00PM",
+                                eveningTime: "2:00PM to 8:00PM",
+                                address:
+                                    "Venkata Hill, Tirupati, Andhra Pradesh"),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
                       ],
                     )
                   ],

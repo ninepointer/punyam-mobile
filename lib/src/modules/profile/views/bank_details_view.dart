@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
-import 'package:stoxhero/src/modules/modules.dart';
+import 'package:punyam/src/modules/modules.dart';
 
 import '../../../core/core.dart';
 

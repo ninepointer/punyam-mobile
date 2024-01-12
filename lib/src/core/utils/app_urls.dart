@@ -2,7 +2,7 @@ import '../../../main.dart';
 
 class AppUrls {
   static const String baseURL =
-      isProd ? 'https://stoxhero.com' : 'http://3.108.199.218';
+      isProd ? 'https://stoxhero.com' : 'https://punyam.app';
   static const String apiURL = '$baseURL/api/v1';
 
   static const String referralWebUrl = 'https://www.stoxhero.com/?referral=';
@@ -35,4 +35,7 @@ class AppUrls {
   //
   static const String bookingConfirmation = "$apiURL/pooja/user/booking";
   static const String poojaCatagory = "$apiURL/pooja/user";
+
+  static String individualPoojaById(String? poojaId) =>
+      "$apiURL/pooja/user/$poojaId";
 }

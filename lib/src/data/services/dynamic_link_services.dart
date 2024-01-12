@@ -1,5 +1,5 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 final firebaseDynamicLink = FirebaseDynamicLinks.instance;
 

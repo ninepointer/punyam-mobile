@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 import '../core.dart';
 
@@ -28,10 +28,10 @@ class AppLogoWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   child: Image.asset(
                     Get.isDarkMode
-                        ? AppImages.lightAppName
-                        : AppImages.dartAppName,
-                    height: logoSize ?? 100,
-                    width: logoSize ?? 250,
+                        ? AppImages.punyamApplogo
+                        : AppImages.punyamApplogo,
+                    height: logoSize ?? 200,
+                    width: logoSize ?? 200,
                   ),
                 ),
               ),

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 import 'package:uni_links/uni_links.dart';
 
 class HomeView extends StatefulWidget {

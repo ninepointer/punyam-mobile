@@ -1,4 +1,4 @@
-import 'package:stoxhero/src/base/base.dart';
+import 'package:punyam/src/base/base.dart';
 
 import '../../core/core.dart';
 import '../data.dart';

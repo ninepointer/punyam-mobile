@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 class SelectedTierDetailsView extends StatefulWidget {
-  const SelectedTierDetailsView({super.key});
+  final Tiers? tierDetails;
+  final Packagess? packageDetails;
+  const SelectedTierDetailsView(
+      {Key? key, this.tierDetails, this.packageDetails})
+      : super(key: key);
 
   @override
   State<SelectedTierDetailsView> createState() =>
@@ -10,6 +14,18 @@ class SelectedTierDetailsView extends StatefulWidget {
 }
 
 class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
+  late PoojaServicesController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = Get.find<PoojaServicesController>();
+    controller.bookingPoojaId = controller.selectedPoojaById.value.sId;
+    controller.bookingTierId = widget.tierDetails?.sId ?? "";
+    controller.bookingAmount = widget.packageDetails?.price ?? 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +60,8 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     child: Container(
                         height: 70,
                         width: 70,
-                        child: Image.asset(
-                          AppImages.homepuja,
+                        child: Image.network(
+                          controller.selectedPoojaById.value.image?.url ?? '',
                           fit: BoxFit.fill,
                         )),
                   ),
@@ -68,7 +84,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "Griha Pravesh + 1 Brahman Bhojan+ 1 Gau Seva",
+                                    "${controller.selectedPoojaById.value.name}",
                                     style: AppStyles.tsBlackMedium20,
                                     softWrap: true,
                                   ),
@@ -87,7 +103,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Griha Pravesh + 1 Brahman Bhojan+ 1 Gau Seva",
+                                    "Selected Tier - ${widget.tierDetails?.tierName}",
                                     style: AppStyles.tsBlackMedium12,
                                     softWrap: true,
                                   ),
@@ -95,6 +111,47 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          if (widget.tierDetails?.postPoojaCleanUpIncluded ==
+                              true)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Pooja cleanup included",
+                                      style: AppStyles.tsBlackMedium12,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          if (widget.tierDetails?.poojaItemsIncluded == true)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Pooja items included ",
+                                      style: AppStyles.tsBlackMedium12,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           SizedBox(
                             height: 4,
                           ),
@@ -106,26 +163,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Pooja cleanup included",
-                                    style: AppStyles.tsBlackMedium12,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Pooja items included ",
+                                    "Total number of main pandit - ${widget.tierDetails?.numberOfMainPandit}",
                                     style: AppStyles.tsBlackMedium12,
                                     softWrap: true,
                                   ),
@@ -176,7 +214,9 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                       ),
                     ),
                     child: Text("Confirm Booking"),
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.getUserBookingDetails();
+                    },
                   ),
                 ),
               ),

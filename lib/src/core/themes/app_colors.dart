@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/core/core.dart';
+import 'package:punyam/src/core/core.dart';
 
 extension CustomColors on ColorScheme {
   Color get lightScaffoldBackgroundColor => Color(0xFFF5F6FA);
@@ -41,4 +41,5 @@ class AppColors {
   static final Color sunlightColor = Color(0xFFFFD700);
   static final Color orangeColor = Color(0xFFFFA500);
   static final Color peelColor = Color(0xFFFFD700);
+  static final Color appLinearProgressionColor = Color(0xFFFDB769);
 }

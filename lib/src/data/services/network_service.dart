@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:stoxhero/main.dart';
+import 'package:punyam/main.dart';
 
 import '../../core/core.dart';
 import '../data.dart';

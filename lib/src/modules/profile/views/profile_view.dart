@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:stoxhero/src/modules/modules.dart';
-import 'package:stoxhero/src/modules/profile/widgets/profile_list_tile.dart';
+import 'package:punyam/src/modules/modules.dart';
+import 'package:punyam/src/modules/profile/widgets/profile_list_tile.dart';
 
 import '../../../core/core.dart';
 

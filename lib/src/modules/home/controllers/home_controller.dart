@@ -32,7 +32,7 @@ class HomeController extends BaseController<DashboardRepository> {
     userDetails.value = AppStorage.getUserDetails();
     // await getStockIndexInstrumentsList();
     // await getDashboardReturnSummary();
-    // await getDashboardCarousel();
+    await getDashboardCarousel();
     // await getDashboard(selectedTradeType, selectedTimeFrame);
     // await liveIndexDetails();
     // socketIndexConnection();

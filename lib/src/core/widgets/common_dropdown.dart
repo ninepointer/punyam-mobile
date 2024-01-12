@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/core/core.dart';
+import 'package:punyam/src/core/core.dart';
 
 class CommonDropdown extends StatelessWidget {
   final String hint;

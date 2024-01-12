@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
-class Tier1Details extends StatelessWidget {
-  const Tier1Details({Key? key});
+class Tier1Details extends GetView<PoojaServicesController> {
+  final Packagess package;
+  final String poojaId;
+
+  const Tier1Details({Key? key, required this.package, required this.poojaId});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class Tier1Details extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "Griha Pravesh ",
+                      "${package.tier?.tierName}",
                       style: AppStyles.tsBlackMedium20,
                       softWrap: true,
                     ),
@@ -41,11 +44,11 @@ class Tier1Details extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: 300,
+                    height: 170,
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(8),
-                      itemCount: 5,
+                      itemCount: 3,
                       itemBuilder: (BuildContext context, int index) {
                         return Column(
                           children: [
@@ -75,7 +78,7 @@ class Tier1Details extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 18,
+                              height: 6,
                             ),
                           ],
                         );
@@ -83,7 +86,77 @@ class Tier1Details extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 6,
+                  ),
+                  if (package.tier?.poojaItemsIncluded == true)
+                    isThisIncluded(title: "Pooja items included"),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  if (package.tier?.postPoojaCleanUpIncluded == true)
+                    isThisIncluded(title: "Pooja Cleanup included"),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          size: 15,
+                          color: AppColors.orangeColor,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                            "Pandit ji experience: ${package.tier?.minPanditExperience} - ${package.tier?.maxPanditExperience} "),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          size: 15,
+                          color: AppColors.orangeColor,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                            "Total number of main pandit: ${package.tier?.numberOfMainPandit}"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          size: 15,
+                          color: AppColors.orangeColor,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                            "Total number of assistant pandit: ${package.tier?.numberOfAssistantPandit}"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
                   ),
                   Center(
                     child: Column(children: [
@@ -115,7 +188,29 @@ class Tier1Details extends StatelessWidget {
                         ),
                         child: Text("PARTICIPATE"),
                         onPressed: () {
-                          Get.to(() => SelectedTierDetailsView());
+                          controller.getindividualPoojaByIdDetails(poojaId);
+                          Packagess pakagedetail =
+                              Packagess(price: package.price);
+                          Tiers selectedTier = Tiers(
+                            sId: package.tier?.sId,
+                            tierName: package.tier?.tierName,
+                            poojaItemsIncluded:
+                                package.tier?.poojaItemsIncluded,
+                            postPoojaCleanUpIncluded:
+                                package.tier?.postPoojaCleanUpIncluded,
+                            minPanditExperience:
+                                package.tier?.minPanditExperience,
+                            maxPanditExperience:
+                                package.tier?.maxPanditExperience,
+                            numberOfMainPandit:
+                                package.tier?.numberOfAssistantPandit,
+                            numberOfAssistantPandit:
+                                package.tier?.numberOfAssistantPandit,
+                          );
+                          Get.to(() => SelectedTierDetailsView(
+                                tierDetails: selectedTier,
+                                packageDetails: pakagedetail,
+                              ));
                         },
                       ),
                     ]),
@@ -128,4 +223,34 @@ class Tier1Details extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget isThisIncluded({required String title}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 8),
+    child: Row(
+      children: [
+        Container(
+          height: 13,
+          width: 13,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle, color: AppColors.orangeColor),
+          child: Icon(
+            Icons.check,
+            size: 10,
+            color: AppColors.white,
+          ),
+        ),
+        SizedBox(
+          width: 6,
+        ),
+        Expanded(
+          child: Text(
+            "$title",
+            softWrap: true,
+          ),
+        ),
+      ],
+    ),
+  );
 }

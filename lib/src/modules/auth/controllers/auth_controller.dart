@@ -239,18 +239,19 @@ class AuthController extends BaseController<AuthRepository> {
     isLoading(false);
   }
 
-  // Future getDefaultInviteCode() async {
-  //   isLoading(true);
-  //   try {
-  //     final RepoResponse<CampaignCodeResponse> response = await repository.getDefaultInviteCode();
-  //     if (response.data != null) {
-  //       inviteCode(response.data?.data);
-  //     }
-  //   } catch (e) {
-  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-  //   }
-  //   isLoading(false);
-  // }
+  Future getDefaultInviteCode() async {
+    isLoading(true);
+    try {
+      final RepoResponse<CampaignCodeResponse> response =
+          await repository.getDefaultInviteCode();
+      if (response.data != null) {
+        inviteCode(response.data?.data);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
 
   void clearForm() {
     fullNameTextController.clear();

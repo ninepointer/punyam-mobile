@@ -4,7 +4,9 @@ import '../../../app/app.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 class BookingDetails extends StatefulWidget {
-  const BookingDetails({Key? key}) : super(key: key);
+  const BookingDetails({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<BookingDetails> createState() => _BookingDetailsState();
@@ -12,8 +14,6 @@ class BookingDetails extends StatefulWidget {
 
 class _BookingDetailsState extends State<BookingDetails> {
   late PoojaServicesController controller;
-  String selectedCity = 'Noida'; // Set the default city
-  String selectedState = '';
 
   @override
   void initState() {
@@ -23,26 +23,14 @@ class _BookingDetailsState extends State<BookingDetails> {
     controller.mobileNumberTextController.clear();
     controller.bookingDateTextController.clear();
     controller.fullNameTextController.clear();
-
+    controller.addressTextController.clear();
+    controller.pinCodeTextController.clear();
+    controller.selectedCity = "Noida";
+    controller.selectedState = "Utter Pradesh";
     // Set the default state based on the default city
-    updateStateBasedOnCity(selectedCity);
-    selectedState = selectedState.isNotEmpty ? selectedState : '';
-  }
-
-  void updateStateBasedOnCity(String city) {
-    switch (city) {
-      case "Noida":
-        selectedState = "Uttar Pradesh";
-        break;
-      case "Delhi":
-        selectedState = "Delhi";
-        break;
-      case "Gurgaon":
-        selectedState = "Haryana";
-        break;
-      default:
-        selectedState = "";
-    }
+    controller.updateStateBasedOnCity(controller.selectedCity);
+    controller.selectedState =
+        controller.selectedState.isNotEmpty ? controller.selectedState : '';
   }
 
   @override
@@ -51,7 +39,7 @@ class _BookingDetailsState extends State<BookingDetails> {
       () => Visibility(
         visible: controller.isProfileLoadingStatus,
         child: ListViewShimmer(
-          itemCount: 5,
+          itemCount: 8,
           shimmerCard: SmallCardShimmer(),
         ),
         replacement: Container(
@@ -127,18 +115,18 @@ class _BookingDetailsState extends State<BookingDetails> {
                 CommonTextField(
                   hintText: 'Pin Code',
                   keyboardType: TextInputType.number,
-                  controller: controller.addressTextController,
+                  controller: controller.pinCodeTextController,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   padding: EdgeInsets.only(bottom: 8),
                 ),
                 DropdownButtonFormField2<String>(
-                  value: selectedCity,
+                  value: controller.selectedCity,
                   onChanged: (String? newValue) {
                     setState(() {
-                      selectedCity = newValue.toString();
-                      updateStateBasedOnCity(newValue.toString());
+                      controller.selectedCity = newValue.toString();
+                      controller.updateStateBasedOnCity(newValue.toString());
                     });
                   },
                   items: <String>[
@@ -199,7 +187,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                 SizedBox(height: 8),
                 CommonTextField(
                   hintText: 'State',
-                  controller: TextEditingController(text: selectedState),
+                  controller:
+                      TextEditingController(text: controller.selectedState),
                   isDisabled: true,
                   padding: EdgeInsets.only(bottom: 8),
                 ),

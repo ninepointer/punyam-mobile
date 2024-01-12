@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 class Tier4Details extends StatelessWidget {
   const Tier4Details({Key? key});

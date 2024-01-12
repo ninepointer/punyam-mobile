@@ -1,4 +1,4 @@
-import 'package:stoxhero/src/app/app.dart';
+import 'package:punyam/src/app/app.dart';
 
 class VerifySigninRequest {
   String? mobile;
@@ -14,7 +14,9 @@ class VerifySigninRequest {
   VerifySigninRequest.fromJson(Map<String, dynamic> json) {
     mobile = json['mobile'];
     mobileOtp = json['mobile_otp'];
-    fcmTokenData = json['fcmTokenData'] != null ? new FcmTokenData.fromJson(json['fcmTokenData']) : null;
+    fcmTokenData = json['fcmTokenData'] != null
+        ? new FcmTokenData.fromJson(json['fcmTokenData'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
