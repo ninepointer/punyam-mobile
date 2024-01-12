@@ -1,7 +1,7 @@
-name: Punyam
+name: punyam
 description: A new Flutter project.
-# version: 1.0.0+80 # Dev
-version: 1.0.0+51 # Prod
+# version: 1.0.0+1 # Dev
+version: 1.0.0+1 # Prod
 publish_to: "none"
 
 environment:

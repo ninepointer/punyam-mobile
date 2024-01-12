@@ -102,8 +102,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           SizedBox(height: 36),
           if (currentIndex == contents.length - 1)
             CommonFilledButton(
-              backgroundColor:
-                  Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
+              backgroundColor: Get.isDarkMode
+                  ? AppColors.cinnamonStickColor
+                  : AppColors.cinnamonStickColor,
               width: 250,
               height: 52,
               label: (currentIndex == contents.length - 1
@@ -118,8 +119,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 child: FloatingActionButton(
                   elevation: 0,
                   backgroundColor: Get.isDarkMode
-                      ? AppColors.darkGreen
-                      : AppColors.lightGreen,
+                      ? AppColors.cinnamonStickColor
+                      : AppColors.cinnamonStickColor,
                   child: Icon(
                     Icons.chevron_right_rounded,
                     color: AppColors.white,
@@ -178,38 +179,36 @@ List<OnBoardingContent> contents = [
   // ),
   OnBoardingContent(
     image: AppImages.mandir,
-    title: 'Experience the real F&O market',
-    description:
-        'Participate in different TestZones to test your strategies & win cash rewards!',
+    title: 'Find your divine touch',
+    description: 'Stay connected with temples and places of worship near you!',
   ),
   OnBoardingContent(
     image: AppImages.mandir,
-    title: 'Future & Options (F&O)',
+    title: 'Participate in religious events',
     description:
-        "Learn the basics of options trading by executing your strategies for free!",
+        "Take part in global events right from the comfort of your home!",
   ),
   OnBoardingContent(
     image: AppImages.mandir,
-    title: 'Subscribe to StoxHero TenX plans',
-    description:
-        'Subscribe to TenX plans and apply your learning to earn cash reward!',
+    title: 'Books poojas on demand',
+    description: 'Access our network of pandit jis for home poojas!',
   ),
-  OnBoardingContent(
-    image: AppImages.mandir,
-    title: 'Get your real market readiness tested!',
-    description:
-        'Participate in MarginX with virtual money at a very low investment and check your market readiness!',
-  ),
-  OnBoardingContent(
-    image: AppImages.mandir,
-    title: 'Refer your friends and win ',
-    description:
-        'Refer your friend & get \u{20B9}15 in your StoxHero wallet, your friend gets \u{20B9}100 as signup bonus',
-  ),
-  OnBoardingContent(
-    image: AppImages.mandir,
-    title: 'Check TestZone Weekly Earning Leaderboard',
-    description:
-        'Check the TestZone profiles of top TestZone traders of the week along with their recent TestZone participations!',
-  ),
+  // OnBoardingContent(
+  //   image: AppImages.mandir,
+  //   title: 'Get your real market readiness tested!',
+  //   description:
+  //       'Participate in MarginX with virtual money at a very low investment and check your market readiness!',
+  // ),
+  // OnBoardingContent(
+  //   image: AppImages.mandir,
+  //   title: 'Refer your friends and win ',
+  //   description:
+  //       'Refer your friend & get \u{20B9}15 in your StoxHero wallet, your friend gets \u{20B9}100 as signup bonus',
+  // ),
+  // OnBoardingContent(
+  //   image: AppImages.mandir,
+  //   title: 'Check TestZone Weekly Earning Leaderboard',
+  //   description:
+  //       'Check the TestZone profiles of top TestZone traders of the week along with their recent TestZone participations!',
+  // ),
 ];

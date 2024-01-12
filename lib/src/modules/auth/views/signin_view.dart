@@ -111,22 +111,22 @@ class _SigninViewState extends State<SigninView> {
                         ],
                       ),
                       Spacer(),
-                      SizedBox(height: 24),
-                      Center(
-                        child: Text(
-                          'Learn and earn from stock market trading.\nClaim your free account now!',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.tsRegular16,
-                        ),
-                      ),
-                      SizedBox(height: 24),
+                      // SizedBox(height: 24),
+                      // Center(
+                      //   child: Text(
+                      //     'Learn and earn from stock market trading.\nClaim your free account now!',
+                      //     textAlign: TextAlign.center,
+                      //     style: Theme.of(context).textTheme.tsRegular16,
+                      //   ),
+                      // ),
+                      // SizedBox(height: 24),
                       CommonOutlinedButton(
                         backgroundColor: Get.isDarkMode
-                            ? AppColors.darkGreen
-                            : AppColors.lightGreen,
+                            ? AppColors.cinnamonStickColor
+                            : AppColors.cinnamonStickColor,
                         labelColor: Get.isDarkMode
-                            ? AppColors.darkGreen
-                            : AppColors.lightGreen,
+                            ? AppColors.cinnamonStickColor
+                            : AppColors.cinnamonStickColor,
                         label: 'Create account',
                         onPressed: () {
                           // controller.getDefaultInviteCode();

@@ -22,7 +22,7 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await getAppVersion();
-    if (isProd) await checkForUpdate();
+    // if (isProd) await checkForUpdate();
     _startOnBoarding();
     super.onInit();
   }
