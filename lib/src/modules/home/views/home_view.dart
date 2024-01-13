@@ -154,57 +154,54 @@ class _HomeViewState extends State<HomeView> {
             ),
           ]),
       body: Obx(() => _tabs[controller.selectedIndex.value]),
-      // floatingActionButton: FloatingActionButton(
-      //   elevation: 0,
-      //   backgroundColor:
-      //       Get.isDarkMode ? AppColors.darkGreen : AppColors.lightGreen,
-      //   onPressed: () => _updateTab(2),
-      //   child: Icon(
-      //     Icons.currency_rupee_rounded,
-      //     color: AppColors.white,
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: Obx(
-      //   () => BottomAppBar(
-      //     shape: CircularNotchedRectangle(),
-      //     notchMargin: 4,
-      //     child: Container(
-      //       height: 60,
-      //       margin: EdgeInsets.all(0),
-      //       child: Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         children: [
-      //           _buildTabButton(
-      //             context,
-      //             index: 0,
-      //             label: 'Home',
-      //             icon: Icons.bar_chart_rounded,
-      //           ),
-      //           _buildTabButton(
-      //             context,
-      //             index: 1,
-      //             label: 'Market',
-      //             icon: Icons.analytics_rounded,
-      //           ),
-      //           SizedBox(width: 40),
-      //           _buildTabButton(
-      //             context,
-      //             index: 3,
-      //             label: 'MarginX',
-      //             icon: Icons.trending_up_rounded,
-      //           ),
-      //           _buildTabButton(
-      //             context,
-      //             index: 4,
-      //             label: 'TestZone',
-      //             icon: Icons.groups_rounded,
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 0,
+          backgroundColor: Get.isDarkMode
+              ? AppColors.cinnamonStickColor
+              : AppColors.cinnamonStickColor,
+          onPressed: () => _updateTab(2),
+          child: Image.asset(AppImages.prayIcon)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Obx(
+        () => BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 4,
+          child: Container(
+            height: 60,
+            margin: EdgeInsets.all(0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildTabButton(
+                  context,
+                  index: 0,
+                  label: 'Home',
+                  icon: Icons.bar_chart_rounded,
+                ),
+                _buildTabButton(
+                  context,
+                  index: 1,
+                  label: 'Temples',
+                  icon: Icons.analytics_rounded,
+                ),
+                SizedBox(width: 40),
+                _buildTabButton(
+                  context,
+                  index: 3,
+                  label: 'Shop',
+                  icon: Icons.trending_up_rounded,
+                ),
+                _buildTabButton(
+                  context,
+                  index: 4,
+                  label: 'Services',
+                  icon: Icons.groups_rounded,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -224,8 +221,8 @@ class _HomeViewState extends State<HomeView> {
               icon,
               color: controller.selectedIndex.value == index
                   ? Get.isDarkMode
-                      ? AppColors.darkGreen
-                      : AppColors.lightGreen
+                      ? AppColors.cinnamonStickColor
+                      : AppColors.cinnamonStickColor
                   : AppColors.grey,
             ),
             SizedBox(height: 4),
@@ -234,8 +231,8 @@ class _HomeViewState extends State<HomeView> {
               style: Theme.of(context).textTheme.tsRegular11.copyWith(
                     color: controller.selectedIndex.value == index
                         ? Get.isDarkMode
-                            ? AppColors.darkGreen
-                            : AppColors.lightGreen
+                            ? AppColors.cinnamonStickColor
+                            : AppColors.cinnamonStickColor
                         : AppColors.grey,
                   ),
             )

@@ -175,6 +175,17 @@ class FormatHelper {
     }
   }
 
+  static String formatTimeOnly(String? value) {
+    if (value != null) {
+      DateTime dateTimeUTC = DateTime.parse(value);
+      DateTime dateTimeIST = dateTimeUTC.add(Duration(hours: 5, minutes: 30));
+      String formattedIST = DateFormat('hh:mm a').format(dateTimeIST);
+      return formattedIST;
+    } else {
+      return '-';
+    }
+  }
+
   static String formatDateTimeOnlyToIST(String? value) {
     if (value != null) {
       DateTime dateTimeUTC = DateTime.parse(value);

@@ -23,7 +23,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
     controller = Get.find<PoojaServicesController>();
     controller.bookingPoojaId = controller.selectedPoojaById.value.sId;
     controller.bookingTierId = widget.tierDetails?.sId ?? "";
-    controller.bookingAmount = widget.packageDetails?.price ?? 0;
+    controller.bookingAmount = widget.packageDetails?.price.toString();
   }
 
   @override
@@ -103,7 +103,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Selected Tier - ${widget.tierDetails?.tierName}",
+                                    "Selected Package - ${widget.tierDetails?.tierName}",
                                     style: AppStyles.tsBlackMedium12,
                                     softWrap: true,
                                   ),

@@ -38,4 +38,11 @@ class AppUrls {
 
   static String individualPoojaById(String? poojaId) =>
       "$apiURL/pooja/user/$poojaId";
+
+  static const String getAllMandirs = "$apiURL/mandir/user";
+
+  static const String getPopularMandirs = "$apiURL/mandir/user/popular";
+  static const String getDhamMandirs = "$apiURL/mandir/user/dham";
+  static const String addtoFavirouteMandirs =
+      "$apiURL/mandir/user/addfavourite";
 }

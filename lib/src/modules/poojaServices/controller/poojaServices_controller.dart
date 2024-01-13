@@ -29,7 +29,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
 
   String? bookingPoojaId = '';
   String? bookingTierId = '';
-  num? bookingAmount = 0;
+  String? bookingAmount = '';
 
   String selectedCity = 'Noida'; // Set the default city
   String selectedState = 'Uttar Pradesh';
@@ -93,11 +93,14 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
             },
           );
         } else {
-          // Update the UI with the selected date and time
-          String dateTimeString =
+          // Store the DateTime object in the desired format
+          String formattedDateTime = selectedDateTime.toUtc().toIso8601String();
+          selectedBookingDateTime(formattedDateTime);
+
+          // Update the UI with the formatted date for display
+          String displayDateTimeString =
               DateFormat("dd-MM-yyyy hh:mm a").format(selectedDateTime);
-          bookingDateTextController.text = dateTimeString;
-          selectedBookingDateTime(selectedDateTime.toString());
+          bookingDateTextController.text = displayDateTimeString;
         }
       }
     }
@@ -192,7 +195,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
     Map<String, dynamic> data = {
       'full_name': fullNameTextController.text,
       "mobile": mobileNumberTextController.text,
-      'booking_date': bookingDateTextController.text,
+      'booking_date': selectedBookingDateTime.value,
       'address': addressTextController.text,
       'city': selectedCity,
       'state': selectedState,

@@ -186,7 +186,7 @@ class Tier1Details extends GetView<PoojaServicesController> {
                             ),
                           ),
                         ),
-                        child: Text("PARTICIPATE"),
+                        child: Text("Book Pooja"),
                         onPressed: () {
                           controller.getindividualPoojaByIdDetails(poojaId);
                           Packagess pakagedetail =

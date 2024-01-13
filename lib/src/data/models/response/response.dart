@@ -11,3 +11,4 @@ export 'verify_phone_login_response.dart';
 export 'booking_confirmation_response.dart';
 export 'pooja_catagory_response.dart';
 export 'select_pooja_by_id_response.dart';
+export 'all_mandir_response.dart';
