@@ -10,7 +10,7 @@ class DhamMandirView extends GetView<MandirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dham'),
+        title: Text('Dhams'),
       ),
       body: Padding(
         padding: AppConstants.getAppPadding(context),

@@ -194,7 +194,7 @@ class _MandirViewState extends State<MandirView> {
                               ),
                               child: Center(
                                   child: Text(
-                                "Popular Mandir's",
+                                "Popular Mandirs",
                                 style: AppStyles.tsBlackMedium16,
                               )),
                             ),

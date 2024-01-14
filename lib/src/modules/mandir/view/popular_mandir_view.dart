@@ -10,7 +10,7 @@ class PopularMandirView extends GetView<MandirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Mandir'),
+        title: Text('Popular Mandirs'),
       ),
       body: Padding(
         padding: AppConstants.getAppPadding(context),
