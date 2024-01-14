@@ -42,4 +42,6 @@ class AppColors {
   static final Color orangeColor = Color(0xFFFFA500);
   static final Color peelColor = Color(0xFFFFD700);
   static final Color appLinearProgressionColor = Color(0xFFFDB769);
+  //Color(0xFFFECA7C)
+  static final Color splashbackgroundColor = Color(0xFFFECA7C);
 }

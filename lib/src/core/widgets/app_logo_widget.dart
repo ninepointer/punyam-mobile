@@ -25,13 +25,11 @@ class AppLogoWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 1.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    Get.isDarkMode
-                        ? AppImages.punyamApplogo
-                        : AppImages.punyamApplogo,
+                    Get.isDarkMode ? AppImages.logo4 : AppImages.logo5,
                     height: logoSize ?? 200,
-                    width: logoSize ?? 200,
+                    width: logoSize ?? 300,
                   ),
                 ),
               ),

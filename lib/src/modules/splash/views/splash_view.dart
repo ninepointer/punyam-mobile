@@ -11,7 +11,7 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: AppColors.splashbackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -20,14 +20,14 @@ class SplashView extends GetView<SplashController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppLogoWidget(),
-                SizedBox(height: 16),
+                // SizedBox(height: 16),
                 Container(
                   width: 150,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: LinearProgressIndicator(
                       backgroundColor: AppColors.grey.withOpacity(.25),
-                      color: AppColors.appLinearProgressionColor,
+                      color: AppColors.cinnamonStickColor,
                     ),
                   ),
                 ),

@@ -31,4 +31,9 @@ class AppImages {
   static const String gayatrijaap = '$imagesDir/gayatriMayntra.jpeg';
   static const String punyamApplogo = '$imagesDir/LogoPunyam.png';
   static const String prayIcon = '$imagesDir/prayIcon.png';
+  static const String logo1 = '$imagesDir/logo1.jpg';
+  static const String logo2 = '$imagesDir/logo2.jpg';
+  static const String logo3 = '$imagesDir/logo3.jpg';
+  static const String logo4 = '$imagesDir/logo4.jpg';
+  static const String logo5 = '$imagesDir/logo5.jpg';
 }
