@@ -112,8 +112,8 @@ class _FullScreenImageState extends State<FullScreenImage> {
             },
           ),
           Positioned(
-            top: 40,
-            left: 16,
+            top: 30,
+            left: 10,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {

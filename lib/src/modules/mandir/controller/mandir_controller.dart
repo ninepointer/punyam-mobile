@@ -20,6 +20,8 @@ class MandirController extends BaseController<MandirRespository> {
   final isMandirLoading = false.obs;
   bool get isMandirLoadingStatus => isMandirLoading.value;
 
+  final dashboardCarouselList = <DashboardCarousel>[].obs;
+
   final searchTextController = TextEditingController();
 
   final allTempleListDetails = <AllMandirData>[].obs;
@@ -32,9 +34,31 @@ class MandirController extends BaseController<MandirRespository> {
   };
 
   Future loadData() async {
+    await getCarousel();
     await getAllTemplesDetails();
     await getPopularTamplesDetails();
     await getDhamTemplesDetails();
+  }
+
+  void navigateToCarousel(String link) {}
+
+  Future getCarousel() async {
+    isLoading(true);
+    try {
+      final RepoResponse<DashboardCarouselResponse> response =
+          await repository.getCarousel();
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          dashboardCarouselList(response.data?.data ?? []);
+          print("dash${dashboardCarouselList.length}");
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
   }
 
   Future<void> getAllTemplesDetails() async {
@@ -81,22 +105,7 @@ class MandirController extends BaseController<MandirRespository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
   }
-  //  Future addFaviroutesMandir(int? mandirid) async {
-  //   isMandirLoading(true);
-  //   try {
-  //     await repository.addToFavorite(mandirid ?? 0);
 
-  //    // selectedWatchlistIndex(-1);
-  //     await getAllTemplesDetails();
-  //    // await searchInstruments(searchTextController.text, showShimmer: false);
-  //     SnackbarHelper.showSnackbar('Add to faviroutes');
-
-  //   } catch (e) {
-  //     print(e.toString());
-  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-  //   }
-  //   isMandirLoading(false);
-  // }
   Future addFaviroutesMandir(String? mandirid) async {
     isMandirLoading(true);
     try {

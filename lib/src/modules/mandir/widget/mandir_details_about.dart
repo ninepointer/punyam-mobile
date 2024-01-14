@@ -20,6 +20,9 @@ class MandirDetailsAboutWidget extends StatelessWidget {
                     "${templeDetails?.description}",
                   ),
                 ),
+                SizedBox(
+                  height: 24,
+                ),
               ],
             ),
           ),

@@ -44,6 +44,7 @@ class AppRoutes {
   static const String newyearstory = '/newyearstory';
   static const String poojaServices = '/poojaServices';
   static const String mandir = '/mandir';
+  static const String popularMandir = '/popularMandir';
 
   // static const String stocks = '/stocks';
 }

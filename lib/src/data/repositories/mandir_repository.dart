@@ -34,4 +34,12 @@ class MandirRespository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
+
+  Future<RepoResponse<DashboardCarouselResponse>> getCarousel() async {
+    String apiURL = AppUrls.dashboardCarousel;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
+  }
 }

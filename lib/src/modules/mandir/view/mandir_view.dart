@@ -37,217 +37,209 @@ class _MandirViewState extends State<MandirView> {
           },
           child: Visibility(
             visible: !controller.isLoadingStatus,
-            child: Padding(
-              padding: AppConstants.getAppPadding(context),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonTextField(
-                    padding: EdgeInsets.zero,
-                    hintText: 'Search Symbol and start trading',
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: controller.searchTextController.clear,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Discover with God/Goddess",
-                        style: AppStyles.tsBlackRegular18,
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 12),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        godImage(image: AppImages.ramji, context: context),
-                        SizedBox(width: 8),
-                        godImage(image: AppImages.durgaji, context: context),
-                        SizedBox(width: 8),
-                        godImage(image: AppImages.hanumanji, context: context),
-                        SizedBox(width: 8),
-                        godImage(image: AppImages.shivji, context: context),
-                        SizedBox(width: 8),
-                        godImage(
-                            image: AppImages.templeImage, context: context),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // Handle button tap
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.cinnamonStickColor),
-                            ),
-                            child: Text(
-                              "Open Now",
-                              style: TextStyle(
-                                color: Colors.orange,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // Handle button tap
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.cinnamonStickColor),
-                            ),
-                            child: Text(
-                              "Favorites",
-                              style: TextStyle(
-                                color: Colors.orange,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _selectedTempleList =
-                                  controller.popularTempleListDetails;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.cinnamonStickColor),
-                            ),
-                            child: Text(
-                              "Popular",
-                              style: TextStyle(
-                                color: Colors.orange,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppColors.cinnamonStickColor),
-                            ),
-                            child: Text(
-                              "Tranding Now",
-                              style: TextStyle(
-                                color: Colors.orange,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    children: [
-                      GestureDetector(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 2.31,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    AssetImage(AppImages.templeBackGroundImage),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(17),
-                              color: AppColors.cyan,
-                            ),
-                            child: Center(
-                                child: Text(
-                              "Popular Mandir's",
-                              style: AppStyles.tsBlackMedium16,
-                            )),
-                          ),
-                          onTap: () {
-                            setState(() {
-                              _selectedTempleList =
-                                  controller.popularTempleListDetails;
-                            });
-                          }),
-                      SizedBox(
-                        width: 12,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: AppConstants.getAppPadding(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonTextField(
+                      padding: EdgeInsets.zero,
+                      hintText: 'Search Symbol and start trading',
+                      prefixIcon: Icon(Icons.search),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: controller.searchTextController.clear,
                       ),
-                      GestureDetector(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 2.31,
-                          height: 70,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image:
-                                  AssetImage(AppImages.templeBackGroundImage),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(17),
-                            color: AppColors.cyan,
-                          ),
-                          child: Center(
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Discover with God/Goddess",
+                          style: AppStyles.tsBlackRegular18,
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          godImage(image: AppImages.ramji, context: context),
+                          SizedBox(width: 8),
+                          godImage(image: AppImages.durgaji, context: context),
+                          SizedBox(width: 8),
+                          godImage(
+                              image: AppImages.hanumanji, context: context),
+                          SizedBox(width: 8),
+                          godImage(image: AppImages.shivji, context: context),
+                          SizedBox(width: 8),
+                          godImage(
+                              image: AppImages.templeImage, context: context),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Handle button tap
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
                               child: Text(
-                            "Dham",
-                            style: AppStyles.tsBlackMedium16,
-                          )),
-                        ),
-                        onTap: () {
-                          setState(() {
-                            _selectedTempleList =
-                                controller.dhamTempleListDetails;
-                          });
-                        },
+                                "Open Now",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              // Handle button tap
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Favorites",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _selectedTempleList =
+                                    controller.popularTempleListDetails;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Popular",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Tranding Now",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 12),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _selectedTempleList.length,
-                      itemBuilder: (context, index) {
-                        var templeDetails = _selectedTempleList[index];
-
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      children: [
+                        GestureDetector(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2.31,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      AppImages.templeBackGroundImage),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(17),
+                                color: AppColors.cyan,
+                              ),
+                              child: Center(
+                                  child: Text(
+                                "Popular Mandir's",
+                                style: AppStyles.tsBlackMedium16,
+                              )),
+                            ),
+                            onTap: () {
+                              Get.to(() => PopularMandirView());
+                            }),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        GestureDetector(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2.31,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      AppImages.templeBackGroundImage),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(17),
+                                color: AppColors.cyan,
+                              ),
+                              child: Center(
+                                  child: Text(
+                                "Dham",
+                                style: AppStyles.tsBlackMedium16,
+                              )),
+                            ),
+                            onTap: () {
+                              Get.to(() => DhamMandirView());
+                            }),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    Column(
+                      children: controller.popularTempleListDetails
+                          .map((templeDetails) {
                         return GestureDetector(
                           onTap: () {
                             Get.to(() => MandirDetailsView(
-                                templeDetails: templeDetails));
+                                  templeDetails: templeDetails,
+                                ));
                           },
                           child: Container(
-                            margin: EdgeInsets.only(bottom: 12), // Add margin
+                            margin: EdgeInsets.only(bottom: 12),
                             width: MediaQuery.of(context).size.width,
                             child: Container(
                               decoration: BoxDecoration(
@@ -309,7 +301,7 @@ class _MandirViewState extends State<MandirView> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 6),
+                                  SizedBox(height: 2),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
@@ -322,7 +314,7 @@ class _MandirViewState extends State<MandirView> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 6),
+                                  SizedBox(height: 2),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
@@ -330,7 +322,7 @@ class _MandirViewState extends State<MandirView> {
                                       children: [
                                         Flexible(
                                           child: Text(
-                                            "${templeDetails.addressDetails!.address} ${templeDetails.addressDetails!.city}",
+                                            "${templeDetails.addressDetails!.address}, ${templeDetails.addressDetails!.city}, ${templeDetails.addressDetails!.state}",
                                             style: AppStyles.tsBlackMedium12,
                                           ),
                                         ),
@@ -358,22 +350,22 @@ class _MandirViewState extends State<MandirView> {
                                           "${templeDetails.deviDevta?.name}",
                                           style: AppStyles.tsBlackMedium14
                                               .copyWith(
-                                                  color: AppColors
-                                                      .cinnamonStickColor),
+                                            color: AppColors.cinnamonStickColor,
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 12)
+                                  SizedBox(height: 12),
                                 ],
                               ),
                             ),
                           ),
                         );
-                      },
+                      }).toList(),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

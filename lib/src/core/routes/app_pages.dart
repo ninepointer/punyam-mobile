@@ -69,5 +69,10 @@ class AppPages {
       page: () => MandirView(),
       binding: MandirBinding(),
     ),
+    GetPage(
+      name: AppRoutes.popularMandir,
+      page: () => PopularMandirView(),
+      binding: MandirBinding(),
+    ),
   ];
 }
