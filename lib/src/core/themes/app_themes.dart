@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../core.dart';
 
 class AppTheme {
-  static final String fontFamily = 'Rubik';
+  static final String fontFamily = GoogleFonts.itimTextTheme().toString();
 
   static ThemeData lightThemeData(BuildContext context) {
     return ThemeData.light(useMaterial3: false).copyWith(

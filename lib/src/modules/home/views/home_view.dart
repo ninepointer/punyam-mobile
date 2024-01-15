@@ -92,67 +92,67 @@ class _HomeViewState extends State<HomeView> {
         if (isOpened) controller.userDetails(AppStorage.getUserDetails());
       },
       appBar: AppBar(
-          title: Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Hello,',
-                    style: AppStyles.tsGreyRegular12,
-                  ),
-                  Text(
-                    controller
-                            .userDetailsData.data?.fullName?.capitalizeFirst ??
-                        '-',
-                    style: Theme.of(context).textTheme.tsMedium16,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          actions: [
-            // Obx(
-            //   () => GestureDetector(
-            //     onTap: () {
-            //       final controller = Get.find<WalletController>();
-            //       controller.loadData();
-            //       controller.selectedTabBarIndex(0);
-            //       Get.toNamed(AppRoutes.wallet);
-            //     },
-            //     child: Container(
-            //       margin: EdgeInsets.symmetric(vertical: 8),
-            //       padding: EdgeInsets.symmetric(horizontal: 14),
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(50),
-            //         color: AppColors.grey.withOpacity(.1),
-            //       ),
-            //       child: Row(
-            //         children: [
-            //           Icon(
-            //             Icons.account_balance_wallet_rounded,
-            //             color: AppColors.secondary,
-            //           ),
-            //           SizedBox(width: 12),
-            //           Text(
-            //             FormatHelper.formatNumbers(
-            //               Get.find<WalletController>().totalCashAmount.value,
-            //             ),
-            //             style: AppStyles.tsBlackMedium14.copyWith(
-            //               color: AppColors.success,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            IconButton(
-              splashRadius: 24,
-              icon: Icon(Icons.person),
-              onPressed: () => Get.toNamed(AppRoutes.profile),
+        // toolbarHeight: 500,
+        title: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hello,',
+                  style: AppStyles.tsGreyRegular12,
+                ),
+                Text(
+                  controller.userDetailsData.data?.fullName?.capitalizeFirst ??
+                      '-',
+                  style: Theme.of(context).textTheme.tsMedium16,
+                ),
+              ],
             ),
-          ]),
+          ],
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () => Get.toNamed(AppRoutes.profile),
+            child: Container(
+              height: 40,
+              width: 40,
+              margin: EdgeInsets.only(right: 14, top: 4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.brandYellow.withOpacity(1),
+                ),
+              ),
+              child: ClipOval(
+                child: controller.userDetails.value.data?.profilePhoto == null
+                    ? Padding(
+                        padding: EdgeInsets.all(2),
+                        child: Image.asset(
+                          Get.isDarkMode
+                              ? AppImages.darkAppLogo
+                              : AppImages.lightAppLogo,
+                          fit: BoxFit.contain,
+                        ),
+                      )
+                    : Image.network(
+                        controller.userDetails.value.data?.profilePhoto?.url ??
+                            '',
+                        fit: BoxFit.contain,
+                      ),
+              ),
+            ),
+          ),
+        ],
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage(AppImages.hanumanji),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
+      ),
       body: Obx(() => _tabs[controller.selectedIndex.value]),
       floatingActionButton: FloatingActionButton(
           elevation: 0,

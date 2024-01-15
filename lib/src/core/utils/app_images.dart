@@ -14,18 +14,17 @@ class AppImages {
   static const String homepuja = '$imagesDir/homepuja.png';
   static const String templeImage = '$imagesDir/TempleImage.jpg';
   static const String templeBackGroundImage = '$imagesDir/mandirBackground.png';
-  static const String mandir1 = '$imagesDir/mandir1.png';
-  static const String pooja1 = '$imagesDir/pooja1.png';
-  static const String product1 = '$imagesDir/product1.png';
+  static const String mandir1 = '$imagesDir/sculpture.png';
+  static const String pooja1 = '$imagesDir/pooja2.png';
+  static const String product1 = '$imagesDir/store.png';
   static const String mathuraMandir = '$imagesDir/mathuramandir.jpg';
   static const String tirupatiBalaji = '$imagesDir/tirupatiBalaji.jpg';
   static const String hanumanji = '$imagesDir/hanumannji.jpg';
   static const String ramji = '$imagesDir/ramji.jpg';
   static const String shivji = '$imagesDir/shivji.jpeg';
   static const String durgaji = '$imagesDir/durgaji.jpg';
-
-  static const String newHome = '$imagesDir/NewHome.jpg';
-  static const String newCar = '$imagesDir/NewCar.jpg';
+  static const String newHome = '$imagesDir/homePooja.png';
+  static const String newCar = '$imagesDir/carPooja.png';
 
   static const String sundarKaand = '$imagesDir/sundarkand.jpeg';
   static const String gayatrijaap = '$imagesDir/gayatriMayntra.jpeg';
@@ -36,4 +35,5 @@ class AppImages {
   static const String logo3 = '$imagesDir/logo3.jpg';
   static const String logo4 = '$imagesDir/logo4.jpg';
   static const String logo5 = '$imagesDir/logo5.jpg';
+  static const String recycle = '$imagesDir/recycling.png';
 }

@@ -46,10 +46,10 @@ class _DashboardViewState extends State<DashboardView> {
                       label: "Trending Now",
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     Container(
-                      height: 150,
+                      height: MediaQuery.of(context).size.width * 0.4,
                       width: double.infinity,
                       child: CarouselSlider.builder(
                         itemCount: controller.dashboardCarouselList.length,
@@ -62,7 +62,7 @@ class _DashboardViewState extends State<DashboardView> {
                             ),
                             child: Container(
                               width: double.infinity,
-                              height: 100,
+                              height: MediaQuery.of(context).size.width * 0.4,
                               decoration: BoxDecoration(
                                 color: AppColors.grey.withOpacity(.1),
                                 borderRadius: BorderRadius.circular(8),
@@ -72,7 +72,8 @@ class _DashboardViewState extends State<DashboardView> {
                                 child: Image.network(
                                   "${controller.dashboardCarouselList[index].carouselImage}",
                                   fit: BoxFit.fill,
-                                  height: 100,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.4,
                                   width: double.infinity,
                                 ),
                               ),
@@ -88,7 +89,7 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,74 +118,95 @@ class _DashboardViewState extends State<DashboardView> {
                       ],
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => PoojaServicesView());
-                          },
-                          child: boxCard(
-                              label: "Pooja",
-                              image: AppImages.pooja1,
-                              context: context),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => MandirView());
-                          },
-                          child: boxCard(
-                              label: "Temples",
-                              image: AppImages.mandir1,
-                              context: context),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Get.to(() => PoojaServicesView());
-                          },
-                          child: boxCard(
-                              label: "Products",
-                              image: AppImages.product1,
-                              context: context),
-                        )
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => MandirView());
+                            },
+                            child: boxCard(
+                                label: "Mandir",
+                                subTitle: "Near me",
+                                image: AppImages.mandir1,
+                                context: context),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => PoojaServicesView());
+                            },
+                            child: boxCard(
+                                label: "Pooja",
+                                subTitle: "Book at home",
+                                image: AppImages.pooja1,
+                                context: context),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // Get.to(() => PoojaServicesView());
+                            },
+                            child: boxCard(
+                                label: "Store",
+                                subTitle: "Order samagri",
+                                image: AppImages.product1,
+                                context: context),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              // Get.to(() => PoojaServicesView());
+                            },
+                            child: boxCard(
+                                label: "Recycle",
+                                subTitle: "Pooja samagri",
+                                image: AppImages.recycle,
+                                context: context),
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     CommonTile(
                       label: "Pooja Services",
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
                       child: Row(
                         children: [
                           poojaServiceCard(
                             label: "New Vehicle Pooja",
                             price: 1100,
-                            image: AppImages.carPuja,
+                            image: AppImages.newCar,
                           ),
                           SizedBox(
-                            width: 12,
+                            width: MediaQuery.of(context).size.width * 0.0625,
                           ),
                           poojaServiceCard(
                             label: "Griha Pravesh Pooja",
                             price: 2100,
-                            image: AppImages.homepuja,
+                            image: AppImages.newHome,
                           ),
                           SizedBox(
-                            width: 12,
+                            width: MediaQuery.of(context).size.width * 0.0625,
                           ),
                           poojaServiceCard(
                             label: "New Vehicle Pooja",
@@ -195,14 +217,13 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: 12,
-                    ),
+                        height: MediaQuery.of(context).size.width * 0.0625),
                     GestureDetector(
                       onTap: () {
                         Get.to(() => PoojaServicesView());
                       },
                       child: Text(
-                        "View All Poojas -->",
+                        "View All Pooja Services -->",
                         style: AppStyles.tsBlackMedium14.copyWith(
                           color: AppColors.brandYellow,
                           decoration: TextDecoration.underline,
@@ -210,15 +231,16 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     CommonTile(
-                      label: "Temples Near Me",
+                      label: "Popular Temples Near Me",
                     ),
                     SizedBox(
-                      height: 12,
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     SingleChildScrollView(
+                      clipBehavior: Clip.none,
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
@@ -228,12 +250,50 @@ class _DashboardViewState extends State<DashboardView> {
                             image: AppImages.mathuraMandir,
                           ),
                           SizedBox(
-                            width: 12,
+                            width: MediaQuery.of(context).size.width * 0.0625,
                           ),
                           poojaServiceCard(
                             label: "Triputi Balaji Dham",
                             price: 11000,
                             image: AppImages.tirupatiBalaji,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
+                    CommonTile(
+                      label: "Dham",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Row(
+                        children: [
+                          poojaServiceCard(
+                            label: "New Vehicle Pooja",
+                            price: 1100,
+                            image: AppImages.newCar,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.0625,
+                          ),
+                          poojaServiceCard(
+                            label: "Griha Pravesh Pooja",
+                            price: 2100,
+                            image: AppImages.newHome,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.0625,
+                          ),
+                          poojaServiceCard(
+                            label: "New Vehicle Pooja",
+                            price: 1500,
+                            image: AppImages.shopping,
                           ),
                         ],
                       ),
@@ -255,22 +315,30 @@ class _DashboardViewState extends State<DashboardView> {
     Color? valueColor,
   }) {
     return Container(
+      // height: MediaQuery.of(context).size.width * 0.75,
       width: MediaQuery.of(context).size.width * 0.50,
-      // height: 160,
-      padding: EdgeInsetsDirectional.all(6),
+      // margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
           color: AppColors.white,
-          border: Border.all(
-            color: AppColors.brandYellow.withOpacity(1.0),
-          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(0, 3),
+            ),
+          ],
           borderRadius: BorderRadius.circular(10.0)),
       child: Column(
         children: [
           Container(
-            height: 150,
+            height: MediaQuery.of(context).size.width * 0.4,
             width: MediaQuery.of(context).size.width,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
               child: Image.asset(
                 image,
                 fit: BoxFit.cover,
@@ -280,23 +348,33 @@ class _DashboardViewState extends State<DashboardView> {
           SizedBox(
             height: 8,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(label, style: AppStyles.tsBlackRegular16),
-            ],
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(label,
+                    style: AppStyles.tsBlackRegular16.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.orangeColor)),
+              ],
+            ),
           ),
           SizedBox(
             height: 8,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
-                style: AppStyles.tsBlackMedium14,
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
+                  style: AppStyles.tsBlackMedium14,
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 8,
@@ -310,24 +388,37 @@ class _DashboardViewState extends State<DashboardView> {
 Widget boxCard({
   required String image,
   required String label,
+  required String subTitle,
   required BuildContext context,
   Color? valueColor,
 }) {
   return Container(
-    width: MediaQuery.of(context).size.width * 0.28,
-    height: 110,
+    width: MediaQuery.of(context).size.width * 0.25,
+    height: 100,
     padding: EdgeInsetsDirectional.all(5),
     decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(
-          color: AppColors.brandYellow.withOpacity(1.0),
+      color: AppColors.white,
+      // border: Border.all(
+      //   color: AppColors.brandYellow.withOpacity(1.0),
+      // ),
+      borderRadius: BorderRadius.circular(10.0),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 2,
+          blurRadius: 3,
+          offset: Offset(0, 3),
         ),
-        borderRadius: BorderRadius.circular(10.0)),
+      ],
+    ),
     child: Column(
       children: [
+        SizedBox(
+          height: 4,
+        ),
         Container(
-          height: 65,
-          width: 100,
+          height: MediaQuery.of(context).size.width * 0.11,
+          width: MediaQuery.of(context).size.width * 0.11,
           child: Padding(
               padding: EdgeInsets.all(2),
               child: Image.asset(
@@ -336,19 +427,20 @@ Widget boxCard({
               )),
         ),
         SizedBox(
-          height: 8,
+          height: 4,
         ),
         Text(
           label,
-          style: AppStyles.tsBlackMedium16,
+          style:
+              AppStyles.tsBlackMedium16.copyWith(color: AppColors.orangeColor),
         ),
-        // SizedBox(
-        //   height: 4,
-        // ),
-        // Text(
-        //   discount,
-        //   style: AppStyles.tsBlackMedium14,
-        // ),
+        SizedBox(
+          height: 2,
+        ),
+        Text(
+          subTitle,
+          style: AppStyles.tsGreyMedium10,
+        ),
         SizedBox(
           height: 4,
         ),
