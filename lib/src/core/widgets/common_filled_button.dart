@@ -9,6 +9,7 @@ class CommonFilledButton extends StatelessWidget {
   final EdgeInsets? margin;
   final VoidCallback? onPressed;
   final bool isLoading;
+  final String? leadingIcon;
   final Color? backgroundColor;
   final Color? labelColor;
   final OutlinedBorder? shape;
@@ -23,6 +24,7 @@ class CommonFilledButton extends StatelessWidget {
     this.backgroundColor,
     this.labelColor,
     this.shape,
+    this.leadingIcon
   }) : super(key: key);
 
   @override
@@ -52,17 +54,33 @@ class CommonFilledButton extends StatelessWidget {
                   ),
                 ),
               )
-            : Text(
-                label ?? 'Label',
-                style: Theme.of(context).textTheme.tsWhiteRegular16.copyWith(
-                      color: labelColor ?? AppColors.white,
-                      fontSize: height == null
-                          ? 16
-                          : (height! < 36)
-                              ? 14
-                              : 16,
+            : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                leadingIcon!=null?
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(leadingIcon!),
                     ),
-              ),
+                    SizedBox(width:10)  
+                  ],
+                ):
+                SizedBox(),
+                Text(
+                    label ?? 'Label',
+                    style: Theme.of(context).textTheme.tsWhiteRegular16.copyWith(
+                          color: labelColor ?? AppColors.white,
+                          fontSize: height == null
+                              ? 16
+                              : (height! < 36)
+                                  ? 14
+                                  : 16,
+                        ),
+                  ),
+              ],
+            ),
         onPressed: isLoading ? () {} : onPressed,
       ),
     );

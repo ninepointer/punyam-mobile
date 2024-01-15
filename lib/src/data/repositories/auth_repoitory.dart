@@ -89,4 +89,12 @@ class AuthRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: GenericResponse.fromJson(response));
   }
+  Future<RepoResponse<VerifyPhoneLoginResponse>> userGoogleLogin(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.googleLogin;
+    var response = await service.post(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: VerifyPhoneLoginResponse.fromJson(response));
+  }
 }

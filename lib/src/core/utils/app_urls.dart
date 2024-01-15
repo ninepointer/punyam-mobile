@@ -45,4 +45,6 @@ class AppUrls {
   static const String getDhamMandirs = "$apiURL/mandir/user/dham";
   static const String addtoFavirouteMandirs =
       "$apiURL/mandir/user/addfavourite";
+  static const String googleLogin =
+      "$apiURL/verifyfirebaselogintoken";
 }
