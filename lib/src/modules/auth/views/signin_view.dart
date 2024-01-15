@@ -52,7 +52,7 @@ class _SigninViewState extends State<SigninView> {
                         children: [
                           Align(
                             child: Text(
-                              'Let\'s get started with\nPooja!',
+                              'Let\'s get started with\nPunyam!',
                               style: Theme.of(context).textTheme.tsMedium20,
                               textAlign: TextAlign.center,
                             ),
