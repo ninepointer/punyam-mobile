@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import '../../../app/app.dart';
 
@@ -43,15 +44,87 @@ class _MandirViewState extends State<MandirView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonTextField(
-                      padding: EdgeInsets.zero,
-                      hintText: 'Search Symbol and start trading',
-                      prefixIcon: Icon(Icons.search),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: controller.searchTextController.clear,
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+                      child: CarouselSlider.builder(
+                        itemCount: controller.carouselListforMandir.length,
+                        itemBuilder: (context, int index, _) {
+                          return Container(
+                            width: double.infinity,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: AppColors.grey.withOpacity(.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                "${controller.carouselListforMandir[index].carouselImage}",
+                                fit: BoxFit.fill,
+                                height: 100,
+                                width: double.infinity,
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          autoPlayInterval: const Duration(seconds: 6),
+                        ),
                       ),
                     ),
+                    SizedBox(height: 12),
+                    //           InkWell(
+                    //   onTap: () {
+                    //     // Open the SearchBottomSheet when the container is tapped
+                    //     showModalBottomSheet(
+                    //       isScrollControlled: true,
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return SearchBottomSheet();
+                    //       },
+                    //     );
+                    //   },
+                    //   child: Container(
+                    //     margin: EdgeInsets.only(left: 15, right: 15),
+                    //     padding: EdgeInsets.symmetric(horizontal: 20),
+                    //     height: 60,
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       borderRadius: BorderRadius.circular(25),
+                    //       boxShadow: [
+                    //         BoxShadow(
+                    //           color: Colors.grey.withOpacity(0.2),
+                    //           spreadRadius: 2,
+                    //           blurRadius: 4,
+                    //           offset: Offset(0, 2),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     child: Row(
+                    //       children: [
+                    //         IconButton(
+                    //           icon: Icon(Icons.search),
+                    //           color: Colors.grey,
+                    //           onPressed: () {},
+                    //         ),
+                    //         SizedBox(width: 10),
+                    //         Text(
+                    //           "Search and add... ",
+                    //           style: TextStyle(
+                    //             fontSize: 16,
+                    //             color: Colors.grey,
+                    //             fontWeight: FontWeight.w500,
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+
                     SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,21 +138,36 @@ class _MandirViewState extends State<MandirView> {
                     SizedBox(height: 12),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          godImage(image: AppImages.ramji, context: context),
-                          SizedBox(width: 8),
-                          godImage(image: AppImages.durgaji, context: context),
-                          SizedBox(width: 8),
-                          godImage(
-                              image: AppImages.hanumanji, context: context),
-                          SizedBox(width: 8),
-                          godImage(image: AppImages.shivji, context: context),
-                          SizedBox(width: 8),
-                          godImage(
-                              image: AppImages.templeImage, context: context),
-                        ],
+                      clipBehavior: Clip.none,
+                      child: Container(
+                        child: Row(
+                          children: controller.deviDevtaListDetails
+                              .asMap()
+                              .entries
+                              .map((entry) {
+                            int index = entry.key;
+
+                            return Row(
+                              children: [
+                                godImage(
+                                  product: entry.value,
+                                  context: context,
+                                  onpress: () async {
+                                    await controller.getTempleByGodNameDetails(
+                                        entry.value.sId.toString());
+
+                                    Get.to(() => MandirDetailsByGodNameView(
+                                        mandirByname: entry.value));
+                                  },
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.025,
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                     SizedBox(height: 12),
@@ -376,22 +464,28 @@ class _MandirViewState extends State<MandirView> {
 }
 
 Widget godImage({
-  required String image,
+  required DeviDevtaList product,
   required BuildContext context,
+  required Function onpress,
 }) {
-  return Container(
-    height: 70,
-    width: MediaQuery.of(context).size.width * 0.178,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: AppColors.grey.withOpacity(.25),
+  return GestureDetector(
+    onTap: () {
+      onpress();
+    },
+    child: Container(
+      height: MediaQuery.of(context).size.width * 0.178,
+      width: MediaQuery.of(context).size.width * 0.178,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: AppColors.grey.withOpacity(.25),
+        ),
       ),
-    ),
-    child: ClipOval(
-      child: Image.asset(
-        image,
-        fit: BoxFit.cover,
+      child: ClipOval(
+        child: Image.network(
+          product.image!.url!,
+          fit: BoxFit.fill,
+        ),
       ),
     ),
   );

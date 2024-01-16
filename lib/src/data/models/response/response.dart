@@ -12,3 +12,6 @@ export 'booking_confirmation_response.dart';
 export 'pooja_catagory_response.dart';
 export 'select_pooja_by_id_response.dart';
 export 'all_mandir_response.dart';
+export 'increase_count_of_pooja_response.dart';
+export 'devta_list_response.dart';
+export "temple_nearby_me_response.dart";

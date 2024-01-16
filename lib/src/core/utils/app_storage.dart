@@ -26,6 +26,19 @@ class AppStorage {
     await _box.write(AppStorageKeys.token, data);
   }
 
+  static Future setUserLocation(String? latitude, String longitude) async {
+    await _box.write(AppStorageKeys.userloctionLatitude, latitude);
+    await _box.write(AppStorageKeys.userloctionLongitude, longitude);
+  }
+
+  static String? locationLatitude() {
+    return _box.read(AppStorageKeys.userloctionLatitude);
+  }
+
+  static String? locationLongitude() {
+    return _box.read(AppStorageKeys.userloctionLongitude);
+  }
+
   static String? getToken() {
     return _box.read(AppStorageKeys.token);
   }
@@ -52,4 +65,6 @@ class AppStorageKeys {
   static const String token = 'token';
   static const String userDetails = 'userDetails';
   static const String newUser = 'newUser';
+  static const String userloctionLatitude = 'userloctionLatitude';
+  static const String userloctionLongitude = 'userloctionLongitude';
 }

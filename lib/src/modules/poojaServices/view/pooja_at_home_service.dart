@@ -21,7 +21,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.poojaCatagoryGenralPooja.length);
+    print("rrrrr ${controller.carouselListforPooja.length}");
     return Obx(
       () => RefreshIndicator(
         onRefresh: () async {
@@ -42,17 +42,17 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     label: "Trending Pooja",
                   ),
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
                   Container(
-                    height: 150,
+                    height: MediaQuery.of(context).size.width * 0.4,
                     width: double.infinity,
                     child: CarouselSlider.builder(
-                      itemCount: controller.dashboardCarouselList.length,
+                      itemCount: controller.carouselListforPooja.length,
                       itemBuilder: (context, int index, _) {
                         return Container(
                           width: double.infinity,
-                          height: 100,
+                          height: MediaQuery.of(context).size.width * 0.4,
                           decoration: BoxDecoration(
                             color: AppColors.grey.withOpacity(.1),
                             borderRadius: BorderRadius.circular(8),
@@ -60,9 +60,9 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.network(
-                              "${controller.dashboardCarouselList[index].carouselImage}",
+                              "${controller.carouselListforPooja[index].carouselImage}",
                               fit: BoxFit.fill,
-                              height: 100,
+                              height: MediaQuery.of(context).size.width * 0.4,
                               width: double.infinity,
                             ),
                           ),
@@ -77,16 +77,17 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
                   CommonTile(
                     label: "General Pooja",
                   ),
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
+                    clipBehavior: Clip.none,
                     child: Container(
                       child: Row(
                         children: controller.poojaCatagoryGenralPooja
@@ -95,52 +96,43 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                             .map((entry) {
                           int index = entry.key;
 
-                          return homeServiceCard(
-                            product: entry.value,
-                            context: context,
-                            onpress: () async {
-                              await controller.getindividualPoojaByIdDetails(
-                                  entry.value.sId.toString());
+                          return Row(
+                            children: [
+                              homeServiceCard(
+                                product: entry.value,
+                                context: context,
+                                onpress: () async {
+                                  await controller.increasePoojaCountDetails(
+                                      entry.value.sId);
+                                  await controller
+                                      .getindividualPoojaByIdDetails(
+                                          entry.value.sId.toString());
 
-                              Get.to(() => BookingView());
-                            },
+                                  Get.to(() => BookingView());
+                                },
+                              ),
+                              SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.0625,
+                              ),
+                            ],
                           );
                         }).toList(),
                       ),
                     ),
                   ),
-
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(children: [
-                  //     homeServiceCard(
-                  //         context: context,
-                  //         image: AppImages.newHome,
-                  //         label: "Home Pooja",
-                  //         price: 5100),
-                  //     SizedBox(
-                  //       width: 12,
-                  //     ),
-                  //     homeServiceCard(
-                  //         context: context,
-                  //         image: AppImages.newCar,
-                  //         label: "Car Pooja",
-                  //         price: 1100),
-                  //   ]),
-                  // ),
-
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
                   CommonTile(
                     label: "Jaap",
                   ),
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
-
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
+                    clipBehavior: Clip.none,
                     child: Container(
                       child: Row(
                         children: controller.poojaCatagoryJaap
@@ -149,22 +141,75 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                             .map((entry) {
                           int index = entry.key;
 
-                          return homeServiceCard(
-                            product: entry.value,
-                            context: context,
-                            onpress: () async {
-                              await controller.getindividualPoojaByIdDetails(
-                                  entry.value.sId.toString());
+                          return Row(
+                            children: [
+                              homeServiceCard(
+                                product: entry.value,
+                                context: context,
+                                onpress: () async {
+                                  await controller.increasePoojaCountDetails(
+                                      entry.value.sId);
+                                  await controller
+                                      .getindividualPoojaByIdDetails(
+                                          entry.value.sId.toString());
 
-                              Get.to(() => BookingView());
-                            },
+                                  Get.to(() => BookingView());
+                                },
+                              ),
+                              SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.0625,
+                              ),
+                            ],
                           );
                         }).toList(),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: MediaQuery.of(context).size.width * 0.0625,
+                  ),
+                  CommonTile(
+                    label: "Paath",
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.0625,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    clipBehavior: Clip.none,
+                    child: Container(
+                      child: Row(
+                        children: controller.poojaCatagoryPaath
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                          int index = entry.key;
+
+                          return Row(
+                            children: [
+                              homeServiceCard(
+                                product: entry.value,
+                                context: context,
+                                onpress: () async {
+                                  await controller.increasePoojaCountDetails(
+                                      entry.value.sId);
+                                  await controller
+                                      .getindividualPoojaByIdDetails(
+                                          entry.value.sId.toString());
+
+                                  Get.to(() => BookingView());
+                                },
+                              ),
+                              SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.0625,
+                              ),
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -182,71 +227,94 @@ Widget homeServiceCard({
   required Function onpress,
 }) {
   return Container(
-    width: MediaQuery.of(context).size.width * 0.50,
-    padding: EdgeInsetsDirectional.all(6),
-    margin: EdgeInsets.only(right: 20),
+    width: MediaQuery.of(context).size.width * 0.60,
     decoration: BoxDecoration(
       color: AppColors.white,
-      border: Border.all(
-        color: AppColors.brandYellow.withOpacity(1.0),
-      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.1),
+          spreadRadius: 2,
+          blurRadius: 2,
+          offset: Offset(0, 3),
+        ),
+      ],
       borderRadius: BorderRadius.circular(10.0),
     ),
     child: Column(
       children: [
         Container(
-          height: 150,
-          width: MediaQuery.of(context).size.width * 0.575,
+          height: MediaQuery.of(context).size.width * 0.4,
+          width: MediaQuery.of(context).size.width,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Padding(
-              padding: EdgeInsets.all(2),
-              child: Image.network(
-                product.image!
-                    .url!, // Assuming PoojaCategoryData has an Image property
-                fit: BoxFit.fill,
-              ),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+            child: Image.network(
+              product.image!
+                  .url!, // Assuming PoojaCategoryData has an Image property
+              fit: BoxFit.fill,
             ),
           ),
         ),
         SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(product.name ?? '', style: AppStyles.tsBlackMedium18),
-          ],
-        ),
-        SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
-              style: AppStyles.tsBlackMedium14,
-            ),
-            SizedBox(
-              height: 25,
-              child: ElevatedButton(
-                onPressed: () {
-                  onpress();
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 4,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  backgroundColor: AppColors.cinnamonStickColor,
-                ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width *
+                    0.54, // Adjust the width
                 child: Text(
-                  "Book Now",
-                  style: AppStyles.tsWhiteMedium12,
+                  product.name ?? '',
+                  style: AppStyles.tsBlackRegular16.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.orangeColor,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
+        ),
+        SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
+                style: AppStyles.tsBlackMedium14,
+              ),
+              SizedBox(
+                height: 25,
+                child: ElevatedButton(
+                  onPressed: () {
+                    onpress();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 4,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    backgroundColor: AppColors.cinnamonStickColor,
+                  ),
+                  child: Text(
+                    "Book Now",
+                    style: AppStyles.tsWhiteMedium12,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 8,
         ),
       ],
     ),

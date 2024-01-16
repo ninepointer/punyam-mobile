@@ -21,6 +21,10 @@ class _HomeViewState extends State<HomeView> {
 
   List<Widget> _tabs = [
     DashboardView(),
+    MandirView(),
+    MandirView(),
+    MandirView(),
+    PoojaServicesView(),
   ];
 
   @override
@@ -75,9 +79,22 @@ class _HomeViewState extends State<HomeView> {
     switch (index) {
       case 0:
         Get.find<HomeController>().loadData();
+        Get.find<PoojaServicesController>().loadData();
+        Get.find<MandirController>().loadData();
+        // Get.find<CollegeContestController>().getLiveCollegeContestList();
 
-        // Get.find<WalletController>().getWalletTransactionsList();
-
+        break;
+      case 1:
+        Get.find<MandirController>().loadData();
+        break;
+      case 2:
+        Get.find<MandirController>().loadData();
+        break;
+      case 3:
+        Get.find<MandirController>().loadData();
+        break;
+      case 4:
+        Get.find<PoojaServicesController>().loadData();
         break;
       default:
     }
@@ -87,25 +104,44 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CommonDrawer(),
-      onDrawerChanged: (isOpened) {
-        if (isOpened) controller.userDetails(AppStorage.getUserDetails());
-      },
+      // drawer: CommonDrawer(),
+      // onDrawerChanged: (isOpened) {
+      //   if (isOpened) controller.userDetails(AppStorage.getUserDetails());
+      // },
       appBar: AppBar(
-        // toolbarHeight: 500,
         title: Row(
           children: [
+            GestureDetector(
+              onTap: () {
+                // Navigate to the location page
+                // You can replace 'LocationPage' with the actual page route you want to navigate to
+                Get.toNamed('LocationPage');
+              },
+              child: Container(
+                margin: EdgeInsets.only(right: 14),
+                child: Icon(Icons.location_on),
+              ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Hello,',
-                  style: AppStyles.tsGreyRegular12,
+                Row(
+                  children: [
+                    Text(
+                      'Home',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Icon(Icons.keyboard_arrow_down)
+                  ],
                 ),
                 Text(
-                  controller.userDetailsData.data?.fullName?.capitalizeFirst ??
-                      '-',
-                  style: Theme.of(context).textTheme.tsMedium16,
+                  'Your Address Here',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
@@ -144,15 +180,8 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
         ],
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //       image: AssetImage(AppImages.hanumanji),
-        //       fit: BoxFit.cover,
-        //     ),
-        //   ),
-        // ),
       ),
+
       body: Obx(() => _tabs[controller.selectedIndex.value]),
       floatingActionButton: FloatingActionButton(
           elevation: 0,

@@ -43,6 +43,7 @@ class DashboardCarousel {
   String? createdBy;
   String? createdOn;
   String? lastModifiedOn;
+  String? position;
   int? iV;
 
   DashboardCarousel(
@@ -61,6 +62,7 @@ class DashboardCarousel {
       this.createdBy,
       this.createdOn,
       this.lastModifiedOn,
+      this.position,
       this.iV});
 
   DashboardCarousel.fromJson(Map<String, dynamic> json) {
@@ -79,6 +81,7 @@ class DashboardCarousel {
     createdBy = json['createdBy'];
     createdOn = json['createdOn'];
     lastModifiedOn = json['lastModifiedOn'];
+    position = json['position'];
     iV = json['__v'];
   }
 
@@ -99,6 +102,7 @@ class DashboardCarousel {
     data['createdBy'] = this.createdBy;
     data['createdOn'] = this.createdOn;
     data['lastModifiedOn'] = this.lastModifiedOn;
+    data['position'] = this.position;
     data['__v'] = this.iV;
     return data;
   }

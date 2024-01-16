@@ -19,6 +19,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
   final isBookingLoading = false.obs;
   bool get isProfileLoadingStatus => isBookingLoading.value;
   final dashboardCarouselList = <DashboardCarousel>[].obs;
+  final carouselListforPooja = <DashboardCarousel>[].obs;
   final poojaCatagoryGenralPooja = <PoojaCategoryData>[].obs;
   final poojaCatagoryPaath = <PoojaCategoryData>[].obs;
   final poojaCatagoryJaap = <PoojaCategoryData>[].obs;
@@ -131,8 +132,13 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
           await repository.getCarousel();
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
+          carouselListforPooja.clear();
           dashboardCarouselList(response.data?.data ?? []);
-          print("dash${dashboardCarouselList.length}");
+          for (DashboardCarousel carousel in dashboardCarouselList) {
+            if (carousel.position == "Pooja") {
+              carouselListforPooja.addAll([carousel]);
+            }
+          }
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
@@ -186,6 +192,17 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
       }
     } catch (e) {
       log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future increasePoojaCountDetails(String? poojaId) async {
+    try {
+      await repository.increasePoojaCount(poojaId ?? '');
+      await getPoojaCatagoryDetails();
+      // SnackbarHelper.showSnackbar("Add ${poojaId} pooja Successfully");
+    } catch (e) {
+      print(e.toString());
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
   }

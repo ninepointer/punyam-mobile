@@ -5,3 +5,7 @@ export 'widget/mandir_details.photo.dart';
 export 'widget/mandir_details_about.dart';
 export 'view/dham_mandir_view.dart';
 export 'view/popular_mandir_view.dart';
+export 'view/mandir-Details_by_god_name.dart';
+export 'view/mandir_near_me_details.dart';
+export 'widget/nearby_mandir_details_photo.dart';
+export "widget/neraby_mandir_details_about.dart";

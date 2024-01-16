@@ -45,4 +45,12 @@ class AppUrls {
   static const String getDhamMandirs = "$apiURL/mandir/user/dham";
   static const String addtoFavirouteMandirs =
       "$apiURL/mandir/user/addfavourite";
+  static const String increasePoojaCount = "$apiURL/pooja/user/addCount";
+  static const String poojalistHomepage = "$apiURL/pooja/user/trending";
+  static const String godList = "$apiURL/devta/user";
+  static String mandirListBygod(String? id) =>
+      "$apiURL/mandir/user/bydevta?devtaId=$id";
+  static String nearbyMandirs(String? long, String? lat) =>
+      "$apiURL/mandir/user/bydistance?lat=$lat&long=$long";
+  static String searchMandir = "$apiURL/mandir/user/bysearch";
 }

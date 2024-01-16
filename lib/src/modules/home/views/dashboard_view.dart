@@ -10,6 +10,7 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   late HomeController controller;
   late PoojaServicesController poojaServicesController;
+  late MandirController mandirController;
   late List<String> monthsList;
 
   String? selectedValue2 = '';
@@ -17,14 +18,19 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   void initState() {
     super.initState();
+
     controller = Get.find<HomeController>();
+    controller.getUserCurrentLocation();
     poojaServicesController = Get.find<PoojaServicesController>();
+    mandirController = Get.find<MandirController>();
+    controller.loadData();
     poojaServicesController.loadData();
+    mandirController.loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("${controller.dashboardCarouselList.length}");
+    print("hhhhh ${controller.carouselListforHome.length}");
     return Scaffold(
       body: Obx(
         () => RefreshIndicator(
@@ -52,11 +58,11 @@ class _DashboardViewState extends State<DashboardView> {
                       height: MediaQuery.of(context).size.width * 0.4,
                       width: double.infinity,
                       child: CarouselSlider.builder(
-                        itemCount: controller.dashboardCarouselList.length,
+                        itemCount: controller.carouselListforHome.length,
                         itemBuilder: (context, int index, _) {
                           return GestureDetector(
                             onTap: () => controller.navigateToCarousel(
-                              controller.dashboardCarouselList[index]
+                              controller.carouselListforHome[index]
                                       .linkToCarousel ??
                                   '',
                             ),
@@ -70,7 +76,7 @@ class _DashboardViewState extends State<DashboardView> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
-                                  "${controller.dashboardCarouselList[index].carouselImage}",
+                                  "${controller.carouselListforHome[index].carouselImage}",
                                   fit: BoxFit.fill,
                                   height:
                                       MediaQuery.of(context).size.width * 0.4,
@@ -190,30 +196,40 @@ class _DashboardViewState extends State<DashboardView> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.none,
-                      child: Row(
-                        children: [
-                          poojaServiceCard(
-                            label: "New Vehicle Pooja",
-                            price: 1100,
-                            image: AppImages.newCar,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.0625,
-                          ),
-                          poojaServiceCard(
-                            label: "Griha Pravesh Pooja",
-                            price: 2100,
-                            image: AppImages.newHome,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.0625,
-                          ),
-                          poojaServiceCard(
-                            label: "New Vehicle Pooja",
-                            price: 1500,
-                            image: AppImages.shopping,
-                          ),
-                        ],
+                      child: Container(
+                        child: Row(
+                          children: controller.homepagePoojaList
+                              .asMap()
+                              .entries
+                              .map((entry) {
+                            int index = entry.key;
+
+                            // Use SizedBox to add space between items
+                            return Row(
+                              children: [
+                                poojaServiceCard(
+                                    label: "${entry.value.name}",
+                                    price: 11000,
+                                    image: AppImages.tirupatiBalaji,
+                                    product: entry.value,
+                                    onpress: () async {
+                                      await poojaServicesController
+                                          .increasePoojaCountDetails(
+                                              entry.value.sId);
+                                      await poojaServicesController
+                                          .getindividualPoojaByIdDetails(
+                                              entry.value.sId.toString());
+
+                                      Get.to(() => BookingView());
+                                    }),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.0625,
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -240,24 +256,36 @@ class _DashboardViewState extends State<DashboardView> {
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     SingleChildScrollView(
-                      clipBehavior: Clip.none,
                       scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          poojaServiceCard(
-                            label: "Mathura Dham",
-                            price: 21000,
-                            image: AppImages.mathuraMandir,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.0625,
-                          ),
-                          poojaServiceCard(
-                            label: "Triputi Balaji Dham",
-                            price: 11000,
-                            image: AppImages.tirupatiBalaji,
-                          ),
-                        ],
+                      clipBehavior: Clip.none,
+                      child: Container(
+                        child: Row(
+                          children: mandirController.nearbyMandirs
+                              .asMap()
+                              .entries
+                              .map((entry) {
+                            int index = entry.key;
+
+                            return Row(
+                              children: [
+                                mandirCard(
+                                  label: "${entry.value.name}",
+                                  price: 11000,
+                                  product: entry.value,
+                                  onpress: () {
+                                    Get.to(() => MandirNearMeDetailsView(
+                                          templeDetails: entry.value,
+                                        ));
+                                  },
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.0625,
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -272,31 +300,38 @@ class _DashboardViewState extends State<DashboardView> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.none,
-                      child: Row(
-                        children: [
-                          poojaServiceCard(
-                            label: "New Vehicle Pooja",
-                            price: 1100,
-                            image: AppImages.newCar,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.0625,
-                          ),
-                          poojaServiceCard(
-                            label: "Griha Pravesh Pooja",
-                            price: 2100,
-                            image: AppImages.newHome,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.0625,
-                          ),
-                          poojaServiceCard(
-                            label: "New Vehicle Pooja",
-                            price: 1500,
-                            image: AppImages.shopping,
-                          ),
-                        ],
+                      child: Container(
+                        child: Row(
+                          children: mandirController.dhamTempleListDetails
+                              .asMap()
+                              .entries
+                              .map((entry) {
+                            int index = entry.key;
+
+                            return Row(
+                              children: [
+                                dhamMandirCard(
+                                  label: "${entry.value.name}",
+                                  price: 11000,
+                                  product: entry.value,
+                                  onpress: () {
+                                    Get.to(() => MandirDetailsView(
+                                          templeDetails: entry.value,
+                                        ));
+                                  },
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.0625,
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                   ],
                 ),
@@ -309,20 +344,20 @@ class _DashboardViewState extends State<DashboardView> {
   }
 
   Widget poojaServiceCard({
+    required PoojaCategoryData product,
     required String image,
     required String label,
     required num price,
     Color? valueColor,
+    required Function onpress,
   }) {
     return Container(
-      // height: MediaQuery.of(context).size.width * 0.75,
-      width: MediaQuery.of(context).size.width * 0.50,
-      // margin: EdgeInsets.symmetric(vertical: 10),
+      width: MediaQuery.of(context).size.width * 0.6,
       decoration: BoxDecoration(
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.1),
               spreadRadius: 2,
               blurRadius: 2,
               offset: Offset(0, 3),
@@ -339,9 +374,9 @@ class _DashboardViewState extends State<DashboardView> {
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
+              child: Image.network(
+                product.image!.url!,
+                fit: BoxFit.fill,
               ),
             ),
           ),
@@ -367,12 +402,248 @@ class _DashboardViewState extends State<DashboardView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
                   style: AppStyles.tsBlackMedium14,
                 ),
+                SizedBox(
+                  height: 25,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      onpress();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      backgroundColor: AppColors.cinnamonStickColor,
+                    ),
+                    child: Text(
+                      "Book Now",
+                      style: AppStyles.tsWhiteMedium12,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget mandirCard({
+    required TempleNearByMeList product,
+    required String label,
+    required num price,
+    required Function onpress,
+    Color? valueColor,
+  }) {
+    return Container(
+      // height: MediaQuery.of(context).size.width * 0.75,
+      width: MediaQuery.of(context).size.width * 0.6,
+      // margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(0, 3),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10.0)),
+      child: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.network(
+                product.coverImage!.url!,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width *
+                      0.50, // Adjust the width
+                  child: Text(
+                    label,
+                    style: AppStyles.tsBlackRegular16.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.orangeColor,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Distance: ${(product.distance! / 1000).toStringAsFixed(2)} km",
+                  style: AppStyles.tsBlackMedium14,
+                ),
+                SizedBox(
+                  height: 25,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      onpress();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      backgroundColor: AppColors.cinnamonStickColor,
+                    ),
+                    child: Text(
+                      "View",
+                      style: AppStyles.tsWhiteMedium12,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget dhamMandirCard({
+    required AllMandirData product,
+    required String label,
+    required num price,
+    Color? valueColor,
+    required Function onpress,
+  }) {
+    return Container(
+      // height: MediaQuery.of(context).size.width * 0.75,
+      width: MediaQuery.of(context).size.width * 0.6,
+      // margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(0, 3),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10.0)),
+      child: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.network(
+                product.coverImage!.url!,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width *
+                      0.50, // Adjust the width
+                  child: Text(
+                    label,
+                    style: AppStyles.tsBlackRegular16.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.orangeColor,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${(product.deviDevta?.name)}",
+                  style: AppStyles.tsBlackMedium14,
+                ),
+                SizedBox(
+                  height: 25,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      onpress();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      backgroundColor: AppColors.cinnamonStickColor,
+                    ),
+                    child: Text(
+                      "View",
+                      style: AppStyles.tsWhiteMedium12,
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -404,10 +675,10 @@ Widget boxCard({
       borderRadius: BorderRadius.circular(10.0),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.grey.withOpacity(0.1),
           spreadRadius: 2,
-          blurRadius: 3,
-          offset: Offset(0, 3),
+          blurRadius: 1,
+          offset: Offset(0, 1),
         ),
       ],
     ),

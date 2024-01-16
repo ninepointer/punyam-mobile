@@ -36,4 +36,14 @@ class PoojaServicesRespository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: BookingConfirmationResponse.fromJson(response));
   }
+
+  Future<RepoResponse<IncreasePoojaCountPetchResponse>> increasePoojaCount(
+      String id) async {
+    String apiURL = '${AppUrls.increasePoojaCount}/$id';
+    var response = await service.patchAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(
+            data: IncreasePoojaCountPetchResponse.fromJson(response));
+  }
 }

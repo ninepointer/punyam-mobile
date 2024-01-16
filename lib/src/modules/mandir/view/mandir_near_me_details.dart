@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:punyam/src/app/app.dart';
 
-class MandirDetailsView extends StatefulWidget {
-  final AllMandirData? templeDetails;
+class MandirNearMeDetailsView extends StatefulWidget {
+  final TempleNearByMeList? templeDetails;
 
-  const MandirDetailsView({
+  const MandirNearMeDetailsView({
     Key? key,
     this.templeDetails,
   }) : super(key: key);
 
   @override
-  State<MandirDetailsView> createState() => _MandirDetailsViewState();
+  State<MandirNearMeDetailsView> createState() =>
+      _MandirNearMeDetailsViewState();
 }
 
-class _MandirDetailsViewState extends State<MandirDetailsView>
+class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   late MandirController controller;
@@ -98,9 +99,9 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                                   controller.isFavorite =
                                       !controller.isFavorite;
                                   // Call the addFaviroutesMandir function with the mandirid
-                                  controller.addFaviroutesMandir(
-                                    widget.templeDetails?.sId,
-                                  );
+                                  // controller.addFaviroutesMandir(
+                                  //   widget.templeDetails?.sId,
+                                  // );
                                 });
                               },
                               color: controller.isFavorite
@@ -130,9 +131,9 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                     ],
                   ),
                 ),
-                mandirDetailsCard(
+                nearBymemandirDetailsCard(
                   mandirName: "${widget.templeDetails?.name}",
-                  godName: "${widget.templeDetails?.deviDevta?.name}",
+                  godName: "${widget.templeDetails?.deviDevta}",
                   morningTime:
                       " ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningOpeningTime)} to ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningClosingTime)}",
                   eveningTime:
@@ -183,9 +184,9 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                       child: TabBarView(
                         controller: tabController,
                         children: [
-                          MandirDetailsAboutWidget(
+                          NearByMandirDetailsAboutWidget(
                               templeDetails: widget.templeDetails),
-                          MandirDetailsPhtosWidget(
+                          NaerByMandirDetailsPhtosWidget(
                               templeDetails: widget.templeDetails),
                         ],
                       ),
@@ -201,7 +202,7 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
   }
 }
 
-Widget mandirDetailsCard({
+Widget nearBymemandirDetailsCard({
   required String mandirName,
   required String godName,
   required String morningTime,
@@ -257,9 +258,8 @@ Widget mandirDetailsCard({
             children: [
               Expanded(
                 child: Text(
-                  address,
+                  "$address",
                   style: AppStyles.tsBlackMedium12,
-                  softWrap: true,
                 ),
               ),
             ],

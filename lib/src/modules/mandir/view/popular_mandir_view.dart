@@ -22,7 +22,7 @@ class PopularMandirView extends GetView<MandirController> {
                 height: 150,
                 width: double.infinity,
                 child: CarouselSlider.builder(
-                  itemCount: controller.dashboardCarouselList.length,
+                  itemCount: controller.carouselListforMandir.length,
                   itemBuilder: (context, int index, _) {
                     return Container(
                       width: double.infinity,
@@ -34,7 +34,7 @@ class PopularMandirView extends GetView<MandirController> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          "${controller.dashboardCarouselList[index].carouselImage}",
+                          "${controller.carouselListforMandir[index].carouselImage}",
                           fit: BoxFit.fill,
                           height: 100,
                           width: double.infinity,

@@ -3,14 +3,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_line/dotted_line.dart';
 import '../../../app/app.dart';
 
-class DhamMandirView extends GetView<MandirController> {
-  const DhamMandirView({Key? key}) : super(key: key);
+class MandirDetailsByGodNameView extends GetView<MandirController> {
+  final DeviDevtaList? mandirByname;
+  MandirDetailsByGodNameView({Key? key, this.mandirByname}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dhams'),
+        title: Text('${mandirByname?.name}'),
       ),
       body: Padding(
         padding: AppConstants.getAppPadding(context),
@@ -18,51 +19,52 @@ class DhamMandirView extends GetView<MandirController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 150,
-                width: double.infinity,
-                child: CarouselSlider.builder(
-                  itemCount: controller.carouselListforMandir.length,
-                  itemBuilder: (context, int index, _) {
-                    return Container(
-                      width: double.infinity,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          "${controller.carouselListforMandir[index].carouselImage}",
-                          fit: BoxFit.fill,
-                          height: 100,
-                          width: double.infinity,
-                        ),
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    viewportFraction: 1,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    autoPlayInterval: const Duration(seconds: 6),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12),
-              CommonTextField(
-                padding: EdgeInsets.zero,
-                hintText: 'Search Symbol and start trading',
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: controller.searchTextController.clear,
-                ),
-              ),
+              // Container(
+              //   height: 150,
+              //   width: double.infinity,
+              //   child: CarouselSlider.builder(
+              //     itemCount: controller.dashboardCarouselList.length,
+              //     itemBuilder: (context, int index, _) {
+              //       return Container(
+              //         width: double.infinity,
+              //         height: 100,
+              //         decoration: BoxDecoration(
+              //           color: AppColors.grey.withOpacity(.1),
+              //           borderRadius: BorderRadius.circular(8),
+              //         ),
+              //         child: ClipRRect(
+              //           borderRadius: BorderRadius.circular(8),
+              //           child: Image.network(
+              //             "${controller.dashboardCarouselList[index].carouselImage}",
+              //             fit: BoxFit.fill,
+              //             height: 100,
+              //             width: double.infinity,
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //     options: CarouselOptions(
+              //       viewportFraction: 1,
+              //       autoPlay: true,
+              //       enlargeCenterPage: true,
+              //       autoPlayInterval: const Duration(seconds: 6),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 12),
+              // CommonTextField(
+              //   padding: EdgeInsets.zero,
+              //   hintText: 'Search Symbol and start trading',
+              //   prefixIcon: Icon(Icons.search),
+              //   suffixIcon: IconButton(
+              //     icon: Icon(Icons.close),
+              //     onPressed: controller.searchTextController.clear,
+              //   ),
+              // ),
               SizedBox(height: 12),
               Column(
-                children: controller.dhamTempleListDetails.map((templeDetails) {
+                children: controller.mandirByDevitaNameListDetails
+                    .map((templeDetails) {
                   return GestureDetector(
                     onTap: () {
                       Get.to(() => MandirDetailsView(
