@@ -9,7 +9,7 @@ class OnlinePoojaView extends GetView<PoojaServicesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Comming Soon")),
+      body: Center(child: Text("Coming Soon")),
     );
   }
 }

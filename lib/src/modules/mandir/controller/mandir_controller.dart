@@ -143,10 +143,26 @@ class MandirController extends BaseController<MandirRespository> {
     }
   }
 
+  // Future<void> getPopularTamplesDetails() async {
+  //   try {
+  //     final RepoResponse<AllMandirResponse> response =
+  //         await repository.getPopularTemples();
+  //     if (response.data != null) {
+  //       popularTempleListDetails(response.data?.data);
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  // }
   Future<void> getPopularTamplesDetails() async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
-      final RepoResponse<AllMandirResponse> response =
-          await repository.getPopularTemples();
+      final RepoResponse<AllMandirResponse> response = await repository
+          .getPopularTemples(longitude.toString(), latitude.toString());
       if (response.data != null) {
         popularTempleListDetails(response.data?.data);
       } else {

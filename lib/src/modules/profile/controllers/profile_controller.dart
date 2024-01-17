@@ -167,7 +167,7 @@ class ProfileController extends BaseController<ProfileRepository> {
   }
 
   void loadProfileDetails() async {
-    isProfileLoading(true);
+    // isProfileLoading(true);
     userDetails(AppStorage.getUserDetails());
 
     firstNameTextController.text = userDetails.value.data?.fullName ?? '';
@@ -190,7 +190,7 @@ class ProfileController extends BaseController<ProfileRepository> {
         userDetails.value.data?.addressDetails?.first.country ?? '';
     // profilePhotoFile(
     //     await downloadFileAsPlatformFile(  userDetails.value.data?.profilePhoto));
-    isProfileLoading(false);
+    // isProfileLoading(false);
   }
 
   // void loadBankDetails() async {
@@ -344,12 +344,12 @@ class ProfileController extends BaseController<ProfileRepository> {
   }
 
   Future saveUserProfileDetails() async {
-    if (profilePhotoFile.value?.path == null ||
-        profilePhotoFile.value!.name.isEmpty) {
-      isEditEnabled(false);
-      SnackbarHelper.showSnackbar('Select profile picture to continue!');
-      return;
-    }
+    // if (profilePhotoFile.value?.path == null ||
+    //     profilePhotoFile.value!.name.isEmpty) {
+    //   isEditEnabled(false);
+    //   SnackbarHelper.showSnackbar('Select profile picture to continue!');
+    //   return;
+    // }
 
     // isProfileLoading(true);
     // DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);

@@ -41,7 +41,8 @@ class AppUrls {
 
   static const String getAllMandirs = "$apiURL/mandir/user";
 
-  static const String getPopularMandirs = "$apiURL/mandir/user/popular";
+  static String getPopularMandirs(String? long, String? lat) =>
+      "$apiURL/mandir/user/popular?lat=$lat&long=$long";
   static const String getDhamMandirs = "$apiURL/mandir/user/dham";
   static const String addtoFavirouteMandirs =
       "$apiURL/mandir/user/addfavourite";

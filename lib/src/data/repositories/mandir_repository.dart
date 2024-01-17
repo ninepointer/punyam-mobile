@@ -11,8 +11,17 @@ class MandirRespository extends BaseRepository {
         : RepoResponse(data: AllMandirResponse.fromJson(response));
   }
 
-  Future<RepoResponse<AllMandirResponse>> getPopularTemples() async {
-    String apiURL = AppUrls.getPopularMandirs;
+  // Future<RepoResponse<AllMandirResponse>> getPopularTemples() async {
+  //   String apiURL = AppUrls.getPopularMandirs;
+  //   var response = await service.getAuth(path: apiURL);
+  //   return response is APIException
+  //       ? RepoResponse(error: response)
+  //       : RepoResponse(data: AllMandirResponse.fromJson(response));
+  // }
+
+  Future<RepoResponse<AllMandirResponse>> getPopularTemples(
+      String lat, String long) async {
+    String apiURL = AppUrls.getPopularMandirs(lat, long);
     var response = await service.getAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)
