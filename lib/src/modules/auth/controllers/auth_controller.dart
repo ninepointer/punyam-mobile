@@ -8,6 +8,8 @@ import '../../../base/base.dart';
 import '../../../core/core.dart';
 import '../../../data/data.dart';
 import '../../modules.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthBinding implements Bindings {
   @override
@@ -258,5 +260,56 @@ class AuthController extends BaseController<AuthRepository> {
     emailTextController.clear();
     mobileTextController.clear();
     otpTextController.clear();
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      print('googleuser ${googleUser}');
+      if (googleUser == null) return null; // User cancelled the sign-in
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      print('googleauth ${googleAuth}');
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future googleSignIn() async {
+    FocusScope.of(Get.context!).unfocus();
+    UserCredential? userCredential = await signInWithGoogle();
+    if (userCredential?.user != null) {
+      String? idTokenData = await userCredential?.user?.getIdToken();
+      // Send this token to your Node.js backend
+      // You can use http package to make a POST request
+      GoogleLoginRequest data = GoogleLoginRequest(idToken: idTokenData);
+      try {
+        final RepoResponse<VerifyPhoneLoginResponse> response =
+            await repository.userGoogleLogin(
+          data.toJson(),
+        );
+        if (response.data != null) {
+          if (response.data?.status?.toLowerCase() == "success") {
+            token(response.data?.token);
+            await AppStorage.setToken(response.data?.token);
+            log('AppStorage.getToken : ${AppStorage.getToken()}');
+            await getUserDetails();
+            clearForm();
+          }
+        } else {
+          SnackbarHelper.showSnackbar(response.error?.message);
+        }
+      } catch (e) {
+        log(e.toString());
+        SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+      }
+    }
   }
 }

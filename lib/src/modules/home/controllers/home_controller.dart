@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../../../app/app.dart';
 
 class HomeBinding implements Bindings {
@@ -23,6 +22,9 @@ class HomeController extends BaseController<DashboardRepository> {
   final dashboardCarouselList = <DashboardCarousel>[].obs;
   final carouselListforHome = <DashboardCarousel>[].obs;
   final homepagePoojaList = <PoojaCategoryData>[].obs;
+  final locationByLatandLong = <Results>[].obs;
+  final locationBy = GetLocationByLatLongList().obs;
+  final addressComponent = <AddressComponents>[].obs;
   final userLoacationLong = "".obs;
   final userLoacationLatitude = "".obs;
 
@@ -47,15 +49,22 @@ class HomeController extends BaseController<DashboardRepository> {
         permission == LocationPermission.deniedForever) {
       log("Permission Denied");
       LocationPermission ask = await Geolocator.requestPermission();
+      final latitude = AppStorage.locationLatitude();
+      final longitude = AppStorage.locationLongitude();
+      //  longitude.toString(), latitude.toString()
+      await getUserLoactionByLatAndLongDetails(
+          latitude.toString(), longitude.toString());
     } else {
       Position currentPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
       log("Longitude ${currentPosition.longitude}");
       log("Latitude ${currentPosition.latitude}");
+      userLoacationLong(currentPosition.latitude.toString());
+      userLoacationLatitude(currentPosition.longitude.toString());
       await AppStorage.setUserLocation(currentPosition.latitude.toString(),
           currentPosition.longitude.toString());
-      userLoacationLong(currentPosition.longitude.toString());
-      userLoacationLatitude(currentPosition.latitude.toString());
+      await getUserLoactionByLatAndLongDetails(
+          userLoacationLatitude.toString(), userLoacationLong.toString());
     }
   }
 
@@ -134,6 +143,24 @@ class HomeController extends BaseController<DashboardRepository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isLoading(false);
+  }
+
+  Future getUserLoactionByLatAndLongDetails(
+      String latitude, String longitude) async {
+    try {
+      final RepoResponse<GetLocationByLatAndLongResponse> response =
+          await repository.getLocationByLongAndLat(latitude, longitude);
+      if (response.data != null) {
+        locationBy(response.data?.data);
+
+        locationByLatandLong(locationBy.value.results ?? []);
+        addressComponent(locationByLatandLong.first.addressComponents ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
   }
 
   Future getPoojaCatagoryDetails() async {

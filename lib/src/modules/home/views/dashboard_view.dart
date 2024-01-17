@@ -18,23 +18,23 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   void initState() {
     super.initState();
-
     controller = Get.find<HomeController>();
     controller.getUserCurrentLocation();
+    controller.loadData();
     poojaServicesController = Get.find<PoojaServicesController>();
     mandirController = Get.find<MandirController>();
-    controller.loadData();
+
     poojaServicesController.loadData();
     mandirController.loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("hhhhh ${controller.carouselListforHome.length}");
     return Scaffold(
       body: Obx(
         () => RefreshIndicator(
           onRefresh: () async {
+            controller.getUserCurrentLocation();
             controller.loadData();
             poojaServicesController.loadData();
             return Future.value();
@@ -258,33 +258,35 @@ class _DashboardViewState extends State<DashboardView> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.none,
-                      child: Container(
-                        child: Row(
-                          children: mandirController.nearbyMandirs
-                              .asMap()
-                              .entries
-                              .map((entry) {
-                            int index = entry.key;
+                      child: Obx(
+                        () => Container(
+                          child: Row(
+                            children: mandirController.nearbyMandirs
+                                .asMap()
+                                .entries
+                                .map((entry) {
+                              int index = entry.key;
 
-                            return Row(
-                              children: [
-                                mandirCard(
-                                  label: "${entry.value.name}",
-                                  price: 11000,
-                                  product: entry.value,
-                                  onpress: () {
-                                    Get.to(() => MandirNearMeDetailsView(
-                                          templeDetails: entry.value,
-                                        ));
-                                  },
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.0625,
-                                ),
-                              ],
-                            );
-                          }).toList(),
+                              return Row(
+                                children: [
+                                  mandirCard(
+                                    label: "${entry.value.name}",
+                                    price: 11000,
+                                    product: entry.value,
+                                    onpress: () {
+                                      Get.to(() => MandirNearMeDetailsView(
+                                            templeDetails: entry.value,
+                                          ));
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.0625,
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ),
@@ -351,92 +353,80 @@ class _DashboardViewState extends State<DashboardView> {
     Color? valueColor,
     required Function onpress,
   }) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.6,
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 2,
-              offset: Offset(0, 3),
+    return GestureDetector(
+      onTap: () {
+        onpress();
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.6,
+        decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              ),
+            ],
+            borderRadius: BorderRadius.circular(10.0)),
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: Image.network(
+                  product.image!.url!,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(label,
+                      style: AppStyles.tsBlackRegular16.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.orangeColor)),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
+                    style: AppStyles.tsBlackMedium14,
+                  ),
+                  Text(
+                    "Book Now",
+                    style: AppStyles.tsBlackMedium14
+                        .copyWith(color: AppColors.orangeColor),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
             ),
           ],
-          borderRadius: BorderRadius.circular(10.0)),
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.width * 0.4,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image.network(
-                product.image!.url!,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(label,
-                    style: AppStyles.tsBlackRegular16.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.orangeColor)),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Starting ${FormatHelper.formatNumbers(price, decimal: 0)}",
-                  style: AppStyles.tsBlackMedium14,
-                ),
-                SizedBox(
-                  height: 25,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      onpress();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 4,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      backgroundColor: AppColors.cinnamonStickColor,
-                    ),
-                    child: Text(
-                      "Book Now",
-                      style: AppStyles.tsWhiteMedium12,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -448,102 +438,90 @@ class _DashboardViewState extends State<DashboardView> {
     required Function onpress,
     Color? valueColor,
   }) {
-    return Container(
-      // height: MediaQuery.of(context).size.width * 0.75,
-      width: MediaQuery.of(context).size.width * 0.6,
-      // margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 2,
-              offset: Offset(0, 3),
+    return GestureDetector(
+      onTap: () {
+        onpress(); // Call the function when tapped
+      },
+      child: Container(
+        // height: MediaQuery.of(context).size.width * 0.75,
+        width: MediaQuery.of(context).size.width * 0.6,
+        // margin: EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              ),
+            ],
+            borderRadius: BorderRadius.circular(10.0)),
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: Image.network(
+                  product.coverImage!.url!,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.50, // Adjust the width
+                    child: Text(
+                      label,
+                      style: AppStyles.tsBlackRegular16.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.orangeColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Distance: ${(product.distance! / 1000).toStringAsFixed(2)} km",
+                    style: AppStyles.tsBlackMedium14,
+                  ),
+                  Text(
+                    "View",
+                    style: AppStyles.tsBlackMedium14
+                        .copyWith(color: AppColors.orangeColor),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
             ),
           ],
-          borderRadius: BorderRadius.circular(10.0)),
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.width * 0.4,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image.network(
-                product.coverImage!.url!,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width *
-                      0.50, // Adjust the width
-                  child: Text(
-                    label,
-                    style: AppStyles.tsBlackRegular16.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.orangeColor,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Distance: ${(product.distance! / 1000).toStringAsFixed(2)} km",
-                  style: AppStyles.tsBlackMedium14,
-                ),
-                SizedBox(
-                  height: 25,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      onpress();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 4,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      backgroundColor: AppColors.cinnamonStickColor,
-                    ),
-                    child: Text(
-                      "View",
-                      style: AppStyles.tsWhiteMedium12,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -555,102 +533,90 @@ class _DashboardViewState extends State<DashboardView> {
     Color? valueColor,
     required Function onpress,
   }) {
-    return Container(
-      // height: MediaQuery.of(context).size.width * 0.75,
-      width: MediaQuery.of(context).size.width * 0.6,
-      // margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 2,
-              offset: Offset(0, 3),
+    return GestureDetector(
+      onTap: () {
+        onpress(); // Call the function when tapped
+      },
+      child: Container(
+        // height: MediaQuery.of(context).size.width * 0.75,
+        width: MediaQuery.of(context).size.width * 0.6,
+        // margin: EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              ),
+            ],
+            borderRadius: BorderRadius.circular(10.0)),
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                child: Image.network(
+                  product.coverImage!.url!,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.50, // Adjust the width
+                    child: Text(
+                      label,
+                      style: AppStyles.tsBlackRegular16.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.orangeColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${(product.deviDevta?.name)}",
+                    style: AppStyles.tsBlackMedium14,
+                  ),
+                  Text(
+                    "View",
+                    style: AppStyles.tsBlackMedium14
+                        .copyWith(color: AppColors.orangeColor),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
             ),
           ],
-          borderRadius: BorderRadius.circular(10.0)),
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.width * 0.4,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image.network(
-                product.coverImage!.url!,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width *
-                      0.50, // Adjust the width
-                  child: Text(
-                    label,
-                    style: AppStyles.tsBlackRegular16.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.orangeColor,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${(product.deviDevta?.name)}",
-                  style: AppStyles.tsBlackMedium14,
-                ),
-                SizedBox(
-                  height: 25,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      onpress();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 4,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      backgroundColor: AppColors.cinnamonStickColor,
-                    ),
-                    child: Text(
-                      "View",
-                      style: AppStyles.tsWhiteMedium12,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-        ],
+        ),
       ),
     );
   }

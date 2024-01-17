@@ -226,97 +226,86 @@ Widget homeServiceCard({
   required BuildContext context,
   required Function onpress,
 }) {
-  return Container(
-    width: MediaQuery.of(context).size.width * 0.60,
-    decoration: BoxDecoration(
-      color: AppColors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.1),
-          spreadRadius: 2,
-          blurRadius: 2,
-          offset: Offset(0, 3),
-        ),
-      ],
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.width * 0.4,
-          width: MediaQuery.of(context).size.width,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: Image.network(
-              product.image!
-                  .url!, // Assuming PoojaCategoryData has an Image property
-              fit: BoxFit.fill,
+  return GestureDetector(
+    onTap: () {
+      onpress();
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width * 0.60,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 2,
+            offset: Offset(0, 3),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Column(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.network(
+                product.image!
+                    .url!, // Assuming PoojaCategoryData has an Image property
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width *
-                    0.54, // Adjust the width
-                child: Text(
-                  product.name ?? '',
-                  style: AppStyles.tsBlackRegular16.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.orangeColor,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
-                style: AppStyles.tsBlackMedium14,
-              ),
-              SizedBox(
-                height: 25,
-                child: ElevatedButton(
-                  onPressed: () {
-                    onpress();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 4,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    backgroundColor: AppColors.cinnamonStickColor,
-                  ),
+          SizedBox(height: 8),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width *
+                      0.54, // Adjust the width
                   child: Text(
-                    "Book Now",
-                    style: AppStyles.tsWhiteMedium12,
+                    product.name ?? '',
+                    style: AppStyles.tsBlackRegular16.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.orangeColor,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 8,
-        ),
-      ],
+          SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
+                  style: AppStyles.tsBlackMedium14,
+                ),
+                Text(
+                  "Book Now",
+                  style: AppStyles.tsBlackMedium14
+                      .copyWith(color: AppColors.orangeColor),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+        ],
+      ),
     ),
   );
 }

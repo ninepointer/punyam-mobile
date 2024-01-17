@@ -318,8 +318,8 @@ class _MandirViewState extends State<MandirView> {
                     ),
                     SizedBox(height: 12),
                     Column(
-                      children: controller.popularTempleListDetails
-                          .map((templeDetails) {
+                      children:
+                          controller.allTempleListDetails.map((templeDetails) {
                         return GestureDetector(
                           onTap: () {
                             Get.to(() => MandirDetailsView(

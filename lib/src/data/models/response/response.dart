@@ -15,3 +15,4 @@ export 'all_mandir_response.dart';
 export 'increase_count_of_pooja_response.dart';
 export 'devta_list_response.dart';
 export "temple_nearby_me_response.dart";
+export 'location_by_lat_and_long_response.dart';

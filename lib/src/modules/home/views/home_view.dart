@@ -14,6 +14,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late HomeController controller;
+  late MandirController mandirController;
 
   Uri? initialUri;
   Uri? latestUri;
@@ -33,7 +34,9 @@ class _HomeViewState extends State<HomeView> {
     // _handleInitialUri();
     // _handleIncomingLinks();
     // _handelInitialNotification();
+
     controller = Get.find<HomeController>();
+    controller.getUserCurrentLocation();
   }
 
   // Future _handleInitialUri() async {
@@ -72,7 +75,6 @@ class _HomeViewState extends State<HomeView> {
   //       isLocal: true,
   //     );
   // }
-
   void _updateTab(int index) {
     controller.selectedIndex.value = index;
 
@@ -109,43 +111,53 @@ class _HomeViewState extends State<HomeView> {
       //   if (isOpened) controller.userDetails(AppStorage.getUserDetails());
       // },
       appBar: AppBar(
-        title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                // Navigate to the location page
-                // You can replace 'LocationPage' with the actual page route you want to navigate to
-                Get.toNamed('LocationPage');
-              },
-              child: Container(
-                margin: EdgeInsets.only(right: 14),
-                child: Icon(Icons.location_on),
+        title: GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.location);
+          },
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 4),
+                child: Icon(
+                  Icons.location_on,
+                  size: 30,
+                ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+              Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Home',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    if (controller.locationByLatandLong.isNotEmpty)
+                      Row(
+                        children: [
+                          Text(
+                            "${controller.locationByLatandLong.first.addressComponents?.first.shortName}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(Icons.keyboard_arrow_down)
+                        ],
                       ),
-                    ),
-                    Icon(Icons.keyboard_arrow_down)
+                    if (controller.locationByLatandLong.isNotEmpty)
+                      Container(
+                        width: MediaQuery.of(context).size.width -
+                            MediaQuery.of(context).size.width * 0.36,
+                        child: Text(
+                          "${controller.locationByLatandLong.first.formattedAddress?.replaceAll(controller.addressComponent.first.shortName.toString() + ", ", "")}",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                   ],
                 ),
-                Text(
-                  'Your Address Here',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          ],
+              )
+            ],
+          ),
         ),
         actions: [
           GestureDetector(
@@ -210,14 +222,14 @@ class _HomeViewState extends State<HomeView> {
                 _buildTabButton(
                   context,
                   index: 1,
-                  label: 'Temples',
+                  label: 'Mandir',
                   icon: Icons.analytics_rounded,
                 ),
                 SizedBox(width: 40),
                 _buildTabButton(
                   context,
                   index: 3,
-                  label: 'Shop',
+                  label: 'Store',
                   icon: Icons.trending_up_rounded,
                 ),
                 _buildTabButton(

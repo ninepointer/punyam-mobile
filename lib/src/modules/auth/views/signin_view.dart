@@ -52,7 +52,7 @@ class _SigninViewState extends State<SigninView> {
                         children: [
                           Align(
                             child: Text(
-                              'Let\'s get started with\nPooja!',
+                              'Let\'s get started with\nPunyam!',
                               style: Theme.of(context).textTheme.tsMedium20,
                               textAlign: TextAlign.center,
                             ),
@@ -120,6 +120,36 @@ class _SigninViewState extends State<SigninView> {
                       //   ),
                       // ),
                       // SizedBox(height: 24),
+                      //  Obx(
+                      //       () => CommonFilledButton(
+                      //         backgroundColor: Get.isDarkMode
+                      //             ? AppColors.darkGreen
+                      //             : AppColors.cinnamonStickColor,
+                      //         isLoading: controller.isLoadingStatus,
+                      //         label: 'Sign In With Google',
+                      //         leadingIcon: AppIcons.googleLogo,
+                      //         onPressed: () {
+                      //           controller.googleSignIn();
+                      //         },
+                      //       ),
+                      //     ),
+                      Divider(),
+                      Text('Or login with'),
+                      InkWell(
+                        onTap: () {
+                          controller.googleSignIn();
+                        },
+                        borderRadius: BorderRadius.circular(50),
+                        child: CircleAvatar(
+                          radius: 32  ,
+                          backgroundColor: Colors.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(AppIcons.googleLogo),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 24),    
                       CommonOutlinedButton(
                         backgroundColor: Get.isDarkMode
                             ? AppColors.cinnamonStickColor

@@ -11,6 +11,16 @@ class DashboardRepository extends BaseRepository {
         : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
   }
 
+  Future<RepoResponse<GetLocationByLatAndLongResponse>> getLocationByLongAndLat(
+      String lat, String long) async {
+    String apiURL = AppUrls.getLocationByLongLat(lat, long);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(
+            data: GetLocationByLatAndLongResponse.fromJson(response));
+  }
+
   Future<RepoResponse<PoojaCategoryResponse>> getHomePagePoojaList() async {
     String apiURL = AppUrls.poojalistHomepage;
     var response = await service.getAuth(path: apiURL);

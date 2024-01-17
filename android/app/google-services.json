@@ -12,7 +12,28 @@
           "package_name": "com.punyam.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "489252768648-6mg9d4f83d34ipc5r5gnmsoicpomgr0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.punyam.app",
+            "certificate_hash": "7c40a8d38851eb662a9c214b81fa0f85466a657c"
+          }
+        },
+        {
+          "client_id": "489252768648-ql7diclcnd6mu1774lna2flpm5n797df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.punyam.app",
+            "certificate_hash": "95eb4ad11998a8ce3fa3e0f93807e08974a882af"
+          }
+        },
+        {
+          "client_id": "489252768648-o7mnkp73gd7gvq5ugf2s90690srf8sam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCkTo01LgueDMvRPbEKsNDBRGf6k5SyPR8"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489252768648-o7mnkp73gd7gvq5ugf2s90690srf8sam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
