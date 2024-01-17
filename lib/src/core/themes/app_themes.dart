@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../core.dart';
 
 class AppTheme {
-  static final String fontFamily = GoogleFonts.itimTextTheme().toString();
+  static final String fontFamily = 'Rubik';
 
   static ThemeData lightThemeData(BuildContext context) {
     return ThemeData.light(useMaterial3: false).copyWith(
@@ -16,7 +14,7 @@ class AppTheme {
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
       ),
-      scaffoldBackgroundColor: AppColors.lightCardBackgroundColor,
+      scaffoldBackgroundColor: AppColors.lightScaffoldBackgroundColor,
       cardColor: AppColors.lightCardBackgroundColor,
       cardTheme: CardTheme(
         color: AppColors.lightCardBackgroundColor,
@@ -39,7 +37,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        color: AppColors.white,
+        color: AppColors.lightCardBackgroundColor,
         iconTheme: IconThemeData(
           color: AppColors.secondary,
         ),
@@ -109,24 +107,12 @@ class AppTheme {
 
   static ThemeData themeData(BuildContext context) {
     var isDarkMode = Get.isDarkMode;
-    // Assuming ThemeService is initialized and available via dependency injection
-    ThemeService _themeService = Get.find<ThemeService>();
-
-    // Retrieve the system's theme mode only if there's no theme key stored
-    if (!GetStorage().hasData('isDarkMode')) {
-      isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    } else {
-      isDarkMode = _themeService
-          ._loadThemeFromBox(); // Use the existing method to load the stored theme
-    }
-
     return ThemeData(
       fontFamily: fontFamily,
       brightness: Brightness.dark,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      scaffoldBackgroundColor: isDarkMode
-          ? AppColors.darkScaffoldBackgroundColor
-          : AppColors.lightScaffoldBackgroundColor,
+      scaffoldBackgroundColor:
+          isDarkMode ? AppColors.darkScaffoldBackgroundColor : AppColors.lightScaffoldBackgroundColor,
       primarySwatch: AppColors.primary,
       primaryTextTheme: Typography().white,
       textTheme: Theme.of(context).textTheme.apply(
@@ -134,13 +120,9 @@ class AppTheme {
             bodyColor: isDarkMode ? AppColors.white : AppColors.black,
             displayColor: isDarkMode ? AppColors.white : AppColors.black,
           ),
-      cardColor: isDarkMode
-          ? AppColors.darkCardBackgroundColor
-          : AppColors.lightCardBackgroundColor,
+      cardColor: isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.lightCardBackgroundColor,
       cardTheme: CardTheme(
-        color: isDarkMode
-            ? AppColors.darkCardBackgroundColor
-            : AppColors.lightCardBackgroundColor,
+        color: isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.lightCardBackgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -194,23 +176,10 @@ class ThemeService {
   final _box = GetStorage();
   final _key = 'isDarkMode';
 
-  ThemeMode get systemTheme {
-    var brightness = SchedulerBinding.instance.window.platformBrightness;
-    return brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
-  }
+  ThemeMode get theme => _loadThemeFromBox() ? ThemeMode.dark : ThemeMode.light;
 
-  // This function now uses the system theme as a default if there's no stored key
-  ThemeMode get theme {
-    if (_box.hasData(_key)) {
-      return _loadThemeFromBox() ? ThemeMode.dark : ThemeMode.light;
-    } else {
-      return systemTheme;
-    }
-  }
-
-  bool _loadThemeFromBox() => _box.read(_key) ?? false; // No change here
-  _saveThemeToBox(bool isDarkMode) =>
-      _box.write(_key, isDarkMode); // No change here
+  bool _loadThemeFromBox() => _box.read(_key) ?? false;
+  _saveThemeToBox(bool isDarkMode) => _box.write(_key, isDarkMode);
 
   void switchTheme() {
     Get.changeThemeMode(_loadThemeFromBox() ? ThemeMode.light : ThemeMode.dark);
