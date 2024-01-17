@@ -42,34 +42,79 @@ class HomeController extends BaseController<DashboardRepository> {
     await getPoojaCatagoryDetails();
   }
 
+  // getUserCurrentLocation() async {
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied ||
+  //       permission == LocationPermission.deniedForever) {
+  //     log("Permission Denied");
+  //     LocationPermission ask = await Geolocator.requestPermission();
+  //     final latitude = AppStorage.locationLatitude();
+  //     final longitude = AppStorage.locationLongitude();
+  //     //  longitude.toString(), latitude.toString()
+  //     if(latitude!=null && longitude!=null){
+  //       await getUserLoactionByLatAndLongDetails(
+  //           latitude.toString(), longitude.toString());
+  //       Get.find<MandirController>().getNearByMandirsDetails();    
+  //     }
+  //   } else {
+  //     Position currentPosition = await Geolocator.getCurrentPosition(
+  //         desiredAccuracy: LocationAccuracy.best);
+  //     log("Longitude ${currentPosition.longitude}");
+  //     log("Latitude ${currentPosition.latitude}");
+  //     userLoacationLong(currentPosition.longitude.toString());
+  //     userLoacationLatitude(currentPosition.latitude.toString());
+  //     await AppStorage.setUserLocation(currentPosition.latitude.toString(),
+  //         currentPosition.longitude.toString());
+  //     await getUserLoactionByLatAndLongDetails(
+  //         userLoacationLatitude.toString(), userLoacationLong.toString());
+  //     Get.find<MandirController>().getNearByMandirsDetails();
+  //   }
+  // }
   getUserCurrentLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      log("Permission Denied");
-      LocationPermission ask = await Geolocator.requestPermission();
+  LocationPermission permission = await Geolocator.checkPermission();
+
+  // Request permission if it's denied but not denied forever.
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+  }
+
+  if (permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
+    try {
+      // Try to fetch current position.
+      Position currentPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+      log("Longitude: ${currentPosition.longitude}");
+      log("Latitude: ${currentPosition.latitude}");
+      await AppStorage.setUserLocation(currentPosition.latitude.toString(), currentPosition.longitude.toString());
+      await getUserLoactionByLatAndLongDetails(currentPosition.latitude.toString(), currentPosition.longitude.toString());
+    } catch (e) {
+      // Fallback to saved location if fetching current position fails.
       final latitude = AppStorage.locationLatitude();
       final longitude = AppStorage.locationLongitude();
-      //  longitude.toString(), latitude.toString()
-      if(latitude!=null && longitude!=null){
-        await getUserLoactionByLatAndLongDetails(
-            latitude.toString(), longitude.toString());
-        Get.find<MandirController>().getNearByMandirsDetails();    
+      if (latitude != null && longitude != null) {
+        log("Using saved location: Latitude $latitude, Longitude $longitude");
+        await getUserLoactionByLatAndLongDetails(latitude.toString(), longitude.toString());
+      } else {
+        log("Error fetching location: $e");
+        // Handle the case where neither current nor saved location is available.
       }
+    }
+  } else {
+    // Permission is denied, use saved location if available.
+    final latitude = AppStorage.locationLatitude();
+    final longitude = AppStorage.locationLongitude();
+    if (latitude != null && longitude != null) {
+      log("Using saved location: Latitude $latitude, Longitude $longitude");
+      await getUserLoactionByLatAndLongDetails(latitude.toString(), longitude.toString());
     } else {
-      Position currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best);
-      log("Longitude ${currentPosition.longitude}");
-      log("Latitude ${currentPosition.latitude}");
-      userLoacationLong(currentPosition.longitude.toString());
-      userLoacationLatitude(currentPosition.latitude.toString());
-      await AppStorage.setUserLocation(currentPosition.latitude.toString(),
-          currentPosition.longitude.toString());
-      await getUserLoactionByLatAndLongDetails(
-          userLoacationLatitude.toString(), userLoacationLong.toString());
-      Get.find<MandirController>().getNearByMandirsDetails();
+      log("Location permission denied and no saved location available.");
     }
   }
+
+  // Proceed with fetching nearby mandirs details.
+  Get.find<MandirController>().getNearByMandirsDetails();
+}
+
+
 
   void navigateToCarousel(String link) {
     if (link == 'marginxs') {
