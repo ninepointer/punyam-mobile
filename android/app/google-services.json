@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "489252768648-3tf0fjs1v53j21ek8r83so7t1tgcvc0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.punyam.app",
+            "certificate_hash": "94829c89365ccba10be722fd050dfb5918b79197"
+          }
+        },
+        {
           "client_id": "489252768648-6mg9d4f83d34ipc5r5gnmsoicpomgr0t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
