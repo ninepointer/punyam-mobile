@@ -45,14 +45,14 @@ class _MandirViewState extends State<MandirView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 150,
+                      height: MediaQuery.of(context).size.width * 0.4,
                       width: double.infinity,
                       child: CarouselSlider.builder(
                         itemCount: controller.carouselListforMandir.length,
                         itemBuilder: (context, int index, _) {
                           return Container(
                             width: double.infinity,
-                            height: 100,
+                            height: MediaQuery.of(context).size.width * 0.4,
                             decoration: BoxDecoration(
                               color: AppColors.grey.withOpacity(.1),
                               borderRadius: BorderRadius.circular(8),
@@ -60,9 +60,9 @@ class _MandirViewState extends State<MandirView> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                "${controller.carouselListforMandir[index].carouselImage}",
+                                "${controller.carouselListforMandir[index].carouselImage ?? ''}",
                                 fit: BoxFit.fill,
-                                height: 100,
+                                height: MediaQuery.of(context).size.width * 0.4,
                                 width: double.infinity,
                               ),
                             ),
@@ -76,7 +76,9 @@ class _MandirViewState extends State<MandirView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     //           InkWell(
                     //   onTap: () {
                     //     // Open the SearchBottomSheet when the container is tapped
@@ -125,7 +127,9 @@ class _MandirViewState extends State<MandirView> {
                     //   ),
                     // ),
 
-                    SizedBox(height: 12),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -135,7 +139,9 @@ class _MandirViewState extends State<MandirView> {
                         )
                       ],
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       clipBehavior: Clip.none,
@@ -264,7 +270,9 @@ class _MandirViewState extends State<MandirView> {
                     //     ],
                     //   ),
                     // ),
-                    SizedBox(height: 12),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     Row(
                       children: [
                         GestureDetector(
@@ -290,7 +298,7 @@ class _MandirViewState extends State<MandirView> {
                               Get.to(() => PopularMandirView());
                             }),
                         SizedBox(
-                          width: 12,
+                          width: MediaQuery.of(context).size.width * 0.030,
                         ),
                         GestureDetector(
                             child: Container(
@@ -316,7 +324,9 @@ class _MandirViewState extends State<MandirView> {
                             }),
                       ],
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     Column(
                       children:
                           controller.allTempleListDetails.map((templeDetails) {
@@ -446,7 +456,10 @@ class _MandirViewState extends State<MandirView> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 12),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.0625,
+                                  ),
                                 ],
                               ),
                             ),
@@ -485,7 +498,7 @@ Widget godImage({
       ),
       child: ClipOval(
         child: Image.network(
-          product.image!.url!,
+          product.image!.url ?? '',
           fit: BoxFit.fill,
         ),
       ),

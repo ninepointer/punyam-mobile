@@ -77,7 +77,7 @@ class _DashboardViewState extends State<DashboardView> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
-                                  "${controller.carouselListforHome[index].carouselImage}",
+                                  "${controller.carouselListforHome[index].carouselImage ?? ''}",
                                   fit: BoxFit.fill,
                                   height:
                                       MediaQuery.of(context).size.width * 0.4,
@@ -428,7 +428,7 @@ class _DashboardViewState extends State<DashboardView> {
                   topRight: Radius.circular(10),
                 ),
                 child: Image.network(
-                  product.image!.url!,
+                  product.image!.url ?? '',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -515,7 +515,7 @@ class _DashboardViewState extends State<DashboardView> {
                   topRight: Radius.circular(10),
                 ),
                 child: Image.network(
-                  product.coverImage!.url!,
+                  product.coverImage!.url ?? "",
                   fit: BoxFit.fill,
                 ),
               ),
@@ -610,7 +610,7 @@ class _DashboardViewState extends State<DashboardView> {
                   topRight: Radius.circular(10),
                 ),
                 child: Image.network(
-                  product.coverImage!.url!,
+                  product.coverImage!.url ?? "",
                   fit: BoxFit.fill,
                 ),
               ),
@@ -678,7 +678,7 @@ Widget boxCard({
 }) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.25,
-    height: 102,
+    height: MediaQuery.of(context).size.width * 0.27,
     padding: EdgeInsetsDirectional.all(5),
     decoration: BoxDecoration(
       color: AppColors.white,

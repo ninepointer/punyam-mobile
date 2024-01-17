@@ -19,14 +19,14 @@ class PopularMandirView extends GetView<MandirController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 150,
+                height: MediaQuery.of(context).size.width * 0.4,
                 width: double.infinity,
                 child: CarouselSlider.builder(
                   itemCount: controller.carouselListforMandir.length,
                   itemBuilder: (context, int index, _) {
                     return Container(
                       width: double.infinity,
-                      height: 100,
+                      height: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         color: AppColors.grey.withOpacity(.1),
                         borderRadius: BorderRadius.circular(8),
@@ -36,7 +36,7 @@ class PopularMandirView extends GetView<MandirController> {
                         child: Image.network(
                           "${controller.carouselListforMandir[index].carouselImage}",
                           fit: BoxFit.fill,
-                          height: 100,
+                          height: MediaQuery.of(context).size.width * 0.4,
                           width: double.infinity,
                         ),
                       ),
@@ -50,7 +50,9 @@ class PopularMandirView extends GetView<MandirController> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.0625,
+              ),
               // CommonTextField(
               //   padding: EdgeInsets.zero,
               //   hintText: 'Search Symbol and start trading',
@@ -60,7 +62,7 @@ class PopularMandirView extends GetView<MandirController> {
               //     onPressed: controller.searchTextController.clear,
               //   ),
               // ),
-              // SizedBox(height: 12),
+              // SizedBox( height: MediaQuery.of(context).size.width * 0.0625,),
               Column(
                 children:
                     controller.popularTempleListDetails.map((templeDetails) {
@@ -188,7 +190,10 @@ class PopularMandirView extends GetView<MandirController> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.width * 0.0625,
+                            ),
                           ],
                         ),
                       ),
