@@ -22,8 +22,8 @@ class _HomeViewState extends State<HomeView> {
 
   List<Widget> _tabs = [
     DashboardView(),
-    MandirView(),
-    MandirView(),
+    // MandirView(),
+    // MandirView(),
     MandirView(),
     PoojaServicesView(),
   ];
@@ -90,14 +90,14 @@ class _HomeViewState extends State<HomeView> {
         Get.find<MandirController>().loadData();
         break;
       case 2:
-        Get.find<MandirController>().loadData();
-        break;
-      case 3:
-        Get.find<MandirController>().loadData();
-        break;
-      case 4:
         Get.find<PoojaServicesController>().loadData();
+        // Get.find<MandirController>().loadData();
         break;
+      // case 3:
+      //   Get.find<MandirController>().loadData();
+      //   break;
+      // case 3:
+      //   break;
       default:
     }
     setState(() {});
@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: GestureDetector(
           onTap: () {
-            Get.toNamed(AppRoutes.location);
+            // Get.toNamed(AppRoutes.location);
           },
           child: Row(
             children: [
@@ -162,32 +162,26 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.profile),
-            child: Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.only(right: 14, top: 4),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.brandYellow.withOpacity(1),
-                ),
-              ),
-              child: ClipOval(
-                child: controller.userDetails.value.data?.profilePhoto == null
-                    ? Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Image.asset(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                radius: 20, // Adjust the radius as needed
+                backgroundColor: AppColors.brandYellow.withOpacity(1),
+                child: ClipOval(
+                  child: controller.userDetails.value.data?.profilePhoto == null
+                      ? Image.asset(
                           Get.isDarkMode
                               ? AppImages.darkAppLogo
                               : AppImages.lightAppLogo,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          controller
+                                  .userDetails.value.data?.profilePhoto?.url ??
+                              '',
+                          fit: BoxFit.cover,
                         ),
-                      )
-                    : Image.network(
-                        controller.userDetails.value.data?.profilePhoto?.url ??
-                            '',
-                        fit: BoxFit.contain,
-                      ),
+                ),
               ),
             ),
           ),
@@ -195,14 +189,15 @@ class _HomeViewState extends State<HomeView> {
       ),
 
       body: Obx(() => _tabs[controller.selectedIndex.value]),
-      floatingActionButton: FloatingActionButton(
-          elevation: 0,
-          backgroundColor: Get.isDarkMode
-              ? AppColors.cinnamonStickColor
-              : AppColors.cinnamonStickColor,
-          onPressed: () => _updateTab(2),
-          child: Image.asset(AppImages.prayIcon)),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 0,
+      //     backgroundColor: Get.isDarkMode
+      //         ? AppColors.cinnamonStickColor
+      //         : AppColors.cinnamonStickColor,
+      //     onPressed: () {},
+      //     //_updateTab(2)
+      //     child: Image.asset(AppImages.prayIcon)),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
         () => BottomAppBar(
           shape: CircularNotchedRectangle(),
@@ -225,17 +220,17 @@ class _HomeViewState extends State<HomeView> {
                   label: 'Mandir',
                   icon: Icons.analytics_rounded,
                 ),
-                SizedBox(width: 40),
+                // SizedBox(width: 40),
+                // _buildTabButton(
+                //   context,
+                //   index: 3,
+                //   label: 'Store',
+                //   icon: Icons.trending_up_rounded,
+                // ),
                 _buildTabButton(
                   context,
-                  index: 3,
-                  label: 'Store',
-                  icon: Icons.trending_up_rounded,
-                ),
-                _buildTabButton(
-                  context,
-                  index: 4,
-                  label: 'Services',
+                  index: 2,
+                  label: 'Pooja',
                   icon: Icons.groups_rounded,
                 ),
               ],

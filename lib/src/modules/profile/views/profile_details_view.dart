@@ -40,34 +40,24 @@ class ProfileDetailsView extends GetView<ProfileController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Account Information',
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.tsMedium16,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Position',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(height: 4),
-                    CommonTextField(
-                      isDisabled: true,
-                      controller: controller.positionTextController,
-                      hintText: 'Position',
-                      padding: EdgeInsets.only(bottom: 8),
-                    ),
-                    Text(
-                      'Username',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(height: 4),
-                    CommonTextField(
-                      isDisabled: true,
-                      controller: controller.userNameTextController,
-                      hintText: 'Username',
-                      padding: EdgeInsets.only(bottom: 8),
-                    ),
+                    // Text(
+                    //   'Account Information',
+                    //   textAlign: TextAlign.start,
+                    //   style: Theme.of(context).textTheme.tsMedium16,
+                    // ),
+                    // SizedBox(height: 8),
+                    // Text(
+                    //   'Position',
+                    //   style: Theme.of(context).textTheme.tsGreyMedium12,
+                    // ),
+                    // SizedBox(height: 4),
+                    // CommonTextField(
+                    //   isDisabled: true,
+                    //   controller: controller.positionTextController,
+                    //   hintText: 'Position',
+                    //   padding: EdgeInsets.only(bottom: 8),
+                    // ),
+
                     Text(
                       'Personal Information',
                       textAlign: TextAlign.start,
@@ -81,7 +71,7 @@ class ProfileDetailsView extends GetView<ProfileController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'First Name',
+                                'Full Name',
                                 style:
                                     Theme.of(context).textTheme.tsGreyMedium12,
                               ),
@@ -90,34 +80,44 @@ class ProfileDetailsView extends GetView<ProfileController> {
                                 // isDisabled: controller.isKYCApproved,
                                 prefixIcon: Icon(Icons.person),
                                 controller: controller.firstNameTextController,
-                                hintText: 'First Name',
+                                hintText: 'Full Name',
                                 padding: EdgeInsets.only(bottom: 8),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 12),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Last Name',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonTextField(
-                                // isDisabled: controller.isKYCApproved,
-                                prefixIcon: Icon(Icons.person),
-                                controller: controller.lastNameTextController,
-                                hintText: 'Last Name',
-                                padding: EdgeInsets.only(bottom: 8),
-                              )
-                            ],
-                          ),
-                        ),
+                        // SizedBox(width: 12),
+                        // Flexible(
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Text(
+                        //         'Last Name',
+                        //         style:
+                        //             Theme.of(context).textTheme.tsGreyMedium12,
+                        //       ),
+                        //       SizedBox(height: 4),
+                        //       CommonTextField(
+                        //         // isDisabled: controller.isKYCApproved,
+                        //         prefixIcon: Icon(Icons.person),
+                        //         controller: controller.lastNameTextController,
+                        //         hintText: 'Last Name',
+                        //         padding: EdgeInsets.only(bottom: 8),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                       ],
+                    ),
+                    Text(
+                      'Username',
+                      style: Theme.of(context).textTheme.tsGreyMedium12,
+                    ),
+                    SizedBox(height: 4),
+                    CommonTextField(
+                      controller: controller.userNameTextController,
+                      hintText: 'Username',
+                      padding: EdgeInsets.only(bottom: 8),
                     ),
                     Text(
                       'Email',
@@ -144,80 +144,81 @@ class ProfileDetailsView extends GetView<ProfileController> {
                         FilteringTextInputFormatter.digitsOnly,
                       ],
                       padding: EdgeInsets.only(bottom: 8),
+                      isDisabled: true,
                     ),
-                    Text(
-                      'WhatsApp',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(height: 4),
-                    CommonTextField(
-                      controller: controller.whatsAppTextController,
-                      hintText: 'WhatsApp',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      padding: EdgeInsets.only(bottom: 8),
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Gender',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonDropdown(
-                                color: AppColors.grey.withOpacity(0.1),
-                                hint: 'Gender',
-                                value: controller.genderValue,
-                                dropdownItems: controller.dropdownItems,
-                                onChanged: (value) =>
-                                    controller.genderValue = value,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Flexible(
-                          child: AbsorbPointer(
-                            // absorbing: controller.isKYCApproved,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'DOB',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .tsGreyMedium12,
-                                ),
-                                SizedBox(height: 4),
-                                GestureDetector(
-                                  onTap: () =>
-                                      controller.showDateRangePicker(context),
-                                  child: CommonTextField(
-                                    padding: EdgeInsets.zero,
-                                    isDisabled: true,
-                                    controller: controller.dobTextController,
-                                    hintText: 'Date of Birth',
-                                    suffixIcon: Icon(
-                                      Icons.calendar_month,
-                                      color: AppColors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 12),
+                    // Text(
+                    //   'WhatsApp',
+                    //   style: Theme.of(context).textTheme.tsGreyMedium12,
+                    // ),
+                    // SizedBox(height: 4),
+                    // CommonTextField(
+                    //   controller: controller.whatsAppTextController,
+                    //   hintText: 'WhatsApp',
+                    //   keyboardType: TextInputType.number,
+                    //   inputFormatters: [
+                    //     LengthLimitingTextInputFormatter(10),
+                    //     FilteringTextInputFormatter.digitsOnly,
+                    //   ],
+                    //   padding: EdgeInsets.only(bottom: 8),
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Gender',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(height: 4),
+                    //           CommonDropdown(
+                    //             color: AppColors.grey.withOpacity(0.1),
+                    //             hint: 'Gender',
+                    //             value: controller.genderValue,
+                    //             dropdownItems: controller.dropdownItems,
+                    //             onChanged: (value) =>
+                    //                 controller.genderValue = value,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: 12),
+                    //     Flexible(
+                    //       child: AbsorbPointer(
+                    //         // absorbing: controller.isKYCApproved,
+                    //         child: Column(
+                    //           crossAxisAlignment: CrossAxisAlignment.start,
+                    //           children: [
+                    //             Text(
+                    //               'DOB',
+                    //               style: Theme.of(context)
+                    //                   .textTheme
+                    //                   .tsGreyMedium12,
+                    //             ),
+                    //             SizedBox(height: 4),
+                    //             GestureDetector(
+                    //               onTap: () =>
+                    //                   controller.showDateRangePicker(context),
+                    //               child: CommonTextField(
+                    //                 padding: EdgeInsets.zero,
+                    //                 isDisabled: true,
+                    //                 controller: controller.dobTextController,
+                    //                 hintText: 'Date of Birth',
+                    //                 suffixIcon: Icon(
+                    //                   Icons.calendar_month,
+                    //                   color: AppColors.grey,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(height: 12),
                     Text(
                       'Profile Photo',
                       style: Theme.of(context).textTheme.tsGreyMedium12,
@@ -235,114 +236,114 @@ class ProfileDetailsView extends GetView<ProfileController> {
                       ),
                     ),
                     SizedBox(height: 12),
-                    Text(
-                      'Location',
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.tsMedium16,
-                    ),
-                    SizedBox(height: 12),
-                    Text(
-                      'Address',
-                      style: Theme.of(context).textTheme.tsGreyMedium12,
-                    ),
-                    SizedBox(height: 4),
-                    CommonTextField(
-                      prefixIcon: Icon(Icons.home),
-                      controller: controller.addressTextController,
-                      hintText: 'Address',
-                      padding: EdgeInsets.only(bottom: 8),
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'City',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.location_city),
-                                controller: controller.cityTextController,
-                                hintText: 'City',
-                                padding: EdgeInsets.only(bottom: 8),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pin Code',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonTextField(
-                                controller: controller.pincodeTextController,
-                                hintText: 'Pincode',
-                                prefixIcon: Icon(Icons.pin),
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  LengthLimitingTextInputFormatter(6),
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                                padding: EdgeInsets.only(bottom: 8),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'State',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.location_on),
-                                controller: controller.stateTextController,
-                                hintText: 'State',
-                                padding: EdgeInsets.only(bottom: 8),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Country',
-                                style:
-                                    Theme.of(context).textTheme.tsGreyMedium12,
-                              ),
-                              SizedBox(height: 4),
-                              CommonTextField(
-                                prefixIcon: Icon(Icons.public),
-                                controller: controller.countryTextController,
-                                hintText: 'Country',
-                                padding: EdgeInsets.only(bottom: 8),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Text(
+                    //   'Location',
+                    //   textAlign: TextAlign.start,
+                    //   style: Theme.of(context).textTheme.tsMedium16,
+                    // ),
+                    // SizedBox(height: 12),
+                    // Text(
+                    //   'Address',
+                    //   style: Theme.of(context).textTheme.tsGreyMedium12,
+                    // ),
+                    // SizedBox(height: 4),
+                    // CommonTextField(
+                    //   prefixIcon: Icon(Icons.home),
+                    //   controller: controller.addressTextController,
+                    //   hintText: 'Address',
+                    //   padding: EdgeInsets.only(bottom: 8),
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'City',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(height: 4),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.location_city),
+                    //             controller: controller.cityTextController,
+                    //             hintText: 'City',
+                    //             padding: EdgeInsets.only(bottom: 8),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: 12),
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Pin Code',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(height: 4),
+                    //           CommonTextField(
+                    //             controller: controller.pincodeTextController,
+                    //             hintText: 'Pincode',
+                    //             prefixIcon: Icon(Icons.pin),
+                    //             keyboardType: TextInputType.number,
+                    //             inputFormatters: [
+                    //               LengthLimitingTextInputFormatter(6),
+                    //               FilteringTextInputFormatter.digitsOnly,
+                    //             ],
+                    //             padding: EdgeInsets.only(bottom: 8),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'State',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(height: 4),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.location_on),
+                    //             controller: controller.stateTextController,
+                    //             hintText: 'State',
+                    //             padding: EdgeInsets.only(bottom: 8),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     SizedBox(width: 12),
+                    //     Flexible(
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           Text(
+                    //             'Country',
+                    //             style:
+                    //                 Theme.of(context).textTheme.tsGreyMedium12,
+                    //           ),
+                    //           SizedBox(height: 4),
+                    //           CommonTextField(
+                    //             prefixIcon: Icon(Icons.public),
+                    //             controller: controller.countryTextController,
+                    //             hintText: 'Country',
+                    //             padding: EdgeInsets.only(bottom: 8),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

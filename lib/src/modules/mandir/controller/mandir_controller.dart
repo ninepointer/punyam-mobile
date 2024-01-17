@@ -44,7 +44,7 @@ class MandirController extends BaseController<MandirRespository> {
 
   Future loadData() async {
     await getCarousel();
-    await getNearByMandirsDetails();
+    // await getNearByMandirsDetails();
     await getAllTemplesDetails();
     await getPopularTamplesDetails();
     await getDhamTemplesDetails();
@@ -138,8 +138,8 @@ class MandirController extends BaseController<MandirRespository> {
   }
 
   Future<void> getNearByMandirsDetails() async {
-    final latitude = AppStorage.locationLatitude();
-    final longitude = AppStorage.locationLongitude();
+    final latitude = AppStorage.locationLatitude()??'28.4744';
+    final longitude = AppStorage.locationLongitude()??'77.5040';
     try {
       final RepoResponse<TempleNearMeResponse> response = await repository
           .getNearByMandirs(longitude.toString(), latitude.toString());
