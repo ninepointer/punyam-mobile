@@ -46,7 +46,7 @@ class _AppState extends State<App> {
       title: AppConstants.appName,
       themeMode: ThemeService().theme,
       theme: AppTheme.lightThemeData(context),
-      darkTheme: AppTheme.darkThemeData(context),
+      // darkTheme: AppTheme.darkThemeData(context),
       initialBinding: AppBinding(),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.splash,

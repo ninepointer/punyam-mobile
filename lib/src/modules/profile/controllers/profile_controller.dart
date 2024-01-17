@@ -351,24 +351,24 @@ class ProfileController extends BaseController<ProfileRepository> {
       return;
     }
 
-    isProfileLoading(true);
-    DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
+    // isProfileLoading(true);
+    // DateTime date = DateFormat('dd-MM-yyyy').parse(dobTextController.text);
     Map<String, dynamic> data = {
-      "first_name": firstNameTextController.text,
-      "last_name": lastNameTextController.text,
+      "full_name": firstNameTextController.text,
+      // "last_name": lastNameTextController.text,
       "email": emailTextController.text,
       "mobile": mobileTextController.text,
-      "gender": genderValue,
-      "dob": DateFormat('yyyy-MM-dd').format(date),
-      "address": addressTextController.text,
-      "city": cityTextController.text,
-      "pincode": pincodeTextController.text,
-      "state": stateTextController.text,
-      "country": countryTextController.text,
+      // "gender": genderValue,
+      // "dob": DateFormat('yyyy-MM-dd').format(date),
+      // "address": addressTextController.text,
+      // "city": cityTextController.text,
+      // "pincode": pincodeTextController.text,
+      // "state": stateTextController.text,
+      // "country": countryTextController.text,
       'profilePhoto':
           await convertPlatformFileToMultipartFile(profilePhotoFile.value),
-      'employeeid': userNameTextController.text,
-      'whatsApp_number': whatsAppTextController.text,
+      // 'employeeid': userNameTextController.text,
+      // 'whatsApp_number': whatsAppTextController.text,
     };
 
     try {
@@ -391,7 +391,7 @@ class ProfileController extends BaseController<ProfileRepository> {
       log('Save KYC: ${e.toString()}');
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
-    isProfileLoading(false);
+    // isProfileLoading(false);
   }
 
   Future saveUserBankDetails() async {

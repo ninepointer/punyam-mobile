@@ -134,7 +134,8 @@ class _DashboardViewState extends State<DashboardView> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => MandirView());
+                              controller.selectedIndex(1);
+                              Get.find<MandirController>().loadData();
                             },
                             child: boxCard(
                                 label: "Mandir",
@@ -161,6 +162,7 @@ class _DashboardViewState extends State<DashboardView> {
                           GestureDetector(
                             onTap: () {
                               // Get.to(() => PoojaServicesView());
+                              SnackbarHelper.showSnackbar("Comming soon");
                             },
                             child: boxCard(
                                 label: "Store",
@@ -171,16 +173,16 @@ class _DashboardViewState extends State<DashboardView> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // Get.to(() => PoojaServicesView());
-                            },
-                            child: boxCard(
-                                label: "Recycle",
-                                subTitle: "Pooja samagri",
-                                image: AppImages.recycle,
-                                context: context),
-                          )
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     // Get.to(() => PoojaServicesView());
+                          //   },
+                          //   child: boxCard(
+                          //       label: "Recycle",
+                          //       subTitle: "Pooja samagri",
+                          //       image: AppImages.recycle,
+                          //       context: context),
+                          // )
                         ],
                       ),
                     ),

@@ -108,23 +108,23 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                                   : Colors.black,
                             ),
                           ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: IconButton(
-                              iconSize: 20,
-                              icon: Icon(Icons.share),
-                              onPressed: () => {},
-                              color: Colors.black,
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 12,
+                          // ),
+                          // Container(
+                          //   height: 40,
+                          //   width: 40,
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     color: Colors.white,
+                          //   ),
+                          //   child: IconButton(
+                          //     iconSize: 20,
+                          //     icon: Icon(Icons.share),
+                          //     onPressed: () => {},
+                          //     color: Colors.black,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],

@@ -196,7 +196,7 @@ class ThemeService {
 
   ThemeMode get systemTheme {
     var brightness = SchedulerBinding.instance.window.platformBrightness;
-    return brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    return brightness == Brightness.dark ? ThemeMode.light : ThemeMode.light;
   }
 
   // This function now uses the system theme as a default if there's no stored key

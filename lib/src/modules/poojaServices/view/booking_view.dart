@@ -326,7 +326,8 @@ class _BookingViewState extends State<BookingView> {
               ),
               child: Text("Need Help?"),
               onPressed: () {
-                // Handle the button press
+                SnackbarHelper.showSnackbar(
+                    "For additional help or queries, please feel free to reach out to us at pooja@punyam.app.");
               },
             ),
             ElevatedButton(

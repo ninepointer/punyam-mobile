@@ -51,16 +51,16 @@ class DhamMandirView extends GetView<MandirController> {
                 ),
               ),
               SizedBox(height: 12),
-              CommonTextField(
-                padding: EdgeInsets.zero,
-                hintText: 'Search Symbol and start trading',
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: controller.searchTextController.clear,
-                ),
-              ),
-              SizedBox(height: 12),
+              // CommonTextField(
+              //   padding: EdgeInsets.zero,
+              //   hintText: 'Search Symbol and start trading',
+              //   prefixIcon: Icon(Icons.search),
+              //   suffixIcon: IconButton(
+              //     icon: Icon(Icons.close),
+              //     onPressed: controller.searchTextController.clear,
+              //   ),
+              // ),
+              // SizedBox(height: 12),
               Column(
                 children: controller.dhamTempleListDetails.map((templeDetails) {
                   return GestureDetector(
@@ -111,9 +111,11 @@ class DhamMandirView extends GetView<MandirController> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    templeDetails.name.toString(),
-                                    style: AppStyles.tsBlackMedium18,
+                                  Flexible(
+                                    child: Text(
+                                      templeDetails.name.toString(),
+                                      style: AppStyles.tsBlackMedium18,
+                                    ),
                                   ),
                                 ],
                               ),

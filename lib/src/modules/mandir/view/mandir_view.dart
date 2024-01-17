@@ -26,9 +26,9 @@ class _MandirViewState extends State<MandirView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Mandir"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Mandir"),
+      // ),
       body: Obx(
         () => RefreshIndicator(
           onRefresh: () async {
@@ -170,100 +170,100 @@ class _MandirViewState extends State<MandirView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 12),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              // Handle button tap
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Open Now",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Handle button tap
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Favorites",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                _selectedTempleList =
-                                    controller.popularTempleListDetails;
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Popular",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Tranding Now",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(height: 12),
+                    // SingleChildScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: Row(
+                    //     children: [
+                    //       InkWell(
+                    //         onTap: () {
+                    //           // Handle button tap
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Open Now",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {
+                    //           // Handle button tap
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Favorites",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             _selectedTempleList =
+                    //                 controller.popularTempleListDetails;
+                    //           });
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Popular",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {},
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Tranding Now",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(height: 12),
                     Row(
                       children: [
@@ -369,9 +369,11 @@ class _MandirViewState extends State<MandirView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          templeDetails.name.toString(),
-                                          style: AppStyles.tsBlackMedium18,
+                                        Flexible(
+                                          child: Text(
+                                            templeDetails.name.toString(),
+                                            style: AppStyles.tsBlackMedium18,
+                                          ),
                                         ),
                                       ],
                                     ),
