@@ -106,11 +106,14 @@ class ProfileView extends GetView<ProfileController> {
               },
             ),
 
-            // ProfileListTile(
-            //   label: 'Messages',
-            //   icon: Icons.message,
-            //   onTap: () {},
-            // ),
+            ProfileListTile(
+              label: 'Log out',
+              icon: Icons.logout,
+              onTap: () async {
+                AppStorage.clearStorage();
+                Get.offAllNamed(AppRoutes.signin);
+              },
+            ),
             // ProfileListTile(
             //   label: 'Settings',
             //   icon: Icons.settings,
