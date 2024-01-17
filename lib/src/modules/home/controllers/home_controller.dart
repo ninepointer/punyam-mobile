@@ -61,8 +61,8 @@ class HomeController extends BaseController<DashboardRepository> {
           desiredAccuracy: LocationAccuracy.best);
       log("Longitude ${currentPosition.longitude}");
       log("Latitude ${currentPosition.latitude}");
-      userLoacationLong(currentPosition.latitude.toString());
-      userLoacationLatitude(currentPosition.longitude.toString());
+      userLoacationLong(currentPosition.longitude.toString());
+      userLoacationLatitude(currentPosition.latitude.toString());
       await AppStorage.setUserLocation(currentPosition.latitude.toString(),
           currentPosition.longitude.toString());
       await getUserLoactionByLatAndLongDetails(

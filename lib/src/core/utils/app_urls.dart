@@ -55,6 +55,6 @@ class AppUrls {
       "$apiURL/mandir/user/bydistance?lat=$lat&long=$long";
   static String searchMandir = "$apiURL/mandir/user/bysearch";
   static const String googleLogin = "$apiURL/verifyfirebaselogintoken";
-  static String getLocationByLongLat(String? long, String? lat) =>
+  static String getLocationByLongLat(String? lat, String? long) =>
       "$apiURL/location/currentplace?lat=$lat&long=$long";
 }

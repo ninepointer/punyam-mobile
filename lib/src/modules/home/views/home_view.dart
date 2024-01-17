@@ -128,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (controller.locationByLatandLong.isNotEmpty)
+                    (controller.locationByLatandLong.value.isNotEmpty)?
                       Row(
                         children: [
                           Text(
@@ -140,8 +140,14 @@ class _HomeViewState extends State<HomeView> {
                           ),
                           Icon(Icons.keyboard_arrow_down)
                         ],
+                      ):Text(
+                        'No location selected',
+                        style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
-                    if (controller.locationByLatandLong.isNotEmpty)
+                    (controller.locationByLatandLong.value.isNotEmpty)?
                       Container(
                         width: MediaQuery.of(context).size.width -
                             MediaQuery.of(context).size.width * 0.36,
@@ -152,7 +158,10 @@ class _HomeViewState extends State<HomeView> {
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
-                      ),
+                      ):Text('Please turn on your location!', style: TextStyle(
+                            fontSize: 12,
+                          ),
+                          overflow: TextOverflow.ellipsis,),
                   ],
                 ),
               )
