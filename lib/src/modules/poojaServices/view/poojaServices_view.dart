@@ -14,7 +14,8 @@ class PoojaServicesView extends GetView<PoojaServicesController> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Pooja Services'),
+          toolbarHeight: 0,
+          // title: const Text('Pooja Services'),
           bottom: TabBar(
             indicatorColor: AppColors.lightGreen,
             tabs: [

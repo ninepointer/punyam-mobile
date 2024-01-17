@@ -253,7 +253,7 @@ class _DashboardViewState extends State<DashboardView> {
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     CommonTile(
-                      label: "Popular Mandir Near Me",
+                      label: "Mandir Near Me",
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
@@ -296,6 +296,50 @@ class _DashboardViewState extends State<DashboardView> {
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
+                    // CommonTile(
+                    //   label: "Popular Mandir Near Me",
+                    // ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.width * 0.0625,
+                    // ),
+                    // SingleChildScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   clipBehavior: Clip.none,
+                    //   child: Obx(
+                    //     () => Container(
+                    //       child: Row(
+                    //         children: mandirController.nearbyMandirs
+                    //             .asMap()
+                    //             .entries
+                    //             .map((entry) {
+                    //           int index = entry.key;
+
+                    //           return Row(
+                    //             children: [
+                    //               mandirCard(
+                    //                 label: "${entry.value.name}",
+                    //                 price: 11000,
+                    //                 product: entry.value,
+                    //                 onpress: () {
+                    //                   Get.to(() => MandirNearMeDetailsView(
+                    //                         templeDetails: entry.value,
+                    //                       ));
+                    //                 },
+                    //               ),
+                    //               SizedBox(
+                    //                 width: MediaQuery.of(context).size.width *
+                    //                     0.0625,
+                    //               ),
+                    //             ],
+                    //           );
+                    //         }).toList(),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.width * 0.0625,
+                    // ),
                     CommonTile(
                       label: "Dham",
                     ),

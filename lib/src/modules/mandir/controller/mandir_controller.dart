@@ -54,7 +54,7 @@ class MandirController extends BaseController<MandirRespository> {
 
   void navigateToCarousel(String link) {}
 
-  Future<void> getNavigateToGoogleMap(double endLat, double endLng) async {
+  Future<void> getNavigateToGoogleMap(num endLat, num endLng) async {
     final latitude = AppStorage.locationLatitude();
     final longitude = AppStorage.locationLongitude();
 
@@ -67,7 +67,7 @@ class MandirController extends BaseController<MandirRespository> {
   }
 
   Future<void> _launchMapsUrl(
-      String startLat, String startLng, double endLat, double endLng) async {
+      String startLat, String startLng, num endLat, num endLng) async {
     String googleMapsUrl =
         "https://www.google.com/maps/dir/?api=1&origin=$startLat,$startLng&destination=$endLat,$endLng&travelmode=driving";
 
@@ -78,8 +78,7 @@ class MandirController extends BaseController<MandirRespository> {
     }
   }
 
-  Future<void> _launchMapsUrlWithDestinationOnly(
-      double endLat, double endLng) async {
+  Future<void> _launchMapsUrlWithDestinationOnly(num endLat, num endLng) async {
     String googleMapsUrl =
         "https://www.google.com/maps/dir/?api=1&destination=$endLat,$endLng&travelmode=driving";
 
@@ -175,8 +174,8 @@ class MandirController extends BaseController<MandirRespository> {
   }
 
   Future<void> getNearByMandirsDetails() async {
-    final latitude = AppStorage.locationLatitude()??'28.4744';
-    final longitude = AppStorage.locationLongitude()??'77.5040';
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
       final RepoResponse<TempleNearMeResponse> response = await repository
           .getNearByMandirs(longitude.toString(), latitude.toString());

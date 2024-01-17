@@ -173,13 +173,13 @@ class TempleNearByMeAddressDetails {
 
 class TempleNearByMeLocation {
   String? type;
-  List<double>? coordinates;
+  List<num>? coordinates;
 
   TempleNearByMeLocation({this.type, this.coordinates});
 
   TempleNearByMeLocation.fromJson(Map<String, dynamic> json) {
     type = json['type'];
-    coordinates = json['coordinates'].cast<double>();
+    coordinates = (json['coordinates'] as List?)?.map((e) => e as num).toList();
   }
 
   Map<String, dynamic> toJson() {

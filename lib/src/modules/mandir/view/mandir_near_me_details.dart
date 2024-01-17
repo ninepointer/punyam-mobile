@@ -132,6 +132,16 @@ class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
                   ),
                 ),
                 nearBymemandirDetailsCard(
+                  onpress: () async {
+                    num endLat = widget.templeDetails?.addressDetails?.location
+                            ?.coordinates?.first ??
+                        0;
+                    num endLng = widget.templeDetails?.addressDetails?.location
+                            ?.coordinates?.last ??
+                        0;
+                    print("llllll ${endLat} ${endLng}");
+                    await controller.getNavigateToGoogleMap(endLat, endLng);
+                  },
                   mandirName: "${widget.templeDetails?.name}",
                   godName: "${widget.templeDetails?.deviDevta}",
                   morningTime:
@@ -208,6 +218,7 @@ Widget nearBymemandirDetailsCard({
   required String morningTime,
   required String eveningTime,
   required String address,
+  required Function onpress,
 }) {
   return Container(
     child: CommonCard(
@@ -289,7 +300,7 @@ Widget nearBymemandirDetailsCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
-              onPressed: () {},
+              onPressed: () => onpress(),
               child: Icon(
                 Icons.directions_outlined,
                 color: AppColors.cinnamonStickColor,

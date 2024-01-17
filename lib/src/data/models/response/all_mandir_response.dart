@@ -189,13 +189,13 @@ class MandirAddressDetails {
 
 class MandirLocation {
   String? type;
-  List<double>? coordinates;
+  List<num>? coordinates;
 
   MandirLocation({this.type, this.coordinates});
 
   MandirLocation.fromJson(Map<String, dynamic> json) {
     type = json['type'];
-    coordinates = json['coordinates'].cast<double>();
+    coordinates = (json['coordinates'] as List?)?.map((e) => e as num).toList();
   }
 
   Map<String, dynamic> toJson() {
