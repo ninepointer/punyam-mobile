@@ -26,6 +26,7 @@ class _DashboardViewState extends State<DashboardView> {
 
     poojaServicesController.loadData();
     mandirController.loadData();
+    mandirController.getNearByMandirsDetails();
   }
 
   @override
@@ -633,7 +634,7 @@ Widget boxCard({
 }) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.25,
-    height: 100,
+    height: 102,
     padding: EdgeInsetsDirectional.all(5),
     decoration: BoxDecoration(
       color: AppColors.white,

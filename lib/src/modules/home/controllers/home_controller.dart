@@ -27,12 +27,11 @@ class HomeController extends BaseController<DashboardRepository> {
   final addressComponent = <AddressComponents>[].obs;
   final userLoacationLong = "".obs;
   final userLoacationLatitude = "".obs;
-
   void loadUserDetails() {
     userDetails(AppStorage.getUserDetails());
     loadData();
 
-    // Get.find<WalletController>().getWalletTransactionsList();
+    // Get.find<MandirController>().loadData();
     // Get.find<ContestController>().getFeaturedContest();
     // Get.find<ContestController>().getReadSetting();
   }
@@ -52,8 +51,11 @@ class HomeController extends BaseController<DashboardRepository> {
       final latitude = AppStorage.locationLatitude();
       final longitude = AppStorage.locationLongitude();
       //  longitude.toString(), latitude.toString()
-      await getUserLoactionByLatAndLongDetails(
-          latitude.toString(), longitude.toString());
+      if(latitude!=null && longitude!=null){
+        await getUserLoactionByLatAndLongDetails(
+            latitude.toString(), longitude.toString());
+        Get.find<MandirController>().getNearByMandirsDetails();    
+      }
     } else {
       Position currentPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
@@ -65,6 +67,7 @@ class HomeController extends BaseController<DashboardRepository> {
           currentPosition.longitude.toString());
       await getUserLoactionByLatAndLongDetails(
           userLoacationLatitude.toString(), userLoacationLong.toString());
+      Get.find<MandirController>().getNearByMandirsDetails();
     }
   }
 
