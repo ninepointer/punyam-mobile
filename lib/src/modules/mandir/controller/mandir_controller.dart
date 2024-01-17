@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../base/base.dart';
 import '../../../core/core.dart';
@@ -52,6 +53,42 @@ class MandirController extends BaseController<MandirRespository> {
   }
 
   void navigateToCarousel(String link) {}
+
+  Future<void> getNavigateToGoogleMap(double endLat, double endLng) async {
+    final latitude = AppStorage.locationLatitude();
+    final longitude = AppStorage.locationLongitude();
+
+    if (latitude != null && longitude != null) {
+      await _launchMapsUrl(
+          latitude.toString(), longitude.toString(), endLat, endLng);
+    } else {
+      await _launchMapsUrlWithDestinationOnly(endLat, endLng);
+    }
+  }
+
+  Future<void> _launchMapsUrl(
+      String startLat, String startLng, double endLat, double endLng) async {
+    String googleMapsUrl =
+        "https://www.google.com/maps/dir/?api=1&origin=$startLat,$startLng&destination=$endLat,$endLng&travelmode=driving";
+
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
+
+  Future<void> _launchMapsUrlWithDestinationOnly(
+      double endLat, double endLng) async {
+    String googleMapsUrl =
+        "https://www.google.com/maps/dir/?api=1&destination=$endLat,$endLng&travelmode=driving";
+
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
 
   Future getCarousel() async {
     isLoading(true);

@@ -131,6 +131,18 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                   ),
                 ),
                 mandirDetailsCard(
+                  onpress: () async {
+                    double endLat = widget.templeDetails?.addressDetails
+                            ?.location?.coordinates?.first
+                            .toDouble() ??
+                        0.0;
+                    double endLng = widget.templeDetails?.addressDetails
+                            ?.location?.coordinates?.last
+                            .toDouble() ??
+                        0.0;
+                    print("llllll ${endLat} ${endLng}");
+                    await controller.getNavigateToGoogleMap(endLat, endLng);
+                  },
                   mandirName: "${widget.templeDetails?.name}",
                   godName: "${widget.templeDetails?.deviDevta?.name}",
                   morningTime:
@@ -207,6 +219,7 @@ Widget mandirDetailsCard({
   required String morningTime,
   required String eveningTime,
   required String address,
+  required Function onpress,
 }) {
   return Container(
     child: CommonCard(
@@ -289,7 +302,7 @@ Widget mandirDetailsCard({
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
-              onPressed: () {},
+              onPressed: () => onpress(),
               child: Icon(
                 Icons.directions_outlined,
                 color: AppColors.cinnamonStickColor,

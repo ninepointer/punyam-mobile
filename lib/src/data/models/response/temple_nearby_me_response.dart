@@ -40,7 +40,7 @@ class TempleNearByMeList {
   TempleNearByMeAddressDetails? addressDetails;
   List<TempleNearByMeImages>? images;
   int? constructionYear;
-  double? distance;
+  num? distance;
   String? deviDevta;
 
   TempleNearByMeList(

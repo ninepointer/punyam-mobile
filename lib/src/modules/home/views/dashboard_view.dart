@@ -252,7 +252,7 @@ class _DashboardViewState extends State<DashboardView> {
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     CommonTile(
-                      label: "Popular Temples Near Me",
+                      label: "Popular Mandir Near Me",
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
