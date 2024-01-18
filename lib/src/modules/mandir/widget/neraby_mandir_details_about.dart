@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:punyam/src/app/app.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class NearByMandirDetailsAboutWidget extends StatelessWidget {
   final TempleNearByMeList? templeDetails;
@@ -15,14 +16,8 @@ class NearByMandirDetailsAboutWidget extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                Container(
-                  child: Text(
-                    "${templeDetails?.description}",
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
-                ),
+                Html(data: """${templeDetails?.description} """),
+                SizedBox(height: 24),
               ],
             ),
           ),

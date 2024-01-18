@@ -2,7 +2,7 @@ import '../../../main.dart';
 
 class AppUrls {
   static const String baseURL =
-      isProd ? 'https://punyam.app' : 'https://punyam.app';
+      isProd ? 'https://3.6.178.87' : 'https://punyam.app';
   static const String apiURL = '$baseURL/api/v1';
 
   static const String referralWebUrl = 'https://www.stoxhero.com/?referral=';

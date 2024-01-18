@@ -78,6 +78,15 @@ class _BookingViewState extends State<BookingView> {
                           textAlign: TextAlign.center,
                         ),
                       if (controller.selectedPoojaById.value.subCategory ==
+                          "Festival Pooja")
+                        Text(
+                          "About Festival Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
                           "Jaap")
                         Text(
                           "About Jaap",
@@ -136,17 +145,19 @@ class _BookingViewState extends State<BookingView> {
                     children: [
                       if (controller.selectedPoojaById.value.subCategory ==
                           "Jaap")
-                        Text(
-                          "Purpose of Jaap",
-                          style: AppStyles.tsBlackMedium24.copyWith(
-                            color: AppColors.brandYellow,
+                        if (controller.selectedPoojaById.value.subCategory ==
+                            "General Pooja")
+                          Text(
+                            "Purpose Of Pooja",
+                            style: AppStyles.tsBlackMedium24.copyWith(
+                              color: AppColors.brandYellow,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
                       if (controller.selectedPoojaById.value.subCategory ==
-                          "General Pooja")
+                          "Festival Pooja")
                         Text(
-                          "Purpose of Pooja",
+                          "Purpose Of Pooja",
                           style: AppStyles.tsBlackMedium24.copyWith(
                             color: AppColors.brandYellow,
                           ),
@@ -155,7 +166,7 @@ class _BookingViewState extends State<BookingView> {
                       if (controller.selectedPoojaById.value.subCategory ==
                           "Paath")
                         Text(
-                          "Purpose of Paath",
+                          "Purpose Of Paath",
                           style: AppStyles.tsBlackMedium24.copyWith(
                             color: AppColors.brandYellow,
                           ),
@@ -249,6 +260,15 @@ class _BookingViewState extends State<BookingView> {
                     children: [
                       if (controller.selectedPoojaById.value.subCategory ==
                           "General Pooja")
+                        Text(
+                          "Pooja Items",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Festival Pooja")
                         Text(
                           "Pooja Items",
                           style: AppStyles.tsBlackMedium24.copyWith(

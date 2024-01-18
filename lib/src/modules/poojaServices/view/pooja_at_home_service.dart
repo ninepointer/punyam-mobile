@@ -79,9 +79,10 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
-                  CommonTile(
-                    label: "General Pooja",
-                  ),
+                  if (controller.poojaCatagoryGenralPooja.isNotEmpty)
+                    CommonTile(
+                      label: "General Pooja",
+                    ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
@@ -124,9 +125,10 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
-                  CommonTile(
-                    label: "Jaap",
-                  ),
+                  if (controller.poojaCatagoryJaap.isNotEmpty)
+                    CommonTile(
+                      label: "Jaap",
+                    ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
@@ -169,9 +171,10 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
-                  CommonTile(
-                    label: "Paath",
-                  ),
+                  if (controller.poojaCatagoryPaath.isNotEmpty)
+                    CommonTile(
+                      label: "Paath",
+                    ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.0625,
                   ),
@@ -210,6 +213,55 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                         }).toList(),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.0625,
+                  ),
+                  if (controller.poojaCatagoryFestivalPooja.isNotEmpty)
+                    CommonTile(
+                      label: "Festival Pooja",
+                    ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.0625,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    clipBehavior: Clip.none,
+                    child: Container(
+                      child: Row(
+                        children: controller.poojaCatagoryFestivalPooja
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                          int index = entry.key;
+
+                          return Row(
+                            children: [
+                              homeServiceCard(
+                                product: entry.value,
+                                context: context,
+                                onpress: () async {
+                                  await controller.increasePoojaCountDetails(
+                                      entry.value.sId);
+                                  await controller
+                                      .getindividualPoojaByIdDetails(
+                                          entry.value.sId.toString());
+
+                                  Get.to(() => BookingView());
+                                },
+                              ),
+                              SizedBox(
+                                width:
+                                    MediaQuery.of(context).size.width * 0.0625,
+                              ),
+                            ],
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.0625,
                   ),
                 ],
               ),
@@ -290,7 +342,7 @@ Widget homeServiceCard({
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Starting ${FormatHelper.formatNumbers(1100, decimal: 0)}",
+                  "Starting ${FormatHelper.formatNumbers(product.packages?.isNotEmpty == true ? product.packages!.first.price ?? 0 : 0, decimal: 0)}",
                   style: AppStyles.tsBlackMedium14,
                 ),
                 Text(

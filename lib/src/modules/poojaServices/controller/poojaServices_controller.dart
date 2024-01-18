@@ -23,6 +23,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
   final poojaCatagoryGenralPooja = <PoojaCategoryData>[].obs;
   final poojaCatagoryPaath = <PoojaCategoryData>[].obs;
   final poojaCatagoryJaap = <PoojaCategoryData>[].obs;
+  final poojaCatagoryFestivalPooja = <PoojaCategoryData>[].obs;
   final poojaCatagoriesList = <PoojaCategoryData>[].obs;
 
   final selectedPoojaById = SelectedPoojaByIdData().obs;
@@ -159,6 +160,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
         poojaCatagoryGenralPooja.clear();
         poojaCatagoryPaath.clear();
         poojaCatagoryJaap.clear();
+        poojaCatagoryFestivalPooja.clear();
 
         for (PoojaCategoryData poojacatagory in poojaCatagoriesList) {
           if (poojacatagory.subCategory == "General Pooja") {
@@ -166,10 +168,12 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
           }
           if (poojacatagory.subCategory == "Paath") {
             poojaCatagoryPaath.addAll([poojacatagory]);
-            print("poojaCatagoryPaath ${poojaCatagoryPaath.toJson()}");
           }
           if (poojacatagory.subCategory == "Jaap") {
             poojaCatagoryJaap.addAll([poojacatagory]);
+          }
+          if (poojacatagory.subCategory == "Festival Pooja") {
+            poojaCatagoryFestivalPooja.addAll([poojacatagory]);
           }
         }
       } else {
