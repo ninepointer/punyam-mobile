@@ -3,22 +3,6 @@ import '../../core/core.dart';
 import '../data.dart';
 
 class MandirRespository extends BaseRepository {
-  Future<RepoResponse<AllMandirResponse>> getAllTemples() async {
-    String apiURL = AppUrls.getAllMandirs;
-    var response = await service.getAuth(path: apiURL);
-    return response is APIException
-        ? RepoResponse(error: response)
-        : RepoResponse(data: AllMandirResponse.fromJson(response));
-  }
-
-  // Future<RepoResponse<AllMandirResponse>> getPopularTemples() async {
-  //   String apiURL = AppUrls.getPopularMandirs;
-  //   var response = await service.getAuth(path: apiURL);
-  //   return response is APIException
-  //       ? RepoResponse(error: response)
-  //       : RepoResponse(data: AllMandirResponse.fromJson(response));
-  // }
-
   Future<RepoResponse<AllMandirResponse>> getPopularTemples(
       String lat, String long) async {
     String apiURL = AppUrls.getPopularMandirs(lat, long);
@@ -26,6 +10,44 @@ class MandirRespository extends BaseRepository {
     return response is APIException
         ? RepoResponse(error: response)
         : RepoResponse(data: AllMandirResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>> getAllPopularTemplesByDistance(
+      String lat, String long) async {
+    String apiURL = AppUrls.getPopularMandirByDistanceMandirs(lat, long, '');
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>>
+      getPopularTemplesBySearchByDistance(
+          String lat, String long, String search) async {
+    String apiURL =
+        AppUrls.getPopularMandirByDistanceMandirs(lat, long, search);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>> getDhamMandirByDistance(
+      String lat, String long) async {
+    String apiURL = AppUrls.getDhamByDistanceMandirs(lat, long, '');
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>> getDhamMandirBySearchByDistance(
+      String lat, String long, String search) async {
+    String apiURL = AppUrls.getDhamByDistanceMandirs(lat, long, search);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
   }
 
   Future<RepoResponse<AllMandirResponse>> getDhamTemples() async {
@@ -53,9 +75,18 @@ class MandirRespository extends BaseRepository {
         : RepoResponse(data: AllMandirResponse.fromJson(response));
   }
 
-  Future<RepoResponse<TempleNearMeResponse>> getNearByMandirs(
+  Future<RepoResponse<TempleNearMeResponse>> getNearByMandirsByDistance(
       String lat, String long) async {
-    String apiURL = AppUrls.nearbyMandirs(lat, long);
+    String apiURL = AppUrls.nearbyMandirs(lat, long, '');
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>> getNearByMandirsBySearchByDistance(
+      String lat, String long, String search) async {
+    String apiURL = AppUrls.nearbyMandirs(lat, long, search);
     var response = await service.getAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)

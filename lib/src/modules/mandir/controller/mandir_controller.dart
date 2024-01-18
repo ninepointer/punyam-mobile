@@ -28,12 +28,16 @@ class MandirController extends BaseController<MandirRespository> {
 
   final carouselListforMandir = <DashboardCarousel>[].obs;
 
-  final searchTextController = TextEditingController();
+  final popularMandirsearchTextController = TextEditingController();
+  final dhamMandirsearchTextController = TextEditingController();
+  final allMandirsearchTextController = TextEditingController();
 
   final allTempleListDetails = <AllMandirData>[].obs;
   final mandirByDevitaNameListDetails = <AllMandirData>[].obs;
   final popularTempleListDetails = <AllMandirData>[].obs;
+  final popularTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
   final dhamTempleListDetails = <AllMandirData>[].obs;
+  final dhamTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
   final deviDevtaListDetails = <DeviDevtaList>[].obs;
   final nearbyMandirs = <TempleNearByMeList>[].obs;
   final mandirSearchByStringList = <AllMandirData>[].obs;
@@ -46,10 +50,12 @@ class MandirController extends BaseController<MandirRespository> {
   Future loadData() async {
     await getCarousel();
     // await getNearByMandirsDetails();
-    await getAllTemplesDetails();
+    // await getAllTemplesDetails();
     await getPopularTamplesDetails();
     await getDhamTemplesDetails();
     await getAllDeiDevtaListDetails();
+    await getDhamTamplesByDistanceDetails();
+    await getPopularTamplesByDistanceDetails();
   }
 
   void navigateToCarousel(String link) {}
@@ -113,20 +119,20 @@ class MandirController extends BaseController<MandirRespository> {
     isLoading(false);
   }
 
-  Future<void> getAllTemplesDetails() async {
-    try {
-      final RepoResponse<AllMandirResponse> response =
-          await repository.getAllTemples();
-      if (response.data != null) {
-        allTempleListDetails(response.data?.data);
-      } else {
-        SnackbarHelper.showSnackbar(response.error?.message);
-      }
-    } catch (e) {
-      log(e.toString());
-      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-    }
-  }
+  // Future<void> getAllTemplesDetails({String? searchQuery}) async {
+  //   try {
+  //     final RepoResponse<AllMandirResponse> response =
+  //         await repository.getAllTemples(searchQuery ?? '');
+  //     if (response.data != null) {
+  //       allTempleListDetails(response.data?.data);
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  // }
 
   Future<void> getTempleByGodNameDetails(String id) async {
     try {
@@ -174,6 +180,73 @@ class MandirController extends BaseController<MandirRespository> {
     }
   }
 
+  // Future<void> getPopularTamplesByDistanceDetails(String searchQuery) async {
+  //   final latitude = AppStorage.locationLatitude() ?? '28.4744';
+  //   final longitude = AppStorage.locationLongitude() ?? '77.5040';
+  //   try {
+  //     final RepoResponse<TempleNearMeResponse> response =
+  //         await repository.getPopularTemplesByDistance(
+  //             latitude.toString(), longitude.toString(),searchQuery);
+  //     if (response.data != null) {
+  //       popularTempleListByDistanceDetails(response.data?.data);
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  // }
+  Future<void> getPopularTamplesByDistanceDetails({String? searchQuery}) async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
+    try {
+      RepoResponse<TempleNearMeResponse> response;
+
+      if (searchQuery != null && searchQuery.isNotEmpty) {
+        response = await repository.getPopularTemplesBySearchByDistance(
+            latitude.toString(), longitude.toString(), searchQuery);
+      } else {
+        response = await repository.getAllPopularTemplesByDistance(
+            latitude.toString(), longitude.toString());
+      }
+
+      if (response.data != null) {
+        popularTempleListByDistanceDetails(response.data?.data);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future<void> getDhamTamplesByDistanceDetails({String? searchQuery}) async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
+    try {
+      RepoResponse<TempleNearMeResponse> response;
+
+      if (searchQuery != null && searchQuery.isNotEmpty) {
+        response = await repository.getDhamMandirBySearchByDistance(
+            latitude.toString(), longitude.toString(), searchQuery);
+      } else {
+        response = await repository.getDhamMandirByDistance(
+            latitude.toString(), longitude.toString());
+      }
+
+      if (response.data != null) {
+        dhamTempleListByDistanceDetails(response.data?.data);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
   Future<void> getDhamTemplesDetails() async {
     try {
       final RepoResponse<AllMandirResponse> response =
@@ -189,12 +262,36 @@ class MandirController extends BaseController<MandirRespository> {
     }
   }
 
-  Future<void> getNearByMandirsDetails() async {
+  // Future<void> getNearByMandirsDetails() async {
+  //   final latitude = AppStorage.locationLatitude() ?? '28.4744';
+  //   final longitude = AppStorage.locationLongitude() ?? '77.5040';
+  //   try {
+  //     final RepoResponse<TempleNearMeResponse> response = await repository
+  //         .getNearByMandirs(latitude.toString(), longitude.toString());
+  //     if (response.data != null) {
+  //       nearbyMandirs(response.data?.data);
+  //     } else {
+  //       SnackbarHelper.showSnackbar(response.error?.message);
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+  //   }
+  // }
+  Future<void> getNearByMandirsDetails({String? searchQuery}) async {
     final latitude = AppStorage.locationLatitude() ?? '28.4744';
     final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
-      final RepoResponse<TempleNearMeResponse> response = await repository
-          .getNearByMandirs(latitude.toString(), longitude.toString());
+      RepoResponse<TempleNearMeResponse> response;
+
+      if (searchQuery != null && searchQuery.isNotEmpty) {
+        response = await repository.getNearByMandirsBySearchByDistance(
+            latitude.toString(), longitude.toString(), searchQuery);
+      } else {
+        response = await repository.getNearByMandirsByDistance(
+            latitude.toString(), longitude.toString());
+      }
+
       if (response.data != null) {
         nearbyMandirs(response.data?.data);
       } else {
@@ -225,40 +322,13 @@ class MandirController extends BaseController<MandirRespository> {
     isMandirLoading(true);
     try {
       await repository.addToFavirouteMandir(mandirid ?? '');
-      await getAllTemplesDetails();
+      // await getAllTemplesDetails();
       SnackbarHelper.showSnackbar(
-          isFavorite ? 'Add to favorites' : 'Remove from favorites');
+          isFavorite ? 'Added to favorites' : 'Removed from favorites');
     } catch (e) {
       print(e.toString());
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isMandirLoading(false);
-  }
-
-  void gotoSearchMandir() {
-    searchTextController.text = 'Search ';
-    searchMandirByStringDetails(searchTextController.text);
-    Get.toNamed(AppRoutes.virtualSearchSymbol);
-  }
-
-  Future searchMandirByStringDetails(String? value,
-      {bool showShimmer = true}) async {
-    isSearchMandirLoading(true);
-    try {
-      final RepoResponse<AllMandirResponse> response =
-          await repository.searchMandirByString(value);
-      if (response.data != null) {
-        if (response.data?.data! != null) {
-          mandirSearchByStringList.clear();
-          mandirSearchByStringList(response.data?.data ?? []);
-        }
-      } else {
-        SnackbarHelper.showSnackbar(response.error?.message);
-      }
-    } catch (e) {
-      log(e.toString());
-      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
-    }
-    isSearchMandirLoading(false);
   }
 }

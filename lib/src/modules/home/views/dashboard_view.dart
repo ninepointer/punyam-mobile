@@ -149,7 +149,8 @@ class _DashboardViewState extends State<DashboardView> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => PoojaServicesView());
+                              controller.selectedIndex(2);
+                              Get.find<PoojaServicesController>().loadData();
                             },
                             child: boxCard(
                                 label: "Pooja",
@@ -239,7 +240,8 @@ class _DashboardViewState extends State<DashboardView> {
                         height: MediaQuery.of(context).size.width * 0.0625),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => PoojaServicesView());
+                        controller.selectedIndex(2);
+                        Get.find<PoojaServicesController>().loadData();
                       },
                       child: Text(
                         "View All Pooja Services -->",
@@ -253,7 +255,7 @@ class _DashboardViewState extends State<DashboardView> {
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
                     CommonTile(
-                      label: "Mandir Near Me",
+                      label: "Mandirs Near Me",
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
@@ -294,52 +296,68 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.0625),
+                    GestureDetector(
+                      onTap: () {
+                        controller.selectedIndex(1);
+                        Get.find<MandirController>().loadData();
+                      },
+                      child: Text(
+                        "View  All Mandirs -->",
+                        style: AppStyles.tsBlackMedium14.copyWith(
+                          color: AppColors.brandYellow,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
-                    // CommonTile(
-                    //   label: "Popular Mandir Near Me",
-                    // ),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.width * 0.0625,
-                    // ),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   clipBehavior: Clip.none,
-                    //   child: Obx(
-                    //     () => Container(
-                    //       child: Row(
-                    //         children: mandirController.nearbyMandirs
-                    //             .asMap()
-                    //             .entries
-                    //             .map((entry) {
-                    //           int index = entry.key;
+                    CommonTile(
+                      label: "Popular Mandirs Near Me",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      clipBehavior: Clip.none,
+                      child: Obx(
+                        () => Container(
+                          child: Row(
+                            children: mandirController
+                                .popularTempleListByDistanceDetails
+                                .asMap()
+                                .entries
+                                .map((entry) {
+                              int index = entry.key;
 
-                    //           return Row(
-                    //             children: [
-                    //               mandirCard(
-                    //                 label: "${entry.value.name}",
-                    //                 price: 11000,
-                    //                 product: entry.value,
-                    //                 onpress: () {
-                    //                   Get.to(() => MandirNearMeDetailsView(
-                    //                         templeDetails: entry.value,
-                    //                       ));
-                    //                 },
-                    //               ),
-                    //               SizedBox(
-                    //                 width: MediaQuery.of(context).size.width *
-                    //                     0.0625,
-                    //               ),
-                    //             ],
-                    //           );
-                    //         }).toList(),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.width * 0.0625,
-                    // ),
+                              return Row(
+                                children: [
+                                  mandirCard(
+                                    label: "${entry.value.name}",
+                                    price: 11000,
+                                    product: entry.value,
+                                    onpress: () {
+                                      Get.to(() => MandirNearMeDetailsView(
+                                            templeDetails: entry.value,
+                                          ));
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.0625,
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.0625,
+                    ),
                     CommonTile(
                       label: "Dham",
                     ),
@@ -351,7 +369,8 @@ class _DashboardViewState extends State<DashboardView> {
                       clipBehavior: Clip.none,
                       child: Container(
                         child: Row(
-                          children: mandirController.dhamTempleListDetails
+                          children: mandirController
+                              .dhamTempleListByDistanceDetails
                               .asMap()
                               .entries
                               .map((entry) {
@@ -359,12 +378,12 @@ class _DashboardViewState extends State<DashboardView> {
 
                             return Row(
                               children: [
-                                dhamMandirCard(
+                                mandirCard(
                                   label: "${entry.value.name}",
                                   price: 11000,
                                   product: entry.value,
                                   onpress: () {
-                                    Get.to(() => MandirDetailsView(
+                                    Get.to(() => MandirNearMeDetailsView(
                                           templeDetails: entry.value,
                                         ));
                                   },

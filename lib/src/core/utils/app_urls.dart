@@ -39,10 +39,6 @@ class AppUrls {
   static String individualPoojaById(String? poojaId) =>
       "$apiURL/pooja/user/$poojaId";
 
-  static const String getAllMandirs = "$apiURL/mandir/user";
-
-  static String getPopularMandirs(String? lat, String? long) =>
-      "$apiURL/mandir/user/popular?lat=$lat&long=$long";
   static const String getDhamMandirs = "$apiURL/mandir/user/dham";
   static const String addtoFavirouteMandirs =
       "$apiURL/mandir/user/addfavourite";
@@ -51,10 +47,27 @@ class AppUrls {
   static const String godList = "$apiURL/devta/user";
   static String mandirListBygod(String? id) =>
       "$apiURL/mandir/user/bydevta?devtaId=$id";
-  static String nearbyMandirs(String? lat, String? long) =>
-      "$apiURL/mandir/user/bydistance?lat=$lat&long=$long";
+  static String nearbyMandirs(String? lat, String? long, String? search) =>
+      "$apiURL/mandir/user/bydistance?lat=$lat&long=$long&search=$search";
   static String searchMandir = "$apiURL/mandir/user/bysearch";
   static const String googleLogin = "$apiURL/verifyfirebaselogintoken";
   static String getLocationByLongLat(String? lat, String? long) =>
       "$apiURL/location/currentplace?lat=$lat&long=$long";
+
+  static String getPopularMandirs(String? lat, String? long) =>
+      "$apiURL/mandir/user/popular?lat=$lat&long=$long";
+
+  // static String getAllMandirs(String? search) =>
+  //     "$apiURL/mandir/user/bysearch?search=$search";
+  static String getDhamByDistanceMandirs(
+          String? lat, String? long, String? search) =>
+      "$apiURL/mandir/user/newdham?lat=$lat&long=$long&search=$search";
+  static String getPopularMandirByDistanceMandirs(
+          String? lat, String? long, String? search) =>
+      "$apiURL/mandir/user/newpopular?lat=$lat&long=$long&search=$search";
+
+  static const String addUserAddressUrl = "$apiURL/user/address";
+  static String editUserAddressUrl(String? id) => "$apiURL/user/address/$id";
+  static String removeUserAddressUrl(String? id) =>
+      "$apiURL/user/removeaddress/$id";
 }
