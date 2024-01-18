@@ -66,13 +66,13 @@ class MandirRespository extends BaseRepository {
         : RepoResponse(data: DevataListResponse.fromJson(response));
   }
 
-  Future<RepoResponse<AllMandirResponse>> getMandirBygodName(
-      String poojaId) async {
-    String apiURL = AppUrls.mandirListBygod(poojaId);
+  Future<RepoResponse<TempleNearMeResponse>> getMandirBygodName(
+      String poojaId, String lat, String long, String search) async {
+    String apiURL = AppUrls.mandirListBygod(poojaId, lat, long, search);
     var response = await service.getAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: AllMandirResponse.fromJson(response));
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
   }
 
   Future<RepoResponse<TempleNearMeResponse>> getNearByMandirsByDistance(
@@ -95,6 +95,15 @@ class MandirRespository extends BaseRepository {
 
   Future<RepoResponse<GenericResponse>> addToFavirouteMandir(String id) async {
     String apiURL = '${AppUrls.addtoFavirouteMandirs}/$id';
+    var response = await service.patchAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<GenericResponse>> removeToFavirouteMandir(
+      String id) async {
+    String apiURL = '${AppUrls.removetoFavirouteMandirs}/$id';
     var response = await service.patchAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)

@@ -220,7 +220,7 @@ class Faq {
 
 class Packages {
   Tier? tier;
-  int? price;
+  num? price;
   String? sId;
 
   Packages({this.tier, this.price, this.sId});

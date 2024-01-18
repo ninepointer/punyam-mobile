@@ -62,13 +62,33 @@ class MandirDetailsByGodNameView extends GetView<MandirController> {
               //   ),
               // ),
               SizedBox(height: 12),
+              //  CommonTextField(
+              //         padding: EdgeInsets.zero,
+              //         hintText: 'Search Mandir here',
+              //         prefixIcon: const Icon(Icons.search),
+              //         suffixIcon: IconButton(
+              //           icon: const Icon(Icons.close),
+              //           onPressed: () {
+              //             controller.mandirByDevtasearchTextController.clear();
+              //             controller.getTempleByGodNameDetails(searchQuery: '');
+              //           },
+              //         ),
+              //         onChanged: (query) {
+              //           controller.getNearByMandirsDetails(searchQuery: query);
+              //         },
+              //         controller: controller.mandirByDevtasearchTextController,
+              //       ),
+
+              //       SizedBox(
+              //         height: MediaQuery.of(context).size.width * 0.0625,
+              //       ),
               Column(
                 children: controller.mandirByDevitaNameListDetails.isNotEmpty
                     ? controller.mandirByDevitaNameListDetails
                         .map((templeDetails) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(() => MandirDetailsView(
+                            Get.to(() => MandirNearMeDetailsView(
                                   templeDetails: templeDetails,
                                 ));
                           },
@@ -181,7 +201,14 @@ class MandirDetailsByGodNameView extends GetView<MandirController> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "${templeDetails.deviDevta?.name}",
+                                          "${templeDetails.deviDevta}",
+                                          style: AppStyles.tsBlackMedium14
+                                              .copyWith(
+                                            color: AppColors.cinnamonStickColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Distance: ${((templeDetails.distance!) / 1000).toStringAsFixed(2)} km",
                                           style: AppStyles.tsBlackMedium14
                                               .copyWith(
                                             color: AppColors.cinnamonStickColor,

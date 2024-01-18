@@ -27,6 +27,8 @@ class _DashboardViewState extends State<DashboardView> {
     poojaServicesController.loadData();
     mandirController.loadData();
     mandirController.getNearByMandirsDetails();
+    mandirController.getDhamTamplesByDistanceDetails();
+    mandirController.getPopularTamplesByDistanceDetails();
   }
 
   @override
@@ -175,16 +177,17 @@ class _DashboardViewState extends State<DashboardView> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.05,
                           ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     // Get.to(() => PoojaServicesView());
-                          //   },
-                          //   child: boxCard(
-                          //       label: "Recycle",
-                          //       subTitle: "Pooja samagri",
-                          //       image: AppImages.recycle,
-                          //       context: context),
-                          // )
+                          GestureDetector(
+                            onTap: () {
+                              // Get.to(() => PoojaServicesView());
+                              SnackbarHelper.showSnackbar("Coming soon");
+                            },
+                            child: boxCard(
+                                label: "Recycle",
+                                subTitle: "Pooja samagri",
+                                image: AppImages.recycle,
+                                context: context),
+                          )
                         ],
                       ),
                     ),
@@ -213,7 +216,10 @@ class _DashboardViewState extends State<DashboardView> {
                               children: [
                                 poojaServiceCard(
                                     label: "${entry.value.name}",
-                                    price: 11000,
+                                    price: entry.value.packages?.isNotEmpty ==
+                                            true
+                                        ? entry.value.packages!.first.price ?? 0
+                                        : 0,
                                     image: AppImages.tirupatiBalaji,
                                     product: entry.value,
                                     onpress: () async {

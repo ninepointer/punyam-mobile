@@ -31,9 +31,10 @@ class MandirController extends BaseController<MandirRespository> {
   final popularMandirsearchTextController = TextEditingController();
   final dhamMandirsearchTextController = TextEditingController();
   final allMandirsearchTextController = TextEditingController();
+  final mandirByDevtasearchTextController = TextEditingController();
 
   final allTempleListDetails = <AllMandirData>[].obs;
-  final mandirByDevitaNameListDetails = <AllMandirData>[].obs;
+  final mandirByDevitaNameListDetails = <TempleNearByMeList>[].obs;
   final popularTempleListDetails = <AllMandirData>[].obs;
   final popularTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
   final dhamTempleListDetails = <AllMandirData>[].obs;
@@ -42,10 +43,12 @@ class MandirController extends BaseController<MandirRespository> {
   final nearbyMandirs = <TempleNearByMeList>[].obs;
   final mandirSearchByStringList = <AllMandirData>[].obs;
 
-  bool isFavorite = false;
-  late final Function(bool) onFavoriteChanged = (isFavorite) {
-    this.isFavorite = isFavorite;
-  };
+  final isFavorite = false.obs;
+
+  // final currentPage = 0.obs;
+  // final totalItems = 0.obs;
+  // final itemsPerPage = 0.obs;
+  // final isLoadingMore = false.obs;
 
   Future loadData() async {
     await getCarousel();
@@ -54,9 +57,27 @@ class MandirController extends BaseController<MandirRespository> {
     await getPopularTamplesDetails();
     await getDhamTemplesDetails();
     await getAllDeiDevtaListDetails();
-    await getDhamTamplesByDistanceDetails();
-    await getPopularTamplesByDistanceDetails();
+    // await getDhamTamplesByDistanceDetails();
+    // await getPopularTamplesByDistanceDetails();
   }
+
+  //   void loadMoreOrders() {
+  //   if (!isLoadingMore.value) {
+  //     isLoadingMore.value = true;
+  //     currentPage.value++;
+  //     if (itemsPerPage.value == 0) {
+  //       isLoadingMore.value = false;
+  //       return;
+  //     }
+  //     final lastPage = (totalItems.value / itemsPerPage.value).ceil();
+  //     print("lastpage ${lastPage} ${totalItems.value} ${itemsPerPage.value}");
+  //     if (currentPage.value >= lastPage) {
+  //       isLoadingMore.value = true;
+  //     } else {
+  //       getVirtualTradeAllOrdersList();
+  //     }
+  //   }
+  // }
 
   void navigateToCarousel(String link) {}
 
@@ -134,10 +155,14 @@ class MandirController extends BaseController<MandirRespository> {
   //   }
   // }
 
-  Future<void> getTempleByGodNameDetails(String id) async {
+  Future<void> getTempleByGodNameDetails(String id,
+      {String? searchQuery}) async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
-      final RepoResponse<AllMandirResponse> response =
-          await repository.getMandirBygodName(id);
+      final RepoResponse<TempleNearMeResponse> response =
+          await repository.getMandirBygodName(
+              id, latitude.toString(), longitude.toString(), searchQuery ?? '');
       if (response.data != null) {
         mandirByDevitaNameListDetails(response.data?.data);
       } else {
@@ -318,13 +343,20 @@ class MandirController extends BaseController<MandirRespository> {
     }
   }
 
-  Future addFaviroutesMandir(String? mandirid) async {
+  Future<void> addFaviroutesMandir(String? mandirid) async {
     isMandirLoading(true);
     try {
-      await repository.addToFavirouteMandir(mandirid ?? '');
-      // await getAllTemplesDetails();
-      SnackbarHelper.showSnackbar(
-          isFavorite ? 'Added to favorites' : 'Removed from favorites');
+      if (isFavorite.value) {
+        await repository.removeToFavirouteMandir(mandirid ?? '');
+        SnackbarHelper.showSnackbar('Removed from favorites');
+      } else {
+        await repository.addToFavirouteMandir(mandirid ?? '');
+        SnackbarHelper.showSnackbar('Added to favorites');
+      }
+
+      // Toggle the favorite state
+      isFavorite.value = !isFavorite.value;
+      update(); // Trigger rebuild
     } catch (e) {
       print(e.toString());
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);

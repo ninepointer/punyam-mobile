@@ -86,27 +86,19 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                               color: Colors.white,
                             ),
                             child: IconButton(
-                              iconSize: 20,
-                              icon: Icon(
-                                controller.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_outline_outlined,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  // Toggle the favorite status
-                                  controller.isFavorite =
-                                      !controller.isFavorite;
-                                  // Call the addFaviroutesMandir function with the mandirid
-                                  controller.addFaviroutesMandir(
-                                    widget.templeDetails?.sId,
-                                  );
-                                });
-                              },
-                              color: controller.isFavorite
-                                  ? Colors.red
-                                  : Colors.black,
-                            ),
+                                iconSize: 20,
+                                icon: Icon(
+                                  controller.isFavorite.isTrue
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline_outlined,
+                                ),
+                                onPressed: () async {
+                                  await controller.addFaviroutesMandir(
+                                      widget.templeDetails?.sId);
+                                },
+                                color: controller.isFavorite.value
+                                    ? Colors.red
+                                    : Colors.black),
                           ),
                           // SizedBox(
                           //   width: 12,

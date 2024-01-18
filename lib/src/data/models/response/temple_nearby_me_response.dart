@@ -30,6 +30,7 @@ class TempleNearMeResponse {
 class TempleNearByMeList {
   String? name;
   String? description;
+  String? sId;
   TempleNearByMeCoverImage? coverImage;
   bool? dham;
   bool? popular;
@@ -45,6 +46,7 @@ class TempleNearByMeList {
 
   TempleNearByMeList(
       {this.name,
+      this.sId,
       this.description,
       this.coverImage,
       this.dham,
@@ -61,6 +63,7 @@ class TempleNearByMeList {
 
   TempleNearByMeList.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    sId = json["_id"];
     description = json['description'];
     coverImage = json['cover_image'] != null
         ? new TempleNearByMeCoverImage.fromJson(json['cover_image'])
@@ -88,6 +91,7 @@ class TempleNearByMeList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
+    data["_id"] = this.sId;
     data['description'] = this.description;
     if (this.coverImage != null) {
       data['cover_image'] = this.coverImage!.toJson();

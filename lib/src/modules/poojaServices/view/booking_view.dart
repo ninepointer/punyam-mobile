@@ -86,6 +86,15 @@ class _BookingViewState extends State<BookingView> {
                           ),
                           textAlign: TextAlign.center,
                         ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Paath")
+                        Text(
+                          "About Paath",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                     ],
                   ),
                   SizedBox(
@@ -138,6 +147,15 @@ class _BookingViewState extends State<BookingView> {
                           "General Pooja")
                         Text(
                           "Purpose of Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Paath")
+                        Text(
+                          "Purpose of Paath",
                           style: AppStyles.tsBlackMedium24.copyWith(
                             color: AppColors.brandYellow,
                           ),
@@ -242,6 +260,15 @@ class _BookingViewState extends State<BookingView> {
                           "Jaap")
                         Text(
                           "Jaap Items",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Paath")
+                        Text(
+                          "Paath Items",
                           style: AppStyles.tsBlackMedium24.copyWith(
                             color: AppColors.brandYellow,
                           ),
