@@ -27,6 +27,8 @@ class HomeController extends BaseController<DashboardRepository> {
   final addressComponent = <AddressComponents>[].obs;
   final userLoacationLong = "".obs;
   final userLoacationLatitude = "".obs;
+  final mapLatitude = "".obs;
+  final mapLongitude = "".obs;
   void loadUserDetails() {
     userDetails(AppStorage.getUserDetails());
     loadData();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:punyam/src/modules/home/views/maps_view.dart';
 import '../../../app/app.dart';
 
 class LocationView extends GetView<HomeController> {
@@ -128,38 +129,43 @@ class LocationView extends GetView<HomeController> {
                       SizedBox(
                         height: MediaQuery.of(context).size.width * 0.0250,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.add,
-                                size: 30,
-                                color: Colors.redAccent,
-                              ),
-                              SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.0150,
-                              ),
-                              Text(
-                                "Add Address",
-                                style: AppStyles.tsBlackRegular16.copyWith(
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.keyboard_arrow_right,
-                                size: 30,
-                                color: Colors.grey,
-                              ),
-                            ],
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(()=>MapsScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.redAccent,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.0150,
+                                ),
+                                Text(
+                                  "Add Address",
+                                  style: AppStyles.tsBlackRegular16.copyWith(
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.keyboard_arrow_right,
+                                  size: 30,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
