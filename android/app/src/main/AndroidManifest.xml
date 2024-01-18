@@ -14,6 +14,9 @@
 		<meta-data
 			android:name="com.google.firebase.messaging.default_notification_color"
 			android:resource="@color/primary_color" />
+		<meta-data
+				android:name="com.google.android.geo.API_KEY"
+				android:value="AIzaSyCvSbDQCTnOgkn-NlypxQvKbSWuepE0368"/>		
 		<activity
 			android:name=".MainActivity"
 			android:exported="true"

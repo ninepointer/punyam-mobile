@@ -6,7 +6,9 @@ class AppConstants {
   static const String appName = 'Punyam';
 
   static const String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlmY2U1NjRlMjUxNDU3MmExNjA1MGIiLCJpYXQiOjE3MDUwNDg0OTl9.fsFAF1ZgC5vr5VHdzC6omKiBxY4hiIUkNnLUE0AvhHI";
+      // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlmY2U1NjRlMjUxNDU3MmExNjA1MGIiLCJpYXQiOjE3MDUwNDg0OTl9.fsFAF1ZgC5vr5VHdzC6omKiBxY4hiIUkNnLUE0AvhHI"; // rahul prod
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTlmY2U1NjRlMjUxNDU3MmExNjA1MGIiLCJpYXQiOjE3MDU2MDM4NTR9.4h9HIJ6XE0_AWI1LPRm4PIYc9y0k1fABEQdU18G2Ryg";
+
   static const String equityTraderType = "Equity Trader";
   static const String buy = "BUY";
   static const String sell = "SELL";

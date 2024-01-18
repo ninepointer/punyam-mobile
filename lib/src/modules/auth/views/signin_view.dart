@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:punyam/src/core/widgets/common_text_field_for_signin.dart';
 
 import '../../../app/app.dart';
 
@@ -36,81 +37,110 @@ class _SigninViewState extends State<SigninView> {
               SliverFillRemaining(
                 hasScrollBody: false,
                 child: Container(
-                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(color: AppColors.white),
+                  // padding: EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      SizedBox(height: 24),
+                      // SizedBox(height: 24),
                       Image.asset(
                         'assets/images/signin.png',
-                        width: 120,
-                        height: 120,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width -
+                            MediaQuery.of(context).size.width * 0.15,
+                        fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 36),
                       CommonCard(
                         padding: EdgeInsets.all(16),
                         margin: EdgeInsets.zero,
                         children: [
                           Align(
                             child: Text(
-                              'Let\'s get started with\nPunyam!',
+                              'One app for all your spiritual\nneeds!',
                               style: Theme.of(context).textTheme.tsMedium20,
                               textAlign: TextAlign.center,
                             ),
                           ),
+                          // SizedBox(height: 24),
+                          // Align(
+                          //   child: Text(
+                          //     'Please provide your mobile number, a six digit OTP will be sent for verification.',
+                          //     textAlign: TextAlign.center,
+                          //     style: AppStyles.tsGreyRegular16,
+                          //   ),
+                          // ),
                           SizedBox(height: 24),
-                          Align(
-                            child: Text(
-                              'Please provide your mobile number, a six digit OTP will be send for verification.',
-                              textAlign: TextAlign.center,
-                              style: AppStyles.tsGreyRegular16,
-                            ),
-                          ),
-                          SizedBox(height: 24),
-                          Form(
-                            key: formKey,
-                            child: CommonTextField(
-                              controller: controller.mobileTextController,
-                              hintText: 'Enter your mobile number',
-                              keyboardType: TextInputType.phone,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(10),
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
-                              prefixIcon: Icon(
-                                Icons.phone,
-                                color: AppColors.grey,
-                              ),
-                              validator: (value) {
-                                RegExp regExp = RegExp(r'^[6-9]\d{9}$');
-                                if (value == null ||
-                                    value.isEmpty ||
-                                    value.length == 0) {
-                                  return 'This field is required!';
-                                } else if (value.length == 10) if (!regExp
-                                    .hasMatch(value)) {
-                                  return 'Please enter valid mobile number!';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Obx(
-                            () => CommonFilledButton(
-                              backgroundColor: Get.isDarkMode
-                                  ? AppColors.darkGreen
-                                  : AppColors.cinnamonStickColor,
-                              isLoading: controller.isLoadingStatus,
-                              label: 'Continue',
-                              onPressed: () {
-                                bool isValid =
-                                    formKey.currentState?.validate() ?? false;
-                                if (isValid) controller.userSignin();
-                              },
-                            ),
-                          ),
+                          Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                children: [
+                                  Form(
+                                    key: formKey,
+                                    child: Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            spreadRadius: 2,
+                                            blurRadius: 1,
+                                            offset: Offset(0, 1),
+                                          ),
+                                        ],
+                                      ),
+                                      child: CommonTextFieldForSingIn(
+                                        controller:
+                                            controller.mobileTextController,
+                                        hintText: 'Enter your mobile number',
+                                        keyboardType: TextInputType.phone,
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(10),
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                        ],
+                                        prefixIcon: Icon(
+                                          Icons.phone,
+                                          color: AppColors.grey,
+                                        ),
+                                        validator: (value) {
+                                          RegExp regExp =
+                                              RegExp(r'^[6-9]\d{9}$');
+                                          if (value == null ||
+                                              value.isEmpty ||
+                                              value.length == 0) {
+                                            return 'This field is required!';
+                                          } else if (value.length ==
+                                              10) if (!regExp.hasMatch(value)) {
+                                            return 'Please enter valid mobile number!';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 12,
+                                  ),
+                                  Obx(
+                                    () => CommonFilledButton(
+                                      backgroundColor: Get.isDarkMode
+                                          ? AppColors.darkGreen
+                                          : AppColors.cinnamonStickColor,
+                                      isLoading: controller.isLoadingStatus,
+                                      label: 'Continue',
+                                      onPressed: () {
+                                        bool isValid =
+                                            formKey.currentState?.validate() ??
+                                                false;
+                                        if (isValid) controller.userSignin();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ))
                         ],
                       ),
-                      Spacer(),
+                      // Spacer(),
                       // SizedBox(height: 24),
                       // Center(
                       //   child: Text(
@@ -133,15 +163,17 @@ class _SigninViewState extends State<SigninView> {
                       //         },
                       //       ),
                       //     ),
-                      Divider(),
+                      // Divider(),
+                      SizedBox(height: 16),
                       Text('Or login with'),
+                      SizedBox(height: 8),
                       InkWell(
                         onTap: () {
                           controller.googleSignIn();
                         },
                         borderRadius: BorderRadius.circular(50),
                         child: CircleAvatar(
-                          radius: 32  ,
+                          radius: 32,
                           backgroundColor: Colors.transparent,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -149,19 +181,23 @@ class _SigninViewState extends State<SigninView> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 24),    
-                      CommonOutlinedButton(
-                        backgroundColor: Get.isDarkMode
-                            ? AppColors.cinnamonStickColor
-                            : AppColors.cinnamonStickColor,
-                        labelColor: Get.isDarkMode
-                            ? AppColors.cinnamonStickColor
-                            : AppColors.cinnamonStickColor,
-                        label: 'Create account',
-                        onPressed: () {
-                          // controller.getDefaultInviteCode();
-                          Get.toNamed(AppRoutes.signup);
-                        },
+                      SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                        child: CommonOutlinedButton(
+                          margin: EdgeInsets.only(bottom: 10),
+                          backgroundColor: Get.isDarkMode
+                              ? AppColors.cinnamonStickColor
+                              : AppColors.cinnamonStickColor,
+                          labelColor: Get.isDarkMode
+                              ? AppColors.cinnamonStickColor
+                              : AppColors.cinnamonStickColor,
+                          label: 'Create account',
+                          onPressed: () {
+                            // controller.getDefaultInviteCode();
+                            Get.toNamed(AppRoutes.signup);
+                          },
+                        ),
                       ),
                     ],
                   ),
