@@ -162,7 +162,7 @@ class MandirController extends BaseController<MandirRespository> {
     final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
       final RepoResponse<AllMandirResponse> response = await repository
-          .getPopularTemples(longitude.toString(), latitude.toString());
+          .getPopularTemples(latitude.toString(), longitude.toString());
       if (response.data != null) {
         popularTempleListDetails(response.data?.data);
       } else {
@@ -194,7 +194,7 @@ class MandirController extends BaseController<MandirRespository> {
     final longitude = AppStorage.locationLongitude() ?? '77.5040';
     try {
       final RepoResponse<TempleNearMeResponse> response = await repository
-          .getNearByMandirs(longitude.toString(), latitude.toString());
+          .getNearByMandirs(latitude.toString(), longitude.toString());
       if (response.data != null) {
         nearbyMandirs(response.data?.data);
       } else {

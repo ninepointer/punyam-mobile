@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: GestureDetector(
           onTap: () {
-            // Get.toNamed(AppRoutes.location);
+            Get.toNamed(AppRoutes.location);
           },
           child: Row(
             children: [
@@ -128,40 +128,45 @@ class _HomeViewState extends State<HomeView> {
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    (controller.locationByLatandLong.value.isNotEmpty)?
-                      Row(
-                        children: [
-                          Text(
-                            "${controller.locationByLatandLong.first.addressComponents?.first.shortName}",
+                    (controller.locationByLatandLong.value.isNotEmpty)
+                        ? Row(
+                            children: [
+                              Text(
+                                "${controller.locationByLatandLong.first.addressComponents?.first.shortName}",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(Icons.keyboard_arrow_down)
+                            ],
+                          )
+                        : Text(
+                            'No location selected',
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(Icons.keyboard_arrow_down)
-                        ],
-                      ):Text(
-                        'No location selected',
-                        style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
-                      ),
-                    (controller.locationByLatandLong.value.isNotEmpty)?
-                      Container(
-                        width: MediaQuery.of(context).size.width -
-                            MediaQuery.of(context).size.width * 0.36,
-                        child: Text(
-                          "${controller.locationByLatandLong.first.formattedAddress?.replaceAll(controller.addressComponent.first.shortName.toString() + ", ", "")}",
-                          style: TextStyle(
-                            fontSize: 12,
                           ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ):Text('Please turn on your location!', style: TextStyle(
-                            fontSize: 12,
+                    (controller.locationByLatandLong.value.isNotEmpty)
+                        ? Container(
+                            width: MediaQuery.of(context).size.width -
+                                MediaQuery.of(context).size.width * 0.36,
+                            child: Text(
+                              "${controller.locationByLatandLong.first.formattedAddress?.replaceAll(controller.addressComponent.first.shortName.toString() + ", ", "")}",
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        : Text(
+                            'Please turn on your location!',
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          overflow: TextOverflow.ellipsis,),
                   ],
                 ),
               )

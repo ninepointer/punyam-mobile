@@ -41,7 +41,7 @@ class AppUrls {
 
   static const String getAllMandirs = "$apiURL/mandir/user";
 
-  static String getPopularMandirs(String? long, String? lat) =>
+  static String getPopularMandirs(String? lat, String? long) =>
       "$apiURL/mandir/user/popular?lat=$lat&long=$long";
   static const String getDhamMandirs = "$apiURL/mandir/user/dham";
   static const String addtoFavirouteMandirs =
@@ -51,7 +51,7 @@ class AppUrls {
   static const String godList = "$apiURL/devta/user";
   static String mandirListBygod(String? id) =>
       "$apiURL/mandir/user/bydevta?devtaId=$id";
-  static String nearbyMandirs(String? long, String? lat) =>
+  static String nearbyMandirs(String? lat, String? long) =>
       "$apiURL/mandir/user/bydistance?lat=$lat&long=$long";
   static String searchMandir = "$apiURL/mandir/user/bysearch";
   static const String googleLogin = "$apiURL/verifyfirebaselogintoken";
