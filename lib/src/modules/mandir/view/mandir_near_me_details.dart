@@ -135,6 +135,8 @@ class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
 
                       await controller.getNavigateToGoogleMap(endLat, endLng);
                     },
+                    morningAarti: "12",
+                    eveningAarti: "13",
                     mandirName: "${widget.templeDetails?.name}",
                     godName: "${widget.templeDetails?.deviDevta}",
                     morningTime:
@@ -212,6 +214,8 @@ Widget nearBymemandirDetailsCard({
   required String morningTime,
   required String eveningTime,
   required String address,
+  required String morningAarti,
+  required String eveningAarti,
   required Function onpress,
 }) {
   return Container(
