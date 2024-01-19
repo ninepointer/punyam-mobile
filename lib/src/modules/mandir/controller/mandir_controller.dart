@@ -41,9 +41,20 @@ class MandirController extends BaseController<MandirRespository> {
   final dhamTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
   final deviDevtaListDetails = <DeviDevtaList>[].obs;
   final nearbyMandirs = <TempleNearByMeList>[].obs;
+  final nearbyMandirsSearch = <TempleNearByMeList>[].obs;
+  final dhamTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
+  final popularTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
   final mandirSearchByStringList = <AllMandirData>[].obs;
 
   final isFavorite = false.obs;
+
+  @override
+  void onClose() {
+    print("Hello");
+    allMandirsearchTextController.clear();
+    nearbyMandirsSearch.clear();
+    super.onClose();
+  }
 
   // final currentPage = 0.obs;
   // final totalItems = 0.obs;
@@ -237,7 +248,11 @@ class MandirController extends BaseController<MandirRespository> {
       }
 
       if (response.data != null) {
-        popularTempleListByDistanceDetails(response.data?.data);
+        if (searchQuery != null && searchQuery.isNotEmpty) {
+          popularTempleListByDistanceSearchDetails(response.data?.data);
+        } else {
+          popularTempleListByDistanceDetails(response.data?.data);
+        }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }
@@ -262,7 +277,11 @@ class MandirController extends BaseController<MandirRespository> {
       }
 
       if (response.data != null) {
-        dhamTempleListByDistanceDetails(response.data?.data);
+        if (searchQuery != null && searchQuery.isNotEmpty) {
+          dhamTempleListByDistanceSearchDetails(response.data?.data);
+        } else {
+          dhamTempleListByDistanceDetails(response.data?.data);
+        }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }
@@ -318,7 +337,12 @@ class MandirController extends BaseController<MandirRespository> {
       }
 
       if (response.data != null) {
-        nearbyMandirs(response.data?.data);
+        if (searchQuery != null && searchQuery.isNotEmpty) {
+          nearbyMandirsSearch(response.data?.data);
+          print("uuu ${nearbyMandirsSearch}");
+        } else {
+          nearbyMandirs(response.data?.data);
+        }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }

@@ -79,5 +79,10 @@ class AppPages {
       page: () => LocationView(),
       binding: HomeBinding(),
     ),
+    GetPage(
+      name: AppRoutes.bookingOrders,
+      page: () => BookingOrderView(),
+      binding: BookingBinding(),
+    ),
   ];
 }

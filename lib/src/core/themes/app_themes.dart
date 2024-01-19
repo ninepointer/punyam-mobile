@@ -14,10 +14,10 @@ class AppTheme {
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
       ),
-      scaffoldBackgroundColor: AppColors.lightScaffoldBackgroundColor,
-      cardColor: AppColors.lightCardBackgroundColor,
+      scaffoldBackgroundColor: AppColors.white,
+      cardColor: AppColors.white,
       cardTheme: CardTheme(
-        color: AppColors.lightCardBackgroundColor,
+        color: AppColors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -29,15 +29,15 @@ class AppTheme {
             displayColor: AppColors.black,
           ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.lightCardBackgroundColor,
+        backgroundColor: AppColors.white,
       ),
       bottomAppBarTheme: BottomAppBarTheme(
-        color: AppColors.lightCardBackgroundColor,
+        color: AppColors.white,
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        color: AppColors.lightCardBackgroundColor,
+        color: AppColors.white,
         iconTheme: IconThemeData(
           color: AppColors.secondary,
         ),
@@ -111,8 +111,9 @@ class AppTheme {
       fontFamily: fontFamily,
       brightness: Brightness.dark,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      scaffoldBackgroundColor:
-          isDarkMode ? AppColors.darkScaffoldBackgroundColor : AppColors.lightScaffoldBackgroundColor,
+      scaffoldBackgroundColor: isDarkMode
+          ? AppColors.darkScaffoldBackgroundColor
+          : AppColors.lightScaffoldBackgroundColor,
       primarySwatch: AppColors.primary,
       primaryTextTheme: Typography().white,
       textTheme: Theme.of(context).textTheme.apply(
@@ -120,9 +121,10 @@ class AppTheme {
             bodyColor: isDarkMode ? AppColors.white : AppColors.black,
             displayColor: isDarkMode ? AppColors.white : AppColors.black,
           ),
-      cardColor: isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.lightCardBackgroundColor,
+      cardColor:
+          isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.white,
       cardTheme: CardTheme(
-        color: isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.lightCardBackgroundColor,
+        color: isDarkMode ? AppColors.darkCardBackgroundColor : AppColors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -130,7 +132,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        color: AppColors.lightCardBackgroundColor,
+        color: AppColors.white,
         iconTheme: IconThemeData(
           color: AppColors.primary,
         ),

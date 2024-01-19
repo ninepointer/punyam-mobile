@@ -58,86 +58,88 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               },
               itemBuilder: (_, index) {
                 var item = contents[index];
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 48,
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(item.image),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 36),
-                      Image.asset(
-                        item.image,
-                        width: 250,
-                        height: 195,
+                  child: Column(children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.80),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          contents.length,
+                          (index) => buildDot(index),
+                        ),
                       ),
-                      Spacer(),
-                      Text(
-                        item.title,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.tsMedium20,
+                    ),
+                    SizedBox(height: 20),
+                    if (currentIndex == contents.length - 1)
+                      Column(
+                        children: [
+                          SizedBox(height: 20),
+                          CommonFilledButton(
+                            labelColor: AppColors.cinnamonStickColor,
+                            backgroundColor: Get.isDarkMode
+                                ? AppColors.white
+                                : AppColors.white,
+                            width: 250,
+                            height: 50,
+                            label: (currentIndex == contents.length - 1
+                                ? 'Get Started'
+                                : 'Next'),
+                            onPressed: navigateToNextScreen,
+                          )
+                        ],
+                      )
+                    else
+                      SizedBox(
+                        height: 52,
+                        child: FittedBox(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  spreadRadius: 2,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              backgroundColor: Get.isDarkMode
+                                  ? AppColors.white
+                                  : AppColors.white,
+                              child: Icon(
+                                Icons.chevron_right_rounded,
+                                color: AppColors.cinnamonStickColor,
+                              ),
+                              onPressed: navigateToNextScreen,
+                            ),
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 20),
-                      Text(
-                        item.description,
-                        textAlign: TextAlign.center,
-                        style: AppStyles.tsGreyRegular16,
+                    // SizedBox(height: 10),
+                    if (currentIndex != contents.length - 1)
+                      TextButton(
+                        onPressed: navigateToSignin,
+                        child: Text(
+                          'Skip',
+                          style: AppStyles.tsGreyMedium20
+                              .copyWith(color: AppColors.white.shade300),
+                        ),
                       ),
-                    ],
-                  ),
+                    SizedBox(height: 16),
+                  ]),
                 );
               },
             ),
           ),
-          SizedBox(height: 36),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                contents.length,
-                (index) => buildDot(index),
-              ),
-            ),
-          ),
-          SizedBox(height: 36),
-          if (currentIndex == contents.length - 1)
-            CommonFilledButton(
-              backgroundColor: Get.isDarkMode
-                  ? AppColors.cinnamonStickColor
-                  : AppColors.cinnamonStickColor,
-              width: 250,
-              height: 52,
-              label: (currentIndex == contents.length - 1
-                  ? 'Get Started'
-                  : 'Next'),
-              onPressed: navigateToNextScreen,
-            )
-          else
-            SizedBox(
-              height: 52,
-              child: FittedBox(
-                child: FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: Get.isDarkMode
-                      ? AppColors.cinnamonStickColor
-                      : AppColors.cinnamonStickColor,
-                  child: Icon(
-                    Icons.chevron_right_rounded,
-                    color: AppColors.white,
-                  ),
-                  onPressed: navigateToNextScreen,
-                ),
-              ),
-            ),
-          SizedBox(height: 42),
-          TextButton(
-            onPressed: navigateToSignin,
-            child: Text(
-              currentIndex == contents.length - 1 ? '' : 'Skip',
-              style: AppStyles.tsGreyMedium16,
-            ),
-          ),
-          SizedBox(height: 36),
         ],
       ),
     );
@@ -151,8 +153,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       margin: EdgeInsets.only(right: 8),
       decoration: BoxDecoration(
         color: currentIndex == index
-            ? AppColors.secondary
-            : AppColors.grey.withOpacity(.25),
+            ? AppColors.cinnamonStickColor
+            : AppColors.white.withOpacity(.7),
         borderRadius: BorderRadius.circular(50),
       ),
     );
@@ -178,27 +180,26 @@ List<OnBoardingContent> contents = [
   //   description: 'Enter trading battles, show your skills, and win \n exciting gifts and cash prizes!',
   // ),
   OnBoardingContent(
-    image: AppImages.mandir,
+    image: AppImages.onBoarding1,
     title: 'Find your divine touch',
     description: 'Stay connected with temples and places of worship near you!',
   ),
   OnBoardingContent(
-    image: AppImages.mandir,
+    image: AppImages.onBoarding2,
     title: 'Participate in religious events',
     description:
         "Take part in global events right from the comfort of your home!",
   ),
   OnBoardingContent(
-    image: AppImages.mandir,
+    image: AppImages.onBoarding3,
     title: 'Books poojas on demand',
     description: 'Access our network of pandit jis for home poojas!',
   ),
-  // OnBoardingContent(
-  //   image: AppImages.mandir,
-  //   title: 'Get your real market readiness tested!',
-  //   description:
-  //       'Participate in MarginX with virtual money at a very low investment and check your market readiness!',
-  // ),
+  OnBoardingContent(
+    image: AppImages.onBoarding4,
+    title: 'Books poojas on demand',
+    description: 'Access our network of pandit jis for home poojas!',
+  ),
   // OnBoardingContent(
   //   image: AppImages.mandir,
   //   title: 'Refer your friends and win ',

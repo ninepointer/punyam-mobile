@@ -135,12 +135,14 @@ class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
 
                       await controller.getNavigateToGoogleMap(endLat, endLng);
                     },
+                    morningAarti: "12",
+                    eveningAarti: "13",
                     mandirName: "${widget.templeDetails?.name}",
                     godName: "${widget.templeDetails?.deviDevta}",
                     morningTime:
-                        " ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningOpeningTime)} to ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningClosingTime)}",
+                        " ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningOpeningTime)} - ${FormatHelper.formatTimeOnly(widget.templeDetails?.morningClosingTime)}",
                     eveningTime:
-                        " ${FormatHelper.formatTimeOnly(widget.templeDetails?.eveningOpeningTime)} to ${FormatHelper.formatTimeOnly(widget.templeDetails?.eveningClosingTime)}",
+                        " ${FormatHelper.formatTimeOnly(widget.templeDetails?.eveningOpeningTime)} - ${FormatHelper.formatTimeOnly(widget.templeDetails?.eveningClosingTime)}",
                     address:
                         "${widget.templeDetails?.addressDetails!.address}, ${widget.templeDetails?.addressDetails!.city}, ${widget.templeDetails?.addressDetails!.state}",
                   ),
@@ -178,9 +180,9 @@ class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 12,
-                    ),
+                    // SizedBox(
+                    //   height: 12,
+                    // ),
                     Expanded(
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -212,6 +214,8 @@ Widget nearBymemandirDetailsCard({
   required String morningTime,
   required String eveningTime,
   required String address,
+  required String morningAarti,
+  required String eveningAarti,
   required Function onpress,
 }) {
   return Container(
@@ -240,15 +244,36 @@ Widget nearBymemandirDetailsCard({
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
-              Text(
-                "$morningTime |",
-                style: AppStyles.tsBlackMedium12,
+              Icon(
+                Icons.sunny,
+                size: 15,
               ),
               SizedBox(
-                width: 12,
+                width: 4,
               ),
               Text(
-                "$eveningTime",
+                "Morning Session:   $morningTime",
+                style: AppStyles.tsBlackMedium12,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
+              Icon(
+                Icons.shield_moon_rounded,
+                size: 15,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                "Evening Session:   $eveningTime",
                 style: AppStyles.tsBlackMedium12,
               ),
             ],
@@ -276,8 +301,21 @@ Widget nearBymemandirDetailsCard({
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Icon(
+                Icons.person_2_rounded,
+                size: 15,
+              ),
+              Text(
+                "Main Diety: ",
+                style: AppStyles.tsBlackMedium14.copyWith(
+                  color: AppColors.black,
+                ),
+              ),
+              SizedBox(
+                width: 4,
+              ),
               Text(
                 godName,
                 style: AppStyles.tsBlackMedium14.copyWith(
@@ -290,20 +328,33 @@ Widget nearBymemandirDetailsCard({
         SizedBox(
           height: 6,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Column(
           children: [
-            MaterialButton(
-              onPressed: () => onpress(),
-              child: Icon(
-                Icons.directions_outlined,
-                color: AppColors.cinnamonStickColor,
-              ),
-              height: 20,
-              padding: EdgeInsets.zero,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MaterialButton(
+                  onPressed: () => onpress(),
+                  child: Icon(
+                    Icons.directions_outlined,
+                    color: AppColors.cinnamonStickColor,
+                  ),
+                  height: 16,
+                  padding: EdgeInsets.zero,
+                ),
+              ],
             ),
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Get direction",
+              style: AppStyles.tsBlackMedium12,
+            )
+          ],
+        )
       ],
     ),
   );

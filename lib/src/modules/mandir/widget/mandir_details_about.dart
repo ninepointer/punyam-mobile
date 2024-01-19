@@ -11,7 +11,8 @@ class MandirDetailsAboutWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: AppConstants.getAppPadding(context),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05),
         child: SingleChildScrollView(
           child: Container(
             child: Column(

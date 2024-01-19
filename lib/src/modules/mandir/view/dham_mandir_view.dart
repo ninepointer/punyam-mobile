@@ -54,23 +54,48 @@ class DhamMandirView extends GetView<MandirController> {
                 const SizedBox(
                   height: 16,
                 ),
-                CommonTextField(
-                  padding: EdgeInsets.zero,
-                  hintText: 'Search Dham Here',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      controller.dhamMandirsearchTextController.clear();
-                      controller.getDhamTamplesByDistanceDetails(
-                          searchQuery: '');
-                    },
-                  ),
-                  onChanged: (query) {
-                    controller.getDhamTamplesByDistanceDetails(
-                        searchQuery: query);
+                InkWell(
+                  onTap: () async {
+                    // Open the SearchBottomSheet when the container is tapped
+                    await Get.to(
+                      () => DhamMandirSearchView(),
+                    );
+                    controller.dhamTempleListByDistanceSearchDetails.clear();
+                    controller.dhamMandirsearchTextController.clear();
                   },
-                  controller: controller.dhamMandirsearchTextController,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      // borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          color: Colors.grey,
+                          onPressed: () {},
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Search mandir here... ",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 controller.dhamTempleListByDistanceDetails.isEmpty
