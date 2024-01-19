@@ -26,6 +26,7 @@ class _HomeViewState extends State<HomeView> {
     // MandirView(),
     MandirView(),
     PoojaServicesView(),
+    BookingOrderView()
   ];
 
   @override
@@ -93,9 +94,9 @@ class _HomeViewState extends State<HomeView> {
         Get.find<PoojaServicesController>().loadData();
         // Get.find<MandirController>().loadData();
         break;
-      // case 3:
-      //   Get.find<MandirController>().loadData();
-      //   break;
+      case 3:
+        Get.find<BookingController>().loadData();
+        break;
       // case 3:
       //   break;
       default:
@@ -234,18 +235,19 @@ class _HomeViewState extends State<HomeView> {
                   label: 'Mandir',
                   icon: Icons.analytics_rounded,
                 ),
-                // SizedBox(width: 40),
-                // _buildTabButton(
-                //   context,
-                //   index: 3,
-                //   label: 'Store',
-                //   icon: Icons.trending_up_rounded,
-                // ),
+
                 _buildTabButton(
                   context,
                   index: 2,
                   label: 'Pooja',
                   icon: Icons.groups_rounded,
+                ),
+                // SizedBox(width: 40),
+                _buildTabButton(
+                  context,
+                  index: 3,
+                  label: 'Booking',
+                  icon: Icons.add_shopping_cart_outlined,
                 ),
               ],
             ),

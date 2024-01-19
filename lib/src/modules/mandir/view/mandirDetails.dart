@@ -176,9 +176,9 @@ class _MandirDetailsViewState extends State<MandirDetailsView>
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 12,
-                  ),
+                  // SizedBox(
+                  //   height: 12,
+                  // ),
                   Expanded(
                     child: Container(
                       width: MediaQuery.of(context).size.width,

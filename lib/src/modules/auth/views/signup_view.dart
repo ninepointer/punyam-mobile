@@ -86,9 +86,10 @@ class _SignupViewState extends State<SignupView> {
                                 // ),
                                 SizedBox(height: 24),
                                 Container(
-                                  height: 50,
+                                  height: 48,
                                   decoration: BoxDecoration(
                                     color: AppColors.white,
+                                    borderRadius: BorderRadius.circular(8),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.1),
@@ -121,8 +122,9 @@ class _SignupViewState extends State<SignupView> {
                                   height: 12,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 48,
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
                                     color: AppColors.white,
                                     boxShadow: [
                                       BoxShadow(
@@ -157,8 +159,9 @@ class _SignupViewState extends State<SignupView> {
                                   height: 12,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 48,
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
                                     color: AppColors.white,
                                     boxShadow: [
                                       BoxShadow(
@@ -199,8 +202,9 @@ class _SignupViewState extends State<SignupView> {
                                   height: 12,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 48,
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
                                     color: AppColors.white,
                                     boxShadow: [
                                       BoxShadow(

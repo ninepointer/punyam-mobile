@@ -76,8 +76,9 @@ class _SigninViewState extends State<SigninView> {
                                   Form(
                                     key: formKey,
                                     child: Container(
-                                      height: 50,
+                                      height: 48,
                                       decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
                                         color: AppColors.white,
                                         boxShadow: [
                                           BoxShadow(

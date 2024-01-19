@@ -36,4 +36,9 @@ class AppImages {
   static const String logo4 = '$imagesDir/logo4.jpg';
   static const String logo5 = '$imagesDir/logo5.jpg';
   static const String recycle = '$imagesDir/recycling.png';
+
+  static const String onBoarding1 = '$imagesDir/onboarding1.png';
+  static const String onBoarding2 = '$imagesDir/onboarding2.png';
+  static const String onBoarding3 = '$imagesDir/onboarding3.png';
+  static const String onBoarding4 = '$imagesDir/onboarding4.png';
 }

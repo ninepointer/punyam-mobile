@@ -33,25 +33,29 @@ class _NearByImageGalleryState extends State<NearByImageGallery> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => NearByFullScreenImage(
-                images: widget.images, currentIndex: currentIndex),
-          ),
-        );
-      },
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
-        itemCount: widget.images.length,
-        itemBuilder: (context, index) {
-          return buildImageItem(widget.images[index].url ?? '');
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.05),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NearByFullScreenImage(
+                  images: widget.images, currentIndex: currentIndex),
+            ),
+          );
         },
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
+          ),
+          itemCount: widget.images.length,
+          itemBuilder: (context, index) {
+            return buildImageItem(widget.images[index].url ?? '');
+          },
+        ),
       ),
     );
   }

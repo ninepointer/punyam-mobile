@@ -11,6 +11,7 @@ class AppBinding extends Bindings {
     Get.put(WalletRepository(), permanent: true);
     Get.put(PoojaServicesRespository(), permanent: true);
     Get.put(MandirRespository(), permanent: true);
+    Get.put(BookingBinding(), permanent: true);
 
     Get.put(DashboardRepository(), permanent: true);
     Get.put(AppController(), permanent: true);
@@ -20,5 +21,6 @@ class AppBinding extends Bindings {
     Get.put(WalletController(), permanent: true);
     Get.put(PoojaServicesController(), permanent: true);
     Get.put(MandirController(), permanent: true);
+    Get.put(BookingController(), permanent: true);
   }
 }

@@ -54,23 +54,48 @@ class PopularMandirView extends GetView<MandirController> {
                 const SizedBox(
                   height: 16,
                 ),
-                CommonTextField(
-                  padding: EdgeInsets.zero,
-                  hintText: 'Search Mandir here',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      controller.popularMandirsearchTextController.clear();
-                      controller.getPopularTamplesByDistanceDetails(
-                          searchQuery: '');
-                    },
-                  ),
-                  onChanged: (query) {
-                    controller.getPopularTamplesByDistanceDetails(
-                        searchQuery: query);
+                InkWell(
+                  onTap: () async {
+                    // Open the SearchBottomSheet when the container is tapped
+                    await Get.to(
+                      () => PopularMandirSearchView(),
+                    );
+                    controller.popularTempleListByDistanceSearchDetails.clear();
+                    controller.popularMandirsearchTextController.clear();
                   },
-                  controller: controller.popularMandirsearchTextController,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      // borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          color: Colors.grey,
+                          onPressed: () {},
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Search mandir here... ",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 controller.popularTempleListByDistanceDetails.isEmpty

@@ -5,7 +5,7 @@ extension CustomColors on ColorScheme {
   Color get lightScaffoldBackgroundColor => Color(0xFFF5F6FA);
   Color get darkScaffoldBackgroundColor => Color(0xFF171F2A);
 
-  Color get lightCardBackgroundColor => Color(0xFFFFFFFF);
+  Color get lightCardBackgroundColor => Colors.white;
   Color get darkCardBackgroundColor => Color(0xFF1E2936);
 }
 
@@ -31,7 +31,7 @@ class AppColors {
   static final Color lightScaffoldBackgroundColor = Color(0xFFF5F6FA);
   static final Color darkScaffoldBackgroundColor = Color(0xFF171F2A);
 
-  static final Color lightCardBackgroundColor = Color(0xFFFFFFFF);
+  static final Color lightCardBackgroundColor = Colors.white;
   static final Color darkCardBackgroundColor = Color(0xFF1E2936);
   static final Color appBackgroundColor = Color(0xFFF8E6DC);
 
