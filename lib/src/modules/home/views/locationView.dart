@@ -40,34 +40,34 @@ class LocationView extends GetView<HomeController> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.0225,
                 ),
-                SafeArea(
-                  bottom: false,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Theme.of(context).cardColor,
-                          padding: const EdgeInsets.all(8).copyWith(
-                            top: 0,
-                          ),
-                          child: CommonTextField(
-                            // controller: controller.searchTextController,
-                            padding: EdgeInsets.zero,
-                            hintText: 'Search for area, street name...',
-                            prefixIcon: Icon(Icons.search,
-                                size: 30, color: Colors.redAccent),
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {},
-                              // onPressed: controller.searchTextController.clear,
-                            ),
-                            // onChanged: controller.searchInstruments,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // SafeArea(
+                //   bottom: false,
+                //   child: Container(
+                //     child: Column(
+                //       children: [
+                //         Container(
+                //           color: Theme.of(context).cardColor,
+                //           padding: const EdgeInsets.all(8).copyWith(
+                //             top: 0,
+                //           ),
+                //           child: CommonTextField(
+                //             // controller: controller.searchTextController,
+                //             padding: EdgeInsets.zero,
+                //             hintText: 'Search for area, street name...',
+                //             prefixIcon: Icon(Icons.search,
+                //                 size: 30, color: Colors.redAccent),
+                //             suffixIcon: IconButton(
+                //               icon: Icon(Icons.close),
+                //               onPressed: () {},
+                //               // onPressed: controller.searchTextController.clear,
+                //             ),
+                //             // onChanged: controller.searchInstruments,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.0225,
                 ),
@@ -115,7 +115,7 @@ class LocationView extends GetView<HomeController> {
                             ),
                             Expanded(
                               child: Text(
-                                "Ganga vihar Colony, Neha Colony, Somnath Nagar, Dausa",
+                                "${controller.locationByLatandLong.first.formattedAddress}",
                                 style: AppStyles.tsGreyRegular14,
                               ),
                             )
@@ -221,6 +221,7 @@ class LocationView extends GetView<HomeController> {
                 if (controller.userSaveAddress.value.addressDetails != null)
                   ListView.builder(
                     shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount:
                         controller.userSaveAddress.value.addressDetails?.length,
                     itemBuilder: (BuildContext context, int index) {
