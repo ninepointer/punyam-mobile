@@ -82,7 +82,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                   ),
                   Positioned(
                     top: -30,
-                    left: MediaQuery.of(context).size.width / 2 - 38,
+                    left: MediaQuery.of(context).size.width / 2 - 48,
                     // Center horizontally
                     child: Container(
                       height: 60,
