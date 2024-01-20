@@ -12,3 +12,4 @@ export 'widgets/widgets.dart';
 export "poojaServices/pooja_index.dart";
 export "mandir/mandir_index.dart";
 export "booking_order/booking_index.dart";
+export 'store/store_index.dart';

@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:punyam/src/modules/store/controller/store_controller.dart';
 
 import '../../modules/modules.dart';
 import 'routes.dart';
@@ -83,6 +84,11 @@ class AppPages {
       name: AppRoutes.bookingOrders,
       page: () => BookingOrderView(),
       binding: BookingBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.store,
+      page: () => StoreView(),
+     binding: StoreBinding(),
     ),
   ];
 }
