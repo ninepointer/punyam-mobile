@@ -229,13 +229,13 @@ class AddressDetails {
 
 class Location {
   String? type;
-  List<int>? coordinates;
+  List<num>? coordinates;
 
   Location({this.type, this.coordinates});
 
   Location.fromJson(Map<String, dynamic> json) {
     type = json['type'];
-    coordinates = json['coordinates'].cast<int>();
+    coordinates = json['coordinates'].cast<num>();
   }
 
   Map<String, dynamic> toJson() {

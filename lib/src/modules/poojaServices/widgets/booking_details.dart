@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:punyam/src/core/widgets/common_text_field_for_signin.dart';
 import '../../../app/app.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -50,76 +51,135 @@ class _BookingDetailsState extends State<BookingDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Name',
-                  style: Theme.of(context).textTheme.tsGreyMedium12,
-                ),
-                SizedBox(height: 8),
-                CommonTextField(
-                  hintText: 'Enter Your Full Name',
-                  keyboardType: TextInputType.name,
-                  controller: controller.fullNameTextController,
-                  padding: EdgeInsets.only(bottom: 8),
-                ),
-                Text(
-                  'Mobile Number',
-                  style: Theme.of(context).textTheme.tsGreyMedium12,
-                ),
-                SizedBox(height: 8),
-                CommonTextField(
-                  hintText: 'Enter Your Mobile Number',
-                  controller: controller.mobileNumberTextController,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(10),
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  padding: EdgeInsets.only(bottom: 8),
-                ),
-                Text(
-                  'Choose Date and Time',
-                  style: Theme.of(context).textTheme.tsGreyMedium12,
-                ),
-                SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () => controller.showDateTimePicker(context),
-                  child: CommonTextField(
-                    isDisabled: true,
-                    padding: EdgeInsets.zero,
-                    controller: controller.bookingDateTextController,
-                    hintText: 'Choose Your Booking Date',
-                    suffixIcon: Icon(
-                      Icons.calendar_month,
-                      color: AppColors.grey,
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter booking date and time';
-                      }
-                      return null;
-                    },
+                Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: CommonTextFieldForSingIn(
+                    hintText: 'Enter Your Full Name',
+                    keyboardType: TextInputType.name,
+                    controller: controller.fullNameTextController,
                   ),
                 ),
-                SizedBox(height: 8),
-                Text(
-                  'Enter your Address',
-                  style: Theme.of(context).textTheme.tsGreyMedium12,
+                SizedBox(height: 12),
+                Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: CommonTextFieldForSingIn(
+                    hintText: 'Enter Your Mobile Number',
+                    controller: controller.mobileNumberTextController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
                 ),
-                SizedBox(height: 8),
-                CommonTextField(
-                  hintText: 'Enter Your Address',
-                  keyboardType: TextInputType.name,
-                  controller: controller.addressTextController,
-                  padding: EdgeInsets.only(bottom: 8),
+                SizedBox(height: 12),
+                GestureDetector(
+                  onTap: () => controller.showDateTimePicker(context),
+                  child: Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 2,
+                          blurRadius: 1,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    child: CommonTextFieldForSingIn(
+                      isDisabled: true,
+                      padding: EdgeInsets.zero,
+                      controller: controller.bookingDateTextController,
+                      hintText: 'Choose Your Booking Date',
+                      suffixIcon: Icon(
+                        Icons.calendar_month,
+                        color: AppColors.grey,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter booking date and time';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
                 ),
-                CommonTextField(
-                  hintText: 'Pin Code',
-                  keyboardType: TextInputType.number,
-                  controller: controller.pinCodeTextController,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  padding: EdgeInsets.only(bottom: 8),
+                SizedBox(height: 12),
+                Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: CommonTextFieldForSingIn(
+                    hintText: 'Enter Your Address',
+                    keyboardType: TextInputType.name,
+                    controller: controller.addressTextController,
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: CommonTextFieldForSingIn(
+                    hintText: 'Pin Code',
+                    keyboardType: TextInputType.number,
+                    controller: controller.pinCodeTextController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
                 ),
                 DropdownButtonFormField2<String>(
                   value: controller.selectedCity,
@@ -144,6 +204,17 @@ class _BookingDetailsState extends State<BookingDetails> {
                     maxHeight: 250,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
+                      color: AppColors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey
+                              .withOpacity(0.5), // Adjust the opacity and color
+                          spreadRadius: 4,
+                          blurRadius: 10, // Increase the blur radius if needed
+                          offset: Offset(0,
+                              2), // Adjust the offset to control the shadow direction
+                        ),
+                      ],
                     ),
                   ),
                   menuItemStyleData: MenuItemStyleData(
@@ -152,7 +223,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(16).copyWith(left: 0),
                     filled: true,
-                    fillColor: AppColors.grey.withOpacity(.1),
+                    fillColor: AppColors.white.withOpacity(.1),
                     hintText: 'Quantity',
                     hintStyle: AppStyles.tsGreyRegular14,
                     errorStyle: AppStyles.tsGreyRegular12.copyWith(
@@ -172,7 +243,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
                         width: 2,
-                        color: AppColors.primary,
+                        color: AppColors.cinnamonStickColor,
                       ),
                     ),
                     errorBorder: OutlineInputBorder(
@@ -185,12 +256,26 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ),
                 ),
                 SizedBox(height: 8),
-                CommonTextField(
-                  hintText: 'State',
-                  controller:
-                      TextEditingController(text: controller.selectedState),
-                  isDisabled: true,
-                  padding: EdgeInsets.only(bottom: 8),
+                Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: CommonTextFieldForSingIn(
+                    hintText: 'State',
+                    controller:
+                        TextEditingController(text: controller.selectedState),
+                    isDisabled: true,
+                  ),
                 ),
               ],
             ),

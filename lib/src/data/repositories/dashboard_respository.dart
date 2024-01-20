@@ -29,20 +29,30 @@ class DashboardRepository extends BaseRepository {
         : RepoResponse(data: PoojaCategoryResponse.fromJson(response));
   }
 
-  Future<RepoResponse<GenericResponse>> addUserAddress() async {
+  Future<RepoResponse<SaveAddressResponse>> addUserAddress(
+      Map<String, dynamic> data) async {
     String apiURL = AppUrls.addUserAddressUrl;
-    var response = await service.patchAuth(path: apiURL);
+    var response = await service.patchAuth(path: apiURL, data: data);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: GenericResponse.fromJson(response));
+        : RepoResponse(data: SaveAddressResponse.fromJson(response));
   }
 
-  Future<RepoResponse<GenericResponse>> removeUserAddress(String id) async {
+  Future<RepoResponse<GetSaveAddressResponse>> getaddUserAddress() async {
+    String apiURL = AppUrls.addUserAddressUrl;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GetSaveAddressResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<GetSaveAddressResponse>> removeUserAddress(
+      String id) async {
     String apiURL = AppUrls.removeUserAddressUrl(id);
     var response = await service.patchAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: GenericResponse.fromJson(response));
+        : RepoResponse(data: GetSaveAddressResponse.fromJson(response));
   }
 
   Future<RepoResponse<GenericResponse>> editUserAddress(String id) async {

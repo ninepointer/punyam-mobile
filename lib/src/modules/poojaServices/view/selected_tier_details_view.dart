@@ -26,13 +26,30 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
     controller.bookingAmount = widget.packageDetails?.price.toString();
   }
 
+  bool validateBookingDetails() {
+    if (controller.fullNameTextController.text.isEmpty ||
+        controller.mobileNumberTextController.text.isEmpty ||
+        controller.bookingDateTextController.text.isEmpty ||
+        controller.addressTextController.text.isEmpty ||
+        controller.pinCodeTextController.text.isEmpty ||
+        controller.selectedCity.isEmpty ||
+        controller.selectedState.isEmpty) {
+      // At least one of the required fields is empty
+      return false;
+    }
+
+    // Add more validation checks if needed
+
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Booking Details")),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+          padding: AppConstants.getAppPadding(context),
           child: Column(
             children: [
               SizedBox(
@@ -55,15 +72,17 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     ),
                   ),
                   Positioned(
-                    top: -35,
-                    left: 140,
+                    top: -30,
+                    left: MediaQuery.of(context).size.width / 2 - 38,
+                    // Center horizontally
                     child: Container(
-                        height: 70,
-                        width: 70,
-                        child: Image.network(
-                          controller.selectedPoojaById.value.image?.url ?? '',
-                          fit: BoxFit.fill,
-                        )),
+                      height: 60,
+                      width: 60,
+                      child: Image.network(
+                        controller.selectedPoojaById.value.image?.url ?? '',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -73,108 +92,55 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 50,
+                          SizedBox(height: 30),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${controller.selectedPoojaById.value.name}",
+                              style: AppStyles.tsBlackMedium20,
+                              softWrap: true,
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "${controller.selectedPoojaById.value.name}",
-                                    style: AppStyles.tsBlackMedium20,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Selected Package - ${widget.tierDetails?.tierName}",
-                                    style: AppStyles.tsBlackMedium12,
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 4,
+                          SizedBox(height: 12),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Selected Package - ${widget.tierDetails?.tierName}",
+                              style: AppStyles.tsBlackMedium12,
+                              softWrap: true,
+                            ),
                           ),
                           if (widget.tierDetails?.postPoojaCleanUpIncluded ==
                               true)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      "Pooja cleanup included",
-                                      style: AppStyles.tsBlackMedium12,
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          if (widget.tierDetails?.poojaItemsIncluded == true)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  flex: 1,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      "Pooja items included ",
-                                      style: AppStyles.tsBlackMedium12,
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                flex: 1,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Total number of main pandit - ${widget.tierDetails?.numberOfMainPandit}",
-                                    style: AppStyles.tsBlackMedium12,
-                                    softWrap: true,
-                                  ),
-                                ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Pooja cleanup included",
+                                style: AppStyles.tsBlackMedium12,
+                                softWrap: true,
                               ),
-                            ],
+                            ),
+                          if (widget.tierDetails?.poojaItemsIncluded == true)
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Pooja items included",
+                                style: AppStyles.tsBlackMedium12,
+                                softWrap: true,
+                              ),
+                            ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Total number of main pandit - ${widget.tierDetails?.numberOfMainPandit}",
+                              style: AppStyles.tsBlackMedium12,
+                              softWrap: true,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
@@ -215,7 +181,14 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     ),
                     child: Text("Confirm Booking"),
                     onPressed: () {
-                      controller.getUserBookingDetails();
+                      if (validateBookingDetails()) {
+                        // All fields are filled, proceed with booking
+                        controller.getUserBookingDetails();
+                      } else {
+                        // Show a Snackbar notification
+                        SnackbarHelper.showSnackbar(
+                            'Please fill all the fields before confirming booking');
+                      }
                     },
                   ),
                 ),

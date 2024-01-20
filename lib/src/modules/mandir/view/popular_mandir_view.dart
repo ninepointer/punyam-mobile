@@ -194,11 +194,18 @@ class PopularMandirView extends GetView<MandirController> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
                                       child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Flexible(
-                                            child: Text(
-                                              "${templeDetails.addressDetails!.address}, ${templeDetails.addressDetails!.city}, ${templeDetails.addressDetails!.state}",
-                                              style: AppStyles.tsBlackMedium12,
+                                          Expanded(
+                                            child: Container(
+                                              child: Text(
+                                                "${templeDetails.addressDetails!.address}, ${templeDetails.addressDetails!.city}, ${templeDetails.addressDetails!.state}",
+                                                style:
+                                                    AppStyles.tsBlackMedium12,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                           ),
                                         ],
