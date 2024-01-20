@@ -289,7 +289,7 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                             hintText: 'Pin code*',
                             keyboardType: TextInputType.number,
                             inputFormatters: [
-                              // LengthLimitingTextInputFormatter(6),
+                              LengthLimitingTextInputFormatter(6),
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             controller: controller.homePinCodeTextController,

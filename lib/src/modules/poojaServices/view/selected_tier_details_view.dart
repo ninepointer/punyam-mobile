@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:punyam/src/app/app.dart';
 
 class SelectedTierDetailsView extends StatefulWidget {
@@ -29,18 +30,24 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
   }
 
   bool validateBookingDetails() {
-    if (controller.fullNameTextController.text.isEmpty ||
-        controller.mobileNumberTextController.text.isEmpty ||
-        controller.bookingDateTextController.text.isEmpty ||
-        controller.addressTextController.text.isEmpty ||
-        controller.pinCodeTextController.text.isEmpty ||
-        controller.selectedCity.isEmpty ||
-        controller.selectedState.isEmpty) {
+    if (controller.bookingDateTextController.text.isEmpty ||
+        controller.bookingAddressTextController.text.isEmpty) {
       // At least one of the required fields is empty
+      SnackbarHelper.showSnackbar(
+          'Please fill all the fields before confirming booking');
       return false;
     }
+// Check if the booking time is at least 24 hours from now
+    DateTime selectedDateTime = DateFormat("dd-MM-yyyy hh:mm a")
+        .parse(controller.bookingDateTextController.text);
+    DateTime minimumDateTime = DateTime.now().add(Duration(hours: 24));
 
-    // Add more validation checks if needed
+    if (selectedDateTime.isBefore(minimumDateTime)) {
+      // Booking time is less than 24 hours from now
+      SnackbarHelper.showSnackbar(
+          'Booking time should be at least 24 hours from now');
+      return false;
+    }
 
     return true;
   }
@@ -104,40 +111,95 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                             ),
                           ),
                           SizedBox(height: 12),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Selected Package - ${widget.tierDetails?.tierName}",
-                              style: AppStyles.tsBlackMedium12,
-                              softWrap: true,
-                            ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_circle_right,
+                                size: 20,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Selected Package - ${widget.tierDetails?.tierName}",
+                                  style: AppStyles.tsBlackRegular14,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.015,
                           ),
                           if (widget.tierDetails?.postPoojaCleanUpIncluded ==
                               true)
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Pooja cleanup included",
-                                style: AppStyles.tsBlackMedium12,
-                                softWrap: true,
-                              ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_circle_right,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Pooja cleanup included",
+                                    style: AppStyles.tsBlackRegular14,
+                                    softWrap: true,
+                                  ),
+                                ),
+                              ],
                             ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.015,
+                          ),
                           if (widget.tierDetails?.poojaItemsIncluded == true)
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Pooja items included",
-                                style: AppStyles.tsBlackMedium12,
-                                softWrap: true,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_circle_right,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Pooja items included",
+                                    style: AppStyles.tsBlackRegular14,
+                                    softWrap: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.015,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.arrow_circle_right,
+                                size: 20,
                               ),
-                            ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Total number of main pandit - ${widget.tierDetails?.numberOfMainPandit}",
-                              style: AppStyles.tsBlackMedium12,
-                              softWrap: true,
-                            ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Total number of main pandit - ${widget.tierDetails?.numberOfMainPandit}",
+                                  style: AppStyles.tsBlackRegular14,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -184,12 +246,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     child: Text("Confirm Booking"),
                     onPressed: () {
                       if (validateBookingDetails()) {
-                        // All fields are filled, proceed with booking
                         controller.getUserBookingDetails();
-                      } else {
-                        // Show a Snackbar notification
-                        SnackbarHelper.showSnackbar(
-                            'Please fill all the fields before confirming booking');
                       }
                     },
                   ),
