@@ -141,6 +141,16 @@ class HomeController extends BaseController<DashboardRepository> {
     Get.find<MandirController>().getPopularTamplesByDistanceDetails();
   }
 
+  getUserAddressLocation(latitude, longitude) async{
+    try {  
+    await getUserLoactionByLatAndLongDetails(
+              latitude.toString(), longitude.toString());
+    AppStorage.setUserLocation(latitude.toString(), longitude.toString());          
+    } catch (e) {
+      log('Error setting user location');
+  }
+      
+    }
   void navigateToCarousel(String link) {
     if (link == 'marginxs') {
       selectedIndex(3);

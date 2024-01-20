@@ -242,6 +242,11 @@ class LocationView extends GetView<HomeController> {
                       return Column(
                         children: [
                           GestureDetector(
+                            onTap:() async=> {
+                              print('itemloc ${item?.location?.coordinates}'),
+                              await controller.getUserAddressLocation(item?.location?.coordinates?[0], item?.location?.coordinates?[1]),
+                              Get.back()
+                            },
                             child: saveAddressCard(
                                 context: context,
                                 product: item,
