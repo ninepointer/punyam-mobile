@@ -49,134 +49,156 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                     SizedBox(
                       height: 24,
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: controller.userAllBookingOrders.length,
-                      itemBuilder: (context, index) {
-                        var order = controller.userAllBookingOrders[index];
-                        return Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: AppColors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                    controller.userAllBookingOrders.isEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controller.userAllBookingOrders.length,
+                            itemBuilder: (context, index) {
+                              var order =
+                                  controller.userAllBookingOrders[index];
+                              return Column(
                                 children: [
-                                  BookingCardTile(
-                                    label: 'Name',
-                                    value: order.fullName
-                                        .toString()
-                                        .capitalizeFirst,
+                                  Container(
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            spreadRadius: 2,
+                                            blurRadius: 2,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            BookingCardTile(
+                                              label: 'Name',
+                                              value: order.fullName
+                                                  .toString()
+                                                  .capitalizeFirst,
+                                            ),
+                                            BookingCardTile(
+                                              isRightAlign: true,
+                                              label: 'Contact No.',
+                                              value: order.mobile,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.016,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            BookingCardTile(
+                                              label: 'Pooja name',
+                                              value: order
+                                                  .specificProductId?.name
+                                                  .toString()
+                                                  .capitalizeFirst,
+                                            ),
+                                            BookingCardTile(
+                                              isRightAlign: true,
+                                              label: 'Pooja id',
+                                              value: order.productId,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.016,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            BookingCardTile(
+                                              label: 'Booking date',
+                                              value: FormatHelper
+                                                  .formatDateTimeOnlyToIST(
+                                                      order.bookingDate),
+                                            ),
+                                            BookingCardTile(
+                                              isRightAlign: true,
+                                              label: 'Booking amount',
+                                              value: FormatHelper.formatNumbers(
+                                                  order.bookingAmount,
+                                                  decimal: 0),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.016,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            BookingCardTile(
+                                              label: 'Selected package',
+                                              value: order.tier?.tierName
+                                                  .toString()
+                                                  .capitalizeFirst,
+                                            ),
+                                            BookingCardTile(
+                                              isRightAlign: true,
+                                              label: 'Status',
+                                              value: order.status,
+                                              valueColor:
+                                                  order.status == "Approved"
+                                                      ? AppColors.success
+                                                      : AppColors.danger,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.016,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            BookingCardTile(
+                                              label: 'Address',
+                                              value:
+                                                  "${order.addressDetails?.houseOrFlatNo ?? ''}, ${order.addressDetails?.locality ?? ''}, ${order.addressDetails?.landmark ?? ''}, ${order.addressDetails?.city ?? ''}, ${order.addressDetails?.state ?? ''}, ${order.addressDetails?.country}",
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  BookingCardTile(
-                                    isRightAlign: true,
-                                    label: 'Contact No.',
-                                    value: order.mobile,
+                                  SizedBox(
+                                    height: 20,
                                   ),
                                 ],
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.016,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BookingCardTile(
-                                    label: 'Pooja name',
-                                    value: order.specificProductId?.name
-                                        .toString()
-                                        .capitalizeFirst,
-                                  ),
-                                  BookingCardTile(
-                                    isRightAlign: true,
-                                    label: 'Pooja id',
-                                    value: order.productId,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.016,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BookingCardTile(
-                                    label: 'Booking date',
-                                    value: FormatHelper.formatDateTime(
-                                        order.bookingDate),
-                                  ),
-                                  BookingCardTile(
-                                    isRightAlign: true,
-                                    label: 'Booking amount',
-                                    value: FormatHelper.formatNumbers(
-                                        order.bookingAmount,
-                                        decimal: 0),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.016,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BookingCardTile(
-                                    label: 'Selected package',
-                                    value: order.tier?.tierName
-                                        .toString()
-                                        .capitalizeFirst,
-                                  ),
-                                  BookingCardTile(
-                                    isRightAlign: true,
-                                    label: 'Status',
-                                    value: order.status,
-                                    valueColor: order.status == "Approved"
-                                        ? AppColors.success
-                                        : AppColors.danger,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.016,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BookingCardTile(
-                                    label: 'Address',
-                                    value:
-                                        "${order.addressDetails?.houseOrFlatNo ?? ''}, ${order.addressDetails?.locality ?? ''}, ${order.addressDetails?.landmark ?? ''}, ${order.addressDetails?.city ?? ''}, ${order.addressDetails?.state ?? ''}, ${order.addressDetails?.country}",
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                              );
+                            },
+                          )
+                        : NoBookingDataFound()
                   ],
                 ),
               ),
@@ -220,6 +242,48 @@ class BookingCardTile extends StatelessWidget {
               ),
         ),
       ],
+    );
+  }
+}
+
+class NoBookingDataFound extends StatelessWidget {
+  final String? label;
+  final String? imagePath;
+  const NoBookingDataFound({
+    Key? key,
+    this.label,
+    this.imagePath,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Center(
+        child: Column(
+          children: [
+            imagePath == null
+                ? Icon(
+                    Icons.error_outline_rounded,
+                    size: 36,
+                    color: AppColors.grey.shade100,
+                  )
+                : Image.asset(
+                    imagePath ?? '',
+                    height: 48,
+                    width: 48,
+                  ),
+            SizedBox(height: 8),
+            Align(
+              child: Text(
+                label ?? 'No Bookings Found!',
+                style: Theme.of(context).textTheme.tsRegular16,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
