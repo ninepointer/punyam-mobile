@@ -394,9 +394,10 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                     height: 24,
                   ),
                   CommonOutlinedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_areMandatoryFieldsFilled()) {
-                        controller.saveUserAddress();
+                        await controller.saveUserAddress();
+                        await controller.getUserSaveAddressDetails();
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       } else {
