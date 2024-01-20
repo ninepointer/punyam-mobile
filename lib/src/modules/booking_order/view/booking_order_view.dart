@@ -49,7 +49,7 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                     SizedBox(
                       height: 24,
                     ),
-                    controller.userAllBookingOrders.isEmpty
+                    controller.userAllBookingOrders.isNotEmpty
                         ? ListView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
