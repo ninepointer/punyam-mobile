@@ -47,6 +47,8 @@ class AppRoutes {
   static const String popularMandir = '/popularMandir';
   static const String location = '/location';
   static const String bookingOrders = '/bookingOrders';
+   static const String store = '/store';
+
 
   // static const String stocks = '/stocks';
 }
