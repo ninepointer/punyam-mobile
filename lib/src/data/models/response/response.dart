@@ -18,3 +18,4 @@ export "temple_nearby_me_response.dart";
 export 'location_by_lat_and_long_response.dart';
 export 'save_address_response.dart';
 export 'get_user_save_addresses.dart';
+export 'all_get_booking_response.dart';

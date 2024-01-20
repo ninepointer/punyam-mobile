@@ -288,7 +288,7 @@ class HomeController extends BaseController<DashboardRepository> {
       'latitude': double.parse(mapLatitude.value),
       'longitude': double.parse(mapLongitude.value),
       'tag': homeTagTextController.text,
-      'contact_name': homeContactNoTextController.text,
+      'contact_name': homeNameTextController.text,
       'contact_number': homeContactNoTextController.text,
       'landmark': homelandmarkTextController.text,
       'locality': homelocalityTextController.text,

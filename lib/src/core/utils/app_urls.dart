@@ -75,4 +75,6 @@ class AppUrls {
   static String editUserAddressUrl(String? id) => "$apiURL/user/address/$id";
   static String removeUserAddressUrl(String? id) =>
       "$apiURL/user/removeaddress/$id";
+
+  static const String getAllUserBooking = "$apiURL/booking/user";
 }

@@ -171,100 +171,100 @@ class _MandirViewState extends State<MandirView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 12),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              // Handle button tap
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Open Now",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Handle button tap
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Favorites",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                _selectedTempleList =
-                                    controller.popularTempleListDetails;
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Popular",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.cinnamonStickColor),
-                              ),
-                              child: Text(
-                                "Trending Now",
-                                style: TextStyle(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(height: 12),
+                    // SingleChildScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: Row(
+                    //     children: [
+                    //       InkWell(
+                    //         onTap: () {
+                    //           // Handle button tap
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Open Now",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {
+                    //           // Handle button tap
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Favorites",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             _selectedTempleList =
+                    //                 controller.popularTempleListDetails;
+                    //           });
+                    //         },
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Popular",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 12,
+                    //       ),
+                    //       InkWell(
+                    //         onTap: () {},
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(10),
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(10),
+                    //             border: Border.all(
+                    //                 color: AppColors.cinnamonStickColor),
+                    //           ),
+                    //           child: Text(
+                    //             "Trending Now",
+                    //             style: TextStyle(
+                    //               color: Colors.orange,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),

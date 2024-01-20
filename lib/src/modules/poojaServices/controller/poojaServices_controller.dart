@@ -27,6 +27,11 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
   final poojaCatagoriesList = <PoojaCategoryData>[].obs;
 
   final selectedPoojaById = SelectedPoojaByIdData().obs;
+
+  var userBookingData = GetSaveAddressDetails().obs;
+
+  // var userBookingAddressData = <GetSaveAddressDetails>[].obs;
+
   final selectedTabIndex = 0.obs;
 
   String? bookingPoojaId = '';
@@ -44,6 +49,7 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
   final emailTextController = TextEditingController();
   final pinCodeTextController = TextEditingController();
   final selectedBookingDateTime = ''.obs;
+  final bookingAddressTextController = TextEditingController();
   Future loadData() async {
     await getPoojaCatagoryDetails();
     await getCarousel();
@@ -107,6 +113,22 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
       }
     }
   }
+
+  // void showDateTimePicker(BuildContext context) async {
+  //   DateTime? pickedDate = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime.now(),
+  //     lastDate: DateTime(2300),
+  //   );
+
+  //   if (pickedDate != null) {
+  //     String formattedDateTime = pickedDate.toUtc().toIso8601String();
+  //     selectedBookingDateTime(formattedDateTime);
+  //     String displayDateString = DateFormat("dd-MM-yyyy").format(pickedDate);
+  //     bookingDateTextController.text = displayDateString;
+  //   }
+  // }
 
   void updateStateBasedOnCity(String city) {
     switch (city) {
@@ -213,21 +235,31 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
 
   Future getUserBookingDetails() async {
     isLoading(true);
-    Map<String, dynamic> data = {
-      'full_name': fullNameTextController.text,
-      "mobile": mobileNumberTextController.text,
-      'booking_date': selectedBookingDateTime.value,
-      'address': addressTextController.text,
-      'city': selectedCity,
-      'state': selectedState,
-      'country': country,
-      'booking_amount': bookingAmount,
-      'poojaId': bookingPoojaId,
-      'tierId': bookingTierId,
-    };
+    BookingConfirmationRequest data = BookingConfirmationRequest(
+      address: "",
+      pincode: userBookingData.value.pincode,
+      city: userBookingData.value.city,
+      state: userBookingData.value.state,
+      country: "india",
+      latitude: userBookingData.value.location!.coordinates!.first,
+      longitude: userBookingData.value.location!.coordinates!.last,
+      contactName: userBookingData.value.contactName,
+      contactNumber: userBookingData.value.contactNumber,
+      landmark: userBookingData.value.landmark,
+      locality: userBookingData.value.locality,
+      floor: userBookingData.value.floor,
+      houseOrFlatNo: userBookingData.value.houseOrFlatNo,
+      fullName: userBookingData.value.contactName,
+      mobile: userBookingData.value.contactNumber,
+      bookingAmount: bookingAmount,
+      bookingDate: selectedBookingDateTime.value,
+      poojaId: bookingPoojaId,
+      tierId: bookingTierId,
+    );
     try {
-      final RepoResponse<BookingConfirmationResponse> response =
-          await repository.getConfirmationBooking(data);
+      final RepoResponse<GenericResponse> response =
+          await repository.getConfirmationBooking(data.toJson());
+
       if (response.data != null) {
         await Get.find<AuthController>().getUserDetails(navigate: false);
         loadData();

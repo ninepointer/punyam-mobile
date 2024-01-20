@@ -28,13 +28,13 @@ class PoojaServicesRespository extends BaseRepository {
         : RepoResponse(data: SelectPoojaByIdResponse.fromJson(response));
   }
 
-  Future<RepoResponse<BookingConfirmationResponse>> getConfirmationBooking(
+  Future<RepoResponse<GenericResponse>> getConfirmationBooking(
       Map<String, dynamic> data) async {
     String apiURL = AppUrls.bookingConfirmation;
     var response = await service.postAuth(path: apiURL, data: data);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: BookingConfirmationResponse.fromJson(response));
+        : RepoResponse(data: GenericResponse.fromJson(response));
   }
 
   Future<RepoResponse<IncreasePoojaCountPetchResponse>> increasePoojaCount(
