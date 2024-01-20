@@ -316,7 +316,11 @@ Widget saveAddressCard({
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(
+                      () => MapsScreen(product: product),
+                    );
+                  },
                   child: Text("Edit"),
                 ),
                 SizedBox(
@@ -324,8 +328,7 @@ Widget saveAddressCard({
                 ),
                 GestureDetector(
                   onTap: () {
-                    controller.removeUserAddress(product!.sId.toString());
-                    print("hello");
+                    controller.removeUserAddress(product.sId.toString());
                   },
                   child: Text("Delete"),
                 )

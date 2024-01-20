@@ -55,11 +55,12 @@ class DashboardRepository extends BaseRepository {
         : RepoResponse(data: GetSaveAddressResponse.fromJson(response));
   }
 
-  Future<RepoResponse<GenericResponse>> editUserAddress(String id) async {
+  Future<RepoResponse<SaveAddressResponse>> editUserAddress(
+      String id, Map<String, dynamic> data) async {
     String apiURL = AppUrls.editUserAddressUrl(id);
-    var response = await service.patchAuth(path: apiURL);
+    var response = await service.patchAuth(path: apiURL, data: data);
     return response is APIException
         ? RepoResponse(error: response)
-        : RepoResponse(data: GenericResponse.fromJson(response));
+        : RepoResponse(data: SaveAddressResponse.fromJson(response));
   }
 }

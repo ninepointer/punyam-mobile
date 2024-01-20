@@ -15,6 +15,7 @@ class SelectedTierDetailsView extends StatefulWidget {
 
 class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
   late PoojaServicesController controller;
+  late HomeController homeController;
 
   @override
   void initState() {

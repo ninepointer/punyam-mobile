@@ -352,4 +352,39 @@ class HomeController extends BaseController<DashboardRepository> {
     homefloorNoTextController.clear();
     homehouseNoTextController.clear();
   }
+
+  Future editUserAddress(String id) async {
+    isLoading(true);
+    Map<String, dynamic> data = {
+      'address': "",
+      "pincode": homePinCodeTextController.text,
+      'city': selectedCity,
+      'state': selectedState,
+      'country': "india",
+      'latitude': double.parse(mapLatitude.value),
+      'longitude': double.parse(mapLongitude.value),
+      'tag': homeTagTextController.text,
+      'contact_name': homeContactNoTextController.text,
+      'contact_number': homeContactNoTextController.text,
+      'landmark': homelandmarkTextController.text,
+      'locality': homelocalityTextController.text,
+      'floor': homefloorNoTextController.text,
+      'house_or_flat_no': homehouseNoTextController.text,
+    };
+    try {
+      final RepoResponse<SaveAddressResponse> response =
+          await repository.editUserAddress(id, data);
+
+      if (response.data?.status == "success") {
+        SnackbarHelper.showSnackbar(response.data?.message);
+        clearDataField();
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
 }
