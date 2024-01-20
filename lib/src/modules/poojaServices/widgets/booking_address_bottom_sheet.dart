@@ -24,145 +24,147 @@ class _BookingAddressBottomSheetState extends State<BookingAddressBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Please Select Your Address',
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.close),
-                ),
-              ],
-            ),
-            Divider(),
-            SizedBox(
-              height: 24,
-            ),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => MapsScreen());
-              },
-              child: Row(
+    return Obx(
+      () => Container(
+        margin: EdgeInsets.all(20),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 30,
-                        color: Colors.redAccent,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.0150,
-                      ),
-                      Text(
-                        "Add Address",
-                        style: AppStyles.tsBlackRegular16.copyWith(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
+                  Text(
+                    'Please Select Your Address',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.keyboard_arrow_right,
-                        size: 30,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  )
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close),
+                  ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.18,
-                  child: Divider(
-                    height: 1,
-                    thickness: 1,
-                    color: AppColors.grey,
-                  ),
-                ),
-                Text(
-                  "SAVED ADDRESSES",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 2),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.18,
-                  child: Divider(
-                    height: 1,
-                    thickness: 1,
-                    color: AppColors.grey,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            if (homeController.userSaveAddress.value.addressDetails != null)
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount:
-                    homeController.userSaveAddress.value.addressDetails?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var item = homeController
-                      .userSaveAddress.value.addressDetails![index];
-                  // controller.userBookingAddressData =
-                  //     item as RxList<GetUserSaveAddressData>;
-                  // controller.userBookingData = homeController.userSaveAddress;
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          String concatenatedText =
-                              '${item.houseOrFlatNo} ${item.floor} ${item.locality} ${item.landmark} ${item.city} ${item.state}';
-
-                          controller.bookingAddressTextController.value =
-                              controller.bookingAddressTextController.value
-                                  .copyWith(
-                            text: concatenatedText,
-                          );
-                          controller.userBookingData.value = item;
-
-                          Navigator.of(context).pop();
-                        },
-                        child: chooseYourAddressCard(
-                            context: context,
-                            product: item,
-                            controller: homeController),
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                    ],
-                  );
-                  // Other widgets based on your data
+              Divider(),
+              SizedBox(
+                height: 24,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => MapsScreen());
                 },
-              )
-          ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.add,
+                          size: 30,
+                          color: Colors.redAccent,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.0150,
+                        ),
+                        Text(
+                          "Add Address",
+                          style: AppStyles.tsBlackRegular16.copyWith(
+                              color: Colors.redAccent,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 30,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.18,
+                    child: Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: AppColors.grey,
+                    ),
+                  ),
+                  Text(
+                    "SAVED ADDRESSES",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 2),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.18,
+                    child: Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: AppColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              if (homeController.userSaveAddress.value.addressDetails != null)
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: homeController
+                      .userSaveAddress.value.addressDetails?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var item = homeController
+                        .userSaveAddress.value.addressDetails![index];
+                    // controller.userBookingAddressData =
+                    //     item as RxList<GetUserSaveAddressData>;
+                    // controller.userBookingData = homeController.userSaveAddress;
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            String concatenatedText =
+                                '${item.houseOrFlatNo} ${item.floor} ${item.locality} ${item.landmark} ${item.city} ${item.state}';
+
+                            controller.bookingAddressTextController.value =
+                                controller.bookingAddressTextController.value
+                                    .copyWith(
+                              text: concatenatedText,
+                            );
+                            controller.userBookingData.value = item;
+
+                            Navigator.of(context).pop();
+                          },
+                          child: chooseYourAddressCard(
+                              context: context,
+                              product: item,
+                              controller: homeController),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                      ],
+                    );
+                    // Other widgets based on your data
+                  },
+                )
+            ],
+          ),
         ),
       ),
     );
