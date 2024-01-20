@@ -33,6 +33,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
+    print("fffff ${controller.userDetails.toJson()}");
     return Scaffold(
       body: Obx(
         () => RefreshIndicator(

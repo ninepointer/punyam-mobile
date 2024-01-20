@@ -122,24 +122,6 @@ class _MandirViewState extends State<MandirView> {
                         ),
                       ),
                     ),
-
-                    // child: CommonTextField(
-                    //   padding: EdgeInsets.zero,
-                    //   hintText: 'Search Mandir here',
-                    //   prefixIcon: const Icon(Icons.search),
-                    //   suffixIcon: IconButton(
-                    //     icon: const Icon(Icons.close),
-                    //     onPressed: () {
-                    //       // controller.allMandirsearchTextController.clear();
-                    //       // controller.getNearByMandirsDetails(searchQuery: '');
-                    //     },
-                    //   ),
-                    //   onChanged: (query) {
-                    //     // controller.getNearByMandirsDetails(searchQuery: query);
-                    //   },
-                    //   // controller: controller.allMandirsearchTextController,
-                    // ),
-
                     SizedBox(
                       height: MediaQuery.of(context).size.width * 0.0625,
                     ),
@@ -441,12 +423,19 @@ class _MandirViewState extends State<MandirView> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10),
                                           child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Flexible(
-                                                child: Text(
-                                                  "${templeDetails.addressDetails!.address}, ${templeDetails.addressDetails!.city}, ${templeDetails.addressDetails!.state}",
-                                                  style:
-                                                      AppStyles.tsBlackMedium12,
+                                              Expanded(
+                                                child: Container(
+                                                  child: Text(
+                                                    "${templeDetails.addressDetails!.address}, ${templeDetails.addressDetails!.city}, ${templeDetails.addressDetails!.state}",
+                                                    style: AppStyles
+                                                        .tsBlackMedium12,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
                                                 ),
                                               ),
                                             ],

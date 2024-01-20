@@ -17,8 +17,20 @@ class HomeController extends BaseController<DashboardRepository> {
 
   bool get isLoadingStatus => isLoading.value;
 
-  final selectedIndex = 0.obs;
+  final homeaddressTextController = TextEditingController();
+  final homeNameTextController = TextEditingController();
+  final homelandmarkTextController = TextEditingController();
+  final homelocalityTextController = TextEditingController();
+  final homehouseNoTextController = TextEditingController();
+  final homefloorNoTextController = TextEditingController();
+  final homeContactNoTextController = TextEditingController();
+  final homePinCodeTextController = TextEditingController();
+  final homeTagTextController = TextEditingController();
 
+  final selectedIndex = 0.obs;
+  final userSaveAddress = GetUserSaveAddressData().obs;
+
+  final userSaveAddressData = <GetSaveAddressDetails>[].obs;
   final dashboardCarouselList = <DashboardCarousel>[].obs;
   final carouselListforHome = <DashboardCarousel>[].obs;
   final homepagePoojaList = <PoojaCategoryData>[].obs;
@@ -29,6 +41,9 @@ class HomeController extends BaseController<DashboardRepository> {
   final userLoacationLatitude = "".obs;
   final mapLatitude = "".obs;
   final mapLongitude = "".obs;
+
+  String selectedCity = 'Noida'; // Set the default city
+  String selectedState = 'Uttar Pradesh';
   void loadUserDetails() {
     userDetails(AppStorage.getUserDetails());
     loadData();
@@ -42,6 +57,7 @@ class HomeController extends BaseController<DashboardRepository> {
     userDetails.value = AppStorage.getUserDetails();
     await getDashboardCarousel();
     await getPoojaCatagoryDetails();
+    await getUserSaveAddressDetails();
   }
 
   // getUserCurrentLocation() async {
@@ -249,5 +265,91 @@ class HomeController extends BaseController<DashboardRepository> {
     } catch (e) {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
+  }
+
+  Future saveUserAddress() async {
+    isLoading(true);
+    Map<String, dynamic> data = {
+      'address': "",
+      "pincode": homePinCodeTextController.text,
+      'city': selectedCity,
+      'state': selectedState,
+      'country': "india",
+      'latitude': double.parse(mapLatitude.value),
+      'longitude': double.parse(mapLongitude.value),
+      'tag': homeTagTextController.text,
+      'contact_name': homeContactNoTextController.text,
+      'contact_number': homeContactNoTextController.text,
+      'landmark': homelandmarkTextController.text,
+      'locality': homelocalityTextController.text,
+      'floor': homefloorNoTextController.text,
+      'house_or_flat_no': homehouseNoTextController.text,
+    };
+    try {
+      final RepoResponse<SaveAddressResponse> response =
+          await repository.addUserAddress(data);
+
+      if (response.data?.status == "success") {
+        SnackbarHelper.showSnackbar(response.data?.message);
+        clearDataField();
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future<void> getUserSaveAddressDetails() async {
+    try {
+      final RepoResponse<GetSaveAddressResponse> response =
+          await repository.getaddUserAddress();
+      if (response.data != null) {
+        userSaveAddress(response.data?.data);
+        userSaveAddressData(userSaveAddress.value.addressDetails ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future removeUserAddress(String id) async {
+    isLoading(true);
+
+    try {
+      final RepoResponse<GetSaveAddressResponse> response =
+          await repository.removeUserAddress(id);
+      if (response.data != null) {
+        userSaveAddress(response.data?.data);
+      }
+      if (response.data?.status == "success") {
+        SnackbarHelper.showSnackbar(response.data?.message);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  void clearDataField() {
+    homePinCodeTextController.clear();
+    homeNameTextController.clear();
+    selectedCity = "Noida";
+    selectedState = "Uttar Pradesh";
+    homeTagTextController.clear();
+    homeContactNoTextController.clear();
+    homeContactNoTextController.clear();
+    homelandmarkTextController.clear();
+    homelocalityTextController.clear();
+    homefloorNoTextController.clear();
+    homehouseNoTextController.clear();
   }
 }

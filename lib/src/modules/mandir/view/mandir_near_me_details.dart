@@ -307,9 +307,12 @@ Widget nearBymemandirDetailsCard({
                 Icons.person_2_rounded,
                 size: 15,
               ),
+              SizedBox(
+                width: 4,
+              ),
               Text(
-                "Main Diety: ",
-                style: AppStyles.tsBlackMedium14.copyWith(
+                "Main Diety:",
+                style: AppStyles.tsBlackMedium12.copyWith(
                   color: AppColors.black,
                 ),
               ),
@@ -318,7 +321,7 @@ Widget nearBymemandirDetailsCard({
               ),
               Text(
                 godName,
-                style: AppStyles.tsBlackMedium14.copyWith(
+                style: AppStyles.tsBlackMedium12.copyWith(
                   color: AppColors.cinnamonStickColor,
                 ),
               ),
@@ -339,7 +342,6 @@ Widget nearBymemandirDetailsCard({
                     Icons.directions_outlined,
                     color: AppColors.cinnamonStickColor,
                   ),
-                  height: 16,
                   padding: EdgeInsets.zero,
                 ),
               ],
