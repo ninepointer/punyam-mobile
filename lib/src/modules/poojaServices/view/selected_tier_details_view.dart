@@ -22,6 +22,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
     super.initState();
 
     controller = Get.find<PoojaServicesController>();
+    homeController = Get.find<HomeController>();
     controller.bookingPoojaId = controller.selectedPoojaById.value.sId;
     controller.bookingTierId = widget.tierDetails?.sId ?? "";
     controller.bookingAmount = widget.packageDetails?.price.toString();
