@@ -53,6 +53,13 @@
             {
               "client_id": "489252768648-o7mnkp73gd7gvq5ugf2s90690srf8sam.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "489252768648-ue0ku3puedb9ttmkbpb8d5nilctjpafv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.stoxhero.app"
+              }
             }
           ]
         }

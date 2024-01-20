@@ -142,17 +142,17 @@ class NotificationServices {
         final homeController = Get.find<HomeController>();
         if (isLocal) Get.toNamed(AppRoutes.home);
 
-        if (route == 'profile') {
-          Get.toNamed(AppRoutes.profile);
-          Get.find<ProfileController>().loadData();
+        if (route == 'mandir') {
+          Get.toNamed(AppRoutes.mandir);
+          Get.find<MandirController>().loadData();
         }
-        if (route == 'wallet') {
-          Get.toNamed(AppRoutes.wallet);
-          Get.find<WalletController>().loadData();
+        if (route == 'pooja') {
+          Get.toNamed(AppRoutes.poojaServices);
+          Get.find<PoojaServicesController>().loadData();
         }
 
-        if (route == 'faqs') {
-          Get.toNamed(AppRoutes.faq);
+        if (route == 'bookings') {
+          Get.toNamed(AppRoutes.bookingOrders);
         }
       }
     }

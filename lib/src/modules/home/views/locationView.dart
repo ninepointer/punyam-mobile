@@ -87,39 +87,51 @@ class LocationView extends GetView<HomeController> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.location_on,
-                              size: 30,
-                              color: Colors.redAccent,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.0150,
-                            ),
-                            Text(
-                              "Use current location",
-                              style: AppStyles.tsBlackRegular16.copyWith(
-                                  color: Colors.redAccent,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () => {
+                            controller.getUserCurrentLocation(),
+                            Get.back()
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 30,
+                                color: Colors.redAccent,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.0150,
+                              ),
+                              Text(
+                                "Use current location",
+                                style: AppStyles.tsBlackRegular16.copyWith(
+                                    color: Colors.redAccent,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.width * 0.0050,
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 34,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "${controller.locationByLatandLong.first.formattedAddress}",
-                                style: AppStyles.tsGreyRegular14,
+                        GestureDetector(
+                          onTap: () => {
+                            controller.getUserCurrentLocation(),
+                            Get.back()
+                          },
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 34,
                               ),
-                            )
-                          ],
+                              Expanded(
+                                child: Text(
+                                  "${controller.locationByLatandLong.value.length>0?controller.locationByLatandLong.first.formattedAddress:""}",
+                                  style: AppStyles.tsGreyRegular14,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.width * 0.0250,
@@ -229,10 +241,12 @@ class LocationView extends GetView<HomeController> {
                           .userSaveAddress.value.addressDetails![index];
                       return Column(
                         children: [
-                          saveAddressCard(
-                              context: context,
-                              product: item,
-                              controller: controller),
+                          GestureDetector(
+                            child: saveAddressCard(
+                                context: context,
+                                product: item,
+                                controller: controller),
+                          ),
                           SizedBox(
                             height: 12,
                           ),

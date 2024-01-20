@@ -32,50 +32,50 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    // _handleInitialUri();
-    // _handleIncomingLinks();
-    // _handelInitialNotification();
+    _handleInitialUri();
+    _handleIncomingLinks();
+    _handelInitialNotification();
 
     controller = Get.find<HomeController>();
     controller.getUserCurrentLocation();
   }
 
-  // Future _handleInitialUri() async {
-  //   if (!_initialUriIsHandled) {
-  //     _initialUriIsHandled = true;
-  //     try {
-  //       final uri = await getInitialUri();
-  //       print('UniLinks Initial : $uri');
-  //       if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
-  //       if (!mounted) return;
-  //     } catch (e) {
-  //       print('UniLinks Error : $e');
-  //     }
-  //   }
-  // }
+  Future _handleInitialUri() async {
+    if (!_initialUriIsHandled) {
+      _initialUriIsHandled = true;
+      try {
+        final uri = await getInitialUri();
+        print('UniLinks Initial : $uri');
+        if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
+        if (!mounted) return;
+      } catch (e) {
+        print('UniLinks Error : $e');
+      }
+    }
+  }
 
-  // void _handleIncomingLinks() {
-  //   StreamSubscription? sub;
-  //   sub = uriLinkStream.listen((Uri? uri) {
-  //     if (!mounted) return;
-  //     print('UniLinks Incoming : $uri');
-  //     if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
-  //   }, onError: (Object e) {
-  //     if (!mounted) return;
-  //     print('UniLinks Error : $e');
-  //   });
-  // }
+  void _handleIncomingLinks() {
+    StreamSubscription? sub;
+    sub = uriLinkStream.listen((Uri? uri) {
+      if (!mounted) return;
+      print('UniLinks Incoming : $uri');
+      if (uri != null) DeepLinkingServices.handelLinkRouting(uri);
+    }, onError: (Object e) {
+      if (!mounted) return;
+      print('UniLinks Error : $e');
+    });
+  }
 
-  // void _handelInitialNotification() async {
-  //   print('handelInitialNotification');
-  //   RemoteMessage? initialMessage = await firebaseMessaging.getInitialMessage();
-  //   print('handelInitialNotification : ${initialMessage?.toMap()}');
-  //   if (initialMessage != null)
-  //     NotificationServices.handelNotificationClick(
-  //       initialMessage.data,
-  //       isLocal: true,
-  //     );
-  // }
+  void _handelInitialNotification() async {
+    print('handelInitialNotification');
+    RemoteMessage? initialMessage = await firebaseMessaging.getInitialMessage();
+    print('handelInitialNotification : ${initialMessage?.toMap()}');
+    if (initialMessage != null)
+      NotificationServices.handelNotificationClick(
+        initialMessage.data,
+        isLocal: true,
+      );
+  }
   void _updateTab(int index) {
     controller.selectedIndex.value = index;
 

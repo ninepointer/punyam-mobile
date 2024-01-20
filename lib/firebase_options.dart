@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCrdCTvM4CCoZpWEnOlufzCr2ykpNqbF3I',
-    appId: '1:74859915433:android:6e5eea7c977d31d1dc61b8',
-    messagingSenderId: '74859915433',
-    projectId: 'stoxhero-app-2023',
-    storageBucket: 'stoxhero-app-2023.appspot.com',
+    apiKey: 'AIzaSyCkTo01LgueDMvRPbEKsNDBRGf6k5SyPR8',
+    appId: '1:489252768648:android:a597c3f97eff2631b2883d',
+    messagingSenderId: '489252768648',
+    projectId: 'punyam-8d805',
+    storageBucket: 'punyam-8d805.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBkz5SiJMXGpbILPhJJvSKSFd8KPdmawT0',
-    appId: '1:74859915433:ios:a2de608af8a7c318dc61b8',
-    messagingSenderId: '74859915433',
-    projectId: 'stoxhero-app-2023',
-    storageBucket: 'stoxhero-app-2023.appspot.com',
+    apiKey: 'AIzaSyChPN5PSmCSmeJN31Ew3sBfO7memZzir5Q',
+    appId: '1:489252768648:ios:2959d1a798a70ad7b2883d',
+    messagingSenderId: '489252768648',
+    projectId: 'punyam-8d805',
+    storageBucket: 'punyam-8d805.appspot.com',
+    androidClientId: '489252768648-3tf0fjs1v53j21ek8r83so7t1tgcvc0p.apps.googleusercontent.com',
+    iosClientId: '489252768648-ue0ku3puedb9ttmkbpb8d5nilctjpafv.apps.googleusercontent.com',
     iosBundleId: 'com.stoxhero.app',
   );
 }
