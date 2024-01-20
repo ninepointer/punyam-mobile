@@ -6,7 +6,8 @@ import 'package:punyam/src/core/core.dart';
 import 'package:punyam/src/core/widgets/common_text_field_for_signin.dart';
 
 class AddressBottomSheet extends StatefulWidget {
-  AddressBottomSheet({Key? key}) : super(key: key);
+  final GetSaveAddressDetails? product;
+  AddressBottomSheet({this.product, Key? key}) : super(key: key);
 
   @override
   _AddressBottomSheetState createState() => _AddressBottomSheetState();
@@ -21,6 +22,25 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
     controller = Get.find<HomeController>();
     controller.loadData();
     controller.clearDataField();
+    if (widget.product != null) {
+      controller.homeTagTextController.text = widget.product!.tag.toString();
+      controller.homeNameTextController.text =
+          widget.product!.contactName.toString();
+      controller.homeContactNoTextController.text =
+          widget.product!.contactNumber.toString();
+      controller.homehouseNoTextController.text =
+          widget.product!.houseOrFlatNo.toString();
+      controller.homefloorNoTextController.text =
+          widget.product!.floor.toString();
+      controller.homelocalityTextController.text =
+          widget.product!.locality.toString();
+      controller.homelandmarkTextController.text =
+          widget.product!.landmark.toString();
+      controller.homePinCodeTextController.text =
+          widget.product!.pincode.toString();
+      controller.selectedCity = widget.product!.city.toString();
+      controller.selectedState = widget.product!.state.toString();
+    }
     updateStateBasedOnCity(controller.selectedCity);
     controller.selectedState =
         controller.selectedState.isNotEmpty ? controller.selectedState : '';
@@ -132,11 +152,11 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                     ),
                     child: CommonTextFieldForSingIn(
                       hintText: 'Contact no*',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
+                      keyboardType: TextInputType.phone,
+                      // inputFormatters: [
+                      //   LengthLimitingTextInputFormatter(10),
+                      // FilteringTextInputFormatter.,
+                      // ],
                       controller: controller.homeContactNoTextController,
                     ),
                   ),
@@ -162,10 +182,7 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                           ),
                           child: CommonTextFieldForSingIn(
                             hintText: 'Flat / House no* ',
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
+                            keyboardType: TextInputType.name,
                             controller: controller.homehouseNoTextController,
                           ),
                         ),
@@ -190,10 +207,10 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                           ),
                           child: CommonTextFieldForSingIn(
                             hintText: 'Floor no',
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
+                            keyboardType: TextInputType.name,
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.digitsOnly,
+                            // ],
                             controller: controller.homefloorNoTextController,
                           ),
                         ),
@@ -272,7 +289,7 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                             hintText: 'Pin code*',
                             keyboardType: TextInputType.number,
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(6),
+                              // LengthLimitingTextInputFormatter(6),
                               FilteringTextInputFormatter.digitsOnly,
                             ],
                             controller: controller.homePinCodeTextController,
@@ -396,8 +413,15 @@ class _AddressBottomSheetState extends State<AddressBottomSheet> {
                   CommonOutlinedButton(
                     onPressed: () async {
                       if (_areMandatoryFieldsFilled()) {
-                        await controller.saveUserAddress();
-                        await controller.getUserSaveAddressDetails();
+                        if (widget.product != null) {
+                          await controller
+                              .editUserAddress(widget.product!.sId.toString());
+                          await controller.getUserSaveAddressDetails();
+                        } else {
+                          await controller.saveUserAddress();
+                          await controller.getUserSaveAddressDetails();
+                        }
+
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       } else {
