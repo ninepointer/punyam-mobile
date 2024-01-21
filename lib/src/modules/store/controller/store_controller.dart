@@ -29,6 +29,9 @@ class StoreController extends BaseController<StoreRepository> {
   final storeItemCatagoryWiseList = <StoreCatagoryItemList>[].obs;
   final storeCartItems = <StoreCartList>[].obs;
 
+  RxString cartItemId = "".obs;
+  RxInt cartItemQuantity = 0.obs;
+
   final carouselListforMandir = <DashboardCarousel>[].obs;
   final searchTextController = TextEditingController();
   final isSearchCleared = false.obs;
@@ -136,8 +139,8 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future storeAddToCartDetails() async {
     AddTocartRequest data = AddTocartRequest(
-      itemId: "",
-      quantity: 0,
+      itemId: cartItemId.value,
+      quantity: cartItemQuantity.value,
     );
     try {
       final RepoResponse<GenericResponse> response =
@@ -145,7 +148,7 @@ class StoreController extends BaseController<StoreRepository> {
 
       if (response.data != null) {
         if (response.data?.status == "success") {
-          SnackbarHelper.showSnackbar(response.data?.message);
+          // SnackbarHelper.showSnackbar(response.data?.message);
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
@@ -158,7 +161,7 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future removeFromCartDetails() async {
     RemoveFromcartRequest data = RemoveFromcartRequest(
-      itemId: "",
+      itemId: cartItemId.value,
     );
     try {
       final RepoResponse<GenericResponse> response =
@@ -166,7 +169,7 @@ class StoreController extends BaseController<StoreRepository> {
 
       if (response.data != null) {
         if (response.data?.status == "success") {
-          SnackbarHelper.showSnackbar(response.data?.message);
+          // SnackbarHelper.showSnackbar(response.data?.message);
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);

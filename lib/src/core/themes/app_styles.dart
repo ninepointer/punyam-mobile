@@ -1215,6 +1215,12 @@ class AppStyles {
     fontSize: 24,
   );
 
+  static TextStyle tsBlackRegular8 = TextStyle(
+    color: AppColors.black,
+    fontFamily: AppTheme.fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 8,
+  );
   static TextStyle tsBlackRegular10 = TextStyle(
     color: AppColors.black,
     fontFamily: AppTheme.fontFamily,

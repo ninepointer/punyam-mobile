@@ -32,6 +32,14 @@ class _StoreViewState extends State<StoreView> {
         backgroundColor: Colors.grey[50],
         actions: [
           IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () async {
+              await Get.to(
+                () => CartPageWidget(),
+              );
+            },
+          ),
+          IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
               await Get.to(
@@ -64,15 +72,18 @@ class _StoreViewState extends State<StoreView> {
                           title: Column(
                             children: [
                               // Circular cropped image
-                              CircleAvatar(
-                                radius: 20,
-                                backgroundColor: Colors.white,
-                                child: ClipOval(
-                                  child: Image.network(
-                                    category.image!.url.toString(),
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
+                              Container(
+                                padding: EdgeInsets.only(top: 11),
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.white,
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      category.image!.url.toString(),
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -85,7 +96,8 @@ class _StoreViewState extends State<StoreView> {
                                       2, // Allow text to wrap to the second line
                                   overflow: TextOverflow
                                       .ellipsis, // Ellipsis for overflow
-                                  style: AppStyles.tsBlackRegular12,
+                                  style: AppStyles.tsBlackRegular8,
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ],
@@ -115,7 +127,7 @@ class _StoreViewState extends State<StoreView> {
                     children: [
                       // Adjust the height as needed
                       Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
+                        padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
                           height: MediaQuery.of(context).size.width * 0.4,
                           width: 280,
@@ -163,44 +175,57 @@ class _StoreViewState extends State<StoreView> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                        padding: const EdgeInsets.only(top: 20.0, left: 8),
                         child: Container(
-                          width: 310,
-                          height: 525,
-                          child: GridView.count(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.8,
-                            shrinkWrap: true,
-                            clipBehavior: Clip.none,
-                            // padding: const EdgeInsets.all(
-                            //     8.0), // Add padding between items
-                            children: [
-                              for (int i = 1;
-                                  i <
-                                      controller
-                                          .storeItemCatagoryWiseList.length;
-                                  i++)
-                                Padding(
-                                  padding: const EdgeInsets.all(
-                                      4.0), // Add padding around each item
-                                  child: Container(
-                                    child: StoreCard(
-                                      item: controller
-                                          .storeItemCatagoryWiseList[i],
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                        width: 0.2,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
+                            width: 290,
+                            height: 525,
+                            child:
+                                controller.storeItemCatagoryWiseList.isNotEmpty
+                                    ? GridView.count(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 0.7,
+
+                                        mainAxisSpacing: 10,
+                                        shrinkWrap: true,
+                                        clipBehavior: Clip.none,
+                                        // padding: const EdgeInsets.all(
+                                        //     8.0), // Add padding between items
+                                        children: [
+                                          for (int i = 1;
+                                              i <
+                                                  controller
+                                                      .storeItemCatagoryWiseList
+                                                      .length;
+                                              i++)
+                                            Padding(
+                                              padding: const EdgeInsets.all(
+                                                  4.0), // Add padding around each item
+                                              child: Container(
+                                                child: StoreCard(
+                                                  item: controller
+                                                      .storeItemCatagoryWiseList[i],
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Colors.grey,
+                                                    width: 0.2,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          "No Items Found",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )),
                       ),
 
                       //),
