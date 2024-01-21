@@ -26,6 +26,9 @@ class CartPageWidget extends GetView<StoreController> {
                 bottom: 0,
                 right: 0,
                 child: InkWell(
+                  onTap: () {
+                    SnackbarHelper.showSnackbar("Place order comming soon");
+                  },
                   child: Container(
                     margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                     child: Container(
