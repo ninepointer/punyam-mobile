@@ -181,9 +181,10 @@ class _MandirViewState extends State<MandirView> {
                         children: [
                           InkWell(
                             onTap: () {
-                              // Handle button tap
+                              _selectedTempleList = controller.nearbyMandirs;
                             },
                             child: Container(
+                              width: 80,
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -191,10 +192,11 @@ class _MandirViewState extends State<MandirView> {
                                     color: AppColors.cinnamonStickColor),
                               ),
                               child: Text(
-                                "Open Now",
+                                "All",
                                 style: TextStyle(
                                   color: Colors.orange,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

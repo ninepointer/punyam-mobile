@@ -22,6 +22,7 @@ class _StoreCardState extends State<StoreCard> {
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
+    controller.getStoreCartItemsDetails();
   }
 
   @override
@@ -115,7 +116,7 @@ class _StoreCardState extends State<StoreCard> {
                             controller.cartItemId.value =
                                 widget.item!.sId.toString();
                             controller.removeFromCartDetails();
-                            showSnackBar("Decreased", quantity);
+                            // showSnackBar("Decreased", quantity);
                           }
                         });
                       },
@@ -152,7 +153,7 @@ class _StoreCardState extends State<StoreCard> {
                           controller.cartItemId.value =
                               widget.item!.sId.toString();
                           controller.storeAddToCartDetails();
-                          showSnackBar("Increased", quantity);
+                          // showSnackBar("Increased", quantity);
                         });
                       },
                       child: Text(
@@ -172,20 +173,21 @@ class _StoreCardState extends State<StoreCard> {
     );
   }
 
-  void showSnackBar(String action, int quantity) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "${widget.item?.name} added to cart\nPrice: ${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}\nQuantity: $quantity",
-        ),
-        duration: Duration(seconds: 4),
-        action: SnackBarAction(
-          label: 'View Cart',
-          onPressed: () {
-            Get.to(() => CartPageWidget());
-          },
-        ),
-      ),
-    );
-  }
+//   void showSnackBar(String action, int quantity) {
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(
+//         content: Text(
+//           "${widget.item?.name} added to cart\nPrice: ${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}\nQuantity: $quantity",
+//         ),
+//         duration: Duration(seconds: 4),
+//         action: SnackBarAction(
+//           label: 'View Cart',
+//           onPressed: () {
+//             Get.to(() => CartPageWidget());
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
 }
