@@ -21,7 +21,6 @@ class _BookingOrderViewState extends State<BookingOrderView> {
 
   @override
   Widget build(BuildContext context) {
-    print("Hello ${controller.userAllBookingOrders.toJson()}");
     return Scaffold(
       body: Obx(
         () => RefreshIndicator(
@@ -31,6 +30,7 @@ class _BookingOrderViewState extends State<BookingOrderView> {
           },
           child: Visibility(
             visible: !controller.isLoadingStatus,
+            replacement: BookingOrderShimmer(),
             child: SingleChildScrollView(
               child: Padding(
                 padding: AppConstants.getAppPadding(context),

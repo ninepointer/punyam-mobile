@@ -31,7 +31,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
         },
         child: Visibility(
           visible: !controller.isLoadingStatus,
-          // replacement: DashboardShimmer(),
+          replacement: PoojaViewShimmer(),
           child: SingleChildScrollView(
             child: Padding(
               padding: AppConstants.getAppPadding(context),

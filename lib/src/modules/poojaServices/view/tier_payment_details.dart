@@ -60,7 +60,7 @@ class _TierWisePaymentDetailsState extends State<TierWisePaymentDetails>
           ),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 450,
+            height: 350,
             child: TabBarView(
               controller: tabController,
               children: widget.packages?.map((package) {

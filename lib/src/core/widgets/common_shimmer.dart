@@ -22,7 +22,8 @@ class ListViewShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: !isScroll,
-      physics: isScroll ? ClampingScrollPhysics() : NeverScrollableScrollPhysics(),
+      physics:
+          isScroll ? ClampingScrollPhysics() : NeverScrollableScrollPhysics(),
       padding: padding ?? EdgeInsets.all(16).copyWith(bottom: 56),
       itemCount: itemCount ?? 3,
       itemBuilder: (context, index) {
@@ -35,10 +36,12 @@ class ListViewShimmer extends StatelessWidget {
 class CustomCardShimmer extends StatelessWidget {
   final EdgeInsets? margin;
   final double? height;
+  final double? width;
   const CustomCardShimmer({
     super.key,
     this.margin,
     this.height,
+    this.width,
   });
 
   @override
@@ -48,7 +51,7 @@ class CustomCardShimmer extends StatelessWidget {
       highlightColor: AppColors.grey.withOpacity(.5),
       child: Container(
         height: height ?? 40,
-        margin: margin ?? EdgeInsets.only(bottom: 8),
+        width: width ?? double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           color: AppColors.white,
@@ -68,10 +71,31 @@ class SmallCardShimmer extends StatelessWidget {
       baseColor: AppColors.grey.withOpacity(.25),
       highlightColor: AppColors.grey.withOpacity(.5),
       child: Container(
-        height: 80,
-        margin: margin ?? EdgeInsets.only(bottom: 8),
+        width: MediaQuery.of(context).size.width * 0.25,
+        height: MediaQuery.of(context).size.width * 0.27,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
+          color: AppColors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class CircularCardShimmer extends StatelessWidget {
+  final EdgeInsets? margin;
+  const CircularCardShimmer({super.key, this.margin});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: AppColors.grey.withOpacity(.25),
+      highlightColor: AppColors.grey.withOpacity(.5),
+      child: Container(
+        height: MediaQuery.of(context).size.width * 0.178,
+        width: MediaQuery.of(context).size.width * 0.178,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
           color: AppColors.white,
         ),
       ),
@@ -97,6 +121,25 @@ class MediumCardShimmer extends StatelessWidget {
   }
 }
 
+class MediumDashBoardCardShimmer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: AppColors.grey.withOpacity(.25),
+      highlightColor: AppColors.grey.withOpacity(.5),
+      child: Container(
+        height: 140,
+        width: MediaQuery.of(context).size.width * 0.6,
+        margin: EdgeInsets.only(bottom: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.white,
+        ),
+      ),
+    );
+  }
+}
+
 class LargeCardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -104,7 +147,7 @@ class LargeCardShimmer extends StatelessWidget {
       baseColor: AppColors.grey.withOpacity(.25),
       highlightColor: AppColors.grey.withOpacity(.5),
       child: Container(
-        height: 200,
+        height: MediaQuery.of(context).size.width * 0.4,
         margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),

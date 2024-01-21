@@ -77,4 +77,10 @@ class AppUrls {
       "$apiURL/user/removeaddress/$id";
 
   static const String getAllUserBooking = "$apiURL/booking/user";
+
+  static String getTrandingMandirs(String? lat, String? long) =>
+      "$apiURL/mandir/user/trending?lat=$lat&long=$long";
+
+  static String getFavirouteMandirs(String? lat, String? long) =>
+      "$apiURL/mandir/user/myfavourite?lat=$lat&long=$long";
 }

@@ -1,3 +1,220 @@
+// class TempleNearMeResponse {
+//   String? status;
+//   String? message;
+//   List<TempleNearByMeList>? data;
+
+//   TempleNearMeResponse({this.status, this.message, this.data});
+
+//   TempleNearMeResponse.fromJson(Map<String, dynamic> json) {
+//     status = json['status'];
+//     message = json['message'];
+//     if (json['data'] != null) {
+//       data = <TempleNearByMeList>[];
+//       json['data'].forEach((v) {
+//         data!.add(new TempleNearByMeList.fromJson(v));
+//       });
+//     }
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['status'] = this.status;
+//     data['message'] = this.message;
+//     if (this.data != null) {
+//       data['data'] = this.data!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
+
+// class TempleNearByMeList {
+//   String? name;
+//   String? description;
+//   String? sId;
+//   TempleNearByMeCoverImage? coverImage;
+//   bool? dham;
+//   bool? popular;
+//   String? morningOpeningTime;
+//   String? morningClosingTime;
+//   String? eveningOpeningTime;
+//   String? eveningClosingTime;
+//   TempleNearByMeAddressDetails? addressDetails;
+//   List<TempleNearByMeImages>? images;
+//   int? constructionYear;
+//   num? distance;
+//   String? deviDevta;
+
+//   TempleNearByMeList(
+//       {this.name,
+//       this.sId,
+//       this.description,
+//       this.coverImage,
+//       this.dham,
+//       this.popular,
+//       this.morningOpeningTime,
+//       this.morningClosingTime,
+//       this.eveningOpeningTime,
+//       this.eveningClosingTime,
+//       this.addressDetails,
+//       this.images,
+//       this.constructionYear,
+//       this.distance,
+//       this.deviDevta});
+
+//   TempleNearByMeList.fromJson(Map<String, dynamic> json) {
+//     name = json['name'];
+//     sId = json["_id"];
+//     description = json['description'];
+//     coverImage = json['cover_image'] != null
+//         ? new TempleNearByMeCoverImage.fromJson(json['cover_image'])
+//         : null;
+//     dham = json['dham'];
+//     popular = json['popular'];
+//     morningOpeningTime = json['morning_opening_time'];
+//     morningClosingTime = json['morning_closing_time'];
+//     eveningOpeningTime = json['evening_opening_time'];
+//     eveningClosingTime = json['evening_closing_time'];
+//     addressDetails = json['address_details'] != null
+//         ? new TempleNearByMeAddressDetails.fromJson(json['address_details'])
+//         : null;
+//     if (json['images'] != null) {
+//       images = <TempleNearByMeImages>[];
+//       json['images'].forEach((v) {
+//         images!.add(new TempleNearByMeImages.fromJson(v));
+//       });
+//     }
+//     constructionYear = json['construction_year'];
+//     distance = json['distance'];
+//     deviDevta = json['devi_devta'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['name'] = this.name;
+//     data["_id"] = this.sId;
+//     data['description'] = this.description;
+//     if (this.coverImage != null) {
+//       data['cover_image'] = this.coverImage!.toJson();
+//     }
+//     data['dham'] = this.dham;
+//     data['popular'] = this.popular;
+//     data['morning_opening_time'] = this.morningOpeningTime;
+//     data['morning_closing_time'] = this.morningClosingTime;
+//     data['evening_opening_time'] = this.eveningOpeningTime;
+//     data['evening_closing_time'] = this.eveningClosingTime;
+//     if (this.addressDetails != null) {
+//       data['address_details'] = this.addressDetails!.toJson();
+//     }
+//     if (this.images != null) {
+//       data['images'] = this.images!.map((v) => v.toJson()).toList();
+//     }
+//     data['construction_year'] = this.constructionYear;
+//     data['distance'] = this.distance;
+//     data['devi_devta'] = this.deviDevta;
+//     return data;
+//   }
+// }
+
+// class TempleNearByMeCoverImage {
+//   String? name;
+//   String? url;
+
+//   TempleNearByMeCoverImage({this.name, this.url});
+
+//   TempleNearByMeCoverImage.fromJson(Map<String, dynamic> json) {
+//     name = json['name'];
+//     url = json['url'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['name'] = this.name;
+//     data['url'] = this.url;
+//     return data;
+//   }
+// }
+
+// class TempleNearByMeAddressDetails {
+//   TempleNearByMeLocation? location;
+//   String? address;
+//   String? pincode;
+//   String? city;
+//   String? state;
+//   String? country;
+
+//   TempleNearByMeAddressDetails(
+//       {this.location,
+//       this.address,
+//       this.pincode,
+//       this.city,
+//       this.state,
+//       this.country});
+
+//   TempleNearByMeAddressDetails.fromJson(Map<String, dynamic> json) {
+//     location = json['location'] != null
+//         ? new TempleNearByMeLocation.fromJson(json['location'])
+//         : null;
+//     address = json['address'];
+//     pincode = json['pincode'];
+//     city = json['city'];
+//     state = json['state'];
+//     country = json['country'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     if (this.location != null) {
+//       data['location'] = this.location!.toJson();
+//     }
+//     data['address'] = this.address;
+//     data['pincode'] = this.pincode;
+//     data['city'] = this.city;
+//     data['state'] = this.state;
+//     data['country'] = this.country;
+//     return data;
+//   }
+// }
+
+// class TempleNearByMeLocation {
+//   String? type;
+//   List<num>? coordinates;
+
+//   TempleNearByMeLocation({this.type, this.coordinates});
+
+//   TempleNearByMeLocation.fromJson(Map<String, dynamic> json) {
+//     type = json['type'];
+//     coordinates = (json['coordinates'] as List?)?.map((e) => e as num).toList();
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['type'] = this.type;
+//     data['coordinates'] = this.coordinates;
+//     return data;
+//   }
+// }
+
+// class TempleNearByMeImages {
+//   String? url;
+//   String? name;
+//   String? sId;
+
+//   TempleNearByMeImages({this.url, this.name, this.sId});
+
+//   TempleNearByMeImages.fromJson(Map<String, dynamic> json) {
+//     url = json['url'];
+//     name = json['name'];
+//     sId = json['_id'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['url'] = this.url;
+//     data['name'] = this.name;
+//     data['_id'] = this.sId;
+//     return data;
+//   }
+// }
 class TempleNearMeResponse {
   String? status;
   String? message;
@@ -28,9 +245,9 @@ class TempleNearMeResponse {
 }
 
 class TempleNearByMeList {
+  String? sId;
   String? name;
   String? description;
-  String? sId;
   TempleNearByMeCoverImage? coverImage;
   bool? dham;
   bool? popular;
@@ -41,12 +258,16 @@ class TempleNearByMeList {
   TempleNearByMeAddressDetails? addressDetails;
   List<TempleNearByMeImages>? images;
   int? constructionYear;
+  String? slug;
   num? distance;
   String? deviDevta;
+  String? accessibility;
+  String? morningAartiTime;
+  String? eveningAartiTime;
 
   TempleNearByMeList(
-      {this.name,
-      this.sId,
+      {this.sId,
+      this.name,
       this.description,
       this.coverImage,
       this.dham,
@@ -58,12 +279,16 @@ class TempleNearByMeList {
       this.addressDetails,
       this.images,
       this.constructionYear,
+      this.slug,
       this.distance,
-      this.deviDevta});
+      this.deviDevta,
+      this.accessibility,
+      this.morningAartiTime,
+      this.eveningAartiTime});
 
   TempleNearByMeList.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
     name = json['name'];
-    sId = json["_id"];
     description = json['description'];
     coverImage = json['cover_image'] != null
         ? new TempleNearByMeCoverImage.fromJson(json['cover_image'])
@@ -84,14 +309,18 @@ class TempleNearByMeList {
       });
     }
     constructionYear = json['construction_year'];
+    slug = json['slug'];
     distance = json['distance'];
     deviDevta = json['devi_devta'];
+    accessibility = json['accessibility'];
+    morningAartiTime = json['morning_aarti_time'];
+    eveningAartiTime = json['evening_aarti_time'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
     data['name'] = this.name;
-    data["_id"] = this.sId;
     data['description'] = this.description;
     if (this.coverImage != null) {
       data['cover_image'] = this.coverImage!.toJson();
@@ -109,27 +338,31 @@ class TempleNearByMeList {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
     data['construction_year'] = this.constructionYear;
+    data['slug'] = this.slug;
     data['distance'] = this.distance;
     data['devi_devta'] = this.deviDevta;
+    data['accessibility'] = this.accessibility;
+    data['morning_aarti_time'] = this.morningAartiTime;
+    data['evening_aarti_time'] = this.eveningAartiTime;
     return data;
   }
 }
 
 class TempleNearByMeCoverImage {
-  String? name;
   String? url;
+  String? name;
 
-  TempleNearByMeCoverImage({this.name, this.url});
+  TempleNearByMeCoverImage({this.url, this.name});
 
   TempleNearByMeCoverImage.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
     url = json['url'];
+    name = json['name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
     data['url'] = this.url;
+    data['name'] = this.name;
     return data;
   }
 }
@@ -141,6 +374,8 @@ class TempleNearByMeAddressDetails {
   String? city;
   String? state;
   String? country;
+  String? locality;
+  String? landmark;
 
   TempleNearByMeAddressDetails(
       {this.location,
@@ -148,7 +383,9 @@ class TempleNearByMeAddressDetails {
       this.pincode,
       this.city,
       this.state,
-      this.country});
+      this.country,
+      this.locality,
+      this.landmark});
 
   TempleNearByMeAddressDetails.fromJson(Map<String, dynamic> json) {
     location = json['location'] != null
@@ -159,6 +396,8 @@ class TempleNearByMeAddressDetails {
     city = json['city'];
     state = json['state'];
     country = json['country'];
+    locality = json['locality'];
+    landmark = json['landmark'];
   }
 
   Map<String, dynamic> toJson() {
@@ -171,6 +410,8 @@ class TempleNearByMeAddressDetails {
     data['city'] = this.city;
     data['state'] = this.state;
     data['country'] = this.country;
+    data['locality'] = this.locality;
+    data['landmark'] = this.landmark;
     return data;
   }
 }
@@ -183,7 +424,7 @@ class TempleNearByMeLocation {
 
   TempleNearByMeLocation.fromJson(Map<String, dynamic> json) {
     type = json['type'];
-    coordinates = (json['coordinates'] as List?)?.map((e) => e as num).toList();
+    coordinates = json['coordinates'].cast<num>();
   }
 
   Map<String, dynamic> toJson() {

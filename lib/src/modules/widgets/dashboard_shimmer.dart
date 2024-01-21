@@ -8,30 +8,54 @@ class DashboardShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(8).copyWith(bottom: 100),
+      padding: AppConstants.getAppPadding(context),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(child: SmallCardShimmer()),
-              SizedBox(width: 8),
-              Expanded(child: SmallCardShimmer()),
-              SizedBox(width: 8),
-              Expanded(child: SmallCardShimmer()),
-            ],
-          ),
-          LargeCardShimmer(),
+          // Row(
+          //   children: [
+          //     Expanded(child: SmallCardShimmer()),
+          //     SizedBox(width: 8),
+          //     Expanded(child: SmallCardShimmer()),
+          //     SizedBox(width: 8),
+          //     Expanded(child: SmallCardShimmer()),
+          //   ],
+          // ),
           CustomCardShimmer(),
-          Row(
-            children: [
-              Expanded(child: MediumCardShimmer()),
-              SizedBox(width: 8),
-              Expanded(child: MediumCardShimmer()),
-              SizedBox(width: 8),
-              Expanded(child: MediumCardShimmer()),
-            ],
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.0225,
           ),
           LargeCardShimmer(),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.0225,
+          ),
+          CustomCardShimmer(),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.0625,
+          ),
+          Row(
+            children: [
+              Expanded(child: SmallCardShimmer()),
+              SizedBox(width: 8),
+              Expanded(child: SmallCardShimmer()),
+              SizedBox(width: 8),
+              Expanded(child: SmallCardShimmer()),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.0625,
+          ),
+          CustomCardShimmer(),
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.0625,
+          ),
+          Row(
+            children: [
+              Expanded(child: MediumDashBoardCardShimmer()),
+              SizedBox(width: 8),
+              Expanded(child: MediumDashBoardCardShimmer()),
+            ],
+          ),
+
           CustomCardShimmer(),
           LargeCardShimmer(),
           CustomCardShimmer(),

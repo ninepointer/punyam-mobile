@@ -45,6 +45,8 @@ class MandirController extends BaseController<MandirRespository> {
   final dhamTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
   final popularTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
   final mandirSearchByStringList = <AllMandirData>[].obs;
+  final trandingNowMandirs = <TempleNearByMeList>[].obs;
+  final myFaviroutesMandirs = <TempleNearByMeList>[].obs;
 
   final isFavorite = false.obs;
 
@@ -68,6 +70,8 @@ class MandirController extends BaseController<MandirRespository> {
     await getPopularTamplesDetails();
     await getDhamTemplesDetails();
     await getAllDeiDevtaListDetails();
+    await getTrandingNowTamplesDetails();
+    await getMyFaviroutesTamplesDetails();
     // await getDhamTamplesByDistanceDetails();
     // await getPopularTamplesByDistanceDetails();
   }
@@ -199,6 +203,41 @@ class MandirController extends BaseController<MandirRespository> {
   //     SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
   //   }
   // }
+
+  Future<void> getMyFaviroutesTamplesDetails() async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
+    try {
+      final RepoResponse<TempleNearMeResponse> response = await repository
+          .getAllfaviroutesMandirs(latitude.toString(), longitude.toString());
+      if (response.data != null) {
+        myFaviroutesMandirs(response.data?.data);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future<void> getTrandingNowTamplesDetails() async {
+    final latitude = AppStorage.locationLatitude() ?? '28.4744';
+    final longitude = AppStorage.locationLongitude() ?? '77.5040';
+    try {
+      final RepoResponse<TempleNearMeResponse> response = await repository
+          .getAllTrandingMandirs(latitude.toString(), longitude.toString());
+      if (response.data != null) {
+        trandingNowMandirs(response.data?.data);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
   Future<void> getPopularTamplesDetails() async {
     final latitude = AppStorage.locationLatitude() ?? '28.4744';
     final longitude = AppStorage.locationLongitude() ?? '77.5040';

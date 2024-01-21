@@ -23,6 +23,7 @@ class BookingController extends BaseController<BookingOrderRepository> {
   }
 
   Future getAllBookingOrdersDetails() async {
+    isLoading(true);
     try {
       final RepoResponse<GatAllBookingResponse> response =
           await repository.getAllBookingOrders();
@@ -34,5 +35,6 @@ class BookingController extends BaseController<BookingOrderRepository> {
     } catch (e) {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
+    isLoading(false);
   }
 }

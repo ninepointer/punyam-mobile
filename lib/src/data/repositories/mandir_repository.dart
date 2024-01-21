@@ -127,4 +127,22 @@ class MandirRespository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: AllMandirResponse.fromJson(response));
   }
+
+  Future<RepoResponse<TempleNearMeResponse>> getAllTrandingMandirs(
+      String lat, String long) async {
+    String apiURL = AppUrls.getTrandingMandirs(lat, long);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<TempleNearMeResponse>> getAllfaviroutesMandirs(
+      String lat, String long) async {
+    String apiURL = AppUrls.getFavirouteMandirs(lat, long);
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: TempleNearMeResponse.fromJson(response));
+  }
 }
