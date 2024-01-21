@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:punyam/src/app/app.dart';
 import 'package:punyam/src/modules/store/controller/store_controller.dart';
+import 'package:punyam/src/modules/store/view/store_search_view.dart';
 import 'package:punyam/src/modules/store/widget/store_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -29,6 +30,16 @@ class _StoreViewState extends State<StoreView> {
       appBar: AppBar(
         title: Text("Mandir Store"),
         backgroundColor: Colors.grey[50],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              await Get.to(
+                () => StoreSearchView(),
+              );
+            },
+          ),
+        ],
       ),
       body: Obx(
         () => RefreshIndicator(
@@ -116,21 +127,26 @@ class _StoreViewState extends State<StoreView> {
                               //           .linkToCarousel ??
                               //       '',
                               // ),
-                              child: Container(
-                                width: double.infinity,
-                                height: MediaQuery.of(context).size.width * 0.4,
-                                decoration: BoxDecoration(
-                                  color: AppColors.grey.withOpacity(.1),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    "${controller.dashboardCarouselList[index].carouselImage ?? ''}",
-                                    fit: BoxFit.fill,
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    width: 400,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.grey.withOpacity(.1),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      "${controller.dashboardCarouselList[index].carouselImage ?? ''}",
+                                      fit: BoxFit.fill,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.4,
+                                      width: 400,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -158,7 +174,7 @@ class _StoreViewState extends State<StoreView> {
                           childAspectRatio: 0.8,
                           shrinkWrap: true,
                           children: [
-                            for (int i = 1; i < 8; i++)
+                            for (int i = 1; i < 11; i++)
                               Container(
                                 child: StoreCard(),
                                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -173,7 +189,6 @@ class _StoreViewState extends State<StoreView> {
                                 ),
                               )
                           ],
-                       
                         ),
                       ),
                     ),

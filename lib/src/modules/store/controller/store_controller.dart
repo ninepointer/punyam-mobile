@@ -18,41 +18,30 @@ class StoreController extends BaseController<StoreRepository> {
   final isLoading = false.obs;
   bool get isLoadingStatus => isLoading.value;
 
-  final isMandirLoading = false.obs;
-  bool get isMandirLoadingStatus => isMandirLoading.value;
+  // final isMandirLoading = false.obs;
+  // bool get isMandirLoadingStatus => isMandirLoading.value;
 
-  final isSearchMandirLoading = false.obs;
-  bool get isSearchMandirLoadingStatus => isSearchMandirLoading.value;
+  // final isSearchMandirLoading = false.obs;
+  // bool get isSearchMandirLoadingStatus => isSearchMandirLoading.value;
 
   final dashboardCarouselList = <DashboardCarousel>[].obs;
 
   final carouselListforMandir = <DashboardCarousel>[].obs;
+  final searchTextController = TextEditingController();
+  final isSearchCleared = false.obs;
 
-  final popularMandirsearchTextController = TextEditingController();
-  final dhamMandirsearchTextController = TextEditingController();
-  final allMandirsearchTextController = TextEditingController();
-  final mandirByDevtasearchTextController = TextEditingController();
-
-  final allTempleListDetails = <AllMandirData>[].obs;
-  final mandirByDevitaNameListDetails = <TempleNearByMeList>[].obs;
-  final popularTempleListDetails = <AllMandirData>[].obs;
-  final popularTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
-  final dhamTempleListDetails = <AllMandirData>[].obs;
-  final dhamTempleListByDistanceDetails = <TempleNearByMeList>[].obs;
-  final deviDevtaListDetails = <DeviDevtaList>[].obs;
-  final nearbyMandirs = <TempleNearByMeList>[].obs;
-  final nearbyMandirsSearch = <TempleNearByMeList>[].obs;
-  final dhamTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
-  final popularTempleListByDistanceSearchDetails = <TempleNearByMeList>[].obs;
-  final mandirSearchByStringList = <AllMandirData>[].obs;
+  // final popularMandirsearchTextController = TextEditingController();
+  // final dhamMandirsearchTextController = TextEditingController();
+  // final allMandirsearchTextController = TextEditingController();
+  // final mandirByDevtasearchTextController = TextEditingController();
 
   final isFavorite = false.obs;
 
   @override
   void onClose() {
     print("Hello");
-    allMandirsearchTextController.clear();
-    nearbyMandirsSearch.clear();
+   // allMandirsearchTextController.clear();
+   
     super.onClose();
   }
 

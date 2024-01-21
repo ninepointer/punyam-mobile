@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:punyam/src/modules/store/widget/qunatity_button.dart';
 
 import '../../../core/core.dart';
 
@@ -54,21 +55,23 @@ class _StoreCardState extends State<StoreCard> {
               ),
               Spacer(), // To push the next element to the right
               // "+" button in the bottom right
-              ElevatedButton(
-                onPressed: () {
-                  // Handle button press
-                },
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all<double>(0),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: AppColors.cinnamonStickColor,
-                  size: 24, // Adjust the size of the icon as needed
-                ),
-              )
+
+              QuantityButton()
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // Handle button press
+              //   },
+              //   style: ButtonStyle(
+              //     elevation: MaterialStateProperty.all<double>(0),
+              //     backgroundColor:
+              //         MaterialStateProperty.all<Color>(Colors.white),
+              //   ),
+              //   child: Icon(
+              //     Icons.add,
+              //     color: AppColors.cinnamonStickColor,
+              //     size: 24, // Adjust the size of the icon as needed
+              //   ),
+              // )
             ],
           ),
         ],
