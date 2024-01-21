@@ -166,8 +166,8 @@ class _DashboardViewState extends State<DashboardView> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Get.to(() => PoojaServicesView());
-                              SnackbarHelper.showSnackbar("Coming soon");
+                              Get.to(() => StoreView());
+                              //SnackbarHelper.showSnackbar("Coming soon");
                             },
                             child: boxCard(
                                 label: "Store",

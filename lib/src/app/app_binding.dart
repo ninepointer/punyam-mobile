@@ -1,3 +1,5 @@
+import 'package:punyam/src/modules/store/controller/store_controller.dart';
+
 import 'app.dart';
 
 class AppBinding extends Bindings {
@@ -7,6 +9,7 @@ class AppBinding extends Bindings {
     Get.put(NotificationServices(), permanent: true);
     Get.put(AuthRepository(), permanent: true);
     Get.put(ProfileRepository(), permanent: true);
+    Get.put(StoreRepository(), permanent: true);
 
     Get.put(WalletRepository(), permanent: true);
     Get.put(PoojaServicesRespository(), permanent: true);
@@ -22,5 +25,7 @@ class AppBinding extends Bindings {
     Get.put(PoojaServicesController(), permanent: true);
     Get.put(MandirController(), permanent: true);
     Get.put(BookingController(), permanent: true);
+    Get.put(StoreController(), permanent: true);
+
   }
 }

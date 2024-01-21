@@ -970,6 +970,12 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );
+  static TextStyle tsprimaryGrayishBlackMedium16 = TextStyle(
+    color: AppColors.blackGrayish,
+    fontFamily: AppTheme.fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+  );
   static TextStyle tsprimaryGrayishBlackMedium18 = TextStyle(
     color: AppColors.blackGrayish,
     fontFamily: AppTheme.fontFamily,
@@ -987,6 +993,12 @@ class AppStyles {
     fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 14,
+  );
+  static TextStyle tsprimarywhiteMedium16 = TextStyle(
+    color: AppColors.white,
+    fontFamily: AppTheme.fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
   );
   static TextStyle tsprimarywhiteMedium20 = TextStyle(
     color: AppColors.white,
