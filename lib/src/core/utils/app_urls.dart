@@ -83,4 +83,16 @@ class AppUrls {
 
   static String getFavirouteMandirs(String? lat, String? long) =>
       "$apiURL/mandir/user/myfavourite?lat=$lat&long=$long";
+
+  //store api's
+  static const String storeCatagory = "$apiURL/itemcategory";
+  //items/category/{categoryId}
+
+  static String storeCatagoryWiseItem(String? catId) =>
+      "$apiURL/items/category/$catId";
+
+  //api/v1/user/cart/add
+  static const String StoreAddtoCart = "$apiURL/user/cart/add";
+  static const String StoreRemovetoCart = "$apiURL/user/cart/remove";
+  static const String getCartItems = "$apiURL/user/cart";
 }

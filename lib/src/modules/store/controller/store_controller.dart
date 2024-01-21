@@ -25,6 +25,9 @@ class StoreController extends BaseController<StoreRepository> {
   // bool get isSearchMandirLoadingStatus => isSearchMandirLoading.value;
 
   final dashboardCarouselList = <DashboardCarousel>[].obs;
+  final storeCatagoryList = <StoreCatagoryList>[].obs;
+  final storeItemCatagoryWiseList = <StoreCatagoryItemList>[].obs;
+  final storeCartItems = <StoreCartList>[].obs;
 
   final carouselListforMandir = <DashboardCarousel>[].obs;
   final searchTextController = TextEditingController();
@@ -40,8 +43,8 @@ class StoreController extends BaseController<StoreRepository> {
   @override
   void onClose() {
     print("Hello");
-   // allMandirsearchTextController.clear();
-   
+    // allMandirsearchTextController.clear();
+
     super.onClose();
   }
 
@@ -52,6 +55,8 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future loadData() async {
     await getDashboardCarousel();
+    await getAllStoreCatagoryList();
+    await getStoreCartItemsDetails();
   }
 //all functions down here
 
@@ -62,14 +67,36 @@ class StoreController extends BaseController<StoreRepository> {
           await repository.getDashboardCarousel();
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
-          dashboardCarouselList.clear();
-          dashboardCarouselList(response.data?.data ?? []);
-          for (DashboardCarousel carousel in dashboardCarouselList) {
+          // Create a new list to store items you want to keep
+          List<DashboardCarousel> updatedList = [];
+
+          for (DashboardCarousel carousel in response.data?.data ?? []) {
             if (carousel.position == "Home") {
-              dashboardCarouselList.addAll([carousel]);
+              updatedList.add(carousel);
             }
           }
+
+          // Clear the original list and add items from the updated list
+          dashboardCarouselList.clear();
+          dashboardCarouselList.addAll(updatedList);
         }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future getAllStoreCatagoryList() async {
+    isLoading(true);
+    try {
+      final RepoResponse<StoreCatagoryResponse> response =
+          await repository.getAllCategories();
+      if (response.data != null) {
+        storeCatagoryList(response.data?.data ?? []);
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }
@@ -77,5 +104,76 @@ class StoreController extends BaseController<StoreRepository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isLoading(false);
+  }
+
+  Future getAllItemsCatagoryWistDetails(String? id) async {
+    try {
+      final RepoResponse<StoreCatagoryWiseItemsResponse> response =
+          await repository.getAllItemCatagoryWise(id);
+      if (response.data != null) {
+        storeItemCatagoryWiseList(response.data?.data ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future getStoreCartItemsDetails() async {
+    try {
+      final RepoResponse<StoreCartResponse> response =
+          await repository.getAllItemCartItems();
+      if (response.data != null) {
+        storeCartItems(response.data?.data ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future storeAddToCartDetails() async {
+    AddTocartRequest data = AddTocartRequest(
+      itemId: "",
+      quantity: 0,
+    );
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.addToCart(data.toJson());
+
+      if (response.data != null) {
+        if (response.data?.status == "success") {
+          SnackbarHelper.showSnackbar(response.data?.message);
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future removeFromCartDetails() async {
+    RemoveFromcartRequest data = RemoveFromcartRequest(
+      itemId: "",
+    );
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.removeFromCart(data.toJson());
+
+      if (response.data != null) {
+        if (response.data?.status == "success") {
+          SnackbarHelper.showSnackbar(response.data?.message);
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
   }
 }

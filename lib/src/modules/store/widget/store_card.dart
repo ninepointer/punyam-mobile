@@ -1,80 +1,164 @@
 import 'package:flutter/material.dart';
 import 'package:punyam/src/modules/store/widget/qunatity_button.dart';
-
+import 'package:punyam/src/app/app.dart';
 import '../../../core/core.dart';
 
 class StoreCard extends StatefulWidget {
-  const StoreCard({super.key});
+  final StoreCatagoryItemList? item;
+
+  StoreCard({this.item, Key? key}) : super(key: key);
 
   @override
   State<StoreCard> createState() => _StoreCardState();
 }
 
 class _StoreCardState extends State<StoreCard> {
+  int quantity = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Set your desired style here
-      // elevation: 4, // Example elevation
-      // color: Colors.blue, // Example background color
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(10), // Example border radius
-      // ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image in the top half
           Container(
-            margin: EdgeInsets.only(left: 5),
-            height: 120,
-            child: Image.asset(
-              AppImages.mandir,
-              // width: 100,
-              // height: 100,
-              fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.grey,
+                width: 0.2,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.network(
+                widget.item?.image?.url ?? '',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-          SizedBox(height: 8),
-          // "175g" text below the image
-          Text(
-            '175g',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 10,
-            ),
-          ),
-          Spacer(), // To push the next elements to the bottom
-          // "Rupees 50" text in the bottom left
-          Row(
-            children: [
-              Text(
-                '₹50',
+          SizedBox(height: 4),
+          // Display product name
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Container(
+              height: 40,
+              child: Text(
+                widget.item?.name ?? '',
                 style: TextStyle(
                   fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(), // To push the next element to the right
-              // "+" button in the bottom right
+            ),
+          ),
 
-              QuantityButton()
-              // ElevatedButton(
-              //   onPressed: () {
-              //     // Handle button press
-              //   },
-              //   style: ButtonStyle(
-              //     elevation: MaterialStateProperty.all<double>(0),
-              //     backgroundColor:
-              //         MaterialStateProperty.all<Color>(Colors.white),
-              //   ),
-              //   child: Icon(
-              //     Icons.add,
-              //     color: AppColors.cinnamonStickColor,
-              //     size: 24, // Adjust the size of the icon as needed
-              //   ),
-              // )
-            ],
+          // Display product description
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+            child: Text(
+              widget.item?.description ?? '',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
+            ),
+          ),
+
+          Container(
+            height: 35,
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(right: 8),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            // Decrease quantity by 1
+                            if (quantity == 0) {
+                              // If quantity becomes 0, reset to 1
+                              quantity = 0;
+                            } else {
+                              quantity--;
+                              showSnackBar("Decreased", quantity);
+                            }
+                          });
+                        },
+                        child: Text(
+                          "-",
+                          style: AppStyles.tsBlackMedium20.copyWith(
+                            color: AppColors.cinnamonStickColor,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        quantity.toString(),
+                        style: TextStyle(
+                          color: AppColors.cinnamonStickColor,
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            // Increase quantity by 1
+                            quantity++;
+                            showSnackBar("Increased", quantity);
+                          });
+                        },
+                        child: Text(
+                          "+",
+                          style: AppStyles.tsBlackMedium20.copyWith(
+                            color: AppColors.cinnamonStickColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  void showSnackBar(String action, int quantity) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "${widget.item?.name} added to cart\nPrice: ${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}\nQuantity: $quantity",
+        ),
+        duration: Duration(seconds: 4),
+        action: SnackBarAction(
+          label: 'View Cart',
+          onPressed: () {
+            Get.to(() => CartPageWidget());
+          },
+        ),
       ),
     );
   }

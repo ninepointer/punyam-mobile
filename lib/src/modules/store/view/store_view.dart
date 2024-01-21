@@ -53,13 +53,13 @@ class _StoreViewState extends State<StoreView> {
               children: [
                 // Drawer implementation with 10 items named with random colors
                 Drawer(
-                  width: 75, // Set the width of the drawer
+                  width: 80,
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: controller.storeCatagoryList.length,
                     itemBuilder: (context, index) {
+                      var category = controller.storeCatagoryList[index];
                       return SizedBox(
-                        height: 80, // Set the height of the ListTile
-                        //  Text(TextStyle()),
+                        height: 80,
                         child: ListTile(
                           title: Column(
                             children: [
@@ -68,26 +68,23 @@ class _StoreViewState extends State<StoreView> {
                                 radius: 20,
                                 backgroundColor: Colors.white,
                                 child: ClipOval(
-                                  child: Image.asset(
-                                    AppImages.mandir,
+                                  child: Image.network(
+                                    category.image!.url.toString(),
                                     width: 50,
                                     height: 50,
                                     fit: BoxFit.cover,
                                   ),
-                                  // Image.network(
-                                  //   'https://example.com/your_image.jpg'
-                                  //   ,
-                                  //   width: 80,
-                                  //   height: 80,
-                                  //   fit: BoxFit.cover,
-                                  // ),
                                 ),
                               ),
                               // Title below the image
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
-                                  'Item $index',
+                                  category.name.toString(),
+                                  maxLines:
+                                      2, // Allow text to wrap to the second line
+                                  overflow: TextOverflow
+                                      .ellipsis, // Ellipsis for overflow
                                   style: AppStyles.tsBlackRegular12,
                                 ),
                               ),
@@ -96,10 +93,13 @@ class _StoreViewState extends State<StoreView> {
                           tileColor: Colors.white,
                           selectedTileColor:
                               Colors.orangeAccent.withOpacity(0.5),
-                          onTap: () {
+                          onTap: () async {
+                            await controller
+                                .getAllItemsCatagoryWistDetails(category.sId);
                             setState(() {
                               _selectedIndex = index;
-                              //Navigator.pop(context); // Close the drawer
+
+                              // Navigator.pop(context); // Close the drawer
                             });
                           },
                           selected: _selectedIndex == index,
@@ -110,90 +110,102 @@ class _StoreViewState extends State<StoreView> {
                 ),
 
                 // Main content area goes here
-                Column(
-                  children: [
-                    // Adjust the height as needed
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4.0),
-                      child: Container(
-                        height: MediaQuery.of(context).size.width * 0.4,
-                        width: 280,
-                        child: CarouselSlider.builder(
-                          itemCount: controller.dashboardCarouselList.length,
-                          itemBuilder: (context, int index, _) {
-                            return GestureDetector(
-                              // onTap: () => controller.dashboardCarouselList(
-                              //   controller.dashboardCarouselList[index]
-                              //           .linkToCarousel ??
-                              //       '',
-                              // ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.grey.withOpacity(.1),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      "${controller.dashboardCarouselList[index].carouselImage ?? ''}",
-                                      fit: BoxFit.fill,
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              0.4,
-                                      width: 400,
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Adjust the height as needed
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * 0.4,
+                          width: 280,
+                          child: CarouselSlider.builder(
+                            itemCount: controller.dashboardCarouselList.length,
+                            itemBuilder: (context, int index, _) {
+                              return GestureDetector(
+                                // onTap: () => controller.dashboardCarouselList(
+                                //   controller.dashboardCarouselList[index]
+                                //           .linkToCarousel ??
+                                //       '',
+                                // ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 20.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.grey.withOpacity(.1),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                        "${controller.dashboardCarouselList[index].carouselImage ?? ''}",
+                                        fit: BoxFit.fill,
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        width: 400,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                          options: CarouselOptions(
-                            viewportFraction: 1,
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            autoPlayInterval: const Duration(seconds: 6),
+                              );
+                            },
+                            options: CarouselOptions(
+                              viewportFraction: 1,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              autoPlayInterval: const Duration(seconds: 6),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: Container(
-                        width: 317,
-                        height: 525, // Set a specific height for the Container
-
-                        // Example of a GridView inside the Container
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.8,
-                          shrinkWrap: true,
-                          children: [
-                            for (int i = 1; i < 11; i++)
-                              Container(
-                                child: StoreCard(),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  //borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: Colors
-                                        .grey, // Set the color of the border
-                                    width: 0.2, // Set the width of the border
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Container(
+                          width: 310,
+                          height: 525,
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.8,
+                            shrinkWrap: true,
+                            clipBehavior: Clip.none,
+                            // padding: const EdgeInsets.all(
+                            //     8.0), // Add padding between items
+                            children: [
+                              for (int i = 1;
+                                  i <
+                                      controller
+                                          .storeItemCatagoryWiseList.length;
+                                  i++)
+                                Padding(
+                                  padding: const EdgeInsets.all(
+                                      4.0), // Add padding around each item
+                                  child: Container(
+                                    child: StoreCard(
+                                      item: controller
+                                          .storeItemCatagoryWiseList[i],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 0.2,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    //),
-                  ],
+
+                      //),
+                    ],
+                  ),
                 )
               ],
             ),
