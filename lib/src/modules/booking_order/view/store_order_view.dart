@@ -278,7 +278,7 @@ class _StoreOrderViewState extends State<StoreOrderView> {
                                                 ],
                                               ),
                                               Text(
-                                                "${FormatHelper.formatNumbers(item.orderAmount, decimal: 0)}",
+                                                "${FormatHelper.formatNumbers((item.orderAmount) * (item.orderQuantity), decimal: 0)}",
                                                 style:
                                                     AppStyles.tsBlackMedium16,
                                               )
