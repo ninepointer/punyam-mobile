@@ -247,6 +247,7 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     onPressed: () {
                       if (validateBookingDetails()) {
                         controller.getUserBookingDetails();
+                        Navigator.pop(context);
                       }
                     },
                   ),

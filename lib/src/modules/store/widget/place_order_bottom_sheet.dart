@@ -164,6 +164,8 @@ class _PlaceOrderAddressBottomSheetState
 
                             await controller.postOrderPlaceDetails();
                             Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                           },
                           child: orderchooseYourAddressCard(
                               context: context,
