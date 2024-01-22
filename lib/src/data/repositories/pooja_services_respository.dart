@@ -4,7 +4,7 @@ import '../data.dart';
 
 class PoojaServicesRespository extends BaseRepository {
   Future<RepoResponse<DashboardCarouselResponse>> getCarousel() async {
-    String apiURL = AppUrls.dashboardCarousel;
+    String apiURL = AppUrls.poojaCarausal;
     var response = await service.getAuth(path: apiURL);
     return response is APIException
         ? RepoResponse(error: response)

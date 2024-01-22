@@ -81,14 +81,14 @@ class StoreController extends BaseController<StoreRepository> {
     isLoading(true);
     try {
       final RepoResponse<DashboardCarouselResponse> response =
-          await repository.getDashboardCarousel();
+          await repository.getStoreCarousel();
       if (response.data != null) {
         if (response.data?.status?.toLowerCase() == "success") {
           // Create a new list to store items you want to keep
           List<DashboardCarousel> updatedList = [];
 
           for (DashboardCarousel carousel in response.data?.data ?? []) {
-            if (carousel.position == "Home") {
+            if (carousel.position == "Store") {
               updatedList.add(carousel);
             }
           }

@@ -16,192 +16,285 @@ class _StoreOrderViewState extends State<StoreOrderView> {
   void initState() {
     super.initState();
     controller = Get.find<BookingController>();
-    controller.loadData();
+    controller.getAllStoreOrdersDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => RefreshIndicator(
-          onRefresh: () async {
-            controller.loadData();
-            return Future.value();
-          },
-          child: Visibility(
-            visible: !controller.isLoadingStatus,
-            replacement: BookingOrderShimmer(),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: AppConstants.getAppPadding(context),
-                child: Column(
+      body: Visibility(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: AppConstants.getAppPadding(context),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "My Bookings",
-                          style: AppStyles.tsBlackMedium18
-                              .copyWith(fontWeight: FontWeight.w600),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    controller.userAllBookingOrders.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: controller.userAllBookingOrders.length,
-                            itemBuilder: (context, index) {
-                              var order =
-                                  controller.userAllBookingOrders[index];
-                              return Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                            offset: Offset(0, 3),
-                                          ),
-                                        ],
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    child: Column(
+                    Text(
+                      "My Orders",
+                      style: AppStyles.tsBlackMedium18
+                          .copyWith(fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                controller.userAllStoreOrders.isNotEmpty
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.userAllStoreOrders.length,
+                        itemBuilder: (context, index) {
+                          var order = controller.userAllStoreOrders[index];
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      spreadRadius: 2,
+                                      blurRadius: 2,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                  children: [
+                                    // Row(
+                                    //   mainAxisAlignment:
+                                    //       MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     OrderCardTile(
+                                    //       label: 'Order Name',
+                                    //       value:
+                                    //           order.itemDetails?.isNotEmpty ??
+                                    //                   false
+                                    //               ? order.itemDetails![0].itemId
+                                    //                   ?.name
+                                    //               : '-',
+                                    //     ),
+                                    //     OrderCardTile(
+                                    //       isRightAlign: true,
+                                    //       label: 'Contact No.',
+                                    //       value: order.mobile ?? '-',
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.width *
+                                    //           0.016,
+                                    // ),
+                                    // Row(
+                                    //   mainAxisAlignment:
+                                    //       MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     OrderCardTile(
+                                    //       label: 'Order Amount',
+                                    //       value:
+                                    //           order.itemDetails?.isNotEmpty ??
+                                    //                   false
+                                    //               ? order.itemDetails![0]
+                                    //                   .orderAmount
+                                    //                   .toString()
+                                    //               : '-',
+                                    //     ),
+                                    //     OrderCardTile(
+                                    //       isRightAlign: true,
+                                    //       label: 'Category id',
+                                    //       value:
+                                    //           order.itemDetails?.isNotEmpty ??
+                                    //                   false
+                                    //               ? order.itemDetails![0]
+                                    //                   .categoryId?.sId
+                                    //               : '-',
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.width *
+                                    //           0.016,
+                                    // ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            OrderCardTile(
-                                              label: 'Name',
-                                              value: order.fullName
-                                                  .toString()
-                                                  .capitalizeFirst,
-                                            ),
-                                            OrderCardTile(
-                                              isRightAlign: true,
-                                              label: 'Contact No.',
-                                              value: order.mobile,
-                                            ),
-                                          ],
+                                        OrderCardTile(
+                                          label: 'Order date',
+                                          value: FormatHelper
+                                              .formatDateTimeOnlyToIST(
+                                                  order.orderDate),
                                         ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
+                                        OrderCardTile(
+                                            isRightAlign: true,
+                                            label: 'Contact No.',
+                                            value: order.mobile),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
                                               0.016,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        OrderCardTile(
+                                          label: 'Status',
+                                          value: order.status ?? '-',
+                                          valueColor: order.status == "Approved"
+                                              ? AppColors.success
+                                              : AppColors.danger,
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            OrderCardTile(
-                                              label: 'Pooja name',
-                                              value: order
-                                                  .specificProductId?.name
-                                                  .toString()
-                                                  .capitalizeFirst,
-                                            ),
-                                            OrderCardTile(
-                                              isRightAlign: true,
-                                              label: 'Pooja id',
-                                              value: order.productId,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.016,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            OrderCardTile(
-                                              label: 'Booking date',
-                                              value: FormatHelper
-                                                  .formatDateTimeOnlyToIST(
-                                                      order.bookingDate),
-                                            ),
-                                            OrderCardTile(
-                                              isRightAlign: true,
-                                              label: 'Booking amount',
-                                              value: FormatHelper.formatNumbers(
-                                                  order.bookingAmount,
-                                                  decimal: 0),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.016,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            OrderCardTile(
-                                              label: 'Selected package',
-                                              value: order.tier?.tierName
-                                                  .toString()
-                                                  .capitalizeFirst,
-                                            ),
-                                            OrderCardTile(
-                                              isRightAlign: true,
-                                              label: 'Status',
-                                              value: order.status,
-                                              valueColor:
-                                                  order.status == "Approved"
-                                                      ? AppColors.success
-                                                      : AppColors.danger,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.016,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            OrderCardTile(
-                                              label: 'Address',
-                                              value:
-                                                  "${order.addressDetails?.houseOrFlatNo ?? ''}, ${order.addressDetails?.locality ?? ''}, ${order.addressDetails?.landmark ?? ''}, ${order.addressDetails?.city ?? ''}, ${order.addressDetails?.state ?? ''}, ${order.addressDetails?.country}",
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 12,
+                                        OrderCardTile(
+                                          isRightAlign: true,
+                                          label: 'Payment Status',
+                                          value: order.paymentDetails
+                                                  ?.paymentStatus ??
+                                              '-',
+                                          valueColor: order.status == "Paid"
+                                              ? AppColors.success
+                                              : AppColors.danger,
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        : StoreOrderNoBookingDataFound()
-                  ],
-                ),
-              ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.016,
+                                    ),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        OrderCardTile(
+                                          label: 'Address',
+                                          value:
+                                              "${order.addressDetails?.houseOrFlatNo ?? ''}, ${order.addressDetails?.locality ?? ''}, ${order.addressDetails?.landmark ?? ''}, ${order.addressDetails?.city ?? ''}, ${order.addressDetails?.state ?? ''}, ${order.addressDetails?.country}",
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                    ),
+
+                                    for (var item in order.itemDetails ?? [])
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 20),
+                                        child: Container(
+                                          padding: EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 2,
+                                                  offset: Offset(0, 3),
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    child: ClipRRect(
+                                                      child: Image.network(
+                                                        item.itemId.image.url ??
+                                                            "",
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        width: 150,
+                                                        child: Text(
+                                                          "${item.itemId.name}"
+                                                              .capitalizeFirst
+                                                              .toString(),
+                                                          maxLines: 2,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "${item.itemId.minOrderQuantity} ${item.itemId.unit}",
+                                                            style: AppStyles
+                                                                .tsGreyRegular14,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 20,
+                                                          ),
+                                                          Icon(
+                                                            Icons.circle,
+                                                            size: 10,
+                                                            color:
+                                                                AppColors.grey,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 20,
+                                                          ),
+                                                          Text(
+                                                            "Qty: ${item.orderQuantity}",
+                                                            style: AppStyles
+                                                                .tsGreyRegular14,
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                "${FormatHelper.formatNumbers(item.orderAmount, decimal: 0)}",
+                                                style:
+                                                    AppStyles.tsBlackMedium16,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      )
+                    : StoreOrderNoBookingDataFound()
+              ],
             ),
           ),
         ),
@@ -214,6 +307,7 @@ class OrderCardTile extends StatelessWidget {
   final String? label;
   final String? value;
   final Color? valueColor;
+  final bool isCenterAlign;
   final bool isRightAlign;
 
   const OrderCardTile({
@@ -222,13 +316,17 @@ class OrderCardTile extends StatelessWidget {
     this.value,
     this.valueColor,
     this.isRightAlign = false,
+    this.isCenterAlign = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          isRightAlign ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: isRightAlign
+          ? CrossAxisAlignment.end
+          : (isCenterAlign
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.start),
       children: [
         Text(
           label ?? '-',
