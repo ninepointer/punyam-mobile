@@ -26,6 +26,7 @@ class BookingController extends BaseController<BookingOrderRepository> {
   }
 
   Future getAllBookingOrdersDetails() async {
+    // userAllBookingOrders.clear();
     try {
       final RepoResponse<GatAllBookingResponse> response =
           await repository.getAllBookingOrders();
@@ -40,6 +41,7 @@ class BookingController extends BaseController<BookingOrderRepository> {
   }
 
   Future getAllStoreOrdersDetails() async {
+    // userAllStoreOrders.clear();
     try {
       final RepoResponse<StoreCartOrderResponse> response =
           await repository.getAllOrderItems();

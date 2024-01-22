@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:punyam/src/core/core.dart';
 import 'package:punyam/src/app/app.dart';
@@ -75,19 +77,21 @@ class _StoreCartCardState extends State<StoreCartCard> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      log("GestureDetector start $quantity ");
                       setState(() {
                         // Decrease quantity by 1
+
+                        quantity = quantity! - 1;
+
+                        controller.cartItemQuantity.value = -1;
+
+                        controller.cartItemId.value =
+                            widget.category!.itemId!.sId!.toString();
+                        controller.removeFromCartDetails();
+                        log("GestureDetector end $quantity ");
                         if (quantity == 0) {
                           // If quantity becomes 0, reset to 1
-                          quantity = 0;
-                        } else {
-                          quantity = quantity! - 1;
-
-                          controller.cartItemQuantity.value = -1;
-
-                          controller.cartItemId.value =
-                              widget.category!.itemId!.sId!.toString();
-                          controller.removeFromCartDetails();
+                          controller.getStoreCartItemsDetails();
                         }
                       });
                     },

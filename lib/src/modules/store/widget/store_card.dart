@@ -22,6 +22,7 @@ class _StoreCardState extends State<StoreCard> {
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
+    quantity = controller.getQuantityByItemId(widget.item?.sId ?? '');
   }
 
   @override
@@ -37,10 +38,10 @@ class _StoreCardState extends State<StoreCard> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.grey,
-                width: 0.2,
-              ),
+              // border: Border.all(
+              //   color: Colors.grey,
+              //   width: 0.2,
+              // ),
             ),
             child: ClipRRect(
               // borderRadius: BorderRadius.only(

@@ -30,6 +30,8 @@ class StoreController extends BaseController<StoreRepository> {
   final storeItemCatagoryWiseList = <StoreCatagoryItemList>[].obs;
   final storeCartItems = <StoreCartList>[].obs;
 
+  final selectedStoreCategory = StoreCatagoryList().obs;
+
   RxString cartItemId = "".obs;
   RxInt cartItemQuantity = 0.obs;
 
@@ -71,11 +73,30 @@ class StoreController extends BaseController<StoreRepository> {
   // final isLoadingMore = false.obs;
 
   Future loadData() async {
+    // storeCartItems.clear();
+    await getStoreCartItemsDetails();
     await getDashboardCarousel();
     await getAllStoreCatagoryList();
-    await getStoreCartItemsDetails();
+
+    getAllItemsCatagoryWistDetails(storeCatagoryList.first.sId);
+    selectedStoreCategory.value = storeCatagoryList.first;
   }
 //all functions down here
+
+  int getQuantityByItemId(String id) {
+    int quantity = 0;
+    log("getQuantityByItemId id ${id}");
+
+    for (var item in storeCartItems) {
+      log("getQuantityByItemId itemid ${item.sId}");
+      log("getQuantityByItemId ${item.sId == id}");
+      if (item.itemId?.sId == id) {
+        quantity = item.quantity ?? 0;
+        log("getQuantityByItemId ${quantity}");
+      }
+    }
+    return quantity;
+  }
 
   Future getDashboardCarousel() async {
     isLoading(true);
@@ -109,6 +130,7 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future getAllStoreCatagoryList() async {
     isLoading(true);
+    storeCatagoryList.clear();
     try {
       final RepoResponse<StoreCatagoryResponse> response =
           await repository.getAllCategories();
@@ -124,6 +146,7 @@ class StoreController extends BaseController<StoreRepository> {
   }
 
   Future getAllItemsCatagoryWistDetails(String? id) async {
+    storeItemCatagoryWiseList.clear();
     try {
       final RepoResponse<StoreCatagoryWiseItemsResponse> response =
           await repository.getAllItemCatagoryWise(id);
@@ -138,6 +161,7 @@ class StoreController extends BaseController<StoreRepository> {
   }
 
   Future getStoreCartItemsDetails() async {
+    storeCartItems.clear();
     try {
       final RepoResponse<StoreCartResponse> response =
           await repository.getAllItemCartItems();
