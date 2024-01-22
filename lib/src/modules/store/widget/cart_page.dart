@@ -17,7 +17,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
-    controller.loadData();
+    controller.getStoreCartItemsDetails();
   }
 
   @override

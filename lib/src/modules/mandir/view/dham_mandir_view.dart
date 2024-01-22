@@ -23,7 +23,7 @@ class DhamMandirView extends GetView<MandirController> {
                   height: MediaQuery.of(context).size.width * 0.4,
                   width: double.infinity,
                   child: CarouselSlider.builder(
-                    itemCount: controller.carouselListforMandir.length,
+                    itemCount: controller.carouselListforDham.length,
                     itemBuilder: (context, int index, _) {
                       return Container(
                         width: double.infinity,
@@ -35,7 +35,7 @@ class DhamMandirView extends GetView<MandirController> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(
-                            "${controller.carouselListforMandir[index].carouselImage ?? ''}",
+                            "${controller.carouselListforDham[index].carouselImage ?? ''}",
                             fit: BoxFit.fill,
                             height: MediaQuery.of(context).size.width * 0.4,
                             width: double.infinity,

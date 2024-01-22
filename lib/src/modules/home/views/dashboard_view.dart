@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:punyam/src/modules/store/controller/store_controller.dart';
 import '../../../app/app.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashboardView extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class _DashboardViewState extends State<DashboardView> {
   late HomeController controller;
   late PoojaServicesController poojaServicesController;
   late MandirController mandirController;
+  late StoreController storeController;
+  late BookingController bookingController;
   late List<String> monthsList;
 
   String? selectedValue2 = '';
@@ -23,7 +27,12 @@ class _DashboardViewState extends State<DashboardView> {
     controller.loadData();
     poojaServicesController = Get.find<PoojaServicesController>();
     mandirController = Get.find<MandirController>();
+    storeController = Get.find<StoreController>();
+    controller = Get.find<HomeController>();
+    bookingController = Get.find<BookingController>();
 
+    storeController.loadData();
+    bookingController.loadData();
     poojaServicesController.loadData();
     mandirController.loadData();
     mandirController.getNearByMandirsDetails();
@@ -249,13 +258,21 @@ class _DashboardViewState extends State<DashboardView> {
                               ),
                             ],
                           ),
+                          // Replace with your desired mobile number
+
                           GestureDetector(
-                              child: Row(
-                            children: [
-                              Icon(Icons.keyboard_arrow_right,
-                                  size: 40, color: AppColors.cinnamonStickColor)
-                            ],
-                          ))
+                            onTap: () {
+                              String phoneNumber = 'tel:${8076284368}';
+                              launch(phoneNumber);
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.keyboard_arrow_right,
+                                    size: 40,
+                                    color: AppColors.cinnamonStickColor),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),

@@ -118,6 +118,23 @@ class MandirRespository extends BaseRepository {
         : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
   }
 
+  Future<RepoResponse<DashboardCarouselResponse>> getDhamCarousel() async {
+    String apiURL = AppUrls.dhamCarausal;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
+  }
+
+  Future<RepoResponse<DashboardCarouselResponse>>
+      getPopularMandirCarousel() async {
+    String apiURL = AppUrls.popularMandirCarausal;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
+  }
+
   Future<RepoResponse<AllMandirResponse>> searchMandirByString(
       String? value) async {
     String apiURL = AppUrls.searchMandir;

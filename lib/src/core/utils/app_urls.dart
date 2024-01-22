@@ -95,7 +95,13 @@ class AppUrls {
   static const String StoreAddtoCart = "$apiURL/user/cart/add";
   static const String StoreRemovetoCart = "$apiURL/user/cart/remove";
   static const String getCartItems = "$apiURL/user/cart";
-  static const String placeStoreOrder = "$apiURL/order";
+  static const String placeStoreOrder = "$apiURL/order/user";
 
-  static const String getStoreOrder = "$apiURL/order/my";
+  static const String getStoreOrder = "$apiURL/order/user/my";
+
+  static const String dhamCarausal = "$apiURL/carousels/dham";
+
+  static const String popularMandirCarausal = "$apiURL/carousels/popular";
+  static const String poojaCarausal = "$apiURL/carousels/pooja";
+  static const String storeCarausal = "$apiURL/carousels/store";
 }

@@ -42,9 +42,9 @@ class PlaceOrderRequest {
     floor = json['floor'];
     houseOrFlatNo = json['house_or_flat_no'];
     mobile = json['mobile'];
-    if (json['order_details'] != null) {
+    if (json['item_details'] != null) {
       orderDetails = List<PlaceOrderDetails>.from(
-        json['order_details'].map((x) => PlaceOrderDetails.fromJson(x)),
+        json['item_details'].map((x) => PlaceOrderDetails.fromJson(x)),
       );
     }
   }
@@ -64,7 +64,7 @@ class PlaceOrderRequest {
     data['house_or_flat_no'] = houseOrFlatNo;
     data['mobile'] = mobile;
     if (orderDetails != null) {
-      data['order_details'] = orderDetails!.map((x) => x.toJson()).toList();
+      data['item_details'] = orderDetails!.map((x) => x.toJson()).toList();
     }
     return data;
   }

@@ -27,7 +27,8 @@ class MandirController extends BaseController<MandirRespository> {
   final dashboardCarouselList = <DashboardCarousel>[].obs;
 
   final carouselListforMandir = <DashboardCarousel>[].obs;
-
+  final carouselListforDham = <DashboardCarousel>[].obs;
+  final carouselListforPopular = <DashboardCarousel>[].obs;
   final popularMandirsearchTextController = TextEditingController();
   final dhamMandirsearchTextController = TextEditingController();
   final allMandirsearchTextController = TextEditingController();
@@ -52,7 +53,6 @@ class MandirController extends BaseController<MandirRespository> {
 
   @override
   void onClose() {
-    print("Hello");
     allMandirsearchTextController.clear();
     nearbyMandirsSearch.clear();
     super.onClose();
@@ -65,6 +65,8 @@ class MandirController extends BaseController<MandirRespository> {
 
   Future loadData() async {
     await getCarousel();
+    await getPopularCarousel();
+    await getDhamCarousel();
     // await getNearByMandirsDetails();
     // await getAllTemplesDetails();
     await getPopularTamplesDetails();
@@ -75,24 +77,6 @@ class MandirController extends BaseController<MandirRespository> {
     // await getDhamTamplesByDistanceDetails();
     // await getPopularTamplesByDistanceDetails();
   }
-
-  //   void loadMoreOrders() {
-  //   if (!isLoadingMore.value) {
-  //     isLoadingMore.value = true;
-  //     currentPage.value++;
-  //     if (itemsPerPage.value == 0) {
-  //       isLoadingMore.value = false;
-  //       return;
-  //     }
-  //     final lastPage = (totalItems.value / itemsPerPage.value).ceil();
-  //     print("lastpage ${lastPage} ${totalItems.value} ${itemsPerPage.value}");
-  //     if (currentPage.value >= lastPage) {
-  //       isLoadingMore.value = true;
-  //     } else {
-  //       getVirtualTradeAllOrdersList();
-  //     }
-  //   }
-  // }
 
   void navigateToCarousel(String link) {}
 
@@ -143,6 +127,54 @@ class MandirController extends BaseController<MandirRespository> {
           for (DashboardCarousel carousel in dashboardCarouselList) {
             if (carousel.position == "Mandir") {
               carouselListforMandir.addAll([carousel]);
+            }
+          }
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getDhamCarousel() async {
+    isLoading(true);
+    try {
+      final RepoResponse<DashboardCarouselResponse> response =
+          await repository.getDhamCarousel();
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          carouselListforDham.clear();
+          dashboardCarouselList(response.data?.data ?? []);
+          for (DashboardCarousel carousel in dashboardCarouselList) {
+            if (carousel.position == "Dham") {
+              carouselListforDham.addAll([carousel]);
+            }
+          }
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getPopularCarousel() async {
+    isLoading(true);
+    try {
+      final RepoResponse<DashboardCarouselResponse> response =
+          await repository.getPopularMandirCarousel();
+      if (response.data != null) {
+        if (response.data?.status?.toLowerCase() == "success") {
+          carouselListforPopular.clear();
+          dashboardCarouselList(response.data?.data ?? []);
+          for (DashboardCarousel carousel in dashboardCarouselList) {
+            if (carousel.position == "Popular") {
+              carouselListforPopular.addAll([carousel]);
             }
           }
         }
