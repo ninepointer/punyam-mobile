@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:punyam/src/app/app.dart';
 
 class MandirNearMeDetailsView extends StatefulWidget {
@@ -135,8 +136,10 @@ class _MandirNearMeDetailsViewState extends State<MandirNearMeDetailsView>
 
                       await controller.getNavigateToGoogleMap(endLat, endLng);
                     },
-                    morningAarti: "12",
-                    eveningAarti: "13",
+                    morningAarti:
+                        "${FormatHelper.formatTimeOnly(widget.templeDetails?.morningAartiTime)} ",
+                    eveningAarti:
+                        "${FormatHelper.formatTimeOnly(widget.templeDetails?.eveningAartiTime)} ",
                     mandirName: "${widget.templeDetails?.name}",
                     godName: "${widget.templeDetails?.deviDevta}",
                     morningTime:
@@ -244,6 +247,22 @@ Widget nearBymemandirDetailsCard({
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
+              Expanded(
+                child: Text(
+                  "$address",
+                  style: AppStyles.tsBlackMedium12,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
               Icon(
                 Icons.sunny,
                 size: 15,
@@ -253,6 +272,27 @@ Widget nearBymemandirDetailsCard({
               ),
               Text(
                 "Morning Session:   $morningTime",
+                style: AppStyles.tsBlackMedium12,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: [
+              Icon(
+                Icons.sunny,
+                size: 15,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                "Morning Aarti:   $morningAarti",
                 style: AppStyles.tsBlackMedium12,
               ),
             ],
@@ -286,17 +326,22 @@ Widget nearBymemandirDetailsCard({
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
-              Expanded(
-                child: Text(
-                  "$address",
-                  style: AppStyles.tsBlackMedium12,
-                ),
+              Icon(
+                Icons.shield_moon_rounded,
+                size: 15,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                "Evening Aarti:   $eveningAarti",
+                style: AppStyles.tsBlackMedium12,
               ),
             ],
           ),
         ),
         SizedBox(
-          height: 6,
+          height: 4,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),

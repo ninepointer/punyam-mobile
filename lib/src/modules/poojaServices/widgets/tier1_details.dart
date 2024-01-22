@@ -43,51 +43,51 @@ class Tier1Details extends GetView<PoojaServicesController> {
             Expanded(
               child: Column(
                 children: [
-                  Container(
-                    height: 170,
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(8),
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  height: 13,
-                                  width: 13,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.orangeColor),
-                                  child: Icon(
-                                    Icons.check,
-                                    size: 10,
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    "Link for Recorded Video or Live Streaming of Pitra Dosh Nivaran Poooja and Tarpan pooja in Gaya.",
-                                    softWrap: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 6,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
+                  // Container(
+                  //   height: 170,
+                  //   child: ListView.builder(
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     padding: const EdgeInsets.all(8),
+                  //     itemCount: 3,
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return Column(
+                  //         children: [
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 height: 13,
+                  //                 width: 13,
+                  //                 decoration: BoxDecoration(
+                  //                     shape: BoxShape.circle,
+                  //                     color: AppColors.orangeColor),
+                  //                 child: Icon(
+                  //                   Icons.check,
+                  //                   size: 10,
+                  //                   color: AppColors.white,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 6,
+                  //               ),
+                  //               Expanded(
+                  //                 child: Text(
+                  //                   "Link for Recorded Video or Live Streaming of Pitra Dosh Nivaran Poooja and Tarpan pooja in Gaya.",
+                  //                   softWrap: true,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 6,
+                  //           ),
+                  //         ],
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 6,
+                  // ),
                   if (package.tier?.poojaItemsIncluded == true)
                     isThisIncluded(title: "Pooja items included"),
                   SizedBox(
@@ -156,7 +156,7 @@ class Tier1Details extends GetView<PoojaServicesController> {
                     ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: 60,
                   ),
                   Center(
                     child: Column(children: [

@@ -20,6 +20,24 @@ class _BookingViewState extends State<BookingView> {
     controller = Get.find<PoojaServicesController>();
   }
 
+  String formatDuration(int? minutes) {
+    if (minutes == null) {
+      return 'N/A'; // Or any default value for null durations
+    }
+
+    if (minutes < 60) {
+      return '$minutes minutes';
+    } else {
+      int hours = minutes ~/ 60;
+      int remainingMinutes = minutes % 60;
+      if (remainingMinutes == 0) {
+        return '$hours hours';
+      } else {
+        return '$hours hours $remainingMinutes minutes';
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +68,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -63,7 +81,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +125,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: Text(
@@ -115,49 +133,117 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width -
-                              MediaQuery.of(context).size.width / 5,
-                          child: imageGallery(image: AppImages.homepuja),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.0625,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width -
-                              MediaQuery.of(context).size.width / 5,
-                          child: imageGallery(image: AppImages.homepuja),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (controller.selectedPoojaById.value.subCategory ==
-                          "Jaap")
-                        if (controller.selectedPoojaById.value.subCategory ==
-                            "General Pooja")
-                          Text(
-                            "Purpose Of Pooja",
-                            style: AppStyles.tsBlackMedium24.copyWith(
-                              color: AppColors.brandYellow,
-                            ),
-                            textAlign: TextAlign.center,
+                          "General Pooja")
+                        Text(
+                          "Pooja Duration",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
                           ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Festival Pooja")
+                        Text(
+                          "Pooja Duration",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Jaap")
+                        Text(
+                          "Jaap Duration",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Paath")
+                        Text(
+                          "Paath Duration",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.circle,
+                        size: 15,
+                        color: AppColors.orangeColor,
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                          "${formatDuration(controller.selectedPoojaById.value.duration)}"),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     children: [
+                  //       Container(
+                  //         width: MediaQuery.of(context).size.width -
+                  //             MediaQuery.of(context).size.width / 5,
+                  //         child: imageGallery(image: AppImages.homepuja),
+                  //       ),
+                  //       SizedBox(
+                  //         width: MediaQuery.of(context).size.width * 0.05,
+                  //       ),
+                  //       Container(
+                  //         width: MediaQuery.of(context).size.width -
+                  //             MediaQuery.of(context).size.width / 5,
+                  //         child: imageGallery(image: AppImages.homepuja),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: MediaQuery.of(context).size.width * 0.05,
+                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "General Pooja")
+                        Text(
+                          "Purpose Of Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       if (controller.selectedPoojaById.value.subCategory ==
                           "Festival Pooja")
                         Text(
                           "Purpose Of Pooja",
+                          style: AppStyles.tsBlackMedium24.copyWith(
+                            color: AppColors.brandYellow,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (controller.selectedPoojaById.value.subCategory ==
+                          "Jaap")
+                        Text(
+                          "Purpose Of Jaap",
                           style: AppStyles.tsBlackMedium24.copyWith(
                             color: AppColors.brandYellow,
                           ),
@@ -175,7 +261,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: ListView.builder(
@@ -216,7 +302,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -231,7 +317,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -253,7 +339,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -297,7 +383,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: ListView.builder(
@@ -337,7 +423,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   TierWisePaymentDetails(
                     key: tierWiseKey,

@@ -77,4 +77,25 @@ class AppUrls {
       "$apiURL/user/removeaddress/$id";
 
   static const String getAllUserBooking = "$apiURL/booking/user";
+
+  static String getTrandingMandirs(String? lat, String? long) =>
+      "$apiURL/mandir/user/trending?lat=$lat&long=$long";
+
+  static String getFavirouteMandirs(String? lat, String? long) =>
+      "$apiURL/mandir/user/myfavourite?lat=$lat&long=$long";
+
+  //store api's
+  static const String storeCatagory = "$apiURL/itemcategory";
+  //items/category/{categoryId}
+
+  static String storeCatagoryWiseItem(String? catId) =>
+      "$apiURL/items/category/$catId";
+
+  //api/v1/user/cart/add
+  static const String StoreAddtoCart = "$apiURL/user/cart/add";
+  static const String StoreRemovetoCart = "$apiURL/user/cart/remove";
+  static const String getCartItems = "$apiURL/user/cart";
+  static const String placeStoreOrder = "$apiURL/order";
+
+  static const String getStoreOrder = "$apiURL/order/my";
 }

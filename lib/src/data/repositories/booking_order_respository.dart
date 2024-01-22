@@ -10,4 +10,12 @@ class BookingOrderRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: GatAllBookingResponse.fromJson(response));
   }
+
+  Future<RepoResponse<StoreCartOrderResponse>> getAllOrderItems() async {
+    String apiURL = AppUrls.getStoreOrder;
+    var response = await service.getAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: StoreCartOrderResponse.fromJson(response));
+  }
 }

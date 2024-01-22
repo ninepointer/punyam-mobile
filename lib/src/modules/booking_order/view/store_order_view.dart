@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:punyam/src/app/app.dart';
 
-class BookingOrderView extends StatefulWidget {
-  const BookingOrderView({Key? key}) : super(key: key);
+class StoreOrderView extends StatefulWidget {
+  const StoreOrderView({Key? key}) : super(key: key);
 
   @override
-  State<BookingOrderView> createState() => _BookingOrderViewState();
+  State<StoreOrderView> createState() => _StoreOrderViewState();
 }
 
-class _BookingOrderViewState extends State<BookingOrderView> {
+class _StoreOrderViewState extends State<StoreOrderView> {
   late BookingController controller;
 
   @override
@@ -79,13 +79,13 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               label: 'Name',
                                               value: order.fullName
                                                   .toString()
                                                   .capitalizeFirst,
                                             ),
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               isRightAlign: true,
                                               label: 'Contact No.',
                                               value: order.mobile,
@@ -102,14 +102,14 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               label: 'Pooja name',
                                               value: order
                                                   .specificProductId?.name
                                                   .toString()
                                                   .capitalizeFirst,
                                             ),
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               isRightAlign: true,
                                               label: 'Pooja id',
                                               value: order.productId,
@@ -126,13 +126,13 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               label: 'Booking date',
                                               value: FormatHelper
                                                   .formatDateTimeOnlyToIST(
                                                       order.bookingDate),
                                             ),
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               isRightAlign: true,
                                               label: 'Booking amount',
                                               value: FormatHelper.formatNumbers(
@@ -151,13 +151,13 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               label: 'Selected package',
                                               value: order.tier?.tierName
                                                   .toString()
                                                   .capitalizeFirst,
                                             ),
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               isRightAlign: true,
                                               label: 'Status',
                                               value: order.status,
@@ -178,7 +178,7 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            BookingCardTile(
+                                            OrderCardTile(
                                               label: 'Address',
                                               value:
                                                   "${order.addressDetails?.houseOrFlatNo ?? ''}, ${order.addressDetails?.locality ?? ''}, ${order.addressDetails?.landmark ?? ''}, ${order.addressDetails?.city ?? ''}, ${order.addressDetails?.state ?? ''}, ${order.addressDetails?.country}",
@@ -198,7 +198,7 @@ class _BookingOrderViewState extends State<BookingOrderView> {
                               );
                             },
                           )
-                        : NoBookingDataFound()
+                        : StoreOrderNoBookingDataFound()
                   ],
                 ),
               ),
@@ -210,13 +210,13 @@ class _BookingOrderViewState extends State<BookingOrderView> {
   }
 }
 
-class BookingCardTile extends StatelessWidget {
+class OrderCardTile extends StatelessWidget {
   final String? label;
   final String? value;
   final Color? valueColor;
   final bool isRightAlign;
 
-  const BookingCardTile({
+  const OrderCardTile({
     super.key,
     this.label,
     this.value,
@@ -246,10 +246,10 @@ class BookingCardTile extends StatelessWidget {
   }
 }
 
-class NoBookingDataFound extends StatelessWidget {
+class StoreOrderNoBookingDataFound extends StatelessWidget {
   final String? label;
   final String? imagePath;
-  const NoBookingDataFound({
+  const StoreOrderNoBookingDataFound({
     Key? key,
     this.label,
     this.imagePath,

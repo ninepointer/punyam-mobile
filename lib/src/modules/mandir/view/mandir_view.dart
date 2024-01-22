@@ -13,14 +13,14 @@ class MandirView extends StatefulWidget {
 
 class _MandirViewState extends State<MandirView> {
   late MandirController controller;
-  late List<AllMandirData> _selectedTempleList = [];
+  late List<TempleNearByMeList> _selectedTempleList = [];
 
   @override
   void initState() {
     super.initState();
     controller = Get.find<MandirController>();
     controller.loadData();
-    _selectedTempleList = controller.allTempleListDetails;
+    _selectedTempleList = controller.nearbyMandirs;
   }
 
   @override
@@ -33,11 +33,12 @@ class _MandirViewState extends State<MandirView> {
         () => RefreshIndicator(
           onRefresh: () async {
             controller.loadData();
-            _selectedTempleList = controller.allTempleListDetails;
+            _selectedTempleList = controller.nearbyMandirs;
             return Future.value();
           },
           child: Visibility(
             visible: !controller.isLoadingStatus,
+            replacement: MandirViewShimmer(),
             child: SingleChildScrollView(
               child: Padding(
                 padding: AppConstants.getAppPadding(context),
@@ -77,7 +78,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     InkWell(
                       onTap: () async {
@@ -123,7 +124,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +136,7 @@ class _MandirViewState extends State<MandirView> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -171,102 +172,116 @@ class _MandirViewState extends State<MandirView> {
                         ),
                       ),
                     ),
-                    // SizedBox(height: 12),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   child: Row(
-                    //     children: [
-                    //       InkWell(
-                    //         onTap: () {
-                    //           // Handle button tap
-                    //         },
-                    //         child: Container(
-                    //           padding: EdgeInsets.all(10),
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             border: Border.all(
-                    //                 color: AppColors.cinnamonStickColor),
-                    //           ),
-                    //           child: Text(
-                    //             "Open Now",
-                    //             style: TextStyle(
-                    //               color: Colors.orange,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: 12,
-                    //       ),
-                    //       InkWell(
-                    //         onTap: () {
-                    //           // Handle button tap
-                    //         },
-                    //         child: Container(
-                    //           padding: EdgeInsets.all(10),
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             border: Border.all(
-                    //                 color: AppColors.cinnamonStickColor),
-                    //           ),
-                    //           child: Text(
-                    //             "Favorites",
-                    //             style: TextStyle(
-                    //               color: Colors.orange,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: 12,
-                    //       ),
-                    //       InkWell(
-                    //         onTap: () {
-                    //           setState(() {
-                    //             _selectedTempleList =
-                    //                 controller.popularTempleListDetails;
-                    //           });
-                    //         },
-                    //         child: Container(
-                    //           padding: EdgeInsets.all(10),
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             border: Border.all(
-                    //                 color: AppColors.cinnamonStickColor),
-                    //           ),
-                    //           child: Text(
-                    //             "Popular",
-                    //             style: TextStyle(
-                    //               color: Colors.orange,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: 12,
-                    //       ),
-                    //       InkWell(
-                    //         onTap: () {},
-                    //         child: Container(
-                    //           padding: EdgeInsets.all(10),
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             border: Border.all(
-                    //                 color: AppColors.cinnamonStickColor),
-                    //           ),
-                    //           child: Text(
-                    //             "Trending Now",
-                    //             style: TextStyle(
-                    //               color: Colors.orange,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _selectedTempleList = controller.nearbyMandirs;
+                            },
+                            child: Container(
+                              width: 80,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "All",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _selectedTempleList =
+                                    controller.myFaviroutesMandirs;
+                                controller.getMyFaviroutesTamplesDetails();
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Favorites",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _selectedTempleList = controller
+                                    .popularTempleListByDistanceDetails;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Popular",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _selectedTempleList =
+                                    controller.trandingNowMandirs;
+                                controller.getTrandingNowTamplesDetails();
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: AppColors.cinnamonStickColor),
+                              ),
+                              child: Text(
+                                "Trending Now",
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Row(
                       children: [
@@ -320,13 +335,12 @@ class _MandirViewState extends State<MandirView> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
-                    controller.nearbyMandirs.isEmpty
+                    _selectedTempleList.isEmpty
                         ? NoDataFound()
                         : Column(
-                            children:
-                                controller.nearbyMandirs.map((templeDetails) {
+                            children: _selectedTempleList.map((templeDetails) {
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(() => MandirNearMeDetailsView(
@@ -481,7 +495,7 @@ class _MandirViewState extends State<MandirView> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.0625,
+                                              0.05,
                                         ),
                                       ],
                                     ),

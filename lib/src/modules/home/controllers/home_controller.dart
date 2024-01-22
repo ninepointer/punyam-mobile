@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:punyam/src/modules/store/controller/store_controller.dart';
 import '../../../app/app.dart';
 
 class HomeBinding implements Bindings {
@@ -152,19 +153,27 @@ class HomeController extends BaseController<DashboardRepository> {
       
     }
   void navigateToCarousel(String link) {
-    if (link == 'marginxs') {
-      selectedIndex(3);
+    // if (link == 'marginxs') {
+    //   selectedIndex(3);
 
-      // Get.find<MarginXController>().loadData();
-      // Get.toNamed(AppRoutes.marginx);
-      // Get.to(() => MarginXView());
-    } else if (link == 'event') {
-      selectedIndex(4);
+    // Get.find<MarginXController>().loadData();
+    // Get.toNamed(AppRoutes.marginx);
+    //
+    if (link == 'pooja') {
+      selectedIndex(2);
       Get.find<PoojaServicesController>().loadData();
     } else if (link == 'mandir') {
-      selectedIndex(2);
+      selectedIndex(1);
       Get.find<MandirController>().loadData();
+    } else if (link == 'store') {
+      Get.find<StoreController>().loadData();
+      Get.to(() => StoreView());
     }
+    // else if (link == 'mandir') {
+    //   selectedIndex(1);
+    //   Get.find<MandirController>().loadData();
+    // }
+
     //  else if (link == 'referrals') {
     //   Get.find<ReferralsController>().loadData();
     //   Get.toNamed(AppRoutes.referrals);

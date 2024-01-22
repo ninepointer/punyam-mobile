@@ -31,7 +31,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
         },
         child: Visibility(
           visible: !controller.isLoadingStatus,
-          // replacement: DashboardShimmer(),
+          replacement: PoojaViewShimmer(),
           child: SingleChildScrollView(
             child: Padding(
               padding: AppConstants.getAppPadding(context),
@@ -42,7 +42,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     label: "Trending Pooja",
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.width * 0.4,
@@ -77,14 +77,14 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   if (controller.poojaCatagoryGenralPooja.isNotEmpty)
                     CommonTile(
                       label: "General Pooja",
                     ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -113,8 +113,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                                 },
                               ),
                               SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.0625,
+                                width: MediaQuery.of(context).size.width * 0.05,
                               ),
                             ],
                           );
@@ -123,14 +122,14 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   if (controller.poojaCatagoryJaap.isNotEmpty)
                     CommonTile(
                       label: "Jaap",
                     ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -159,8 +158,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                                 },
                               ),
                               SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.0625,
+                                width: MediaQuery.of(context).size.width * 0.05,
                               ),
                             ],
                           );
@@ -169,14 +167,14 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   if (controller.poojaCatagoryPaath.isNotEmpty)
                     CommonTile(
                       label: "Paath",
                     ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -205,8 +203,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                                 },
                               ),
                               SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.0625,
+                                width: MediaQuery.of(context).size.width * 0.05,
                               ),
                             ],
                           );
@@ -215,14 +212,14 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   if (controller.poojaCatagoryFestivalPooja.isNotEmpty)
                     CommonTile(
                       label: "Festival Pooja",
                     ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -251,8 +248,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                                 },
                               ),
                               SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.0625,
+                                width: MediaQuery.of(context).size.width * 0.05,
                               ),
                             ],
                           );
@@ -261,7 +257,7 @@ class _PoojaAtHomeViewState extends State<PoojaAtHomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                 ],
               ),
