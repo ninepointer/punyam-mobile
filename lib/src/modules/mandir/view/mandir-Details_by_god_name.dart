@@ -80,7 +80,7 @@ class MandirDetailsByGodNameView extends GetView<MandirController> {
               //       ),
 
               //       SizedBox(
-              //         height: MediaQuery.of(context).size.width * 0.0625,
+              //         height: MediaQuery.of(context).size.width * 0.05,
               //       ),
               Column(
                 children: controller.mandirByDevitaNameListDetails.isNotEmpty

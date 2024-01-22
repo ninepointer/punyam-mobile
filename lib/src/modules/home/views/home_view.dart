@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
     // MandirView(),
     MandirView(),
     PoojaServicesView(),
-    BookingOrderView()
+    AllOrdersAndBookingView()
   ];
 
   @override
@@ -76,6 +76,7 @@ class _HomeViewState extends State<HomeView> {
         isLocal: true,
       );
   }
+
   void _updateTab(int index) {
     controller.selectedIndex.value = index;
 

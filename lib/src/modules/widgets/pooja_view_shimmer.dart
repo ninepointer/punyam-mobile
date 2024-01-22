@@ -13,15 +13,15 @@ class PoojaViewShimmer extends StatelessWidget {
         children: [
           CustomCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           LargeCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [
@@ -31,11 +31,11 @@ class PoojaViewShimmer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [

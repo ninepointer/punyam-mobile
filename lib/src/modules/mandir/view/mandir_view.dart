@@ -78,7 +78,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     InkWell(
                       onTap: () async {
@@ -124,7 +124,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +136,7 @@ class _MandirViewState extends State<MandirView> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -173,7 +173,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -281,7 +281,7 @@ class _MandirViewState extends State<MandirView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Row(
                       children: [
@@ -335,7 +335,7 @@ class _MandirViewState extends State<MandirView> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     _selectedTempleList.isEmpty
                         ? NoDataFound()
@@ -495,7 +495,7 @@ class _MandirViewState extends State<MandirView> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.0625,
+                                              0.05,
                                         ),
                                       ],
                                     ),

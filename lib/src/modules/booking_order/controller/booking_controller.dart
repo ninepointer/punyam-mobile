@@ -16,10 +16,12 @@ class BookingController extends BaseController<BookingOrderRepository> {
   LoginDetailsResponse get userDetailsData => userDetails.value;
 
   final userAllBookingOrders = <BookingOrderData>[].obs;
+  final userAllStoreOrders = <StoreOrderList>[].obs;
 
   Future loadData() async {
     userDetails.value = AppStorage.getUserDetails();
     await getAllBookingOrdersDetails();
+    await getAllStoreOrdersDetails();
   }
 
   Future getAllBookingOrdersDetails() async {
@@ -29,6 +31,22 @@ class BookingController extends BaseController<BookingOrderRepository> {
           await repository.getAllBookingOrders();
       if (response.data != null) {
         userAllBookingOrders(response.data?.data ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+    isLoading(false);
+  }
+
+  Future getAllStoreOrdersDetails() async {
+    isLoading(true);
+    try {
+      final RepoResponse<StoreCartOrderResponse> response =
+          await repository.getAllOrderItems();
+      if (response.data != null) {
+        userAllStoreOrders(response.data?.data ?? []);
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);
       }

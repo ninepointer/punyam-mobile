@@ -14,15 +14,18 @@ class StoreCartCard extends StatefulWidget {
 class _StoreCartCardState extends State<StoreCartCard> {
   late StoreController controller;
   int? quantity;
-  int? storeQuantity;
 
   @override
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
+    //controller.loadData();
     quantity = widget.category?.quantity;
-    storeQuantity = widget.category?.quantity;
-    controller.getStoreCartItemsDetails();
+    controller.orderAmount.value =
+        (widget.category?.itemId?.price ?? 0).toInt();
+    controller.orderQuantity.value = widget.category?.quantity ?? 0;
+    controller.categoryId.value = widget.category?.sId ?? '';
+    controller.itemId.value = widget.category?.itemId?.sId ?? '';
   }
 
   @override
@@ -78,12 +81,12 @@ class _StoreCartCardState extends State<StoreCartCard> {
                           // If quantity becomes 0, reset to 1
                           quantity = 0;
                         } else {
-                          quantity = quantity ?? 0 - 1;
-                          storeQuantity = storeQuantity ?? 0 - 1;
-                          controller.cartItemQuantity.value =
-                              storeQuantity ?? 0;
+                          quantity = quantity! - 1;
+
+                          controller.cartItemQuantity.value = -1;
+
                           controller.cartItemId.value =
-                              widget.category?.itemId?.sId?.toString() ?? "";
+                              widget.category!.itemId!.sId!.toString();
                           controller.removeFromCartDetails();
                         }
                       });
@@ -99,7 +102,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
                     width: 10,
                   ),
                   Text(
-                    quantity.toString(),
+                    "$quantity",
                     style: TextStyle(
                       color: AppColors.cinnamonStickColor,
                       fontSize: 18,
@@ -112,14 +115,14 @@ class _StoreCartCardState extends State<StoreCartCard> {
                     onTap: () {
                       setState(() {
                         // Increase quantity by 1
-                        storeQuantity = 0;
+                        // storeQuantity = 0;
 
-                        quantity = quantity ?? 0 + 1;
-                        storeQuantity = storeQuantity ?? 0 + 1;
+                        quantity = quantity! + 1;
+                        // storeQuantity = storeQuantity ?? 1 + 1;
 
-                        controller.cartItemQuantity.value = storeQuantity ?? 0;
+                        controller.cartItemQuantity.value = 1;
                         controller.cartItemId.value =
-                            widget.category?.itemId?.sId?.toString() ?? "";
+                            widget.category!.itemId!.sId!.toString();
                         controller.storeAddToCartDetails();
                       });
                     },

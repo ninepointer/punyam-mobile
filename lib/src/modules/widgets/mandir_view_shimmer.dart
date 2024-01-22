@@ -23,19 +23,19 @@ class MandirViewShimmer extends StatelessWidget {
 
           LargeCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(
             height: 50,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(
             height: 20,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [
@@ -55,7 +55,7 @@ class MandirViewShimmer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [
@@ -79,7 +79,7 @@ class MandirViewShimmer extends StatelessWidget {
           ),
 
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [
@@ -99,7 +99,7 @@ class MandirViewShimmer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(
             height: 60,

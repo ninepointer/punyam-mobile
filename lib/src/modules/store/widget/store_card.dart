@@ -22,7 +22,6 @@ class _StoreCardState extends State<StoreCard> {
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
-    controller.getStoreCartItemsDetails();
   }
 
   @override
@@ -92,12 +91,19 @@ class _StoreCardState extends State<StoreCard> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}",
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+              quantity == 0
+                  ? Text(
+                      "${FormatHelper.formatNumbers((widget.item?.price ?? 0), decimal: 0)}",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    )
+                  : Text(
+                      "${FormatHelper.formatNumbers((widget.item?.price ?? 0) * quantity, decimal: 0)}",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
               Container(
                 margin: EdgeInsets.only(right: 8),
                 child: Row(

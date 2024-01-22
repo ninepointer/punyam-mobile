@@ -30,7 +30,7 @@ class DashboardShimmer extends StatelessWidget {
           ),
           CustomCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [
@@ -42,11 +42,11 @@ class DashboardShimmer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           CustomCardShimmer(),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.0625,
+            height: MediaQuery.of(context).size.width * 0.05,
           ),
           Row(
             children: [

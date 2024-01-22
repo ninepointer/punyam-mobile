@@ -56,7 +56,7 @@ class _DashboardViewState extends State<DashboardView> {
                       label: "Trending Now",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Container(
                       height: MediaQuery.of(context).size.width * 0.4,
@@ -99,7 +99,7 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +128,7 @@ class _DashboardViewState extends State<DashboardView> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -193,13 +193,80 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
+                    ),
+                    // CommonTile(
+                    //   label: "Book Free Consultation",
+                    // ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.width * 0.05,
+                    // ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      //  height: MediaQuery.of(context).size.width * 0.5,
+                      padding: EdgeInsetsDirectional.all(15),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        // border: Border.all(
+                        //   color: AppColors.brandYellow.withOpacity(1.0),
+                        // ),
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 2,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Text(
+                                "Book Free Consultation",
+                                style: AppStyles.tsBlackMedium16,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Text(
+                                "Book a free pooja consluation with\nour export pandits",
+                                style: AppStyles.tsGreyRegular14,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02,
+                              ),
+                            ],
+                          ),
+                          GestureDetector(
+                              child: Row(
+                            children: [
+                              Icon(Icons.keyboard_arrow_right,
+                                  size: 40, color: AppColors.cinnamonStickColor)
+                            ],
+                          ))
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     CommonTile(
                       label: "Pooja Services",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -234,8 +301,8 @@ class _DashboardViewState extends State<DashboardView> {
                                       Get.to(() => BookingView());
                                     }),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.0625,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05,
                                 ),
                               ],
                             );
@@ -243,8 +310,7 @@ class _DashboardViewState extends State<DashboardView> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.0625),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     GestureDetector(
                       onTap: () {
                         controller.selectedIndex(2);
@@ -259,13 +325,13 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     CommonTile(
                       label: "Mandirs Near Me",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -293,7 +359,7 @@ class _DashboardViewState extends State<DashboardView> {
                                   ),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
-                                        0.0625,
+                                        0.05,
                                   ),
                                 ],
                               );
@@ -302,8 +368,7 @@ class _DashboardViewState extends State<DashboardView> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.width * 0.0625),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.05),
                     GestureDetector(
                       onTap: () {
                         controller.selectedIndex(1);
@@ -318,13 +383,13 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     CommonTile(
                       label: "Popular Mandirs Near Me",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -353,7 +418,7 @@ class _DashboardViewState extends State<DashboardView> {
                                   ),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
-                                        0.0625,
+                                        0.05,
                                   ),
                                 ],
                               );
@@ -363,13 +428,13 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     CommonTile(
                       label: "Dham",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -396,8 +461,8 @@ class _DashboardViewState extends State<DashboardView> {
                                   },
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.0625,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05,
                                 ),
                               ],
                             );
@@ -406,7 +471,7 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.0625,
+                      height: MediaQuery.of(context).size.width * 0.05,
                     ),
                   ],
                 ),

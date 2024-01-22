@@ -68,7 +68,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -81,7 +81,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +125,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: Text(
@@ -133,7 +133,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -177,7 +177,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     children: [
@@ -194,7 +194,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   // SingleChildScrollView(
                   //   scrollDirection: Axis.horizontal,
@@ -206,7 +206,7 @@ class _BookingViewState extends State<BookingView> {
                   //         child: imageGallery(image: AppImages.homepuja),
                   //       ),
                   //       SizedBox(
-                  //         width: MediaQuery.of(context).size.width * 0.0625,
+                  //         width: MediaQuery.of(context).size.width * 0.05,
                   //       ),
                   //       Container(
                   //         width: MediaQuery.of(context).size.width -
@@ -217,7 +217,7 @@ class _BookingViewState extends State<BookingView> {
                   //   ),
                   // ),
                   // SizedBox(
-                  //   height: MediaQuery.of(context).size.width * 0.0625,
+                  //   height: MediaQuery.of(context).size.width * 0.05,
                   // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -261,7 +261,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: ListView.builder(
@@ -302,7 +302,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -317,7 +317,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -339,7 +339,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -383,7 +383,7 @@ class _BookingViewState extends State<BookingView> {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Container(
                     child: ListView.builder(
@@ -423,7 +423,7 @@ class _BookingViewState extends State<BookingView> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.0625,
+                    height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   TierWisePaymentDetails(
                     key: tierWiseKey,

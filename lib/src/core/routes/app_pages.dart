@@ -82,13 +82,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.bookingOrders,
-      page: () => BookingOrderView(),
+      page: () => AllOrdersAndBookingView(),
       binding: BookingBinding(),
     ),
     GetPage(
       name: AppRoutes.store,
       page: () => StoreView(),
-     binding: StoreBinding(),
+      binding: StoreBinding(),
     ),
   ];
 }

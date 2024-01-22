@@ -95,4 +95,7 @@ class AppUrls {
   static const String StoreAddtoCart = "$apiURL/user/cart/add";
   static const String StoreRemovetoCart = "$apiURL/user/cart/remove";
   static const String getCartItems = "$apiURL/user/cart";
+  static const String placeStoreOrder = "$apiURL/order";
+
+  static const String getStoreOrder = "$apiURL/order/my";
 }

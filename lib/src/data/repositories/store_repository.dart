@@ -53,4 +53,13 @@ class StoreRepository extends BaseRepository {
         ? RepoResponse(error: response)
         : RepoResponse(data: StoreCartResponse.fromJson(response));
   }
+
+  Future<RepoResponse<GenericResponse>> placeCartOrder(
+      Map<String, dynamic> data) async {
+    String apiURL = AppUrls.placeStoreOrder;
+    var response = await service.postAuth(path: apiURL, data: data);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: GenericResponse.fromJson(response));
+  }
 }

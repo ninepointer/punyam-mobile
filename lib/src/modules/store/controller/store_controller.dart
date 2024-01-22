@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,14 +33,27 @@ class StoreController extends BaseController<StoreRepository> {
   RxString cartItemId = "".obs;
   RxInt cartItemQuantity = 0.obs;
 
+  RxString categoryId = "".obs;
+  RxInt orderAmount = 0.obs;
+  RxString itemId = "".obs;
+  RxInt orderQuantity = 0.obs;
+
+  var userBookingData = GetSaveAddressDetails().obs;
+
   final carouselListforMandir = <DashboardCarousel>[].obs;
   final searchTextController = TextEditingController();
   final isSearchCleared = false.obs;
 
-  // final popularMandirsearchTextController = TextEditingController();
-  // final dhamMandirsearchTextController = TextEditingController();
-  // final allMandirsearchTextController = TextEditingController();
-  // final mandirByDevtasearchTextController = TextEditingController();
+  RxString city = "".obs;
+  RxString state = "".obs;
+  RxString landmark = "".obs;
+  RxString locality = "".obs;
+  RxString floor = "".obs;
+  RxString houseNo = "".obs;
+  RxString mobile = "".obs;
+  RxString pincode = "".obs;
+  RxDouble latitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
 
   final isFavorite = false.obs;
 
@@ -177,6 +191,72 @@ class StoreController extends BaseController<StoreRepository> {
     } catch (e) {
       log('Save: ${e.toString()}');
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future postOrderPlaceDetails() async {
+    isLoading(true);
+
+    List<PlaceOrderDetails> ordersList =
+        []; // Create a list to store multiple orders
+
+    // Assuming you have a list of order details, update this part accordingly
+    for (int i = 0; i < storeCartItems.length; i++) {
+      // Assuming storeCartItems[i].itemId.price is of type `num?`
+      orderAmount.value = storeCartItems[i].itemId?.price?.toInt() ?? 0;
+
+      // Assuming storeCartItems[i].quantity is of type `int?`
+      orderQuantity.value = storeCartItems[i].quantity ?? 0;
+
+      // Assuming storeCartItems[i].itemId.sId is of type `String?`
+      cartItemId.value = storeCartItems[i].itemId?.sId ?? "";
+
+      // Assuming storeCartItems[i].itemId.sId is of type `String?`
+      itemId.value = storeCartItems[i].itemId?.sId ?? "";
+
+      PlaceOrderDetails order = PlaceOrderDetails(
+        orderAmount: orderAmount.value,
+        orderQuantity: orderQuantity.value,
+        categoryId: cartItemId.value,
+        itemId: itemId.value,
+      );
+      ordersList.add(order);
+    }
+
+    PlaceOrderRequest data = PlaceOrderRequest(
+      address: "",
+      pincode: pincode.value,
+      city: city.value,
+      state: state.value,
+      country: "India",
+      latitude: latitude.value,
+      longitude: longitude.value,
+      landmark: landmark.value,
+      locality: locality.value,
+      floor: floor.value,
+      houseOrFlatNo: houseNo.value,
+      mobile: mobile.value,
+      orderDetails: ordersList, // Set the list of orders
+    );
+
+    try {
+      final RepoResponse<GenericResponse> response =
+          await repository.placeCartOrder(data.toJson());
+
+      if (response.data != null) {
+        // await Get.find<AuthController>().getUserDetails(navigate: false);
+        // loadData();
+        if (response.data?.status == "success") {
+          SnackbarHelper.showSnackbar(response.data?.message);
+        }
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      log('Save: ${e.toString()}');
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    } finally {
+      isLoading(false);
     }
   }
 }
