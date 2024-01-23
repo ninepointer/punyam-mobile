@@ -181,6 +181,7 @@ class _MandirViewState extends State<MandirView> {
                         children: [
                           InkWell(
                             onTap: () {
+                              controller.getNearByMandirsDetails();
                               _selectedTempleList = controller.nearbyMandirs;
                             },
                             child: Container(
@@ -206,9 +207,9 @@ class _MandirViewState extends State<MandirView> {
                           InkWell(
                             onTap: () {
                               setState(() {
+                                controller.getMyFaviroutesTamplesDetails();
                                 _selectedTempleList =
                                     controller.myFaviroutesMandirs;
-                                controller.getMyFaviroutesTamplesDetails();
                               });
                             },
                             child: Container(

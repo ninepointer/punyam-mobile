@@ -43,8 +43,8 @@ class _StoreCartCardState extends State<StoreCartCard> {
         child: Row(
           children: [
             Container(
-              height: 50,
-              width: 50,
+              height: MediaQuery.of(context).size.width * 0.127,
+              width: MediaQuery.of(context).size.width * 0.127,
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(15.0), // Adjust the circular border
@@ -57,13 +57,15 @@ class _StoreCartCardState extends State<StoreCartCard> {
                 ),
               ),
             ),
-            SizedBox(width: 10.0),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.0255),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${widget.category?.itemId?.name ?? ''}', //hardcoded
-                      style: AppStyles.tsBlackMedium12),
+                  Text(
+                    '${widget.category?.itemId?.name ?? ''}', //hardcoded
+                    style: AppStyles.tsBlackMedium12, maxLines: 3,
+                  ),
                   Text(
                     "${(quantity ?? 0) * (widget.category?.itemId?.minOrderQuantity ?? 0)} ${widget.category?.itemId?.unit ?? ''}", //hardcoded
                     style: AppStyles.tsGreyRegular12,
@@ -71,6 +73,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
                 ],
               ),
             ),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.0255),
             Container(
               margin: EdgeInsets.only(right: 8),
               child: Row(
@@ -106,7 +109,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: MediaQuery.of(context).size.width * 0.0255,
                   ),
                   Text(
                     "$quantity",
@@ -116,7 +119,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: MediaQuery.of(context).size.width * 0.0255,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -147,7 +150,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
               ),
             ),
             SizedBox(
-              width: 50,
+              width: MediaQuery.of(context).size.width * 0.127,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,

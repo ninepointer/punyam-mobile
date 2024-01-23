@@ -247,13 +247,6 @@ class _SelectedTierDetailsViewState extends State<SelectedTierDetailsView> {
                     onPressed: () {
                       if (validateBookingDetails()) {
                         controller.getUserBookingDetails();
-                        Get.to(() => BookingSuccessPage(
-                              bookingdate:
-                                  controller.bookingDateTextController.text,
-                              bookingAddress:
-                                  controller.bookingAddressTextController.text,
-                              paymentMethod: "Cash On Delivery",
-                            ));
                       }
                     },
                   ),

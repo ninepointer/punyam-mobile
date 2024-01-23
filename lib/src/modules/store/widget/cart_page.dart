@@ -95,7 +95,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                         ),
                       ),
                 SizedBox(
-                  height: 12,
+                  height: MediaQuery.of(context).size.width * 0.033,
                 ),
                 if (controller.storeCartItems.length != 0)
                   Card(
@@ -251,7 +251,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                     ],
                   ),
                 SizedBox(
-                  height: 12,
+                  height: MediaQuery.of(context).size.width * 0.033,
                 ),
                 if (controller.storeCartItems.length != 0)
                   GestureDetector(
@@ -293,7 +293,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                     ),
                   ),
                 SizedBox(
-                  height: 12,
+                  height: MediaQuery.of(context).size.width * 0.033,
                 ),
                 if (controller.storeCartItems.length != 0)
                   InkWell(
@@ -314,7 +314,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                       margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 40,
+                        height: MediaQuery.of(context).size.width * 0.102,
                         decoration: BoxDecoration(
                           color: AppColors.cinnamonStickColor,
                           borderRadius: BorderRadius.circular(10),
