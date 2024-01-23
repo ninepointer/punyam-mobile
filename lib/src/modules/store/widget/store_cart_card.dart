@@ -84,10 +84,13 @@ class _StoreCartCardState extends State<StoreCartCard> {
                         quantity = quantity! - 1;
 
                         controller.cartItemQuantity.value = -1;
+                        controller.totalCartItemsQuantity.value--;
 
                         controller.cartItemId.value =
                             widget.category!.itemId!.sId!.toString();
                         controller.removeFromCartDetails();
+                        controller.updateCart();
+
                         log("GestureDetector end $quantity ");
                         if (quantity == 0) {
                           // If quantity becomes 0, reset to 1
@@ -122,12 +125,15 @@ class _StoreCartCardState extends State<StoreCartCard> {
                         // storeQuantity = 0;
 
                         quantity = quantity! + 1;
-                        // storeQuantity = storeQuantity ?? 1 + 1;
 
+                        // storeQuantity = storeQuantity ?? 1 + 1;
+                        controller.totalCartItemsQuantity.value++;
                         controller.cartItemQuantity.value = 1;
+
                         controller.cartItemId.value =
                             widget.category!.itemId!.sId!.toString();
                         controller.storeAddToCartDetails();
+                        controller.updateCart();
                       });
                     },
                     child: Text(

@@ -264,7 +264,12 @@ class PoojaServicesController extends BaseController<PoojaServicesRespository> {
         await Get.find<AuthController>().getUserDetails(navigate: false);
         loadData();
         if (response.data?.status == "success") {
-          SnackbarHelper.showSnackbar(response.data?.message);
+          // SnackbarHelper.showSnackbar(response.data?.message);
+          Get.to(() => BookingSuccessPage(
+                bookingdate: bookingDateTextController.text,
+                bookingAddress: bookingAddressTextController.text,
+                paymentMethod: "Cash On Delivery",
+              ));
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);

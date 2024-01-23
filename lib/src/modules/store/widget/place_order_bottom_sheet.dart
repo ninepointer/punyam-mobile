@@ -5,10 +5,10 @@ import 'package:punyam/src/modules/home/views/maps_view.dart';
 import 'package:punyam/src/modules/store/controller/store_controller.dart';
 
 class PlaceOrderAddressBottomSheet extends StatefulWidget {
-  const PlaceOrderAddressBottomSheet({super.key});
+  PlaceOrderAddressBottomSheet({Key? key}) : super(key: key);
 
   @override
-  State<PlaceOrderAddressBottomSheet> createState() =>
+  _PlaceOrderAddressBottomSheetState createState() =>
       _PlaceOrderAddressBottomSheetState();
 }
 
@@ -140,14 +140,14 @@ class _PlaceOrderAddressBottomSheetState
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            //   String concatenatedText =
-                            //       '${item.houseOrFlatNo} ${item.floor} ${item.locality} ${item.landmark} ${item.city} ${item.state}';
+                            String concatenatedText =
+                                '${item.houseOrFlatNo} ${item.floor} ${item.locality} ${item.landmark} ${item.city} ${item.state}';
 
-                            //   controller.bookingAddressTextController.value =
-                            //       controller.bookingAddressTextController.value
-                            //           .copyWith(
-                            //     text: concatenatedText,
-                            //   );
+                            controller.bookingAddressTextController.value =
+                                controller.bookingAddressTextController.value
+                                    .copyWith(
+                              text: concatenatedText,
+                            );
                             //   controller.userBookingData.value = item;
                             controller.pincode.value = item.pincode ?? '';
                             controller.city.value = item.city ?? '';
@@ -162,7 +162,6 @@ class _PlaceOrderAddressBottomSheetState
                             controller.houseNo.value = item.houseOrFlatNo ?? '';
                             controller.mobile.value = item.contactNumber ?? '';
 
-                            await controller.postOrderPlaceDetails();
                             Navigator.of(context).pop();
                           },
                           child: orderchooseYourAddressCard(

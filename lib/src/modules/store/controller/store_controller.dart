@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:punyam/src/app/app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../base/base.dart';
@@ -31,6 +32,7 @@ class StoreController extends BaseController<StoreRepository> {
   final storeCartItems = <StoreCartList>[].obs;
 
   final selectedStoreCategory = StoreCatagoryList().obs;
+  final bookingAddressTextController = TextEditingController();
 
   RxString cartItemId = "".obs;
   RxInt cartItemQuantity = 0.obs;
@@ -39,6 +41,12 @@ class StoreController extends BaseController<StoreRepository> {
   RxInt orderAmount = 0.obs;
   RxString itemId = "".obs;
   RxInt orderQuantity = 0.obs;
+
+  RxInt totalCartItemsQuantity = 0.obs;
+
+  RxString orderSuccessTotalAmount = "".obs;
+
+  RxString orderSuccessOrderId = "".obs;
 
   var userBookingData = GetSaveAddressDetails().obs;
 
@@ -74,10 +82,9 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future loadData() async {
     // storeCartItems.clear();
-    await getStoreCartItemsDetails();
+
     await getDashboardCarousel();
     await getAllStoreCatagoryList();
-
     getAllItemsCatagoryWistDetails(storeCatagoryList.first.sId);
     selectedStoreCategory.value = storeCatagoryList.first;
   }
@@ -96,6 +103,15 @@ class StoreController extends BaseController<StoreRepository> {
       }
     }
     return quantity;
+  }
+
+  void calculateCartQuantity() async {
+    await getStoreCartItemsDetails();
+    int total = 0;
+    for (var item in storeCartItems) {
+      total += item.quantity ?? 0;
+    }
+    totalCartItemsQuantity.value = total;
   }
 
   Future getDashboardCarousel() async {
@@ -162,6 +178,20 @@ class StoreController extends BaseController<StoreRepository> {
 
   Future getStoreCartItemsDetails() async {
     storeCartItems.clear();
+    try {
+      final RepoResponse<StoreCartResponse> response =
+          await repository.getAllItemCartItems();
+      if (response.data != null) {
+        storeCartItems(response.data?.data ?? []);
+      } else {
+        SnackbarHelper.showSnackbar(response.error?.message);
+      }
+    } catch (e) {
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
+  }
+
+  Future updateCart() async {
     try {
       final RepoResponse<StoreCartResponse> response =
           await repository.getAllItemCartItems();
@@ -271,7 +301,11 @@ class StoreController extends BaseController<StoreRepository> {
         // await Get.find<AuthController>().getUserDetails(navigate: false);
         // loadData();
         if (response.data?.status == "success") {
-          SnackbarHelper.showSnackbar(response.data?.message);
+          // SnackbarHelper.showSnackbar(response.data?.message);
+          Get.to(() => OrderSuccessPage(
+              orderId: orderSuccessOrderId.value,
+              orderAmount: orderSuccessTotalAmount.value,
+              paymentMethod: "Cash on Delivery"));
         }
       } else {
         SnackbarHelper.showSnackbar(response.error?.message);

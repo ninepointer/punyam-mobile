@@ -21,7 +21,9 @@ class _StoreViewState extends State<StoreView> {
   void initState() {
     super.initState();
     controller = Get.find<StoreController>();
+
     controller.loadData();
+    controller.calculateCartQuantity();
   }
 
   int _selectedIndex = 0;
@@ -33,16 +35,37 @@ class _StoreViewState extends State<StoreView> {
         title: Text("Mandir Store"),
         backgroundColor: Colors.grey[50],
         actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () async {
-              await Get.to(
-                () => CartPageWidget(),
-              );
-              await controller.getStoreCartItemsDetails();
-              controller.getAllItemsCatagoryWistDetails(
-                  controller.selectedStoreCategory.value.sId);
-            },
+          Obx(
+            () => Stack(
+              children: [
+                Positioned(
+                  top: 6,
+                  bottom: 0,
+                  right: -7,
+                  child: Container(
+                    height: 10,
+                    width: 25,
+                    child: Text(
+                      "${controller.totalCartItemsQuantity.value}",
+                      style: AppStyles.tsBlackMedium16.copyWith(
+                        color: AppColors.cinnamonStickColor,
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  onPressed: () async {
+                    await Get.to(
+                      () => CartPageWidget(),
+                    );
+                    await controller.getStoreCartItemsDetails();
+                    controller.getAllItemsCatagoryWistDetails(
+                        controller.selectedStoreCategory.value.sId);
+                  },
+                ),
+              ],
+            ),
           ),
           IconButton(
             icon: Icon(Icons.search),

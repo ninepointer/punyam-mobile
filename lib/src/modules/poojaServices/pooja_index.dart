@@ -11,3 +11,4 @@ export 'widgets/tier4_details.dart';
 export 'view/selected_tier_details_view.dart';
 export 'widgets/booking_details.dart';
 export 'widgets/booking_address_bottom_sheet.dart';
+export 'widgets/place_booking_successfull_page.dart';
