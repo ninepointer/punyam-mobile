@@ -60,27 +60,31 @@ class _StoreViewState extends State<StoreView> {
           children: [
             // Drawer implementation with 10 items named with random colors
             Drawer(
-              width: 80,
+              width: MediaQuery.of(context).size.width * 0.20,
               child: ListView.builder(
                 itemCount: controller.storeCatagoryList.length,
                 itemBuilder: (context, index) {
                   var category = controller.storeCatagoryList[index];
                   return SizedBox(
-                    height: 80,
+                    height: MediaQuery.of(context).size.width * 0.25,
                     child: ListTile(
                       title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Circular cropped image
                           Container(
-                            padding: EdgeInsets.only(top: 11),
+                            // padding: EdgeInsets.only(top: 10),
                             child: CircleAvatar(
                               radius: 20,
                               backgroundColor: Colors.white,
                               child: ClipOval(
                                 child: Image.network(
                                   category.image!.url.toString(),
-                                  width: 50,
-                                  height: 50,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.10,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.10,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -128,8 +132,8 @@ class _StoreViewState extends State<StoreView> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.width * 0.4,
-                      width: 280,
+                      height: MediaQuery.of(context).size.width * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       child: CarouselSlider.builder(
                         itemCount: controller.dashboardCarouselList.length,
                         itemBuilder: (context, int index, _) {
@@ -140,10 +144,10 @@ class _StoreViewState extends State<StoreView> {
                             //       '',
                             // ),
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
+                              padding: const EdgeInsets.only(top: 0.0),
                               child: Container(
                                 width: double.infinity,
-                                height: MediaQuery.of(context).size.width * 0.4,
+                                height: MediaQuery.of(context).size.width * 0.3,
                                 decoration: BoxDecoration(
                                   color: AppColors.grey.withOpacity(.1),
                                   borderRadius: BorderRadius.circular(8),
@@ -154,8 +158,7 @@ class _StoreViewState extends State<StoreView> {
                                     "${controller.dashboardCarouselList[index].carouselImage ?? ''}",
                                     fit: BoxFit.fill,
                                     height:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    width: 400,
+                                        MediaQuery.of(context).size.width * 0.3,
                                   ),
                                 ),
                               ),
@@ -172,10 +175,10 @@ class _StoreViewState extends State<StoreView> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, left: 8),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Container(
-                        width: 290,
-                        height: 525,
+                        width: MediaQuery.of(context).size.width * 0.78,
+                        height: MediaQuery.of(context).size.width * 1.5,
                         child: controller.storeItemCatagoryWiseList.isNotEmpty
                             ? GridView.builder(
                                 itemCount:
@@ -183,21 +186,21 @@ class _StoreViewState extends State<StoreView> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  childAspectRatio: 0.7,
-                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 0.8,
+                                  mainAxisSpacing: 0,
                                 ),
                                 itemBuilder: (context, index) {
                                   var item = controller
                                       .storeItemCatagoryWiseList[index];
                                   return Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(0.0),
                                     child: Container(
                                       child: StoreCard(item: item),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(0),
                                         border: Border.all(
-                                          color: Colors.grey,
+                                          color: Colors.black12,
                                           width: 0.2,
                                         ),
                                       ),

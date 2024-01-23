@@ -22,7 +22,7 @@ class SplashView extends GetView<SplashController> {
                 AppLogoWidget(),
                 // SizedBox(height: 16),
                 Container(
-                  width: 150,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: LinearProgressIndicator(
