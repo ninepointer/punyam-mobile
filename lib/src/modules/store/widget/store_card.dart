@@ -96,6 +96,7 @@ class _StoreCardState extends State<StoreCard> {
                         fontSize: 14,
                       ),
                     ),
+              quantity != 0 ? 
               Container(
                 margin: EdgeInsets.only(right: 6),
                 child: Row(
@@ -163,7 +164,33 @@ class _StoreCardState extends State<StoreCard> {
                     ),
                   ],
                 ),
-              ),
+              ):
+              GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          // Increase quantity by 1
+                          storeQuantity = 0;
+
+                          quantity++;
+                          storeQuantity = storeQuantity + 1;
+
+                          controller.cartItemQuantity.value = storeQuantity;
+                          controller.cartItemId.value =
+                              widget.item!.sId.toString();
+                          controller.storeAddToCartDetails();
+                          // showSnackBar("Increased", quantity);
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "+",
+                          style: AppStyles.tsBlackMedium20.copyWith(
+                            color: AppColors.cinnamonStickColor,
+                          ),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
