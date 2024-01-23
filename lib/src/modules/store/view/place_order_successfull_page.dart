@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:punyam/src/app/app.dart';
+import 'package:punyam/src/modules/store/controller/store_controller.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   final String orderId;
   final String orderAmount;
   final String paymentMethod;
+  // final StoreController controller;
 
   OrderSuccessPage({
     required this.orderId,
     required this.orderAmount,
     required this.paymentMethod,
+    // required this.controller,
   });
 
   @override
@@ -17,6 +20,7 @@ class OrderSuccessPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Order Successful'),
+        automaticallyImplyLeading: false,
         // backgroundColor: Colors.green, // Customize the app bar color
       ),
       body: Padding(
@@ -53,6 +57,8 @@ class OrderSuccessPage extends StatelessWidget {
               ),
               onPressed: () {
                 // Implement any action you want, e.g., navigate to home page
+                // controller.totalCartItemsQuantity.value = 0;
+                Navigator.pop(context);
                 Navigator.pop(context);
                 Navigator.pop(context);
               },

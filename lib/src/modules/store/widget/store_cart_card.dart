@@ -96,6 +96,7 @@ class _StoreCartCardState extends State<StoreCartCard> {
 
                         log("GestureDetector end $quantity ");
                         if (quantity == 0) {
+                          quantity = 0;
                           // If quantity becomes 0, reset to 1
                           controller.getStoreCartItemsDetails();
                         }

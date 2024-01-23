@@ -41,7 +41,7 @@ class _StoreViewState extends State<StoreView> {
                 Positioned(
                   top: 6,
                   bottom: 0,
-                  right: -7,
+                  right: -10,
                   child: Container(
                     height: 10,
                     width: 25,
@@ -76,6 +76,85 @@ class _StoreViewState extends State<StoreView> {
             },
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Obx(
+          () => Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (controller.totalCartItemsQuantity.value >
+                    0) // Check the quantity
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Quantity:  ',
+                                style: AppStyles.tsBlackMedium14
+                                    .copyWith(color: AppColors.white),
+                              ),
+                              Text(
+                                "${controller.totalCartItemsQuantity.value}",
+                                style: AppStyles.tsBlackMedium14
+                                    .copyWith(color: AppColors.white),
+                              )
+                            ],
+                          ),
+
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.051,
+                          ),
+                          // Check the quantity
+                          GestureDetector(
+                            onTap: () async {
+                              await Get.to(
+                                () => CartPageWidget(),
+                              );
+                              await controller.getStoreCartItemsDetails();
+                              controller.getAllItemsCatagoryWistDetails(
+                                  controller.selectedStoreCategory.value.sId);
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 4),
+                                  child: Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                ),
+                                Text(
+                                  'View Cart',
+                                  style: AppStyles.tsBlackMedium14.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+              ],
+            ),
+          ),
+        ),
       ),
       body: Obx(
         () => Row(

@@ -305,6 +305,7 @@ class StoreController extends BaseController<StoreRepository> {
           Get.to(() => OrderSuccessPage(
               orderId: orderSuccessOrderId.value,
               orderAmount: orderSuccessTotalAmount.value,
+              // controller: StoreController(),
               paymentMethod: "Cash on Delivery"));
         }
       } else {
