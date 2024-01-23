@@ -111,6 +111,7 @@ class _StoreCardState extends State<StoreCard> {
                           } else {
                             quantity--;
                             storeQuantity--;
+                            controller.totalCartItemsQuantity.value--;
                             controller.cartItemQuantity.value = storeQuantity;
                             controller.cartItemId.value =
                                 widget.item!.sId.toString();
@@ -147,7 +148,7 @@ class _StoreCardState extends State<StoreCard> {
 
                           quantity++;
                           storeQuantity = storeQuantity + 1;
-
+                          controller.totalCartItemsQuantity.value++;
                           controller.cartItemQuantity.value = storeQuantity;
                           controller.cartItemId.value =
                               widget.item!.sId.toString();
@@ -173,7 +174,7 @@ class _StoreCardState extends State<StoreCard> {
 
                           quantity++;
                           storeQuantity = storeQuantity + 1;
-
+                          controller.totalCartItemsQuantity.value++;
                           controller.cartItemQuantity.value = storeQuantity;
                           controller.cartItemId.value =
                               widget.item!.sId.toString();

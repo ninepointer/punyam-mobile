@@ -249,7 +249,7 @@ class _DashboardViewState extends State<DashboardView> {
                                     MediaQuery.of(context).size.width * 0.02,
                               ),
                               Text(
-                                "Book a free pooja consluation with\nour export pandits",
+                                "Book a free pooja consultation with\nour export pandits",
                                 style: AppStyles.tsGreyRegular14,
                               ),
                               SizedBox(
