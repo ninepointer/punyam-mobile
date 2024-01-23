@@ -33,34 +33,24 @@ class _StoreCardState extends State<StoreCard> {
         Center(
           child: Container(
             // width: MediaQuery.of(context).size.width,
-            height: 80,
-            width: 80,
+            padding: EdgeInsets.all(5),
+            height: MediaQuery.of(context).size.width * 0.25,
+            width: MediaQuery.of(context).size.width * 0.25,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              // border: Border.all(
-              //   color: Colors.grey,
-              //   width: 0.2,
-              // ),
             ),
-            child: ClipRRect(
-              // borderRadius: BorderRadius.only(
-              //   topLeft: Radius.circular(10),
-              //   topRight: Radius.circular(10),
-              // ),
-              child: Image.network(
-                widget.item?.image?.url ?? '',
-                fit: BoxFit.fill,
-              ),
+            child: Image.network(
+              widget.item?.image?.url ?? '',
+              fit: BoxFit.fill,
             ),
           ),
         ),
-        SizedBox(height: 4),
+        SizedBox(height: 0),
         // Display product name
         Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Container(
-            height: 30,
+            height: 15,
             child: Text(
               widget.item?.name ?? '',
               maxLines: 2,
@@ -72,13 +62,14 @@ class _StoreCardState extends State<StoreCard> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Container(
             child: Text(
-              "Min quantity: ${widget.item?.minOrderQuantity} ${widget.item?.unit}",
+              "${widget.item?.minOrderQuantity} ${widget.item?.unit}",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -88,7 +79,7 @@ class _StoreCardState extends State<StoreCard> {
 
         Container(
           height: 25,
-          padding: EdgeInsets.symmetric(horizontal: 6),
+          padding: EdgeInsets.only(left: 15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -106,7 +97,7 @@ class _StoreCardState extends State<StoreCard> {
                       ),
                     ),
               Container(
-                margin: EdgeInsets.only(right: 8),
+                margin: EdgeInsets.only(right: 6),
                 child: Row(
                   children: [
                     GestureDetector(
