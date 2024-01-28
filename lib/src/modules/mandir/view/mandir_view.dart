@@ -343,7 +343,9 @@ class _MandirViewState extends State<MandirView> {
                         : Column(
                             children: _selectedTempleList.map((templeDetails) {
                               return GestureDetector(
-                                onTap: () {
+                                onTap: () async {
+                                  await controller.increaseMandirCountDetails(
+                                      templeDetails.sId);
                                   Get.to(() => MandirNearMeDetailsView(
                                         templeDetails: templeDetails,
                                       ));

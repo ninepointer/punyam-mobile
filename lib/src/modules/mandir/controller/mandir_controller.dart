@@ -410,7 +410,6 @@ class MandirController extends BaseController<MandirRespository> {
       if (response.data != null) {
         if (searchQuery != null && searchQuery.isNotEmpty) {
           nearbyMandirsSearch(response.data?.data);
-          print("uuu ${nearbyMandirsSearch}");
         } else {
           nearbyMandirs(response.data?.data);
         }
@@ -457,5 +456,19 @@ class MandirController extends BaseController<MandirRespository> {
       SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
     }
     isMandirLoading(false);
+  }
+
+  Future increaseMandirCountDetails(String? mandirId) async {
+    try {
+      await repository.increaseMandirCount(mandirId ?? '');
+      await getNearByMandirsDetails();
+      await getDhamTamplesByDistanceDetails();
+      await getPopularTamplesByDistanceDetails();
+      await getTrandingNowTamplesDetails();
+      // SnackbarHelper.showSnackbar("Add ${poojaId} pooja Successfully");
+    } catch (e) {
+      print(e.toString());
+      SnackbarHelper.showSnackbar(ErrorMessages.somethingWentWrong);
+    }
   }
 }

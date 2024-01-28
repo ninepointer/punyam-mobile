@@ -104,7 +104,9 @@ class PopularMandirView extends GetView<MandirController> {
                         children: controller.popularTempleListByDistanceDetails
                             .map((templeDetails) {
                           return GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              await controller.increaseMandirCountDetails(
+                                  templeDetails.sId);
                               Get.to(() => MandirNearMeDetailsView(
                                     templeDetails: templeDetails,
                                   ));

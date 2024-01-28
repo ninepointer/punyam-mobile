@@ -23,3 +23,4 @@ export 'store_catagory_response.dart';
 export 'store_catagory_wise_item_list_response.dart';
 export 'store_cart_response.dart';
 export 'store_order_response.dart';
+export 'increase_mandir_count_response.dart';

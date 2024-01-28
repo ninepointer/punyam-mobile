@@ -47,6 +47,8 @@ class AppUrls {
       "$apiURL/mandir/user/unfavourite";
 
   static const String increasePoojaCount = "$apiURL/pooja/user/addCount";
+
+  static const String increaseMandirCount = "$apiURL/mandir/user/addCount";
   static const String poojalistHomepage = "$apiURL/pooja/user/trending";
   static const String godList = "$apiURL/devta/user";
   static String mandirListBygod(

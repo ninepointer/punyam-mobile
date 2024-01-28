@@ -126,6 +126,15 @@ class MandirRespository extends BaseRepository {
         : RepoResponse(data: DashboardCarouselResponse.fromJson(response));
   }
 
+  Future<RepoResponse<IncreaseMandirCountResponse>> increaseMandirCount(
+      String id) async {
+    String apiURL = '${AppUrls.increaseMandirCount}/$id';
+    var response = await service.patchAuth(path: apiURL);
+    return response is APIException
+        ? RepoResponse(error: response)
+        : RepoResponse(data: IncreaseMandirCountResponse.fromJson(response));
+  }
+
   Future<RepoResponse<DashboardCarouselResponse>>
       getPopularMandirCarousel() async {
     String apiURL = AppUrls.popularMandirCarausal;
